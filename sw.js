@@ -6,6 +6,7 @@ const CORE = [
   'icons/icon-192.png', 'icons/apple-touch-icon.png',
   'mot/', 'mot/index.html', 'mot/mot.js', 'mot/words.js', 'mot/dico/5.txt',
   'geo/', 'geo/index.html', 'geo/geo.js', 'geo/countries.js',
+  'quiz/', 'quiz/index.html', 'quiz/quiz.js',
   'sens/', 'sens/index.html', 'sens/sens.js', 'sens/secrets.js', 'sens/vocab.txt',
 ];
 

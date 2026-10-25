@@ -1,0 +1,75 @@
+{
+  "date": "2026-10-25",
+  "questions": [
+    {
+      "q": "Quel stade a accueilli ce dimanche le tout premier match de saison régulière de NFL (football américain) organisé en France ?",
+      "choix": ["Le Parc des Princes", "Le Stade de France", "Le Groupama Stadium", "L'Orange Vélodrome"],
+      "reponse": 1,
+      "explication": "Le Stade de France, à Saint-Denis, a reçu le 25 octobre le premier match de saison régulière de la NFL disputé en France.",
+      "source": { "nom": "France 24 via Titres Presse", "url": "https://www.titrespresse.com/26510382603/paris-nfl-stade" }
+    },
+    {
+      "q": "La tempête Austen a balayé la France et le Royaume-Uni cette semaine. Jusqu'à quelle vitesse ont soufflé les rafales ?",
+      "choix": ["100 km/h", "130 km/h", "160 km/h", "220 km/h"],
+      "reponse": 2,
+      "explication": "Les rafales de la tempête Austen ont atteint jusqu'à 160 km/h, en France comme au Royaume-Uni.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/video/2026/10/23/la-tempete-austen-balaie-la-france-et-le-royaume-uni-avec-des-vents-jusqua-160-kmh" }
+    },
+    {
+      "q": "Un séisme a fait au moins 16 morts et détruit des centaines de maisons au Tibet. Quelle était sa magnitude ?",
+      "choix": ["5", "6", "7", "8,5"],
+      "reponse": 2,
+      "explication": "Le tremblement de terre, de magnitude 7, a fait au moins seize morts dans la région chinoise du Tibet.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/video/2026/10/23/tibet-un-seisme-de-magnitude-7-fait-au-moins-seize-morts-des-centaines-de-maisons-detruite" }
+    },
+    {
+      "q": "Comment s'appelle le typhon qui a semé le chaos dans les transports et fait fermer des écoles à Taïwan ?",
+      "choix": ["Haiyan", "Champi", "Krosa", "Bualoi"],
+      "reponse": 1,
+      "explication": "Le typhon Champi a fortement perturbé les transports à Taïwan et entraîné la fermeture d'écoles.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/video/2026/10/23/taiwan-le-typhon-champi-provoque-chaos-dans-les-transports-et-fermeture-decoles" }
+    },
+    {
+      "q": "La Hongrie a commémoré les 70 ans d'une révolution écrasée par l'armée soviétique. En quelle année avait-elle eu lieu ?",
+      "choix": ["1945", "1956", "1968", "1989"],
+      "reponse": 1,
+      "explication": "Le 24 octobre, la Hongrie a rendu hommage aux victimes de la révolution de 1956, réprimée par les Soviétiques.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/video/2026/10/24/hongrie-70-ans-apres-la-repression-sovietique-les-dirigeants-honorent-les-victimes" }
+    },
+    {
+      "q": "En Allemagne, un incendie a ravagé un lieu chargé d'histoire en Bavière. Lequel ?",
+      "choix": ["Le château de Neuschwanstein", "L'ancien refuge du Nid d'Aigle d'Hitler", "La porte de Brandebourg", "La cathédrale de Cologne"],
+      "reponse": 1,
+      "explication": "C'est l'ancien refuge du « Nid d'Aigle », construit pour Hitler dans les Alpes bavaroises, qui a été ravagé par les flammes le 24 octobre.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/video/2026/10/24/un-incendie-ravage-lancien-refuge-du-nid-daigle-dhitler-en-allemagne" }
+    },
+    {
+      "q": "Dans quelle ville le Rassemblement national a-t-il tenu son congrès, clôturé ce dimanche par un discours de Marine Le Pen ?",
+      "choix": ["Perpignan", "Orléans", "Marseille", "Lille"],
+      "reponse": 1,
+      "explication": "Le congrès du RN s'est tenu à Orléans et s'est terminé le 25 octobre, sous haute protection policière.",
+      "source": { "nom": "Europe 1 via Titres Presse", "url": "https://www.titrespresse.com/26510442603/congres-pen-rassemblement" }
+    },
+    {
+      "q": "Lors de la 33e fête de la transhumance à Madrid, combien de moutons et de chèvres ont défilé dans les rues ?",
+      "choix": ["Environ 140", "Plus de 1 400", "Plus de 14 000", "Plus de 140 000"],
+      "reponse": 1,
+      "explication": "Plus de 1 400 moutons et chèvres ont traversé Madrid pour ce 33e festival, sur un parcours modifié cette année.",
+      "source": { "nom": "Titres Presse", "url": "https://www.titrespresse.com/26510422603/madrid-milliers-moutons" }
+    },
+    {
+      "q": "Dans la nuit de samedi à dimanche, la France est passée à l'heure d'hiver. Qu'a-t-on fait à 3 heures du matin ?",
+      "choix": ["Avancé les montres d'une heure", "Reculé les montres d'une heure", "Reculé les montres de deux heures", "Rien, le changement d'heure est supprimé"],
+      "reponse": 1,
+      "explication": "Le dernier dimanche d'octobre, on recule d'une heure : à 3 heures, il était 2 heures. On gagne une heure de sommeil, mais les jours paraissent plus courts.",
+      "source": { "nom": "France 24 via Titres Presse", "url": "https://www.titrespresse.com/26495452603/fatigue-changement-heure" }
+    },
+    {
+      "q": "Aux législatives en Serbie, le camp du président Aleksandar Vučić fait face à quel mouvement d'opposition ?",
+      "choix": ["Un mouvement étudiant", "Un mouvement d'agriculteurs", "Un parti écologiste", "Un mouvement royaliste"],
+      "reponse": 0,
+      "explication": "Ces législatives opposent Aleksandar Vučić au mouvement étudiant, à l'origine d'une vague de contestation dans le pays.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/2026/10/25/legislatives-en-serbie-les-electeurs-face-au-choix-entre-vucic-et-le-mouvement-etudiant" }
+    }
+  ]
+}

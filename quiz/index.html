@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Quiz de l'actu · OustaGames</title>
+  <meta name="theme-color" content="#160f2e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    :root {
+      --bg: #160f2e; --card: rgba(255,255,255,.07); --text: #f5f3ff; --muted: #a8a2c8;
+      --border: rgba(255,255,255,.14); --accent: #8b5cf6; --good: #22c55e; --error: #ef4444;
+    }
+    body {
+      min-height: 100dvh;
+      background: radial-gradient(110% 60% at 0% 0%, rgba(139,92,246,.45), transparent 60%),
+                  radial-gradient(90% 50% at 100% 100%, rgba(236,72,153,.3), transparent 60%), var(--bg);
+      background-attachment: fixed;
+    }
+    .topbar { border-bottom: 0; }
+    .glass { background: var(--card); border: 1px solid var(--border); border-radius: 20px; -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+    .btn { background: linear-gradient(135deg, #8b5cf6, #ec4899); border-radius: 16px; box-shadow: 0 8px 24px rgba(139,92,246,.35); }
+    .btn.secondary { background: var(--card); box-shadow: none; border: 1px solid var(--border); }
+    [hidden] { display: none !important; }
+
+    .intro { text-align: center; padding: 26px 18px; }
+    .intro .day { font-size: .8rem; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); }
+    .intro h2 { font-size: 1.9rem; margin: 8px 0 6px; }
+    .intro p { color: var(--muted); margin: 0 0 20px; }
+    .intro .done { font-size: 1.1rem; margin-bottom: 18px; color: var(--text); }
+    .archive { margin-top: 22px; }
+    .archive h3 { font-size: .8rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin: 0 4px 8px; }
+    .archive button { display: flex; justify-content: space-between; width: 100%; padding: 12px 14px; margin-bottom: 6px;
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px; font-size: .95rem; }
+    .archive span { color: var(--muted); }
+
+    .progress { display: flex; gap: 4px; margin-bottom: 16px; }
+    .progress i { flex: 1; height: 6px; border-radius: 3px; background: rgba(255,255,255,.12); transition: background .3s; }
+    .progress i.ok { background: var(--good); }
+    .progress i.ko { background: var(--error); }
+    .progress i.now { background: #fff; }
+    .qcard { padding: 20px 18px; animation: pop .4s cubic-bezier(.2,.9,.3,1.2); }
+    @keyframes pop { from { transform: translateY(14px) scale(.97); opacity: 0; } to { transform: none; opacity: 1; } }
+    .qnum { font-size: .8rem; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
+    .qcard h2 { font-size: 1.2rem; line-height: 1.35; margin: 8px 0 16px; }
+    .choices { display: grid; gap: 8px; }
+    .choice { text-align: left; padding: 14px 16px; border-radius: 14px; border: 1px solid var(--border);
+      background: rgba(255,255,255,.05); font-size: 1rem; transition: transform .1s, background .3s; }
+    .choice:active { transform: scale(.98); }
+    .choice.right { background: var(--good); border-color: transparent; color: #fff; }
+    .choice.wrong { background: var(--error); border-color: transparent; color: #fff; animation: shake .4s; }
+    .choice:disabled:not(.right):not(.wrong) { opacity: .45; }
+    @keyframes shake { 20%,60% { transform: translateX(-5px); } 40%,80% { transform: translateX(5px); } }
+    .explain { margin-top: 16px; padding: 14px; border-radius: 14px; background: rgba(0,0,0,.25); line-height: 1.45; animation: pop .4s; }
+    .explain b { display: block; margin-bottom: 4px; }
+    .source { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; color: #c4b5fd; font-weight: 600; text-decoration: none; }
+    .next { margin-top: 16px; }
+
+    .result { text-align: center; padding: 24px 18px; }
+    .result .big { font-size: 3.6rem; font-weight: 900; margin: 6px 0;
+      background: linear-gradient(90deg, #c4b5fd, #f9a8d4); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .recap { text-align: left; margin-top: 18px; display: grid; gap: 8px; }
+    .recap div { padding: 10px 12px; border-radius: 12px; background: rgba(255,255,255,.05); font-size: .9rem; line-height: 1.35; }
+    .recap a { color: #c4b5fd; font-weight: 600; text-decoration: none; white-space: nowrap; }
+    .empty { text-align: center; color: var(--muted); padding: 40px 10px; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a href="../" id="back" aria-label="Retour">‹</a>
+    <h1>Quiz de l'actu</h1>
+    <span style="min-width:40px"></span>
+  </header>
+
+  <main class="page">
+    <section id="intro" class="glass intro" hidden>
+      <div class="day" id="intro-day"></div>
+      <h2>10 questions sur l'actu</h2>
+      <p>Après chaque réponse, un lien vers l'article pour en savoir plus.</p>
+      <div class="done" id="intro-done" hidden></div>
+      <button class="btn" id="start">C'est parti</button>
+    </section>
+    <section class="archive" id="archive" hidden>
+      <h3>Les quiz précédents</h3>
+      <div id="archive-list"></div>
+    </section>
+
+    <section id="play" hidden>
+      <div class="progress" id="progress"></div>
+      <div id="question"></div>
+    </section>
+
+    <section id="result" class="glass result" hidden>
+      <div id="result-text"></div>
+      <div class="big" id="result-score"></div>
+      <button class="btn" id="share">Partager mon score</button>
+      <button class="btn secondary" id="home">Retour au quiz</button>
+      <div class="recap" id="recap"></div>
+    </section>
+
+    <p class="empty" id="empty" hidden>Pas encore de quiz aujourd'hui, reviens un peu plus tard !</p>
+  </main>
+  <div class="toast" id="toast"></div>
+  <script src="quiz.js"></script>
+</body>
+</html>
