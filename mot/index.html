@@ -34,14 +34,14 @@
       flex: 1; display: grid; place-content: center; padding: 10px; min-height: 0;
       grid-template-rows: repeat(6, auto); gap: 0;
     }
-    .row { display: grid; grid-template-columns: repeat(5, auto); }
+    .row { display: grid; grid-template-columns: repeat(var(--cols, 5), auto); }
     .row.shake { animation: shake .4s; }
     @keyframes shake { 20%,60% { transform: translateX(-6px); } 40%,80% { transform: translateX(6px); } }
     .tile {
       position: relative; isolation: isolate;
-      width: min(15vw, 7.5dvh, 62px); aspect-ratio: 1; display: grid; place-items: center;
+      width: min(calc(92vw / var(--cols, 5)), 7.5dvh, 62px); aspect-ratio: 1; display: grid; place-items: center;
       background: var(--sutom-blue); border: 1px solid #fff; color: #fff;
-      font-size: min(8vw, 4.2dvh, 2.1rem); font-weight: 800; text-transform: uppercase;
+      font-size: min(calc(48vw / var(--cols, 5)), 4.2dvh, 2.1rem); font-weight: 800; text-transform: uppercase;
     }
     .tile.hint { color: rgba(255,255,255,.75); }
     .tile.good { background: var(--sutom-red); }
@@ -120,7 +120,7 @@
 
   <dialog id="help" class="help">
     <h2>Comment jouer</h2>
-    <p>Trouve le mot de 5 lettres en 6 essais. La première lettre est donnée, et les accents ne comptent pas.</p>
+    <p>Trouve le mot de 5 à 10 lettres en 6 essais. La première lettre et la longueur sont données, et les accents ne comptent pas.</p>
     <p><span class="tile good">A</span>carré rouge : la lettre est bien placée.</p>
     <p><span class="tile close">B</span>rond jaune : la lettre est dans le mot, mais ailleurs.</p>
     <p><span class="tile">C</span>fond bleu : la lettre n'est pas dans le mot.</p>

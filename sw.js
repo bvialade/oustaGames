@@ -4,7 +4,7 @@ const VERSION = 'v1';
 const CORE = [
   './', 'index.html', 'style.css', 'manifest.webmanifest',
   'icons/icon-192.png', 'icons/apple-touch-icon.png',
-  'mot/', 'mot/index.html', 'mot/mot.js', 'mot/words.js',
+  'mot/', 'mot/index.html', 'mot/mot.js', 'mot/words.js', 'mot/dico/5.txt',
   'geo/', 'geo/index.html', 'geo/geo.js', 'geo/countries.js',
   'sens/', 'sens/index.html', 'sens/sens.js', 'sens/secrets.js', 'sens/vocab.txt',
 ];

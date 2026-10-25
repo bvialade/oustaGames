@@ -1,5 +1,5 @@
 const ROWS = 6;
-const COLS = 5;
+let COLS = 5; // longueur du mot en cours, de 5 à 10
 const START = new Date(2026, 0, 1);
 const STORE = 'ousta.mot';
 
@@ -10,6 +10,20 @@ const keyboard = $('keyboard');
 let data = load();
 let mode = 'daily';
 let game; // { answer, guesses: [], current: '', done, won, day? }
+let words; // Map(MOT SANS ACCENTS -> mot avec accents) pour la longueur en cours
+const dicos = {};
+
+// Les mots acceptés sont chargés par longueur, seulement quand on en a besoin.
+async function loadDico(len) {
+  if (!dicos[len]) {
+    const text = await (await fetch(`dico/${len}.txt`)).text();
+    const map = new Map();
+    for (const w of text.split('\n')) if (w) map.set(plain(w), w);
+    dicos[len] = map;
+  }
+  return dicos[len];
+}
+const plain = (w) => w.toUpperCase().replace(/Œ/g, 'OE').replace(/Æ/g, 'AE').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
 function load() {
   try { return JSON.parse(localStorage.getItem(STORE)) || {}; } catch { return {}; }
@@ -28,14 +42,14 @@ const total = SOLUTIONS.length;
 const fresh = (idx, extra) => ({ ...extra, num: idx + 1, answer: SOLUTIONS[idx], guesses: [], current: '', done: false });
 
 // num : numéro de partie (1 à total) à jouer en partie libre, pour jouer la même qu'un proche.
-function newGame(m, num) {
+async function newGame(m, num) {
   mode = m;
   $('mode-daily').classList.toggle('active', m === 'daily');
   $('mode-free').classList.toggle('active', m === 'free');
   if (m === 'daily') {
     const day = dayNumber();
     const saved = data.daily;
-    game = saved && saved.day === day ? saved : fresh(((day % total) + total) % total, { day });
+    game = saved && saved.day === day ? saved : fresh(DAILY[((day % total) + total) % total], { day });
   } else {
     const saved = data.free;
     if (num) game = saved && saved.num === num && !saved.done ? saved : fresh(num - 1);
@@ -46,6 +60,11 @@ function newGame(m, num) {
   game.current = game.answer[0];
   typed = false;
   persist();
+  COLS = game.answer.length;
+  board.style.setProperty('--cols', COLS);
+  words = null;
+  board.innerHTML = '';
+  words = await loadDico(COLS);
   render();
   if (game.done) setTimeout(showEnd, 300);
 }
@@ -125,7 +144,7 @@ function renderKeyboard() {
 let typed = false; // a-t-on tapé une lettre depuis le début de la ligne ?
 
 function press(k) {
-  if (game.done) return;
+  if (!words || game.done) return;
   if (k === '⌫') { if (game.current.length > 1) game.current = game.current.slice(0, -1); }
   else if (k === '⏎') return submit();
   // La première lettre est déjà donnée : si on la retape en premier, on l'ignore.
@@ -137,7 +156,7 @@ function press(k) {
 function submit() {
   const g = game.current;
   if (g.length < COLS) return reject('Pas assez de lettres');
-  if (!VALID.has(g)) return reject('Mot inconnu');
+  if (!words.has(g) && !SOLUTIONS.includes(g)) return reject('Mot inconnu');
   game.guesses.push(g);
   game.current = g[0];
   typed = false;
@@ -193,7 +212,7 @@ const PHRASES = [
 ];
 
 function phrase() {
-  const pretty = (w) => { const a = ACCENTS[w] || w.toLowerCase(); return a[0].toUpperCase() + a.slice(1); };
+  const pretty = (w) => { const a = words.get(w) || w.toLowerCase(); return a[0].toUpperCase() + a.slice(1); };
   const nice = (w) => `<i>${pretty(w)}</i>`;
   const tries = game.guesses.slice(0, -1).map(nice);
   const and = (a) => (a.length > 1 ? a.slice(0, -1).join(', ') + ' et ' + a[a.length - 1] : a[0]);
@@ -212,7 +231,7 @@ function phrase() {
 function showEnd() {
   const st = (data.stats || {})[mode] || { played: 0, wins: 0, streak: 0, best: 0, dist: [0, 0, 0, 0, 0, 0] };
   $('end-title').textContent = game.won ? 'Bravo !' : 'Perdu…';
-  $('end-answer').innerHTML = `Le mot était <b>${(ACCENTS[game.answer] || game.answer).toUpperCase()}</b>`;
+  $('end-answer').innerHTML = `Le mot était <b>${(words.get(game.answer) || game.answer).toUpperCase()}</b>`;
   const story = game.won && game.guesses.length >= 3;
   $('end-phrase').hidden = !story;
   if (story) $('end-phrase').innerHTML = phrase();
