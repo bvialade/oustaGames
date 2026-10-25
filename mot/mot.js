@@ -180,7 +180,7 @@ async function share() {
   const lines = game.guesses.map((g) =>
     score(g, game.answer).map((s) => ({ good: '🟩', close: '🟨', bad: '⬛' })[s]).join('')
   );
-  const head = mode === 'daily' ? `Mot du jour n°${game.day + 1}` : 'Partie libre';
+  const head = mode === 'daily' ? `SUTOM n°${game.day + 1}` : 'SUTOM, partie libre';
   const text = `OustaGames · ${head} ${game.won ? game.guesses.length : 'X'}/6\n\n${lines.join('\n')}\n\n${location.href.split('#')[0]}`;
   try {
     if (navigator.share) await navigator.share({ text });

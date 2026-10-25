@@ -2,7 +2,7 @@
 
 Petits jeux à jouer sur téléphone, sous forme de web app installable (PWA).
 
-- **Le mot du jour** : un jeu de mot à deviner en 6 essais, avec un mot du jour commun à tous et des parties libres.
+- **SUTOM** : un jeu de mot à deviner en 6 essais, avec un mot du jour commun à tous et des parties libres.
 - **Mot chaud, mot froid** : trouver un mot secret grâce à la proximité de sens des mots proposés, avec 10 énigmes à débloquer.
 - **Géographie** : quiz drapeaux, capitales et capitale → pays, par continent.
 
