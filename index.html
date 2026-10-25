@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>OustaGames</title>
+  <meta name="theme-color" content="#4f46e5">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="OustaGames">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    header.hero { padding: 28px 16px 8px; text-align: center; }
+    header.hero h1 { margin: 0; font-size: 1.9rem; }
+    header.hero p { margin: 6px 0 0; color: var(--muted); }
+    .games { display: grid; gap: 12px; }
+    .game {
+      display: flex; align-items: center; gap: 14px; padding: 16px;
+      background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+      color: inherit; text-decoration: none;
+    }
+    .game .emoji { font-size: 2rem; width: 52px; height: 52px; display: grid; place-items: center; border-radius: 12px; background: var(--bg); }
+    .game h2 { margin: 0; font-size: 1.1rem; }
+    .game p { margin: 2px 0 0; color: var(--muted); font-size: .9rem; }
+    .game.soon { opacity: .5; }
+    .tip { margin-top: 20px; font-size: .85rem; color: var(--muted); text-align: center; }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <h1>OustaGames</h1>
+    <p>Choisis ton jeu</p>
+  </header>
+  <main class="page">
+    <nav class="games">
+      <a class="game" href="wordle/">
+        <span class="emoji">🟩</span>
+        <div><h2>Le mot du jour</h2><p>Trouve le mot de 5 lettres en 6 essais.</p></div>
+      </a>
+      <a class="game" href="geo/">
+        <span class="emoji">🌍</span>
+        <div><h2>Géographie</h2><p>Drapeaux et capitales du monde.</p></div>
+      </a>
+      <div class="game soon">
+        <span class="emoji">🧠</span>
+        <div><h2>Mot chaud, mot froid</h2><p>Bientôt : le jeu façon Cémantix.</p></div>
+      </div>
+      <div class="game soon">
+        <span class="emoji">❓</span>
+        <div><h2>Quiz</h2><p>Bientôt : culture générale.</p></div>
+      </div>
+    </nav>
+    <p class="tip" id="tip">Sur iPhone : bouton Partager puis « Sur l'écran d'accueil » pour l'installer.</p>
+  </main>
+  <script>
+    if (navigator.standalone || matchMedia('(display-mode: standalone)').matches) {
+      document.getElementById('tip').hidden = true;
+    }
+    if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+  </script>
+</body>
+</html>

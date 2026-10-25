@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <title>Le mot du jour · OustaGames</title>
+  <meta name="theme-color" content="#4f46e5">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    body { display: flex; flex-direction: column; height: 100dvh; }
+    .modes { display: flex; gap: 8px; justify-content: center; padding: 10px 16px 0; }
+    .modes button {
+      padding: 6px 14px; border-radius: 999px; border: 1px solid var(--border);
+      background: var(--card); font-size: .9rem;
+    }
+    .modes button.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+    #board {
+      flex: 1; display: grid; place-content: center; gap: 6px; padding: 10px;
+      grid-template-rows: repeat(6, 1fr); min-height: 0;
+    }
+    .row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+    .row.shake { animation: shake .4s; }
+    @keyframes shake { 20%,60% { transform: translateX(-6px); } 40%,80% { transform: translateX(6px); } }
+    .tile {
+      width: min(15vw, 7.5dvh, 62px); aspect-ratio: 1; display: grid; place-items: center;
+      border: 2px solid var(--border); font-size: min(8vw, 4dvh, 2rem); font-weight: 700;
+      text-transform: uppercase; border-radius: 6px;
+    }
+    .tile.filled { border-color: var(--muted); }
+    .tile.good, .tile.close, .tile.bad { color: #fff; border-color: transparent; }
+    .good { background: var(--good) !important; color: #fff !important; }
+    .close { background: var(--close) !important; color: #fff !important; }
+    .bad { background: var(--bad) !important; color: #fff !important; }
+    .tile.reveal { animation: flip .45s ease both; }
+    @keyframes flip { 0% { transform: rotateX(0); } 50% { transform: rotateX(90deg); } 100% { transform: rotateX(0); } }
+    #keyboard { padding: 6px 4px 10px; display: grid; gap: 7px; }
+    .krow { display: flex; gap: 5px; justify-content: center; }
+    .key {
+      flex: 1; max-width: 44px; height: 54px; border: 0; border-radius: 6px;
+      background: var(--border); font-weight: 600; font-size: 1.05rem; padding: 0;
+    }
+    .key.wide { max-width: 68px; flex: 1.6; font-size: .8rem; }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; margin: 12px 0; }
+    .stats b { display: block; font-size: 1.6rem; }
+    .stats span { font-size: .75rem; color: var(--muted); }
+    .dist { display: grid; gap: 4px; margin: 12px 0 18px; font-size: .85rem; }
+    .dist div { display: flex; gap: 6px; align-items: center; }
+    .dist i { font-style: normal; background: var(--bad); color: #fff; padding: 1px 6px; border-radius: 3px; min-width: 22px; text-align: right; }
+    .dist i.now { background: var(--good); }
+    .answer { text-align: center; font-size: 1.1rem; }
+    .help p { line-height: 1.4; }
+    .help .tile { display: inline-grid; width: 30px; font-size: 1rem; vertical-align: middle; margin-right: 6px; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a href="../" aria-label="Retour au menu">‹</a>
+    <h1>Le mot du jour</h1>
+    <button class="icon-btn" id="help-btn" aria-label="Règles">?</button>
+  </header>
+  <div class="modes">
+    <button id="mode-daily" class="active">Mot du jour</button>
+    <button id="mode-free">Partie libre</button>
+  </div>
+  <main id="board"></main>
+  <div id="keyboard"></div>
+  <div class="toast" id="toast"></div>
+
+  <dialog id="end">
+    <h2 id="end-title"></h2>
+    <p class="answer" id="end-answer"></p>
+    <div class="stats" id="stats"></div>
+    <div class="dist" id="dist"></div>
+    <button class="btn" id="share">Partager mon résultat</button>
+    <button class="btn secondary" id="again">Nouvelle partie libre</button>
+    <button class="btn secondary" id="close-end">Fermer</button>
+  </dialog>
+
+  <dialog id="help" class="help">
+    <h2>Comment jouer</h2>
+    <p>Trouve le mot de 5 lettres en 6 essais. Les accents ne comptent pas.</p>
+    <p><span class="tile good">A</span>la lettre est bien placée.</p>
+    <p><span class="tile close">B</span>la lettre est dans le mot, mais ailleurs.</p>
+    <p><span class="tile bad">C</span>la lettre n'est pas dans le mot.</p>
+    <p>Le mot du jour est le même pour tout le monde et change à minuit. La partie libre tire un mot au hasard, autant de fois que tu veux.</p>
+    <button class="btn" onclick="this.closest('dialog').close()">C'est parti</button>
+  </dialog>
+
+  <script src="words.js"></script>
+  <script src="wordle.js"></script>
+</body>
+</html>
