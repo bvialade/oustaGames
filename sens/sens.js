@@ -155,6 +155,12 @@ function render(animate = false) {
   $('hints-list').innerHTML = list.map((h, k) =>
     `<li class="${k === lastRendered && animate === 'hint' ? 'new' : ''}" style="--d:${k}"><span>${k + 1}</span><div>${h}</div></li>`).join('');
   $('dots').innerHTML = Array.from({ length: 10 }, (_, k) => `<i class="${k < game.hints ? 'on' : ''}"></i>`).join('');
+  const n = game.letters || 0;
+  $('letters-show').innerHTML = n
+    ? 'Commence par ' + [...secret.word.slice(0, n)].map((c) => `<b>${c}</b>`).join('') + '…'
+    : 'Lettres révélées : aucune';
+  $('letter-btn').disabled = n >= 3 || game.done;
+  $('letter-btn').textContent = n === 0 ? 'Une lettre' : n < 3 ? `Lettre suivante (${n}/3)` : 'Max. 3 lettres';
   $('hints-empty').hidden = game.hints > 0;
   $('hints-title').textContent = `Énigmes ${game.hints}/10`;
   $('hint-btn').disabled = game.hints >= 10 || game.done;
@@ -277,6 +283,14 @@ function revealHint() {
   render('hint');
 }
 
+function revealLetter() {
+  if ((game.letters || 0) >= 3 || game.done) return;
+  game.letters = (game.letters || 0) + 1;
+  lastRendered = -1;
+  persist();
+  render('hint');
+}
+
 function giveUp() {
   if (!confirm('Abandonner et afficher le mot secret ?')) return;
   game.done = true;
@@ -286,12 +300,22 @@ function giveUp() {
   showEnd();
 }
 
+function helps() {
+  const h = game.hints;
+  const l = game.letters || 0;
+  if (!h && !l) return 'sans aucune aide';
+  const parts = [];
+  if (h) parts.push(`${h} énigme${h > 1 ? 's' : ''}`);
+  if (l) parts.push(`${l} lettre${l > 1 ? 's' : ''}`);
+  return 'avec ' + parts.join(' et ');
+}
+
 function showEnd() {
   const n = game.guesses.length;
   $('end-title').textContent = game.won ? 'Bravo !' : 'Le mot était…';
   $('end-word').textContent = secret.word;
   $('end-text').textContent = game.won
-    ? `Trouvé en ${n} essai${n > 1 ? 's' : ''}, avec ${game.hints} indice${game.hints > 1 ? 's' : ''}.`
+    ? `Trouvé en ${n} essai${n > 1 ? 's' : ''}, ${helps()}.`
     : `Tu feras mieux la prochaine fois !`;
   $('share').hidden = !game.won;
   $('again').textContent = mode === 'free' ? 'Rejouer' : 'Faire une partie libre';
@@ -301,7 +325,7 @@ function showEnd() {
 async function share() {
   const n = game.guesses.length;
   const head = mode === 'daily' ? `Mot chaud, mot froid n°${game.day + 1}` : 'Mot chaud, mot froid';
-  const text = `OustaGames · ${head}\nTrouvé en ${n} essai${n > 1 ? 's' : ''} 🥳 avec ${game.hints} indice${game.hints > 1 ? 's' : ''} 🧩\n${location.href.split('#')[0]}`;
+  const text = `OustaGames · ${head}\nTrouvé en ${n} essai${n > 1 ? 's' : ''} 🥳 ${helps()} 🧩\n${location.href.split('#')[0]}`;
   try {
     if (navigator.share) await navigator.share({ text });
     else { await navigator.clipboard.writeText(text); toast('Copié !'); }
@@ -319,6 +343,7 @@ function toast(msg) {
 
 $('form').onsubmit = submit;
 $('hint-btn').onclick = revealHint;
+$('letter-btn').onclick = revealLetter;
 $('give-up').onclick = giveUp;
 $('mode-daily').onclick = () => newGame('daily');
 $('mode-free').onclick = () => newGame('free');

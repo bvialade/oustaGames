@@ -84,6 +84,13 @@
       background: hsl(calc(280 - var(--d) * 14) 80% 55%); }
     .hints li.new { animation: flipin .6s cubic-bezier(.2,.9,.3,1.2); transform-origin: top; }
     @keyframes flipin { from { transform: perspective(600px) rotateX(-90deg); opacity: 0; } to { transform: none; opacity: 1; } }
+    .letters { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 12px; }
+    #letters-show { display: flex; gap: 5px; align-items: center; font-size: .85rem; color: var(--muted); }
+    #letters-show b { width: 30px; height: 34px; display: grid; place-items: center; border-radius: 8px; font-size: 1.1rem; color: #fff;
+      background: linear-gradient(135deg, #0ea5e9, #6366f1); text-transform: uppercase; animation: flipin .5s; }
+    #letter-btn { border: 0; border-radius: 999px; padding: 8px 14px; color: #fff; font-weight: 700; font-size: .85rem;
+      background: linear-gradient(135deg, #0ea5e9, #6366f1); box-shadow: 0 4px 16px rgba(14,165,233,.35); }
+    #letter-btn:disabled { opacity: .35; box-shadow: none; }
     .hints .empty { color: var(--muted); font-size: .88rem; margin: 8px 0 0; }
 
     #list { display: grid; gap: 6px; }
@@ -148,6 +155,10 @@
         <button id="hint-btn" type="button">Une énigme</button>
       </div>
       <div class="dots" id="dots"></div>
+      <div class="letters">
+        <div id="letters-show"></div>
+        <button id="letter-btn" type="button">Une lettre</button>
+      </div>
       <ol id="hints-list"></ol>
       <p class="empty" id="hints-empty">Dix énigmes, de la plus difficile à la plus facile. À débloquer quand tu sèches.</p>
     </section>
@@ -174,7 +185,7 @@
     <p>Trouve le mot secret. Chaque mot que tu proposes reçoit une température : plus il est proche <b>par le sens</b> du mot secret, plus il est chaud.</p>
     <p>🥶 froid · 😎 tiède · 🥵 dans les 1000 mots les plus proches · 🔥 dans les 100 · 😱 dans les 10.</p>
     <p>La progression (sur 1000) apparaît pour les 1000 mots les plus proches : à 999, tu y es presque !</p>
-    <p>Bloqué ? Débloque une énigme. La première est très difficile, la dixième donne presque la réponse.</p>
+    <p>Bloqué ? Débloque une énigme : la première est très difficile, la dixième donne presque la réponse. Tu peux aussi révéler les premières lettres du mot, jusqu'à trois.</p>
     <button class="btn" onclick="this.closest('dialog').close()">C'est parti</button>
   </dialog>
 
