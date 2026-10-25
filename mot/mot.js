@@ -106,7 +106,7 @@ function renderKeyboard() {
       if (!status[g[i]] || rank[s] > rank[status[g[i]]]) status[g[i]] = s;
     });
   }
-  const layout = ['AZERTYUIOP', 'QSDFGHJKLM', '⏎WXCVBN⌫'];
+  const layout = ['AZERTYUIOP', 'QSDFGHJKLM', 'WXCVBN⌫⏎'];
   keyboard.innerHTML = '';
   for (const line of layout) {
     const row = document.createElement('div');
