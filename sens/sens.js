@@ -108,30 +108,145 @@ function emoji({ temp, rank }) {
   return '🧊';
 }
 
-function rowHtml(word, n, isLast) {
+// Couleur d'une température : bleu glacial -> rouge brûlant.
+const hue = (t) => 210 - (Math.max(0, Math.min(t, 60)) / 60) * 210;
+const gaugePos = (t) => Math.max(0, Math.min(100, ((t + 10) / 80) * 100));
+
+function itemHtml(word, n, fresh) {
   const i = info(word);
-  const progress = i.rank !== undefined
-    ? `<div class="meter"><div><i style="width:${((TOP - i.rank) / TOP) * 100}%"></i></div>${TOP - i.rank}</div>` : '';
-  return `<tr class="${isLast ? 'last' : ''}"><td class="n">${n}</td><td>${word}</td><td class="t">${i.temp.toFixed(2)}</td><td>${emoji(i)}</td><td class="p">${progress}</td></tr>`;
+  const bar = i.rank !== undefined
+    ? `<div class="bar"><i data-w="${((TOP - i.rank) / TOP) * 100}"></i></div><span class="pm">${TOP - i.rank}‰</span>` : '';
+  return `<div class="item${fresh ? ' fresh' : ''}" style="--h:${hue(i.temp)}"><span class="n">${n}</span><span class="w">${word}</span><span class="t">${i.temp.toFixed(2)}°</span><span>${emoji(i)}</span>${bar}</div>`;
 }
 
-function render() {
+let lastRendered = 0;
+
+function render(animate = false) {
   $('loading').hidden = true;
   const g = game.guesses;
-  $('table').hidden = g.length === 0;
   const last = g[g.length - 1];
-  $('latest').innerHTML = last ? rowHtml(last, g.length, true) : '';
-  const sorted = g.map((w, i) => [w, i + 1]).sort((a, b) => info(b[0]).temp - info(a[0]).temp);
-  $('rows').innerHTML = sorted.map(([w, n]) => rowHtml(w, n, false)).join('');
+  const temps = g.map((w) => info(w).temp);
+  document.documentElement.style.setProperty('--hue', g.length ? hue(Math.max(...temps)) : 210);
 
+  // Thermomètre
+  const hero = $('hero');
+  hero.classList.toggle('empty', !last);
+  if (last) {
+    const i = info(last);
+    hero.style.setProperty('--h', hue(i.temp));
+    $('hero-label').textContent = `Essai n°${g.length}`;
+    $('hero-word').textContent = last;
+    $('hero-temp').hidden = false;
+    $('hero-emoji').textContent = emoji(i);
+    $('hero-rank').textContent = i.rank === 0 ? 'Trouvé !' : i.rank !== undefined ? `${TOP - i.rank}‰ · dans les ${TOP} mots les plus proches` : i.temp < 0 ? 'Glacial…' : i.temp < 20 ? 'Froid' : 'Tiède, continue !';
+    $('gauge-dot').style.left = gaugePos(i.temp) + '%';
+    countUp($('hero-temp'), i.temp, animate === true);
+    if (animate === true) effects(i, temps);
+  }
+
+  // Liste triée du plus chaud au plus froid
+  $('list-title').hidden = g.length < 2;
+  const sorted = g.map((w, k) => [w, k + 1]).sort((a, b) => info(b[0]).temp - info(a[0]).temp);
+  $('list').innerHTML = g.length < 2 ? '' : sorted.map(([w, n]) => itemHtml(w, n, animate === true && w === last)).join('');
+  requestAnimationFrame(() => document.querySelectorAll('.bar i').forEach((b) => (b.style.width = b.dataset.w + '%')));
+
+  // Énigmes
   const list = secret.hints.slice(0, game.hints);
-  $('hints-list').innerHTML = list.map((h, i) => `<li><span>${i + 1}.</span>${h}</li>`).join('');
+  $('hints-list').innerHTML = list.map((h, k) =>
+    `<li class="${k === lastRendered && animate === 'hint' ? 'new' : ''}" style="--d:${k}"><span>${k + 1}</span><div>${h}</div></li>`).join('');
+  $('dots').innerHTML = Array.from({ length: 10 }, (_, k) => `<i class="${k < game.hints ? 'on' : ''}"></i>`).join('');
   $('hints-empty').hidden = game.hints > 0;
-  $('hints-title').textContent = `Indices ${game.hints}/10`;
+  $('hints-title').textContent = `Énigmes ${game.hints}/10`;
   $('hint-btn').disabled = game.hints >= 10 || game.done;
-  $('hint-btn').textContent = game.hints === 0 ? 'Un indice' : 'Indice suivant';
+  $('hint-btn').textContent = game.hints === 0 ? 'Une énigme' : 'Énigme suivante';
   $('guess').disabled = game.done;
   $('give-up').hidden = game.done;
+}
+
+function countUp(el, target, animate) {
+  const show = (v) => (el.innerHTML = `${v.toFixed(2)}<small>°C</small>`);
+  if (!animate) return show(target);
+  const t0 = performance.now();
+  const step = (now) => {
+    const k = Math.min(1, (now - t0) / 700);
+    show(target * (1 - Math.pow(1 - k, 3)));
+    if (k < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+// Effets selon la chaleur du mot : frisson quand c'est froid, flash et flammes quand c'est chaud.
+function effects(i, temps) {
+  const hero = $('hero');
+  hero.classList.remove('cold', 'hot');
+  void hero.offsetWidth;
+  const best = temps.length < 2 || i.temp > Math.max(...temps.slice(0, -1));
+  if (i.rank === 0) return;
+  if (i.temp < 0) { hero.classList.add('cold'); navigator.vibrate?.(40); return; }
+  if (i.rank !== undefined) {
+    hero.classList.add('hot');
+    if (i.rank <= 100) {
+      const f = document.createElement('div');
+      f.className = 'flash';
+      f.style.setProperty('--h', hue(i.temp));
+      document.body.appendChild(f);
+      setTimeout(() => f.remove(), 800);
+      burst(i.rank <= 10 ? ['🔥', '😱', '✨'] : ['🔥', '✨'], i.rank <= 10 ? 26 : 12);
+      navigator.vibrate?.([30, 40, 30]);
+    }
+  }
+  if (best && temps.length > 1) toast('Nouveau record de chaleur !');
+}
+
+// Petit moteur de particules sur un canvas plein écran (emojis ou confettis).
+const fx = $('fx');
+const ctx = fx.getContext('2d');
+let parts = [];
+let running = false;
+
+function launch(list) {
+  fx.width = innerWidth * devicePixelRatio;
+  fx.height = innerHeight * devicePixelRatio;
+  parts.push(...list);
+  if (!running) { running = true; requestAnimationFrame(tick); }
+}
+
+function tick() {
+  ctx.clearRect(0, 0, fx.width, fx.height);
+  const d = devicePixelRatio;
+  parts = parts.filter((p) => p.life > 0);
+  for (const p of parts) {
+    p.x += p.vx; p.y += p.vy; p.vy += p.g; p.rot += p.vr; p.life--;
+    ctx.save();
+    ctx.globalAlpha = Math.min(1, p.life / 30);
+    ctx.translate(p.x * d, p.y * d);
+    ctx.rotate(p.rot);
+    if (p.emoji) { ctx.font = `${p.size * d}px serif`; ctx.fillText(p.emoji, 0, 0); }
+    else { ctx.fillStyle = p.color; ctx.fillRect(-p.size * d / 2, -p.size * d / 4, p.size * d, p.size * d / 2); }
+    ctx.restore();
+  }
+  if (parts.length) requestAnimationFrame(tick);
+  else { running = false; ctx.clearRect(0, 0, fx.width, fx.height); }
+}
+
+function burst(emojis, n) {
+  const r = $('hero').getBoundingClientRect();
+  launch(Array.from({ length: n }, () => ({
+    emoji: emojis[Math.floor(Math.random() * emojis.length)],
+    x: r.left + r.width / 2, y: r.top + r.height / 2,
+    vx: (Math.random() - 0.5) * 9, vy: -Math.random() * 9 - 2, g: 0.25,
+    rot: 0, vr: (Math.random() - 0.5) * 0.2, size: 14 + Math.random() * 12, life: 70 + Math.random() * 30,
+  })));
+}
+
+function confetti() {
+  const colors = ['#facc15', '#f97316', '#ef4444', '#ec4899', '#a855f7', '#22d3ee', '#4ade80'];
+  launch(Array.from({ length: 180 }, () => ({
+    x: innerWidth / 2 + (Math.random() - 0.5) * 80, y: innerHeight * 0.35,
+    vx: (Math.random() - 0.5) * 16, vy: -Math.random() * 14 - 4, g: 0.3,
+    rot: Math.random() * 6, vr: (Math.random() - 0.5) * 0.4, size: 8 + Math.random() * 8,
+    color: colors[Math.floor(Math.random() * colors.length)], life: 120 + Math.random() * 60,
+  })));
 }
 
 function submit(e) {
@@ -146,15 +261,20 @@ function submit(e) {
   game.guesses.push(word);
   if (word === secret.word) { game.done = true; game.won = true; }
   persist();
-  render();
-  if (game.won) setTimeout(showEnd, 400);
+  render(true);
+  if (game.won) {
+    confetti();
+    navigator.vibrate?.([50, 50, 50, 50, 120]);
+    setTimeout(showEnd, 1200);
+  }
 }
 
 function revealHint() {
   if (game.hints >= 10 || game.done) return;
+  lastRendered = game.hints;
   game.hints++;
   persist();
-  render();
+  render('hint');
 }
 
 function giveUp() {
