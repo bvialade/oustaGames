@@ -160,10 +160,45 @@ function recordStats(won) {
   if (mode === 'daily') st.lastDay = game.day;
 }
 
+// Petite phrase souvenir qui reprend les mots essayés et le mot trouvé.
+// {list} : les essais ratés ("A, B et C"), {nor} : "A, ni B", {first}/{middle} : premier essai et les suivants.
+const PHRASES = [
+  'Premier essai : {first}. Puis {middle}. Et enfin… {win} !',
+  'Ni {nor} : ce qu’il me fallait, c’était {win} !',
+  'J’ai cherché {list} partout, mais je n’ai trouvé que {win}.',
+  'Recette du jour : prenez {list}, mélangez bien, et vous obtenez {win}.',
+  'Il était une fois {list}, partis ensemble à la recherche de {win}.',
+  'Ma tête disait {list}… mais mon cœur disait {win}.',
+  'Caché derrière {list}, {win} attendait patiemment d’être trouvé.',
+  'Dans ma valise pour les vacances : {list}, et surtout {win}.',
+  'On m’a proposé {list}. J’ai poliment refusé et j’ai choisi {win}.',
+  'Au menu ce soir : {list}, avec {win} en dessert.',
+];
+
+function phrase() {
+  const pretty = (w) => { const a = ACCENTS[w] || w.toLowerCase(); return a[0].toUpperCase() + a.slice(1); };
+  const nice = (w) => `<i>${pretty(w)}</i>`;
+  const tries = game.guesses.slice(0, -1).map(nice);
+  const and = (a) => (a.length > 1 ? a.slice(0, -1).join(', ') + ' et ' + a[a.length - 1] : a[0]);
+  const vars = {
+    win: `<b>${pretty(game.answer)}</b>`,
+    list: and(tries),
+    nor: tries.join(', ni '),
+    first: tries[0],
+    middle: and(tries.slice(1)),
+  };
+  // Même partie, même phrase : le choix dépend du numéro et des essais.
+  const seed = [...game.guesses.join('')].reduce((h, c) => (h * 31 + c.charCodeAt(0)) % 9973, game.num);
+  return PHRASES[seed % PHRASES.length].replace(/\{(\w+)\}/g, (_, k) => vars[k]);
+}
+
 function showEnd() {
   const st = (data.stats || {})[mode] || { played: 0, wins: 0, streak: 0, best: 0, dist: [0, 0, 0, 0, 0, 0] };
   $('end-title').textContent = game.won ? 'Bravo !' : 'Perdu…';
   $('end-answer').innerHTML = `Le mot était <b>${game.answer}</b>`;
+  const story = game.won && game.guesses.length >= 3;
+  $('end-phrase').hidden = !story;
+  if (story) $('end-phrase').innerHTML = phrase();
   $('stats').innerHTML = [
     [st.played, 'Parties'],
     [st.played ? Math.round((100 * st.wins) / st.played) : 0, '% gagnées'],

@@ -57,6 +57,11 @@
     .dist i { font-style: normal; background: var(--bad); color: #fff; padding: 1px 6px; border-radius: 3px; min-width: 22px; text-align: right; }
     .dist i.now { background: var(--good); }
     .answer { text-align: center; font-size: 1.1rem; }
+    .phrase {
+      text-align: center; font-size: 1rem; line-height: 1.45; margin: 4px 0 8px; padding: 12px 14px;
+      background: var(--bg); border-radius: 12px;
+    }
+    .phrase b { color: var(--good); }
     .help p { line-height: 1.4; }
     .help .tile { display: inline-grid; width: 30px; font-size: 1rem; vertical-align: middle; margin-right: 6px; }
   </style>
@@ -82,6 +87,7 @@
   <dialog id="end">
     <h2 id="end-title"></h2>
     <p class="answer" id="end-answer"></p>
+    <p class="phrase" id="end-phrase" hidden></p>
     <div class="stats" id="stats"></div>
     <div class="dist" id="dist"></div>
     <button class="btn" id="share">Partager mon résultat</button>
