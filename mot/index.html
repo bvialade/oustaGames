@@ -16,6 +16,12 @@
       padding: 6px 14px; border-radius: 999px; border: 1px solid var(--border);
       background: var(--card); font-size: .9rem;
     }
+    .num-bar { display: flex; gap: 10px; justify-content: center; align-items: center; padding-top: 8px; font-size: .9rem; color: var(--muted); }
+    .num-bar button { border: 0; background: none; color: var(--accent); font-weight: 600; text-decoration: underline; padding: 4px; }
+    #pick-input {
+      width: 100%; font-size: 1.4rem; text-align: center; padding: 12px; border-radius: 12px; margin: 6px 0 14px;
+      border: 1px solid var(--border); background: var(--bg); color: var(--text); -webkit-user-select: text; user-select: text;
+    }
     .modes button.active { background: var(--accent); border-color: var(--accent); color: #fff; }
     #board {
       flex: 1; display: grid; place-content: center; gap: 6px; padding: 10px;
@@ -65,6 +71,10 @@
     <button id="mode-daily" class="active">Mot du jour</button>
     <button id="mode-free">Partie libre</button>
   </div>
+  <div class="num-bar">
+    <span id="game-num"></span>
+    <button id="pick-btn">Choisir un numéro</button>
+  </div>
   <main id="board"></main>
   <div id="keyboard"></div>
   <div class="toast" id="toast"></div>
@@ -79,6 +89,17 @@
     <button class="btn secondary" id="close-end">Fermer</button>
   </dialog>
 
+  <dialog id="pick">
+    <h2>Choisir une partie</h2>
+    <p>Donne le même numéro à un proche : vous aurez le même mot à trouver, chacun de votre côté.</p>
+    <form id="pick-form">
+      <input id="pick-input" type="number" inputmode="numeric" min="1" placeholder="1 à …">
+      <button class="btn" type="submit">Jouer cette partie</button>
+      <button class="btn secondary" type="button" id="pick-cancel">Annuler</button>
+    </form>
+    <p style="font-size:.8rem;color:var(--muted);text-align:center">Il y a <span id="pick-total"></span> parties.</p>
+  </dialog>
+
   <dialog id="help" class="help">
     <h2>Comment jouer</h2>
     <p>Trouve le mot de 5 lettres en 6 essais. Les accents ne comptent pas.</p>
@@ -86,6 +107,7 @@
     <p><span class="tile close">B</span>la lettre est dans le mot, mais ailleurs.</p>
     <p><span class="tile bad">C</span>la lettre n'est pas dans le mot.</p>
     <p>Le mot du jour est le même pour tout le monde et change à minuit. La partie libre tire un mot au hasard, autant de fois que tu veux.</p>
+    <p>Chaque partie a un numéro. Pour jouer la même qu'un proche, touche « Choisir un numéro » et entrez le même.</p>
     <button class="btn" onclick="this.closest('dialog').close()">C'est parti</button>
   </dialog>
 

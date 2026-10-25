@@ -24,23 +24,25 @@ function dayNumber() {
   return Math.round((today - START) / 86400000);
 }
 
-function newGame(m) {
+const total = SOLUTIONS.length;
+const fresh = (idx, extra) => ({ ...extra, num: idx + 1, answer: SOLUTIONS[idx], guesses: [], current: '', done: false });
+
+// num : numéro de partie (1 à total) à jouer en partie libre, pour jouer la même qu'un proche.
+function newGame(m, num) {
   mode = m;
   $('mode-daily').classList.toggle('active', m === 'daily');
   $('mode-free').classList.toggle('active', m === 'free');
   if (m === 'daily') {
     const day = dayNumber();
     const saved = data.daily;
-    if (saved && saved.day === day) {
-      game = saved;
-    } else {
-      game = { day, answer: SOLUTIONS[((day % SOLUTIONS.length) + SOLUTIONS.length) % SOLUTIONS.length], guesses: [], current: '', done: false };
-    }
+    game = saved && saved.day === day ? saved : fresh(((day % total) + total) % total, { day });
   } else {
     const saved = data.free;
-    game = saved && !saved.done ? saved
-      : { answer: SOLUTIONS[Math.floor(Math.random() * SOLUTIONS.length)], guesses: [], current: '', done: false };
+    if (num) game = saved && saved.num === num && !saved.done ? saved : fresh(num - 1);
+    else game = saved && !saved.done ? saved : fresh(Math.floor(Math.random() * total));
   }
+  game.num = SOLUTIONS.indexOf(game.answer) + 1;
+  $('game-num').textContent = (m === 'daily' ? 'Mot du jour · ' : '') + `Partie n°${game.num}`;
   game.current = '';
   persist();
   render();
@@ -180,8 +182,9 @@ async function share() {
   const lines = game.guesses.map((g) =>
     score(g, game.answer).map((s) => ({ good: '🟩', close: '🟨', bad: '⬛' })[s]).join('')
   );
-  const head = mode === 'daily' ? `SUTOM n°${game.day + 1}` : 'SUTOM, partie libre';
-  const text = `OustaGames · ${head} ${game.won ? game.guesses.length : 'X'}/6\n\n${lines.join('\n')}\n\n${location.href.split('#')[0]}`;
+  const head = `SUTOM n°${game.num}${mode === 'daily' ? ' (mot du jour)' : ''}`;
+  const link = location.href.split(/[?#]/)[0] + '?partie=' + game.num;
+  const text = `OustaGames · ${head} ${game.won ? game.guesses.length : 'X'}/6\n\n${lines.join('\n')}\n\nJoue la même partie : ${link}`;
   try {
     if (navigator.share) await navigator.share({ text });
     else { await navigator.clipboard.writeText(text); toast('Copié !'); }
@@ -211,5 +214,28 @@ $('share').onclick = share;
 $('close-end').onclick = () => $('end').close();
 $('again').onclick = () => { $('end').close(); data.free = null; newGame('free'); };
 
+$('pick-btn').onclick = () => {
+  $('pick-input').max = total;
+  $('pick-input').value = '';
+  $('pick-total').textContent = total;
+  $('pick').showModal();
+  $('pick-input').focus();
+};
+$('pick-form').onsubmit = (e) => {
+  e.preventDefault();
+  const n = parseInt($('pick-input').value, 10);
+  if (!(n >= 1 && n <= total)) return toast(`Choisis un numéro entre 1 et ${total}`);
+  $('pick').close();
+  newGame('free', n);
+};
+$('pick-cancel').onclick = () => $('pick').close();
+
 if (!data.seenHelp) { data.seenHelp = true; save(); $('help').showModal(); }
-newGame('daily');
+// Un lien partagé ?partie=12 ouvre directement cette partie.
+const shared = parseInt(new URLSearchParams(location.search).get('partie'), 10);
+if (shared >= 1 && shared <= total) {
+  history.replaceState(null, '', location.pathname);
+  newGame('free', shared);
+} else {
+  newGame('daily');
+}
