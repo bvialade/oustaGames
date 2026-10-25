@@ -2,7 +2,7 @@
 
 Petits jeux à jouer sur téléphone, sous forme de web app installable (PWA).
 
-- **Le mot du jour** : un Wordle en français, avec un mot du jour commun à tous et des parties libres.
+- **Le mot du jour** : un jeu de mot à deviner en 6 essais, avec un mot du jour commun à tous et des parties libres.
 - **Géographie** : quiz drapeaux, capitales et capitale → pays, par continent.
 
 ## Jouer
