@@ -4,7 +4,7 @@ const VERSION = 'v1';
 const CORE = [
   './', 'index.html', 'style.css', 'manifest.webmanifest',
   'icons/icon-192.png', 'icons/apple-touch-icon.png',
-  'wordle/', 'wordle/index.html', 'wordle/wordle.js', 'wordle/words.js',
+  'mot/', 'mot/index.html', 'mot/mot.js', 'mot/words.js',
   'geo/', 'geo/index.html', 'geo/geo.js', 'geo/countries.js',
 ];
 

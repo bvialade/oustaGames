@@ -1,7 +1,7 @@
 const ROWS = 6;
 const COLS = 5;
 const START = new Date(2026, 0, 1);
-const STORE = 'ousta.wordle';
+const STORE = 'ousta.mot';
 
 const $ = (id) => document.getElementById(id);
 const board = $('board');
