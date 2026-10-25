@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Mot chaud, mot froid · OustaGames</title>
+  <meta name="theme-color" content="#4f46e5">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .modes { display: flex; gap: 8px; justify-content: center; margin-bottom: 14px; }
+    .modes button {
+      padding: 6px 14px; border-radius: 999px; border: 1px solid var(--border);
+      background: var(--card); font-size: .9rem;
+    }
+    .modes button.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+    form { display: flex; gap: 8px; }
+    #guess {
+      flex: 1; min-width: 0; font-size: 1.1rem; padding: 12px 14px; border-radius: 12px;
+      border: 1px solid var(--border); background: var(--card); color: var(--text);
+      -webkit-user-select: text; user-select: text;
+    }
+    form .btn { width: auto; padding: 12px 16px; }
+    .hints { margin: 14px 0; background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 12px 14px; }
+    .hints-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .hints-head b { font-size: .95rem; }
+    .hints-head button {
+      border: 0; border-radius: 999px; padding: 7px 12px; background: var(--close); color: #fff; font-weight: 600; font-size: .85rem;
+    }
+    .hints-head button:disabled { opacity: .4; }
+    .hints ol { margin: 8px 0 0; padding-left: 0; list-style: none; display: grid; gap: 6px; }
+    .hints li { font-size: .95rem; line-height: 1.35; }
+    .hints li span { display: inline-block; min-width: 26px; font-size: .75rem; font-weight: 700; color: var(--muted); }
+    .hints .empty { color: var(--muted); font-size: .9rem; margin: 6px 0 0; }
+    table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+    th { text-align: left; font-size: .75rem; color: var(--muted); font-weight: 600; padding: 4px 6px; }
+    td { padding: 8px 6px; border-top: 1px solid var(--border); }
+    td.n { color: var(--muted); width: 2.5em; }
+    td.t { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    td.p { width: 34%; }
+    tr.last td { background: color-mix(in srgb, var(--accent) 14%, transparent); font-weight: 600; }
+    tr.last td:first-child { border-radius: 8px 0 0 8px; }
+    tr.last td:last-child { border-radius: 0 8px 8px 0; }
+    tbody.latest td { border-top: 0; }
+    .meter { display: flex; align-items: center; gap: 6px; font-size: .75rem; color: var(--muted); }
+    .meter div { flex: 1; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+    .meter i { display: block; height: 100%; background: linear-gradient(90deg, #f59e0b, #dc2626); }
+    .footer { display: flex; justify-content: center; margin: 18px 0 30px; }
+    .link { background: none; border: 0; color: var(--muted); text-decoration: underline; font-size: .9rem; }
+    .loading { text-align: center; color: var(--muted); padding: 30px 0; }
+    .help p { line-height: 1.4; }
+    .won { text-align: center; }
+    .won .big { font-size: 2rem; font-weight: 800; margin: 6px 0 14px; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a href="../" aria-label="Retour au menu">‹</a>
+    <h1>Mot chaud, mot froid</h1>
+    <button class="icon-btn" id="help-btn" aria-label="Règles">?</button>
+  </header>
+  <main class="page">
+    <div class="modes">
+      <button id="mode-daily" class="active">Mot du jour</button>
+      <button id="mode-free">Partie libre</button>
+    </div>
+    <form id="form" autocomplete="off">
+      <input id="guess" placeholder="Propose un mot" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="send">
+      <button class="btn" type="submit">Essayer</button>
+    </form>
+
+    <section class="hints">
+      <div class="hints-head">
+        <b id="hints-title">Indices</b>
+        <button id="hint-btn" type="button">Un indice</button>
+      </div>
+      <ol id="hints-list"></ol>
+      <p class="empty" id="hints-empty">Dix énigmes, de la plus difficile à la plus facile. À débloquer quand tu bloques.</p>
+    </section>
+
+    <div class="loading" id="loading">Chargement du dictionnaire…</div>
+    <table id="table" hidden>
+      <thead><tr><th>#</th><th>Mot</th><th class="t">°C</th><th></th><th>Progression</th></tr></thead>
+      <tbody class="latest" id="latest"></tbody>
+      <tbody id="rows"></tbody>
+    </table>
+    <div class="footer"><button class="link" id="give-up">Abandonner et voir le mot</button></div>
+  </main>
+  <div class="toast" id="toast"></div>
+
+  <dialog id="end" class="won">
+    <h2 id="end-title"></h2>
+    <div class="big" id="end-word"></div>
+    <p id="end-text"></p>
+    <button class="btn" id="share">Partager mon résultat</button>
+    <button class="btn secondary" id="again">Nouvelle partie libre</button>
+    <button class="btn secondary" id="close-end">Fermer</button>
+  </dialog>
+
+  <dialog id="help" class="help">
+    <h2>Comment jouer</h2>
+    <p>Trouve le mot secret. Chaque mot que tu proposes reçoit une température : plus il est proche <b>par le sens</b> du mot secret, plus il est chaud.</p>
+    <p>🥶 froid · 😎 tiède · 🥵 dans les 1000 mots les plus proches · 🔥 dans les 100 · 😱 dans les 10.</p>
+    <p>La progression (sur 1000) apparaît pour les 1000 mots les plus proches : à 999, tu y es presque !</p>
+    <p>Bloqué ? Débloque une énigme. La première est très difficile, la dixième donne presque la réponse.</p>
+    <button class="btn" onclick="this.closest('dialog').close()">C'est parti</button>
+  </dialog>
+
+  <script src="secrets.js"></script>
+  <script src="sens.js"></script>
+</body>
+</html>
