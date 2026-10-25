@@ -43,7 +43,8 @@ function newGame(m, num) {
   }
   game.num = SOLUTIONS.indexOf(game.answer) + 1;
   $('game-num').textContent = (m === 'daily' ? 'Mot du jour · ' : '') + `Partie n°${game.num}`;
-  game.current = '';
+  game.current = game.answer[0];
+  typed = false;
   persist();
   render();
   if (game.done) setTimeout(showEnd, 300);
@@ -68,17 +69,28 @@ function score(guess, answer) {
   return res;
 }
 
+// Comme dans SUTOM : la ligne en cours rappelle la première lettre et les lettres déjà bien placées.
+function known() {
+  const k = Array(COLS).fill('.');
+  k[0] = game.answer[0];
+  for (const g of game.guesses) score(g, game.answer).forEach((s, i) => { if (s === 'good') k[i] = g[i]; });
+  return k;
+}
+
 function render() {
   board.innerHTML = '';
+  const hint = known();
   for (let r = 0; r < ROWS; r++) {
     const row = document.createElement('div');
     row.className = 'row';
-    const word = r < game.guesses.length ? game.guesses[r] : r === game.guesses.length ? game.current : '';
-    const colors = r < game.guesses.length ? score(word, game.answer) : null;
+    const past = r < game.guesses.length;
+    const active = r === game.guesses.length && !game.done;
+    const word = past ? game.guesses[r] : active ? game.current : '';
+    const colors = past ? score(word, game.answer) : null;
     for (let c = 0; c < COLS; c++) {
       const t = document.createElement('div');
-      t.className = 'tile' + (word[c] ? ' filled' : '') + (colors ? ' ' + colors[c] : '');
-      t.textContent = word[c] || '';
+      t.className = 'tile' + (colors ? ' ' + colors[c] : '') + (active && !word[c] ? ' hint' : '');
+      t.textContent = word[c] || (active ? hint[c] : '');
       row.appendChild(t);
     }
     board.appendChild(row);
@@ -110,11 +122,15 @@ function renderKeyboard() {
   }
 }
 
+let typed = false; // a-t-on tapé une lettre depuis le début de la ligne ?
+
 function press(k) {
   if (game.done) return;
-  if (k === '⌫') game.current = game.current.slice(0, -1);
+  if (k === '⌫') { if (game.current.length > 1) game.current = game.current.slice(0, -1); }
   else if (k === '⏎') return submit();
-  else if (game.current.length < COLS) game.current += k;
+  // La première lettre est déjà donnée : si on la retape en premier, on l'ignore.
+  else if (!typed && game.current.length === 1 && k === game.current[0]) typed = true;
+  else if (game.current.length < COLS) { game.current += k; typed = true; }
   render();
 }
 
@@ -123,7 +139,8 @@ function submit() {
   if (g.length < COLS) return reject('Pas assez de lettres');
   if (!VALID.has(g)) return reject('Mot inconnu');
   game.guesses.push(g);
-  game.current = '';
+  game.current = g[0];
+  typed = false;
   const won = g === game.answer;
   if (won || game.guesses.length === ROWS) {
     game.done = true;
@@ -169,7 +186,7 @@ const PHRASES = [
   'Recette du jour : prenez {list}, mélangez bien, et vous obtenez {win}.',
   'Il était une fois {list}, partis ensemble à la recherche de {win}.',
   'Ma tête disait {list}… mais mon cœur disait {win}.',
-  'Caché derrière {list}, {win} attendait patiemment d’être trouvé.',
+  'Caché derrière {list}, le mot {win} attendait patiemment.',
   'Dans ma valise pour les vacances : {list}, et surtout {win}.',
   'On m’a proposé {list}. J’ai poliment refusé et j’ai choisi {win}.',
   'Au menu ce soir : {list}, avec {win} en dessert.',
@@ -195,7 +212,7 @@ function phrase() {
 function showEnd() {
   const st = (data.stats || {})[mode] || { played: 0, wins: 0, streak: 0, best: 0, dist: [0, 0, 0, 0, 0, 0] };
   $('end-title').textContent = game.won ? 'Bravo !' : 'Perdu…';
-  $('end-answer').innerHTML = `Le mot était <b>${game.answer}</b>`;
+  $('end-answer').innerHTML = `Le mot était <b>${(ACCENTS[game.answer] || game.answer).toUpperCase()}</b>`;
   const story = game.won && game.guesses.length >= 3;
   $('end-phrase').hidden = !story;
   if (story) $('end-phrase').innerHTML = phrase();
@@ -215,7 +232,7 @@ function showEnd() {
 
 async function share() {
   const lines = game.guesses.map((g) =>
-    score(g, game.answer).map((s) => ({ good: '🟩', close: '🟨', bad: '⬛' })[s]).join('')
+    score(g, game.answer).map((s) => ({ good: '🟥', close: '🟡', bad: '🟦' })[s]).join('')
   );
   const head = `SUTOM n°${game.num}${mode === 'daily' ? ' (mot du jour)' : ''}`;
   const link = location.href.split(/[?#]/)[0] + '?partie=' + game.num;
