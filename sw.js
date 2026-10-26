@@ -1,6 +1,6 @@
 // Garde les fichiers en cache pour jouer hors connexion.
 // Les fichiers sont toujours redemandés au réseau d'abord, donc les mises à jour arrivent seules.
-const VERSION = 'v2';
+const VERSION = 'v3';
 const CORE = [
   './', 'index.html', 'style.css', 'manifest.webmanifest',
   'icons/icon-192.png', 'icons/apple-touch-icon.png',
