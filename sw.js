@@ -1,11 +1,12 @@
 // Garde les fichiers en cache pour jouer hors connexion.
 // Les fichiers sont toujours redemandés au réseau d'abord, donc les mises à jour arrivent seules.
-const VERSION = 'v1';
+const VERSION = 'v2';
 const CORE = [
   './', 'index.html', 'style.css', 'manifest.webmanifest',
   'icons/icon-192.png', 'icons/apple-touch-icon.png',
   'mot/', 'mot/index.html', 'mot/mot.js', 'mot/words.js', 'mot/dico/5.txt',
   'geo/', 'geo/index.html', 'geo/geo.js', 'geo/countries.js',
+  'frontieres/', 'frontieres/index.html', 'frontieres/frontieres.js', 'frontieres/data.js',
   'quiz/', 'quiz/index.html', 'quiz/quiz.js',
   'sens/', 'sens/index.html', 'sens/sens.js', 'sens/secrets.js', 'sens/vocab.txt',
 ];
