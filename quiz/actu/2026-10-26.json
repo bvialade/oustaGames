@@ -1,0 +1,75 @@
+{
+  "date": "2026-10-26",
+  "questions": [
+    {
+      "q": "Après des législatives marquées par une participation record, quel dirigeant serbe, qui dominait la vie politique depuis 2012, a reconnu dimanche soir : « Nous avons perdu les élections » ?",
+      "choix": ["Viktor Orbán", "Aleksandar Vučić", "Edi Rama", "Milorad Dodik"],
+      "reponse": 1,
+      "explication": "Aleksandar Vučić, dont le parti SNS dominait la Serbie depuis 2012, a reconnu sa défaite face au mouvement né des manifestations étudiantes.",
+      "source": { "nom": "Le Grand Continent", "url": "https://legrandcontinent.eu/fr/2026/10/25/legislatives-serbes-vucic-nous-avons-perdu-les-elections/" }
+    },
+    {
+      "q": "Quelle équipe a remporté dimanche le premier match de saison régulière de NFL disputé au Stade de France, face aux New Orleans Saints ?",
+      "choix": ["Les Kansas City Chiefs", "Les Dallas Cowboys", "Les Pittsburgh Steelers", "Les Miami Dolphins"],
+      "reponse": 2,
+      "explication": "Les Pittsburgh Steelers ont battu les New Orleans Saints 16 à 10 au Stade de France.",
+      "source": { "nom": "VAVEL (en anglais)", "url": "https://www.vavel.com/en-us/nfl/2026/10/25/1276745-pittsburgh-steelers-vs-new-orleans-saints-live-score-nfl.html" }
+    },
+    {
+      "q": "Quel quarterback vétéran des Steelers a lancé une passe de touchdown lors de ce match historique à Paris ?",
+      "choix": ["Tom Brady", "Patrick Mahomes", "Aaron Rodgers", "Peyton Manning"],
+      "reponse": 2,
+      "explication": "Aaron Rodgers, quarterback des Steelers, a trouvé un receveur dans la zone d'en-but pour l'un des touchdowns de la victoire 16-10.",
+      "source": { "nom": "VAVEL (en anglais)", "url": "https://www.vavel.com/en-us/nfl/2026/10/25/1276745-pittsburgh-steelers-vs-new-orleans-saints-live-score-nfl.html" }
+    },
+    {
+      "q": "En clôture du congrès du RN à Orléans, qui Marine Le Pen a-t-elle désigné comme son futur Premier ministre si elle est élue ?",
+      "choix": ["Jordan Bardella", "Louis Aliot", "Sébastien Chenu", "Jean-Philippe Tanguy"],
+      "reponse": 0,
+      "explication": "Dans son premier grand discours de campagne, dimanche à Orléans, Marine Le Pen a affirmé que Jordan Bardella serait son Premier ministre.",
+      "source": { "nom": "CNews via Titres Presse", "url": "https://www.titrespresse.com/26507042603/pen-jordan-bardella" }
+    },
+    {
+      "q": "Le gouvernement libère jusqu'à 10 millions de barils de gazole de ses stocks stratégiques. Quelle baisse du prix à la pompe est attendue dès le 1er novembre ?",
+      "choix": ["1 à 2 centimes par litre", "12 à 18 centimes par litre", "40 à 50 centimes par litre", "Le prix sera divisé par deux"],
+      "reponse": 1,
+      "explication": "La baisse attendue est de 12 à 18 centimes par litre, et les distributeurs doivent la répercuter intégralement.",
+      "source": { "nom": "Rekto News", "url": "https://rekto.substack.com/p/lundi-26-octobre-2026" }
+    },
+    {
+      "q": "Citroën fournit à l'armée française des petites voitures électriques Ami pour circuler dans les bases. Combien ?",
+      "choix": ["16", "156", "1 560", "15 600"],
+      "reponse": 1,
+      "explication": "L'armée reçoit 156 Citroën Ami électriques pour les déplacements à l'intérieur de ses bases.",
+      "source": { "nom": "Rekto News", "url": "https://rekto.substack.com/p/lundi-26-octobre-2026" }
+    },
+    {
+      "q": "L'action Kering a chuté de plus de 16 % en une séance. Les ventes de quelle marque phare du groupe ont reculé de 6 % ?",
+      "choix": ["Chanel", "Hermès", "Gucci", "Louis Vuitton"],
+      "reponse": 2,
+      "explication": "Gucci, la marque vedette de Kering, a vu ses ventes baisser de 6 %, et de 9 % dans ses boutiques. Le titre a perdu 41 % depuis janvier.",
+      "source": { "nom": "Rekto News", "url": "https://rekto.substack.com/p/lundi-26-octobre-2026" }
+    },
+    {
+      "q": "Le ministre du Commerce veut transformer 339 stations-service rurales isolées. En quoi ?",
+      "choix": ["En bornes de recharge uniquement", "En commerces de proximité", "En bureaux de poste", "En parkings de covoiturage"],
+      "reponse": 1,
+      "explication": "L'idée est d'en faire des commerces de proximité, avec une aide pouvant aller jusqu'à 20 000 € par station.",
+      "source": { "nom": "Rekto News", "url": "https://rekto.substack.com/p/lundi-26-octobre-2026" }
+    },
+    {
+      "q": "La compagnie aérienne Corsair renonce à desservir un pays d'Afrique, avec ses lignes vers Douala et Yaoundé. Lequel ?",
+      "choix": ["Le Sénégal", "La Côte d'Ivoire", "Le Cameroun", "Le Gabon"],
+      "reponse": 2,
+      "explication": "Corsair abandonne son projet de lignes Paris–Douala et Paris–Yaoundé, les deux grandes villes du Cameroun.",
+      "source": { "nom": "Rekto News", "url": "https://rekto.substack.com/p/lundi-26-octobre-2026" }
+    },
+    {
+      "q": "Selon les estimations, combien les nouvelles taxes françaises et européennes sur les petits colis (type Shein ou Temu) ont-elles rapporté en un an ?",
+      "choix": ["Environ 10 millions d'euros", "Environ 100 millions d'euros", "Environ 1 milliard d'euros", "Environ 10 milliards d'euros"],
+      "reponse": 2,
+      "explication": "Ces taxes auraient rapporté environ 1 milliard d'euros en un an, tout en faisant baisser les volumes de colis de 30 à 40 %.",
+      "source": { "nom": "Rekto News", "url": "https://rekto.substack.com/p/lundi-26-octobre-2026" }
+    }
+  ]
+}
