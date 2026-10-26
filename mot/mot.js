@@ -2,6 +2,8 @@ const ROWS = 6;
 let COLS = 5; // longueur du mot en cours, de 5 à 10
 const START = new Date(2026, 0, 1);
 const STORE = 'ousta.mot';
+// Adresse du relais qui écrit la phrase de fin (voir outils/phrase-worker). Vide = phrases modèles.
+const PHRASE_API = '';
 
 const $ = (id) => document.getElementById(id);
 const board = $('board');
@@ -228,13 +230,42 @@ function phrase() {
   return PHRASES[seed % PHRASES.length].replace(/\{(\w+)\}/g, (_, k) => vars[k]);
 }
 
+// Phrase écrite par Claude via le relais ; gardée par partie pour ne pas redemander.
+async function aiPhrase() {
+  const el = $('end-phrase');
+  const key = game.num + ':' + game.guesses.join(',');
+  const cache = data.phrases || (data.phrases = {});
+  const shown = (t) => { el.textContent = t; };
+  if (cache[key]) return shown(cache[key]);
+  el.textContent = '✍️ …';
+  const pretty = (w) => words.get(w) || w.toLowerCase();
+  try {
+    const ctl = new AbortController();
+    setTimeout(() => ctl.abort(), 8000);
+    const r = await fetch(PHRASE_API, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ essais: game.guesses.slice(0, -1).map(pretty), mot: pretty(game.answer) }),
+      signal: ctl.signal,
+    });
+    const { phrase: t } = await r.json();
+    if (!t) throw new Error();
+    cache[key] = t;
+    save();
+    shown(t);
+  } catch {
+    el.hidden = true;
+  }
+}
+
 function showEnd() {
   const st = (data.stats || {})[mode] || { played: 0, wins: 0, streak: 0, best: 0, dist: [0, 0, 0, 0, 0, 0] };
   $('end-title').textContent = game.won ? 'Bravo !' : 'Perdu…';
   $('end-answer').innerHTML = `Le mot était <b>${(words.get(game.answer) || game.answer).toUpperCase()}</b>`;
   const story = game.won && game.guesses.length >= 3;
   $('end-phrase').hidden = !story;
-  if (story) $('end-phrase').innerHTML = phrase();
+  if (story && PHRASE_API) aiPhrase();
+  else if (story) $('end-phrase').innerHTML = phrase();
   $('stats').innerHTML = [
     [st.played, 'Parties'],
     [st.played ? Math.round((100 * st.wins) / st.played) : 0, '% gagnées'],
