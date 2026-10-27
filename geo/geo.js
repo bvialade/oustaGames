@@ -28,7 +28,7 @@ function save() {
 prefs.mode = prefs.mode || 'flag';
 prefs.region = prefs.region || 'monde';
 prefs.length = prefs.length ?? 10;
-prefs.best = prefs.best || {};
+prefs.points = prefs.points || {}; // meilleur total de points par jeu (cash 5, carré 2, indice 1)
 
 const shuffle = (arr) => {
   const a = [...arr];
@@ -139,11 +139,11 @@ function renderSetup() {
   const modes = $('modes');
   modes.innerHTML = '';
   for (const [k, m] of Object.entries(MODES)) {
-    const best = prefs.best[`${k}-${prefs.region}-${prefs.length}`];
+    const best = prefs.points[`${k}-${prefs.region}-${prefs.length}`];
     const b = document.createElement('button');
     b.className = 'mode' + (k === prefs.mode ? ' active' : '');
     b.innerHTML = `<span class="ico">${m.icon}</span><span><b>${m.label}</b><small>${m.hint}</small></span>`
-      + (best !== undefined ? `<span class="best">🏆 ${best} %</span>` : '');
+      + (best !== undefined ? `<span class="best">🏆 ${ptsLabel(best)}</span>` : '');
     b.onclick = () => { prefs.mode = k; save(); renderSetup(); };
     modes.appendChild(b);
   }
@@ -190,7 +190,7 @@ function start(questions) {
     mode: prefs.mode,
     key: questions ? null : bestKey(),
     questions: questions || !prefs.length ? list : list.slice(0, prefs.length),
-    index: 0, score: 0, streak: 0, bestStreak: 0,
+    index: 0, score: 0, good: 0, cash: 0, streak: 0, bestStreak: 0,
     misses: [], t0: Date.now(),
   };
   show('play');
@@ -207,14 +207,110 @@ function options(target) {
   return shuffle([target, ...[...near, ...far].slice(0, 3)]);
 }
 
+// --- Indices ---
+
+// Monnaies partagées par beaucoup de pays : trop vagues pour servir d'indice.
+const VAGUE_MONEY = ['euro', 'franc CFA', 'dollar des Caraïbes orientales', 'dollar américain', 'dollar australien', 'franc suisse'];
+const byId = Object.fromEntries(COUNTRIES.map((c) => [c.id, c]));
+const letters = (s) => s.replace(/[^\p{L}]/gu, '').length;
+
+function clue(q, mode) {
+  const [money, motto, fact, capFact] = INDICES[q.id];
+  const riddle = (name) => `Son nom commence par « ${name[0]} » et compte ${letters(name)} lettres.`;
+  const list = [];
+  if (mode === 'capital') {
+    list.push(['🏙️', 'La ville', capFact], ['🧩', 'Énigme', riddle(q.c)]);
+  } else {
+    if (mode === 'flag') list.push(['🏛️', 'Sa capitale', q.c]);
+    else list.push(['🏳️', 'Son drapeau', `<img src="${flagSrc(q.id)}" alt="">`]);
+    // « dollar namibien » ou « franc suisse » donneraient la réponse.
+    if (!VAGUE_MONEY.includes(money) && !key(money).includes(key(q.n).slice(0, 5))) list.push(['💰', 'Sa monnaie', money]);
+    if (motto) list.push(['📜', 'Sa devise', `« ${motto} »`]);
+    list.push(['🌍', 'Particularité', fact]);
+    const nb = (DATA.c[q.id].b || []).map((id) => byId[id]?.n).filter(Boolean);
+    list.push(['🧭', 'Ses voisins', nb.length ? (nb.length > 4 ? shuffle(nb).slice(0, 4).join(', ') + '…' : nb.join(', ')) : 'Aucun : pas de frontière terrestre.']);
+    list.push(['🧩', 'Énigme', riddle(q.n)]);
+  }
+  return list[Math.floor(Math.random() * list.length)];
+}
+
+// --- Réponse libre : on tolère accents, majuscules, tirets et petites fautes ---
+
+const ALIASES = {
+  usa: ['etats unis d amerique', 'usa', 'amerique'], gbr: ['grande bretagne', 'uk'], nld: ['hollande'],
+  cze: ['republique tcheque'], mmr: ['myanmar'], swz: ['swaziland'], mkd: ['macedoine'], blr: ['belarus'],
+  cod: ['republique democratique du congo', 'rdc', 'congo kinshasa'], cog: ['congo brazzaville', 'republique du congo'],
+  tls: ['timor leste'], cpv: ['cabo verde'], mda: ['moldova'], kgz: ['kirghizie'], sur: ['suriname'],
+  caf: ['centrafrique'], tur: ['turkiye'], are: ['emirats', 'eau'], kor: ['coree'], vat: ['saint siege'],
+  kna: ['saint kitts et nevis'], bih: ['bosnie'],
+};
+const CAP_ALIASES = {
+  ukr: ['kyiv'], chn: ['beijing'], bgd: ['dhaka'], ind: ['delhi'], kir: ['tarawa'], kgz: ['bishkek'],
+  tkm: ['achkhabad', 'ashgabat'], tjk: ['dushanbe'], uzb: ['tashkent'], mng: ['ulaanbaatar'], mda: ['kichinev'],
+  mmr: ['naypyitaw'], btn: ['thimphu'], npl: ['kathmandu'], som: ['mogadishu'], ssd: ['juba'], usa: ['washington dc'],
+  are: ['abu dhabi', 'abou dhabi'], omn: ['muscat'], arm: ['yerevan'], geo: ['tbilisi'], aze: ['baku'],
+  sau: ['riyadh'], irq: ['baghdad'], irn: ['tehran'], afg: ['kabul'], cub: ['havane', 'havana'],
+  egy: ['caire', 'cairo'], dom: ['santo domingo'], tto: ['port of spain'], mlt: ['valette', 'valletta'],
+  pol: ['warsaw'], prt: ['lisboa'], gbr: ['london'], rus: ['moscow', 'moskva'], dnk: ['copenhagen'],
+  grc: ['athens'], rou: ['bucharest'], cze: ['praha'], eth: ['addis ababa'], che: ['bern'], dza: ['algiers'],
+  sgp: ['singapore'], phl: ['manila'], cyp: ['nicosia'], bol: ['la paz'], lka: ['kotte', 'sri jayawardenepura kotte'],
+  ita: ['roma'], aut: ['wien'], bel: ['brussel'], kwt: ['koweit city', 'kuwait city'],
+};
+function key(s) {
+  return s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
+    .replace(/[’'`\-.,]/g, ' ').replace(/\bste\b/g, 'sainte').replace(/\bst\b/g, 'saint')
+    .replace(/^\s*(le|la|les|l|the)\s+/, '').replace(/\s+/g, '');
+}
+// Distance d'édition, avec les inversions de deux lettres comptées comme une seule faute.
+function distance(a, b) {
+  const d = Array.from({ length: a.length + 1 }, (_, i) => [i, ...Array(b.length).fill(0)]);
+  for (let j = 1; j <= b.length; j++) d[0][j] = j;
+  for (let i = 1; i <= a.length; i++) {
+    for (let j = 1; j <= b.length; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + cost);
+      if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1);
+    }
+  }
+  return d[a.length][b.length];
+}
+const namesOf = (c, mode) => mode === 'capital' ? [c.c, ...(CAP_ALIASES[c.id] || [])] : [c.n, ...(ALIASES[c.id] || [])];
+// Renvoie { right, exact, other } ; other = le pays visé par erreur, s'il est reconnaissable.
+function judge(typed, q, mode) {
+  const t = key(typed);
+  if (!t) return { right: false };
+  const near = (c) => Math.min(...namesOf(c, mode).map((n) => distance(t, key(n))));
+  const dq = near(q);
+  let best = null, dBest = Infinity;
+  for (const c of COUNTRIES) {
+    if (c === q) continue;
+    const dc = near(c);
+    if (dc < dBest) { dBest = dc; best = c; }
+  }
+  const len = key(mode === 'capital' ? q.c : q.n).length;
+  const tol = len <= 4 ? 0 : len <= 7 ? 1 : len <= 11 ? 2 : 3;
+  if (dq === 0 || (dq <= tol && dq < dBest)) return { right: true, exact: dq === 0 };
+  return { right: false, other: dBest <= Math.min(tol, 1) ? best : null };
+}
+
+// --- Déroulé d'une question : choix du niveau, puis réponse ---
+
+const KINDS = {
+  cash: { icon: '✍️', label: 'Cash', pts: 5, sub: 'Tape la réponse' },
+  carre: { icon: '🔲', label: 'Carré', pts: 2, sub: '4 propositions' },
+  indice: { icon: '💡', label: 'Indice', pts: 1, sub: 'Un indice + 4 choix' },
+};
+const ptsLabel = (n) => `${n} pt${n > 1 ? 's' : ''}`;
+
 let nextTimer;
 function ask() {
   clearTimeout(nextTimer);
   const q = quiz.questions[quiz.index];
   const total = quiz.questions.length;
   quiz.answered = false;
+  quiz.kind = null;
   $('count').innerHTML = `Question <b>${quiz.index + 1}</b> / ${total}`;
-  $('score').textContent = `${quiz.score} pt${quiz.score > 1 ? 's' : ''}`;
+  $('score').textContent = ptsLabel(quiz.score);
   $('bar-fill').style.width = (100 * quiz.index) / total + '%';
   renderStreak(false);
 
@@ -227,23 +323,64 @@ function ask() {
   front.classList.remove('in'); void front.offsetWidth; front.classList.add('in');
   $('card').classList.remove('flipped');
 
-  const answers = $('answers');
-  answers.innerHTML = '';
-  options(q).forEach((opt, i) => {
+  const choose = $('choose');
+  choose.innerHTML = '';
+  Object.entries(KINDS).forEach(([k, kind], i) => {
     const b = document.createElement('button');
-    b.className = 'answer';
-    b.style.animationDelay = 80 + i * 60 + 'ms';
-    b.innerHTML = `<span class="key">${'ABCD'[i]}</span><span></span>`;
-    b.lastChild.textContent = m === 'capital' ? opt.c : opt.n;
-    b.onclick = () => pick(b, opt, q);
-    b.dataset.right = opt === q ? '1' : '';
-    answers.appendChild(b);
+    b.className = 'kind ' + k;
+    b.style.animationDelay = 80 + i * 70 + 'ms';
+    b.innerHTML = `<span class="ico">${kind.icon}</span><b>${kind.label}</b><em>${ptsLabel(kind.pts)}</em><small>${kind.sub}</small>`;
+    b.onclick = () => choose_(k);
+    choose.appendChild(b);
   });
+  choose.hidden = false;
+  $('play').classList.remove('compact');
+  $('answers').innerHTML = '';
+  $('hint').hidden = true;
+  $('cash').hidden = true;
+  $('cash').className = 'cash';
+  $('verdict').textContent = '';
   $('next').className = 'btn';
 
   // Précharge le drapeau suivant pour qu'il s'affiche tout de suite.
   const next = quiz.questions[quiz.index + 1];
   if (next) new Image().src = flagSrc(next.id);
+}
+
+function choose_(k) {
+  if (quiz.kind) return;
+  const q = quiz.questions[quiz.index];
+  quiz.kind = k;
+  $('choose').hidden = true;
+  // Carte question plus basse pour laisser la place à l'indice ou au clavier.
+  $('play').classList.toggle('compact', k !== 'carre');
+  if (k === 'cash') {
+    const input = $('cash-input');
+    input.value = '';
+    input.disabled = false;
+    input.placeholder = quiz.mode === 'capital' ? 'La capitale…' : 'Le pays…';
+    $('cash').hidden = false;
+    input.focus();
+    return;
+  }
+  if (k === 'indice') {
+    const [icon, label, text] = clue(q, quiz.mode);
+    $('hint').innerHTML = `<span class="ico">${icon}</span><div><small>${label}</small><div class="txt"></div></div>`;
+    const body = $('hint').querySelector('.txt');
+    if (text.startsWith('<img')) body.innerHTML = text; else body.textContent = text;
+    $('hint').hidden = false;
+  }
+  const answers = $('answers');
+  options(q).forEach((opt, i) => {
+    const b = document.createElement('button');
+    b.className = 'answer';
+    b.style.animationDelay = (k === 'indice' ? 200 : 40) + i * 60 + 'ms';
+    b.innerHTML = `<span class="key">${'ABCD'[i]}</span><span></span>`;
+    b.lastChild.textContent = quiz.mode === 'capital' ? opt.c : opt.n;
+    b.onclick = () => pick(b, opt, q);
+    b.dataset.right = opt === q ? '1' : '';
+    answers.appendChild(b);
+  });
 }
 
 function renderStreak(pop) {
@@ -255,7 +392,6 @@ function renderStreak(pop) {
 
 function pick(button, opt, q) {
   if (quiz.answered) return;
-  quiz.answered = true;
   const right = opt === q;
   const buttons = [...$('answers').children];
   buttons.forEach((b) => {
@@ -263,31 +399,72 @@ function pick(button, opt, q) {
     b.style.animationDelay = '0ms';
     if (b !== button && !b.dataset.right) b.classList.add('dim');
   });
-  if (right) {
-    quiz.score++;
-    quiz.streak++;
-    quiz.bestStreak = Math.max(quiz.bestStreak, quiz.streak);
-    button.classList.add('right');
-    const plus = document.createElement('span');
-    plus.className = 'plus';
-    plus.textContent = '+1';
-    button.appendChild(plus);
-    const sc = $('score');
-    sc.textContent = `${quiz.score} pt${quiz.score > 1 ? 's' : ''}`;
-    sc.classList.remove('pop'); void sc.offsetWidth; sc.classList.add('pop');
-    const r = button.getBoundingClientRect();
-    burst(r.left + r.width / 2, r.top + r.height / 2, quiz.streak % 5 === 0 ? 90 : 26);
-    navigator.vibrate?.(30);
-  } else {
-    quiz.streak = 0;
+  if (right) button.classList.add('right');
+  else {
     button.classList.add('wrong');
     buttons.find((b) => b.dataset.right).classList.add('right');
+  }
+  settle(right, q, right ? null : opt, button);
+}
+
+function submitCash(e) {
+  e.preventDefault();
+  if (quiz.answered || quiz.kind !== 'cash') return;
+  const q = quiz.questions[quiz.index];
+  const input = $('cash-input');
+  const typed = input.value.trim();
+  if (!typed) { input.focus(); return; }
+  const res = judge(typed, q, quiz.mode);
+  const answer = quiz.mode === 'capital' ? q.c : q.n;
+  input.disabled = true;
+  input.blur();
+  $('cash').className = 'cash ' + (res.right ? 'right' : 'wrong');
+  $('verdict').innerHTML = res.right
+    ? (res.exact ? 'Exact !' : `Accepté ! On écrit <b></b>`)
+    : `Raté, c’était <b></b>`;
+  const b = $('verdict').querySelector('b');
+  if (b) b.textContent = answer;
+  settle(res.right, q, res.other, $('cash-input'));
+}
+
+function passCash() {
+  if (quiz.answered || quiz.kind !== 'cash') return;
+  const q = quiz.questions[quiz.index];
+  $('cash-input').disabled = true;
+  $('cash').className = 'cash wrong';
+  $('verdict').innerHTML = 'C’était <b></b>';
+  $('verdict').querySelector('b').textContent = quiz.mode === 'capital' ? q.c : q.n;
+  settle(false, q, null, $('cash-input'));
+}
+
+// Points, série et effets, quelle que soit la façon de répondre.
+function settle(right, q, wrong, anchor) {
+  quiz.answered = true;
+  const pts = KINDS[quiz.kind].pts;
+  if (right) {
+    quiz.score += pts;
+    quiz.good++;
+    quiz.streak++;
+    quiz.bestStreak = Math.max(quiz.bestStreak, quiz.streak);
+    quiz.cash += quiz.kind === 'cash' ? 1 : 0;
+    const plus = document.createElement('span');
+    plus.className = 'plus' + (pts === 5 ? ' gold' : '');
+    plus.textContent = '+' + pts;
+    (anchor.tagName === 'INPUT' ? $('cash') : anchor).appendChild(plus);
+    const sc = $('score');
+    sc.textContent = ptsLabel(quiz.score);
+    sc.classList.remove('pop'); void sc.offsetWidth; sc.classList.add('pop');
+    const r = anchor.getBoundingClientRect();
+    burst(r.left + r.width / 2, r.top + r.height / 2, pts === 5 ? 70 : quiz.streak % 5 === 0 ? 90 : 26);
+    navigator.vibrate?.(pts === 5 ? [30, 40, 30] : 30);
+  } else {
+    quiz.streak = 0;
     quiz.misses.push(q);
     navigator.vibrate?.([60, 40, 60]);
   }
   renderStreak(right);
   $('bar-fill').style.width = (100 * (quiz.index + 1)) / quiz.questions.length + '%';
-  setTimeout(() => reveal(q, right ? null : opt), right ? 450 : 750);
+  setTimeout(() => reveal(q, right ? null : wrong || true), right ? 450 : 750);
 }
 
 // Retourne la carte question pour montrer le pays sur la carte du monde.
@@ -328,32 +505,36 @@ function advance() {
 
 function finish() {
   const total = quiz.questions.length;
-  const pct = Math.round((100 * quiz.score) / total);
+  const max = total * KINDS.cash.pts;
+  const pct = Math.round((100 * quiz.good) / total);
+  const avg = quiz.score / total;
   let record = false, previous;
   if (quiz.key) {
-    previous = prefs.best[quiz.key];
-    record = previous === undefined || pct > previous;
-    if (record) { prefs.best[quiz.key] = pct; save(); }
+    previous = prefs.points[quiz.key];
+    record = previous === undefined || quiz.score > previous;
+    if (record) { prefs.points[quiz.key] = quiz.score; save(); }
   }
   show('result');
 
-  $('result-text').textContent = pct === 100 ? 'Sans faute !' : pct >= 70 ? 'Très bien !' : pct >= 40 ? 'Pas mal !' : 'On s’entraîne encore ?';
-  $('result-score').textContent = `${quiz.score} / ${total}`;
+  $('result-text').textContent = avg >= 4.5 ? 'Champion du cash !' : pct === 100 ? 'Sans faute !' : pct >= 70 ? 'Très bien !' : pct >= 40 ? 'Pas mal !' : 'On s’entraîne encore ?';
+  $('result-score').textContent = `sur ${max} pts`;
   const best = $('result-best');
   best.className = record && previous !== undefined ? 'record' : '';
   best.textContent = !quiz.key ? 'Révision de tes erreurs'
-    : record && previous !== undefined ? '🏆 Nouveau record !' : `Record sur ce jeu : ${prefs.best[quiz.key]} %`;
+    : record && previous !== undefined ? '🏆 Nouveau record !' : `Record sur ce jeu : ${ptsLabel(prefs.points[quiz.key])}`;
 
-  const stars = pct >= 90 ? 3 : pct >= 65 ? 2 : pct >= 35 ? 1 : 0;
+  // 3 étoiles demandent du cash : un sans-faute au carré en vaut 2.
+  const stars = avg >= 4 ? 3 : avg >= 2 ? 2 : avg >= 1 ? 1 : 0;
   $('stars').innerHTML = [0, 1, 2].map((i) => `<span class="${i < stars ? 'on' : ''}" style="animation-delay:${900 + i * 200}ms">⭐</span>`).join('');
 
   const secs = Math.round((Date.now() - quiz.t0) / 1000);
   const time = secs >= 60 ? `${Math.floor(secs / 60)} min ${String(secs % 60).padStart(2, '0')}` : `${secs} s`;
-  $('facts').innerHTML = `<div><b>${quiz.score}</b><span>bonnes réponses</span></div>`
+  $('facts').innerHTML = `<div><b>${quiz.good}/${total}</b><span>réussies</span></div>`
+    + `<div><b>✍️ ${quiz.cash}</b><span>en cash</span></div>`
     + `<div><b>🔥 ${quiz.bestStreak}</b><span>meilleure série</span></div>`
     + `<div><b>${time}</b><span>temps</span></div>`;
 
-  // Jauge et pourcentage qui se remplissent.
+  // Jauge et points qui se remplissent.
   const circle = $('gauge-val');
   const len = 2 * Math.PI * 86;
   circle.style.strokeDasharray = len;
@@ -362,11 +543,11 @@ function finish() {
   (function step(t) {
     const k = Math.min(1, (t - t0) / 1100);
     const e = 1 - (1 - k) ** 3;
-    circle.style.strokeDashoffset = len * (1 - (pct / 100) * e);
-    $('result-pct').textContent = Math.round(pct * e) + ' %';
+    circle.style.strokeDashoffset = len * (1 - (quiz.score / max) * e);
+    $('result-pct').textContent = ptsLabel(Math.round(quiz.score * e));
     if (k < 1) requestAnimationFrame(step);
   })(t0);
-  if (pct >= 70) setTimeout(() => { confetti(pct === 100 || record ? 220 : 120); navigator.vibrate?.([50, 50, 50, 50, 140]); }, 1000);
+  if (pct >= 70) setTimeout(() => { confetti(avg >= 4 || record ? 220 : 120); navigator.vibrate?.([50, 50, 50, 50, 140]); }, 1000);
 
   $('retry-misses').hidden = !quiz.misses.length;
   $('recap').innerHTML = quiz.misses.length
@@ -433,6 +614,8 @@ $('replay').onclick = () => start();
 $('retry-misses').onclick = () => start(quiz.misses);
 $('to-setup').onclick = () => { show('setup'); renderSetup(); showRegion(true); };
 $('next').onclick = advance;
+$('cash').onsubmit = submitCash;
+$('cash-pass').onclick = passCash;
 $('card').onclick = () => { if ($('card').classList.contains('flipped')) advance(); };
 $('back').onclick = (e) => {
   if (!$('setup').hidden) return;
@@ -442,9 +625,10 @@ $('back').onclick = (e) => {
   renderSetup();
   showRegion(true);
 };
-// Au clavier : 1 à 4 (ou A à D) pour répondre, Entrée pour continuer.
+// Au clavier : 1 à 3 pour choisir, 1 à 4 (ou A à D) pour répondre, Entrée pour continuer.
 document.addEventListener('keydown', (e) => {
-  if ($('play').hidden) return;
+  if ($('play').hidden || e.target.tagName === 'INPUT') return;
+  if (!quiz.kind) { const k = Object.keys(KINDS)['123'.indexOf(e.key)]; if (k && e.key.length === 1) { e.preventDefault(); choose_(k); } return; }
   const i = '1234'.indexOf(e.key) >= 0 ? '1234'.indexOf(e.key) : 'abcd'.indexOf(e.key.toLowerCase());
   if (!quiz.answered && i >= 0 && e.key.length === 1) $('answers').children[i]?.click();
   else if (quiz.answered && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); advance(); }
