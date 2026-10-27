@@ -1,0 +1,75 @@
+{
+  "date": "2026-10-27",
+  "questions": [
+    {
+      "q": "Qui a remporté le Ballon d'Or 2026, remis lundi soir à Londres ?",
+      "choix": ["Kylian Mbappé", "Lamine Yamal", "Harry Kane", "Ousmane Dembélé"],
+      "reponse": 2,
+      "explication": "L'attaquant anglais du Bayern Munich Harry Kane succède à Ousmane Dembélé. C'est le premier Anglais sacré depuis Michael Owen en 2001.",
+      "source": { "nom": "France 24", "url": "https://www.france24.com/fr/sports/20261026-l-anglais-harry-kane-remporte-le-ballon-d-or-2026" }
+    },
+    {
+      "q": "Combien de Ballons d'Or l'Espagnole Alexia Putellas a-t-elle désormais remportés ?",
+      "choix": ["Un", "Trois", "Deux", "Cinq"],
+      "reponse": 1,
+      "explication": "Après 2021 et 2022, Alexia Putellas a décroché lundi son troisième Ballon d'Or féminin.",
+      "source": { "nom": "France 24", "url": "https://www.france24.com/fr/sports/20261026-l-espagnole-alexia-putellas-remporte-son-troisi%C3%A8me-ballon-d-or-f%C3%A9minin" }
+    },
+    {
+      "q": "Au Brésil, Lula a été réélu dimanche. Pour quel mandat présidentiel ?",
+      "choix": ["Son deuxième", "Son troisième", "Son cinquième", "Son quatrième"],
+      "reponse": 3,
+      "explication": "Lula a obtenu un quatrième mandat au second tour de la présidentielle, le 25 octobre. Son adversaire Flávio Bolsonaro conteste les résultats.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/video/2026/10/26/lula-reelu-au-bresil-bolsonaro-conteste-les-resultats" }
+    },
+    {
+      "q": "Quelle célèbre rue commerçante de Londres devient piétonne ?",
+      "choix": ["Oxford Street", "Baker Street", "Abbey Road", "Carnaby Street"],
+      "reponse": 0,
+      "explication": "Près d'un kilomètre d'Oxford Street, entre Orchard Street et Great Portland Street, devient piéton. Le maire Sadiq Khan est venu promouvoir le projet auprès des commerçants.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/video/2026/10/26/royaume-uni-oxford-street-devient-pietonne-a-londres" }
+    },
+    {
+      "q": "À Mexico, le défilé des Catrinas a lancé la fête des Morts. Qu'est-ce qu'une Catrina ?",
+      "choix": ["Un gâteau en forme de crâne", "Un squelette élégant, souvent féminin", "Une danse traditionnelle", "Une fleur orange"],
+      "reponse": 1,
+      "explication": "La Catrina est un squelette élégamment habillé, imaginé par José Guadalupe Posada au début du XXe siècle et popularisé par Diego Rivera. Elle symbolise la mort avec humour.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/video/2026/10/26/mexique-le-spectaculaire-defile-des-catrinas-fait-revivre-les-morts" }
+    },
+    {
+      "q": "Quel est le mot de l'année 2026 choisi par le dictionnaire américain Dictionary.com ?",
+      "choix": ["« Vibe »", "« Slay »", "« Rizz »", "« Maxxing »"],
+      "reponse": 3,
+      "explication": "« Maxxing » désigne le fait de pousser quelque chose au maximum, comme dans « proteinmaxxing » ou « cozymaxxing ». Il succède à « 6-7 ».",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/2026/10/26/dictionarycom-revele-son-mot-de-lannee-2026-et-il-est-deprimant" }
+    },
+    {
+      "q": "À combien de salariés Microsoft propose-t-il un départ volontaire ?",
+      "choix": ["Environ 6 000", "Environ 60 000", "Environ 600", "Environ 160 000"],
+      "reponse": 1,
+      "explication": "Microsoft propose un départ volontaire à environ 60 000 salariés, soit plus d'un quart de ses effectifs, alors qu'il investit massivement dans l'intelligence artificielle.",
+      "source": { "nom": "20 Minutes", "url": "https://www.20minutes.fr/high-tech/4257824-20261026-microsoft-propose-depart-volontaire-60-000-salaries" }
+    },
+    {
+      "q": "Selon Oxfam, les 0,1 % les plus riches (8 millions de personnes) émettent plus de CO2 que combien de personnes ?",
+      "choix": ["100 millions", "500 millions", "3,5 milliards", "1 milliard"],
+      "reponse": 2,
+      "explication": "D'après le rapport d'Oxfam, ces 8 millions de personnes polluent plus que 3,5 milliards d'êtres humains, soit près de la moitié de l'humanité.",
+      "source": { "nom": "La Croix", "url": "https://www.la-croix.com/planete/ces-8-millions-de-personnes-qui-emettent-presque-autant-de-co2-que-la-moitie-de-l-humanite-20261026" }
+    },
+    {
+      "q": "Ligue 1 : quel score pour le choc PSG–OL au Parc des Princes ?",
+      "choix": ["2-0 pour le PSG", "1-1", "0-1 pour Lyon", "3-2 pour le PSG"],
+      "reponse": 0,
+      "explication": "Le PSG a battu Lyon 2-0 en clôture de la 8e journée, avec le premier but de Mika Godts sous ses nouvelles couleurs, et reprend la tête du championnat.",
+      "source": { "nom": "RMC Sport", "url": "https://rmcsport.bfmtv.com/replay-emissions/after-foot/video-psg-2-0-ol-tolisso-en-dedans-godts-debloque-son-compteur-le-debrief-complet_VN-202610260957.html" }
+    },
+    {
+      "q": "Sony arrête son dernier lecteur Blu-ray 4K de salon au Japon. Que reste-t-il chez Sony pour lire un Blu-ray 4K ?",
+      "choix": ["Un baladeur Walkman", "La PS5", "Une télévision Bravia", "Rien du tout"],
+      "reponse": 1,
+      "explication": "Sans successeur annoncé au lecteur UBP-X700, la PlayStation 5 reste la seule option Sony pour lire des Blu-ray 4K.",
+      "source": { "nom": "Journal du Geek", "url": "https://www.journaldugeek.com/2026/10/23/sony-commence-a-enterrer-le-blu-ray-il-ne-reste-plus-que-la-ps5/" }
+    }
+  ]
+}
