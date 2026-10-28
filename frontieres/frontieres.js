@@ -220,10 +220,30 @@ function applyView() {
   for (const c of $('route').querySelectorAll('circle')) c.setAttribute('r', 5 * s);
 }
 
+// Cadre d'un pays. Pour les très grands pays (Russie, Canada…), on garde seulement les environs
+// de son centre, sinon la carte dézoome sur tout le globe.
+function countryBox(id) {
+  const [a, b, c, d] = C[id].bb;
+  if (c - a < 300 && d - b < 250) return [a, b, c, d];
+  const [x, y] = C[id].l;
+  return [Math.max(a, x - 150), Math.max(b, y - 100), Math.min(c, x + 150), Math.min(d, y + 100)];
+}
+
+// Ne bouge la carte que si le pays n'est pas déjà visible, et juste assez pour l'inclure.
+function reveal(id) {
+  const [x, y] = C[id].l;
+  const m = view.w * 0.08;
+  if (x > view.x + m && x < view.x + view.w - m && y > view.y + m && y < view.y + view.h - m) return;
+  const [a, b, c, d] = countryBox(id);
+  const pad = 0.35 / 2;
+  const cur = [view.x + view.w * pad / 1.35, view.y + view.h * pad / 1.35, view.x + view.w * (1 - pad / 1.35), view.y + view.h * (1 - pad / 1.35)];
+  flyTo([Math.min(cur[0], a), Math.min(cur[1], b), Math.max(cur[2], c), Math.max(cur[3], d)], 900);
+}
+
 function boxOf(ids) {
   let [x0, y0, x1, y1] = [Infinity, Infinity, -Infinity, -Infinity];
   for (const id of ids) {
-    const [a, b, c, d] = C[id].bb;
+    const [a, b, c, d] = countryBox(id);
     x0 = Math.min(x0, a); y0 = Math.min(y0, b); x1 = Math.max(x1, c); y1 = Math.max(y1, d);
   }
   return [x0, y0, x1, y1];
@@ -478,12 +498,10 @@ function play(id) {
   save();
   render(true);
   navigator.vibrate?.(g === 'good' ? 20 : g === 'near' ? [15, 30, 15] : 60);
-  // On montre le nouveau pays, puis on revient sur le trajet s'il est loin.
-  const box = focusBox();
-  if (g === 'far' && !game.done) {
-    flyTo(boxOf([id, game.a, game.b]), 900);
-    setTimeout(() => game.guesses.at(-1) === id && flyTo(focusBox(), 1000), 1900);
-  } else flyTo(box, 900);
+  // La carte garde le cadrage du joueur : on ne la déplace que si le nouveau pays est hors champ,
+  // et jamais pour un pays loin du trajet.
+  if (g === 'far') showTip(`${emojiFlag(id)} ${C[id].n} : loin du trajet`);
+  else if (!game.done) reveal(id);
   if (game.done) {
     $('guess').blur();
     setTimeout(() => {
@@ -503,7 +521,7 @@ function hint() {
   setClass(next, 'hint');
   ripple(next);
   render();
-  flyTo(focusBox(), 900);
+  reveal(next);
   toast(`Indice ${game.hints.length}/${MAX_HINTS} : un pays utile clignote`);
 }
 $('hint-btn').onclick = hint;
