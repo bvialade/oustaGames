@@ -1,0 +1,75 @@
+{
+  "date": "2026-10-29",
+  "questions": [
+    {
+      "q": "Deux jours après sa réélection, Lula a soufflé ses bougies devant le palais de l'Alvorada à Brasília. Quel âge a-t-il fêté ?",
+      "choix": ["71 ans", "76 ans", "81 ans", "86 ans"],
+      "reponse": 2,
+      "explication": "Le président brésilien a fêté ses 81 ans mardi 27 octobre avec des dizaines de partisans, encore convalescent après une campagne éprouvante.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/video/2026/10/28/bresil-lula-fete-ses-81-ans-apres-sa-victoire-a-la-presidentielle" }
+    },
+    {
+      "q": "Quel pays fait marche arrière et se retire finalement de l'Eurovision 2027 ?",
+      "choix": ["La Belgique", "Les Pays-Bas", "La Suède", "L'Irlande"],
+      "reponse": 1,
+      "explication": "Après avoir annoncé sa participation, le diffuseur néerlandais NPO se retire en invoquant des « sensibilités » liées à la participation d'Israël.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/video/2026/10/27/crise-a-leurovision-les-pays-bas-font-marche-arriere-et-se-retirent-de-ledition-2027" }
+    },
+    {
+      "q": "L'UE autorise 319 millions d'euros d'aides d'État pour une usine de puces électroniques d'Infineon à Villach. Dans quel pays ?",
+      "choix": ["Autriche", "Allemagne", "Suisse", "Slovénie"],
+      "reponse": 0,
+      "explication": "L'usine autrichienne de Villach doit produire des semi-conducteurs de puissance en nitrure de gallium, dans le cadre d'un investissement de 1,1 milliard d'euros.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/2026/10/28/ue-319-millions-deuros-daides-detat-pour-une-usine-autrichienne-de-puces-inedite" }
+    },
+    {
+      "q": "Dans son dixième rapport annuel, la revue médicale The Lancet décrit le changement climatique comme…",
+      "choix": ["Un risque surestimé", "Un problème réglé d'ici 2050", "Une menace seulement pour les animaux", "La plus grande menace pour l'humanité"],
+      "reponse": 3,
+      "explication": "Le Lancet Countdown demande que le changement climatique soit reconnu comme une « urgence sanitaire mondiale », la « plus grande menace pour l'humanité ».",
+      "source": { "nom": "France 24 (via Titres Presse)", "url": "https://www.titrespresse.com/26897642603/the-lancet-changement" }
+    },
+    {
+      "q": "Au Chili, le club de football Deportes Concepción a créé un brassard de capitaine original. Que rappelle-t-il ?",
+      "choix": ["Les règles du hors-jeu", "Les gestes de réanimation cardiaque", "L'hymne du club", "Le score des derniers matchs"],
+      "reponse": 1,
+      "explication": "Le brassard du capitaine Joaquín Larrivey sert d'aide-mémoire : vérifier la respiration, masser, appeler les secours et se faire relayer.",
+      "source": { "nom": "Creapills", "url": "https://creapills.com/chili-brassard-capitaine-gestes-reanimation-cardiaque-20261027" }
+    },
+    {
+      "q": "Qu'a décidé la Réserve fédérale américaine (Fed) mercredi, à quelques jours des élections de mi-mandat ?",
+      "choix": ["Baisser fortement ses taux", "Supprimer le dollar papier", "Maintenir ses taux entre 3,75 % et 4 %", "Relever ses taux à 6 %"],
+      "reponse": 2,
+      "explication": "La Fed a maintenu ses taux par 10 voix contre 2. Les deux dissidentes voulaient une nouvelle hausse, alors que l'inflation atteint 3,7 % sur un an.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/2026/10/28/la-fed-maintient-les-taux-a-quelques-jours-des-midterms-deux-responsables-poussent-a-une-h" }
+    },
+    {
+      "q": "Zazie a chanté en direct son nouveau titre dans « C à vous ». Comment s'appelle-t-il ?",
+      "choix": ["« Où la vie va »", "« Je suis un homme »", "« La vie en rose »", "« Là où je vais »"],
+      "reponse": 0,
+      "explication": "La chanteuse a interprété « Où la vie va » sur le plateau de l'émission de France 5.",
+      "source": { "nom": "C à vous (via Titres Presse)", "url": "https://www.titrespresse.com/26893802603/zazie-titre-vie" }
+    },
+    {
+      "q": "La vieille ville de Bakou, entourée de remparts médiévaux et classée par l'UNESCO, se trouve dans quel pays ?",
+      "choix": ["Turquie", "Arménie", "Kazakhstan", "Azerbaïdjan"],
+      "reponse": 3,
+      "explication": "Icherisheher, avec la tour de la Vierge et le palais des Chirvanchahs, est l'un des cinq sites UNESCO de l'Azerbaïdjan, pays aussi connu pour ses volcans de boue.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/2026/10/28/de-la-vieille-ville-de-bakou-aux-volcans-de-boue-a-la-decouverte-des-merveilles-de-lazerba" }
+    },
+    {
+      "q": "Le cyclone Arnab, devenu « très sévère », a frappé les côtes de quel pays ?",
+      "choix": ["Le Bangladesh", "L'Inde", "Le Sri Lanka", "La Birmanie"],
+      "reponse": 1,
+      "explication": "Le cyclone a touché le sud-est de l'Inde, avec rafales et fortes pluies sur plusieurs zones côtières, comme autour de Visakhapatnam.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/video/2026/10/28/le-cyclone-arnab-fait-plusieurs-morts-dans-le-sud-est-de-linde" }
+    },
+    {
+      "q": "Dans quelle capitale européenne des milliers de personnes ont-elles manifesté devant le Parlement contre la crise du logement ?",
+      "choix": ["Madrid", "Rome", "Lisbonne", "Athènes"],
+      "reponse": 2,
+      "explication": "À Lisbonne, des milliers de manifestants ont dénoncé la flambée des loyers devant le Parlement portugais.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/video/2026/10/28/portugal-la-crise-du-logement-a-lisbonne-declenche-une-protestation-devant-le-parlement" }
+    }
+  ]
+}
