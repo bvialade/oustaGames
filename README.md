@@ -7,6 +7,7 @@ Petits jeux à jouer sur téléphone, sous forme de web app installable (PWA).
 - **Géographie** : quiz drapeaux, capitales et capitale → pays, par continent.
 - **Passe-frontières** : relier deux pays tirés au sort en citant les pays à traverser, sur une carte qui se colore. Défi du jour par zone (Europe, Monde, Afrique, Asie, Amériques) et parties numérotées à partager.
 - **Quiz de l'actu** : 10 questions sur l'actualité du jour, avec les sources.
+- **Quiz du droit** : 10 questions de droit français, au niveau Citoyen, Juge ou Goat, sur une ou plusieurs matières, avec l'article ou l'arrêt de référence.
 
 ## Jouer
 
@@ -18,7 +19,7 @@ L'app fonctionne ensuite hors connexion. Scores et statistiques restent sur chaq
 Aucun outil de build : ce sont des fichiers HTML, CSS et JavaScript statiques.
 Pour tester en local : `python3 -m http.server` puis ouvrir http://localhost:8000.
 
-Chaque jeu vit dans son dossier (`mot/`, `sens/`, `geo/`, `frontieres/`, `quiz/`) et réutilise `style.css`.
+Chaque jeu vit dans son dossier (`mot/`, `sens/`, `geo/`, `frontieres/`, `quiz/`, `droit/`) et réutilise `style.css`.
 Pour ajouter un jeu, créer un dossier, l'ajouter au menu dans `index.html` et à la liste `CORE` de `sw.js`.
 
 ## Données
@@ -31,3 +32,5 @@ Pour ajouter un jeu, créer un dossier, l'ajouter au menu dans `index.html` et �
   Les fichiers `sens/vocab.txt` et `sens/data/*.bin` sont générés à l'avance (score de similarité cosinus × 10 000, en entiers 16 bits).
 
 Pour ajouter des mots secrets au jeu de proximité de sens : les ajouter à la fin de `outils/sens_indices.json` puis lancer `outils/build_sens.py` (instructions en tête du script).
+
+Pour ajouter des questions au quiz du droit : les écrire dans `droit/q/<matière>.js` (format décrit en tête de `droit/themes.js`, bonne réponse en premier), et les ajouter à la fin de la liste du niveau.
