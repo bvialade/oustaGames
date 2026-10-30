@@ -25,17 +25,28 @@ const Spider = {
     }
     T.pile('s', 'stock', {
       ghost: true,
-      pos: (j, n, T) => { const g = Math.floor(j / 10), G = Math.ceil(n / 10), p = T.byId.s; return { x: p.x - (G - 1 - g) * T.cw * .24, y: p.y }; },
+      pos: (j, n, T) => { const g = Math.floor(j / 10), G = Math.ceil(n / 10), p = T.byId.s; return p.vertical ? { x: p.x, y: p.y + g * 3 } : { x: p.x - (G - 1 - g) * T.cw * .24, y: p.y }; },
     });
     for (let i = 0; i < 10; i++) T.pile('t' + i, 'tab', { fan: 'down' });
   },
   layout(T, W, H) {
-    const pad = Math.max(4, W * .012), gap = Math.max(3, Math.round(W * .008));
+    const pad = Math.max(4, Math.min(W, H) * .014), gap = Math.max(3, Math.round(Math.min(W, H) * .01));
+    if (W > H * 1.3) {
+      // Paysage : pioche et suites terminées dans une colonne à droite.
+      const sep = gap * 3;
+      const cw = Math.floor(Math.min((W - 2 * pad - 9 * gap - sep) / 11, H / 3.1 / 1.4, 104));
+      T.cw = cw; T.ch = Math.round(cw * 1.4);
+      const x0 = (W - (11 * cw + 9 * gap + sep)) / 2, sx = x0 + 10 * (cw + gap) - gap + sep;
+      for (let i = 0; i < 10; i++) Object.assign(T.byId['t' + i], { x: x0 + i * (cw + gap), y: pad, gapUp: T.ch * .26, gapDown: T.ch * .09 });
+      Object.assign(T.byId.s, { x: sx, y: pad, vertical: true });
+      for (let i = 0; i < 8; i++) Object.assign(T.byId['f' + i], { x: sx, y: pad + T.ch + gap * 3 + i * T.ch * .14 });
+      return;
+    }
     const cw = Math.floor(Math.min((W - 2 * pad - 9 * gap) / 10, 100, H / 5.4 / 1.4));
     T.cw = cw; T.ch = Math.round(cw * 1.4);
     const x0 = (W - (10 * cw + 9 * gap)) / 2, col = (i) => x0 + i * (cw + gap);
     for (let i = 0; i < 8; i++) Object.assign(T.byId['f' + i], { x: col(0) + i * cw * .36, y: pad });
-    Object.assign(T.byId.s, { x: col(9), y: pad });
+    Object.assign(T.byId.s, { x: col(9), y: pad, vertical: false });
     for (let i = 0; i < 10; i++) {
       Object.assign(T.byId['t' + i], { x: col(i), y: pad + T.ch + gap * 3, gapUp: T.ch * .28, gapDown: T.ch * .1 });
     }
