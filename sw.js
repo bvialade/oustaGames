@@ -1,6 +1,6 @@
 // Garde les fichiers en cache pour jouer hors connexion.
 // Les fichiers sont toujours redemandés au réseau d'abord, donc les mises à jour arrivent seules.
-const VERSION = 'v5';
+const VERSION = 'v6';
 const CORE = [
   './', 'index.html', 'style.css', 'manifest.webmanifest',
   'icons/icon-192.png', 'icons/apple-touch-icon.png',
@@ -11,6 +11,7 @@ const CORE = [
   'droit/', 'droit/index.html', 'droit/droit.js', 'droit/themes.js',
   'droit/q/penal.js', 'droit/q/civil.js', 'droit/q/social.js', 'droit/q/affaires.js', 'droit/q/societes.js',
   'droit/q/suretes.js', 'droit/q/administratif.js', 'droit/q/dip.js', 'droit/q/europeen.js', 'droit/q/constitutionnel.js', 'droit/q/libertes.js',
+  'sudochat/', 'sudochat/index.html', 'sudochat/sudochat.js',
   'sens/', 'sens/index.html', 'sens/sens.js', 'sens/secrets.js', 'sens/vocab.txt',
 ];
 
