@@ -6,7 +6,9 @@ Petits jeux à jouer sur téléphone, sous forme de web app installable (PWA).
 - **Mot chaud, mot froid** : trouver un mot secret grâce à la proximité de sens des mots proposés, avec 10 énigmes à débloquer.
 - **Géographie** : quiz drapeaux, capitales et capitale → pays, par continent.
 - **Passe-frontières** : relier deux pays tirés au sort en citant les pays à traverser, sur une carte qui se colore. Défi du jour par zone (Europe, Monde, Afrique, Asie, Amériques) et parties numérotées à partager.
-- **Sudochat** : un sudoku où les chiffres sont remplacés par des chats, en 4×4, 6×6 ou 9×9, avec notes, herbe à chat (indices) et une grille du jour par taille.
+- **OustaCats** (`chats/`) : des casse-têtes avec des chats.
+  - **Sudochat** : un sudoku où les chiffres sont remplacés par des chats, en 4×4, 6×6 ou 9×9, avec notes, herbe à chat (indices) et une grille du jour par taille.
+  - **Chacun son panier** : un chat par zone de couleur, par ligne et par colonne, sans que deux chats se touchent. 150 niveaux du 5×5 au 10×10 et un défi du jour.
 - **Quiz de l'actu** : 10 questions sur l'actualité du jour, avec les sources.
 - **OustaCards** : quatre jeux de cartes classiques (Solitaire, Spider, FreeCell, Dame de pique contre trois adversaires), avec des cartes dessinées pour le site.
 - **Quiz du droit** : 10 questions de droit français, au niveau Citoyen, Juge ou Goat, sur une ou plusieurs matières, avec l'article ou l'arrêt de référence.
@@ -21,7 +23,7 @@ L'app fonctionne ensuite hors connexion. Scores et statistiques restent sur chaq
 Aucun outil de build : ce sont des fichiers HTML, CSS et JavaScript statiques.
 Pour tester en local : `python3 -m http.server` puis ouvrir http://localhost:8000.
 
-Chaque jeu vit dans son dossier (`mot/`, `sens/`, `geo/`, `frontieres/`, `sudochat/`, `quiz/`, `droit/`, `cartes/`) et réutilise `style.css`.
+Chaque jeu vit dans son dossier (`mot/`, `sens/`, `geo/`, `frontieres/`, `chats/`, `sudochat/`, `paniers/`, `quiz/`, `droit/`, `cartes/`) et réutilise `style.css`.
 Le menu n'a qu'une entrée « Quiz » (`quiz/`) : son accueil propose Actu (`quiz/#actu`) ou Droit (`droit/`).
 Pour ajouter un jeu, créer un dossier, l'ajouter au menu dans `index.html` et à la liste `CORE` de `sw.js`.
 
@@ -36,7 +38,10 @@ Pour ajouter un jeu, créer un dossier, l'ajouter au menu dans `index.html` et �
 
 Pour ajouter des mots secrets au jeu de proximité de sens : les ajouter à la fin de `outils/sens_indices.json` puis lancer `outils/build_sens.py` (instructions en tête du script).
 
+Les dessins des chats sont partagés dans `chats/dessins.js`.
 Les grilles de Sudochat sont calculées dans le navigateur à partir de la taille et du numéro (`makePuzzle` dans `sudochat/sudochat.js`) : modifier le générateur change toutes les grilles numérotées déjà partagées.
+
+Les grilles de Chacun son panier (`paniers/niveaux.js`) sont générées par `node outils/build_paniers.js`, avec une graine fixe : ajouter des niveaux à la fin de la liste `PLAN` pour ne pas décaler les existants.
 
 Dans `cartes/`, `moteur.js` gère le rendu, le glisser-déposer, l'annulation et la sauvegarde ; chaque jeu (`solitaire.js`, `spider.js`, `freecell.js`, `dame.js`) ne décrit que ses règles.
 
