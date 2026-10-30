@@ -12,7 +12,7 @@ const CORE = [
   'droit/q/penal.js', 'droit/q/civil.js', 'droit/q/social.js', 'droit/q/affaires.js', 'droit/q/societes.js',
   'droit/q/suretes.js', 'droit/q/administratif.js', 'droit/q/dip.js', 'droit/q/europeen.js', 'droit/q/constitutionnel.js', 'droit/q/libertes.js',
   'sudochat/', 'sudochat/index.html', 'sudochat/sudochat.js',
-  'snake/', 'snake/index.html', 'snake/snake.js',
+  'xcatspad/', 'xcatspad/index.html', 'xcatspad/xcatspad.js',
   'sens/', 'sens/index.html', 'sens/sens.js', 'sens/secrets.js', 'sens/vocab.txt',
   'cartes/', 'cartes/index.html', 'cartes/cartes.css', 'cartes/moteur.js', 'cartes/solitaire.js', 'cartes/spider.js',
   'cartes/freecell.js', 'cartes/dame.js', 'cartes/app.js',

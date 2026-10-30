@@ -1,13 +1,24 @@
-const STORE = 'ousta.snake';
+const STORE = 'ousta.xcatspad';
 const U = 100; // taille d'une case dans le dessin SVG
 const DIRS = [[-1, 0], [0, 1], [1, 0], [0, -1]]; // haut, droite, bas, gauche (ligne, colonne)
-const COLORS = ['#7ed957', '#ffb020', '#ff5fa2', '#4cc9f0', '#b388ff', '#ff7849', '#ffe14d', '#3ddc97', '#f72585', '#5aa9ff'];
-const BYE = [
-  'Sssalut !', 'Je file !', 'Liberté !', 'Youpiii !', 'Bye bye !', 'Sssayonara !', 'À plus !',
-  'Wouhou !', 'Je vais à la plage !', 'Hasta la vista !', 'Ssssuper !', 'Trop fort !', 'Ciao !',
-  'Vroum vroum !', 'Je suis libre !', 'Bisous !', 'Yahouuu !', 'Adios !', 'Ssssensass !',
+// Robes des chats : pelage, contour, rayures de la queue, yeux, intérieur des oreilles.
+const COATS = [
+  { fur: '#f08a24', line: '#8a4510', stripe: '#b4550c', eye: '#7cc243', ear: '#ffc6a8' },
+  { fur: '#2f2f37', line: '#111114', stripe: '#46464f', eye: '#f5d90a', ear: '#5b5560' },
+  { fur: '#fbfbf6', line: '#8f8678', stripe: '#e6e0d4', eye: '#47a3ff', ear: '#ffc8d2' },
+  { fur: '#8d97a6', line: '#4a5260', stripe: '#6b7484', eye: '#f39c1d', ear: '#f3b9c4' },
+  { fur: '#f1e4c9', line: '#6b4a36', stripe: '#5a3b28', eye: '#3d8bff', ear: '#5a3b28' },
+  { fur: '#7b4a2d', line: '#3e2416', stripe: '#5c3520', eye: '#c7d93a', ear: '#c99a85' },
+  { fur: '#e8c48a', line: '#8a6a3c', stripe: '#c99f5f', eye: '#a0612a', ear: '#ffcfb8' },
+  { fur: '#b9a3d6', line: '#5e4a7c', stripe: '#9a82bd', eye: '#ffd23f', ear: '#f3c4e0' },
 ];
-const OUCH = ['Aïe !', 'Ouille !', 'Hé ho !', 'Bonk !', 'Pousse-toi !', 'Oups !', 'Ma tête !'];
+const COLLARS = ['#e0475b', '#3d8bff', '#2fb36b', '#ffc21a', '#ff6fb5', '#8b5cf6', '#14b8c4', '#ff7a1a'];
+const BYE = [
+  'Miaou !', 'Je file !', 'Liberté !', 'Youpiii !', 'Bye bye !', 'Croquettes !', 'À plus !',
+  'Mrrrrou !', 'À la sieste !', 'Purrrfait !', 'Je vais à la gamelle !', 'Ciao miaou !', 'Pfff, enfin !',
+  'Je suis libre !', 'Bisous !', 'Miaouhou !', 'Adios les matous !', 'Une souris là-bas !', 'Ronron !',
+];
+const OUCH = ['Mraaow !', 'Pfffft !', 'Ma moustache !', 'Hé ho !', 'Ouille !', 'Pousse-toi !', 'Kss kss !', 'Ma queue !'];
 
 const $ = (id) => document.getElementById(id);
 const svg = $('board');
@@ -18,7 +29,7 @@ data.level = data.level || 1;
 data.max = Math.max(data.max || 1, data.level);
 if (data.sound === undefined) data.sound = true;
 
-let game; // { level, n, snakes, occ, hearts, left, over, run }
+let game; // { level, n, cats, occ, hearts, left, over, run }
 let lastExit = 0;
 let combo = 0;
 
@@ -54,11 +65,11 @@ function levelSize(level) {
   return Math.min(10, 4 + Math.floor(level / 3));
 }
 
-// On pose les serpents un par un : chaque nouveau serpent doit avoir la voie libre devant lui
+// On pose les chats un par un : chaque nouveau chat doit avoir la voie libre devant lui
 // parmi ceux déjà posés. Les enlever dans l'ordre inverse marche donc toujours : le niveau a une solution.
 function build(n, maxLen, r) {
   const occ = new Array(n * n).fill(-1);
-  const snakes = [];
+  const cats = [];
   const inside = (y, x) => y >= 0 && x >= 0 && y < n && x < n;
   let placed = true;
   while (placed) {
@@ -76,7 +87,7 @@ function build(n, maxLen, r) {
         }
         const ny = hy - dy, nx = hx - dx;
         if (!clear || !inside(ny, nx) || occ[ny * n + nx] >= 0) continue;
-        const target = 2 + Math.floor(r() * (maxLen - 1));
+        const target = 3 + Math.floor(r() * (maxLen - 2)); // au moins une case de queue quand il y a la place
         const cells = [h, ny * n + nx];
         let cy = ny, cx = nx, way = [-dy, -dx];
         while (cells.length < target) {
@@ -91,15 +102,15 @@ function build(n, maxLen, r) {
           cells.push(cy * n + cx);
         }
         cells.reverse(); // de la queue à la tête
-        for (const i of cells) occ[i] = snakes.length;
-        snakes.push({ cells, dir: d });
+        for (const i of cells) occ[i] = cats.length;
+        cats.push({ cells, dir: d });
         placed = true;
         break;
       }
       if (placed) break;
     }
   }
-  return snakes;
+  return cats;
 }
 
 function headRay(n, s, occ, self) {
@@ -114,15 +125,15 @@ function headRay(n, s, occ, self) {
   return { steps, blocker: -1 };
 }
 
-// Nombre de « vagues » pour tout vider : plus il y en a, plus les serpents dépendent les uns des autres.
-function depth(n, snakes) {
+// Nombre de « vagues » pour tout vider : plus il y en a, plus les chats dépendent les uns des autres.
+function depth(n, cats) {
   const occ = new Array(n * n).fill(-1);
-  snakes.forEach((s, k) => s.cells.forEach((i) => { occ[i] = k; }));
-  let left = snakes.map((_, k) => k), waves = 0;
+  cats.forEach((s, k) => s.cells.forEach((i) => { occ[i] = k; }));
+  let left = cats.map((_, k) => k), waves = 0;
   while (left.length) {
-    const free = left.filter((k) => headRay(n, snakes[k], occ, k).blocker < 0);
+    const free = left.filter((k) => headRay(n, cats[k], occ, k).blocker < 0);
     if (!free.length) return -1;
-    free.forEach((k) => snakes[k].cells.forEach((i) => { occ[i] = -1; }));
+    free.forEach((k) => cats[k].cells.forEach((i) => { occ[i] = -1; }));
     left = left.filter((k) => !free.includes(k));
     waves++;
   }
@@ -131,17 +142,21 @@ function depth(n, snakes) {
 
 function makeLevel(level) {
   const n = levelSize(level);
-  const maxLen = Math.min(3 + Math.floor(level / 2), 2 * n);
+  const maxLen = Math.min(4 + Math.floor(level / 2), 2 * n);
   let best = null;
   for (let k = 0; k < 30; k++) {
-    const snakes = build(n, maxLen, rng(level * 7919 + k * 104729 + 17));
-    const score = depth(n, snakes) * 100 + snakes.length;
-    if (!best || score > best.score) best = { score, snakes };
+    const cats = build(n, maxLen, rng(level * 7919 + k * 104729 + 17));
+    const score = depth(n, cats) * 100 + cats.length;
+    if (!best || score > best.score) best = { score, cats };
   }
   const r = rng(level * 31 + 5);
-  const offset = Math.floor(r() * COLORS.length);
-  best.snakes.forEach((s, k) => { s.color = COLORS[(offset + k * 3) % COLORS.length]; s.flick = (r() * 2.6).toFixed(2); });
-  return { n, snakes: best.snakes };
+  const o1 = Math.floor(r() * COATS.length), o2 = Math.floor(r() * COLLARS.length);
+  best.cats.forEach((s, k) => {
+    s.coat = COATS[(o1 + k * 3) % COATS.length];
+    s.collar = COLLARS[(o2 + k * 5) % COLLARS.length];
+    s.flick = (r() * 4).toFixed(2);
+  });
+  return { n, cats: best.cats };
 }
 
 // ---------- Dessin ----------
@@ -171,52 +186,65 @@ function drawBoard() {
   const bg = el('g', { 'clip-path': 'url(#round)' }, svg);
   for (let y = 0; y < n; y++) {
     for (let x = 0; x < n; x++) {
-      el('rect', { x: x * U, y: y * U, width: U, height: U, fill: (x + y) % 2 ? '#165c42' : '#1a6649' }, bg);
-      el('circle', { cx: x * U + U / 2, cy: y * U + U / 2, r: 5, fill: 'rgba(255,255,255,.12)' }, bg);
+      el('rect', { x: x * U, y: y * U, width: U, height: U, fill: (x + y) % 2 ? '#f6e1cb' : '#fbead8' }, bg);
+      el('circle', { cx: x * U + U / 2, cy: y * U + U / 2, r: 5, fill: 'rgba(138,90,68,.18)' }, bg);
     }
   }
   game.layer = el('g', {}, svg);
-  game.snakes.forEach((s) => {
-    s.el = snakeEl(s);
+  game.cats.forEach((s) => {
+    s.el = catEl(s);
     const pts = s.cells.map(center);
-    drawSnake(s.el, pts);
+    drawCat(s.el, pts);
   });
 }
 
-function snakeEl(s) {
-  const dark = shade(s.color, -0.45), light = shade(s.color, 0.45);
-  const g = el('g', { class: 'snake' }, game.layer);
+// Le chat vu de dessus : sa longue queue suit le chemin, le corps et la tête sont dans la dernière case,
+// tournés dans le sens de la marche (vers +x dans le repère de la tête).
+function catEl(s) {
+  const c = s.coat;
+  const g = el('g', { class: 'cat' }, game.layer);
   const line = { fill: 'none', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' };
   const paths = [
-    el('path', { ...line, class: 'glow', stroke: '#fff7a8', 'stroke-width': 86 }, g),
-    el('path', { ...line, stroke: dark, 'stroke-width': 64 }, g),
-    el('path', { ...line, stroke: s.color, 'stroke-width': 52 }, g),
-    el('path', { ...line, stroke: light, 'stroke-width': 14, 'stroke-dasharray': '0 30' }, g),
+    el('path', { ...line, class: 'glow', stroke: '#ffd23f', 'stroke-width': 84 }, g),
+    el('path', { ...line, stroke: c.line, 'stroke-width': 31 }, g),
+    el('path', { ...line, stroke: c.fur, 'stroke-width': 21 }, g),
+    el('path', { ...line, stroke: c.stripe, 'stroke-width': 21, 'stroke-linecap': 'butt', 'stroke-dasharray': '8 14' }, g),
   ];
+  const tip = el('circle', { r: 14, fill: c.stripe, stroke: c.line, 'stroke-width': 5 }, g);
   const head = el('g', {}, g);
-  const tongue = el('g', { class: 'tongue', style: `animation-delay:${s.flick}s` }, head);
-  el('path', { d: 'M30 0H64M64 0l13-10M64 0l13 10', fill: 'none', stroke: '#e11d48', 'stroke-width': 7, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, tongue);
-  el('ellipse', { cx: 6, cy: 0, rx: 39, ry: 34, fill: s.color, stroke: dark, 'stroke-width': 6 }, head);
-  el('circle', { cx: 35, cy: -7, r: 3, fill: dark }, head);
-  el('circle', { cx: 35, cy: 7, r: 3, fill: dark }, head);
-  const eyes = el('g', { class: 'blink', style: `animation-delay:${s.flick * 1.7}s` }, head);
-  for (const y of [-17, 17]) {
-    el('circle', { cx: 12, cy: y, r: 12, fill: '#fff', stroke: dark, 'stroke-width': 3 }, eyes);
-    el('circle', { cx: 17, cy: y, r: 6.5, fill: '#111' }, eyes);
-    el('circle', { cx: 19, cy: y - 3, r: 2.2, fill: '#fff' }, eyes);
+  for (const y of [-1, 1]) el('ellipse', { cx: 6, cy: 31 * y, rx: 11, ry: 8, fill: c.fur, stroke: c.line, 'stroke-width': 4 }, head);
+  el('ellipse', { cx: -30, cy: 0, rx: 40, ry: 31, fill: c.fur, stroke: c.line, 'stroke-width': 5 }, head);
+  el('path', { d: 'M-52 -21q5 21 0 42M-35 -26q5 26 0 52', fill: 'none', stroke: c.stripe, 'stroke-width': 7, 'stroke-linecap': 'round' }, head);
+  el('rect', { x: -15, y: -25, width: 10, height: 50, rx: 5, fill: s.collar }, head);
+  el('circle', { cx: -9, cy: 27, r: 6, fill: '#ffd23f', stroke: '#b7791f', 'stroke-width': 2 }, head);
+  for (const y of [-1, 1]) {
+    const ear = el('g', { class: 'ear', style: `animation-delay:${s.flick}s` }, head);
+    el('path', { d: `M4 ${-20 * y}L24 ${-48 * y}L40 ${-16 * y}Z`, fill: c.fur, stroke: c.line, 'stroke-width': 5, 'stroke-linejoin': 'round' }, ear);
+    el('path', { d: `M13 ${-23 * y}L24 ${-39 * y}L32 ${-20 * y}Z`, fill: c.ear }, ear);
   }
-  return { g, paths, head };
+  el('circle', { cx: 20, cy: 0, r: 30, fill: c.fur, stroke: c.line, 'stroke-width': 5 }, head);
+  const eyes = el('g', { class: 'blink', style: `animation-delay:${s.flick * 1.3}s` }, head);
+  for (const y of [-12, 12]) {
+    el('circle', { cx: 27, cy: y, r: 9, fill: c.eye, stroke: c.line, 'stroke-width': 2.5 }, eyes);
+    el('ellipse', { cx: 28, cy: y, rx: 6, ry: 2.6, fill: '#111' }, eyes);
+    el('circle', { cx: 31, cy: y - 3, r: 2, fill: '#fff' }, eyes);
+  }
+  el('path', { d: 'M15 -5L15 5L9 0Z', fill: '#f58fa6', stroke: c.line, 'stroke-width': 1.5, 'stroke-linejoin': 'round' }, head);
+  el('path', { d: 'M8 0q-5 0-6-6M8 0q-5 0-6 6M10 9L3 40M14 11L17 42M10 -9L3 -40M14 -11L17 -42', fill: 'none', stroke: c.line, 'stroke-width': 2, 'stroke-linecap': 'round', opacity: 0.75 }, head);
+  return { g, paths, tip, head };
 }
 
-function drawSnake(e, pts) {
+function drawCat(e, pts) {
   const d = 'M' + pts.map((p) => p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join('L');
   e.paths.forEach((p) => p.setAttribute('d', d));
+  e.tip.setAttribute('cx', pts[0][0].toFixed(1));
+  e.tip.setAttribute('cy', pts[0][1].toFixed(1));
   const [hx, hy] = pts[pts.length - 1], [px, py] = pts[pts.length - 2];
   const ang = Math.atan2(hy - py, hx - px) * 180 / Math.PI;
   e.head.setAttribute('transform', `translate(${hx.toFixed(1)} ${hy.toFixed(1)}) rotate(${ang.toFixed(1)})`);
 }
 
-// Chemin du serpent prolongé tout droit au-delà de sa tête, et le corps à la position t (en cases).
+// Chemin du chat prolongé tout droit au-delà de sa tête, et sa queue à la position t (en cases).
 function track(s, extra) {
   const pts = s.cells.map(center);
   const [dy, dx] = DIRS[s.dir];
@@ -245,10 +273,10 @@ function start(level) {
   data.level = level;
   save();
   const lv = makeLevel(level);
-  game = { level, n: lv.n, snakes: lv.snakes, hearts: 3, over: false, run: (game ? game.run : 0) + 1, moving: 0 };
+  game = { level, n: lv.n, cats: lv.cats, hearts: 3, over: false, run: (game ? game.run : 0) + 1, moving: 0 };
   game.occ = new Array(game.n * game.n).fill(-1);
-  game.snakes.forEach((s, k) => { s.id = k; s.alive = true; s.cells.forEach((i) => { game.occ[i] = k; }); });
-  game.left = game.snakes.length;
+  game.cats.forEach((s, k) => { s.id = k; s.alive = true; s.cells.forEach((i) => { game.occ[i] = k; }); });
+  game.left = game.cats.length;
   combo = 0;
   drawBoard();
   updateInfo();
@@ -258,7 +286,7 @@ function updateInfo(lostHeart) {
   $('level-name').textContent = `Niveau ${game.level}`;
   $('prev').disabled = game.level <= 1;
   $('next').disabled = game.level >= data.max;
-  $('left').textContent = `🐍 × ${game.left}`;
+  $('left').textContent = `🐈 × ${game.left}`;
   $('hearts').innerHTML = [0, 1, 2].map((k) => {
     const cls = k >= game.hearts ? 'lost' + (lostHeart && k === game.hearts ? ' pop' : '') : '';
     return `<span class="${cls}">❤️</span>`;
@@ -274,7 +302,7 @@ function tap(ev) {
   if (x < 0 || y < 0 || x >= game.n || y >= game.n) return;
   const k = game.occ[y * game.n + x];
   if (k < 0) return;
-  const s = game.snakes[k];
+  const s = game.cats[k];
   if (s.busy) return;
   clearHint();
   const { steps, blocker } = headRay(game.n, s, game.occ, k);
@@ -309,7 +337,7 @@ function leave(s, steps) {
   animate((e) => {
     const t = Math.min(end, 4 * e + 9 * e * e);
     const body = bodyAt(pts, len, t);
-    drawSnake(s.el, body);
+    drawCat(s.el, body);
     if (e - lastTrail > 0.025) { lastTrail = e; trail(toScreen(body[0]), toScreen(body[1])); }
     if (!out && t > steps + 0.5) {
       out = true;
@@ -339,11 +367,11 @@ function bump(s, steps, blocker) {
     else t = reach * Math.max(0, 1 - (e - go) / 0.35) ** 2;
     if (!hit && e >= go) {
       hit = true;
-      ouch(s, game.snakes[blocker], toScreen(pointAt(pts, len - 1 + reach)));
+      ouch(s, game.cats[blocker], toScreen(pointAt(pts, len - 1 + reach)));
     }
-    drawSnake(s.el, bodyAt(pts, len, t));
+    drawCat(s.el, bodyAt(pts, len, t));
     if (e >= go + 0.35) {
-      drawSnake(s.el, s.cells.map(center));
+      drawCat(s.el, s.cells.map(center));
       s.el.g.classList.remove('moving');
       s.busy = false;
       if (game.hearts <= 0) lose();
@@ -357,6 +385,7 @@ function ouch(s, other, at) {
   combo = 0;
   updateInfo(true);
   sound.bonk();
+  sound.hiss();
   if (navigator.vibrate) navigator.vibrate(80);
   const wrap = $('wrap');
   wrap.classList.remove('shake'); void wrap.offsetWidth; wrap.classList.add('shake');
@@ -370,12 +399,13 @@ function celebrate(s, at) {
   const now = performance.now();
   combo = now - lastExit < 1600 ? combo + 1 : 1;
   lastExit = now;
-  // Effets lancés un peu vers le haut et gardés à l'écran, même quand le serpent sort par un bord.
+  // Effets lancés un peu vers le haut et gardés à l'écran, même quand le chat sort par un bord.
   const [dy, dx] = DIRS[s.dir];
   at = [Math.max(30, Math.min(innerWidth - 30, at[0])), Math.max(40, Math.min(innerHeight - 30, at[1]))];
   BURSTS[Math.floor(Math.random() * BURSTS.length)](at, [dx * 0.7, dy - 0.6], s.color);
   if (Math.random() < 0.75) bubble(at, BYE[Math.floor(Math.random() * BYE.length)]);
   sound.pop(combo);
+  sound.meow(combo);
   if (combo >= 2) {
     const c = document.createElement('div');
     c.className = 'combo';
@@ -398,9 +428,9 @@ function win() {
   }, 300);
   const perfect = game.hearts === 3;
   setTimeout(() => {
-    $('end-emoji').textContent = perfect ? '🐍👑' : '🐍🎉';
+    $('end-emoji').textContent = perfect ? '😻👑' : '🐈🎉';
     $('end-title').textContent = perfect ? 'Sans une bosse !' : 'Bravo !';
-    $('end-sub').textContent = `Niveau ${game.level} terminé, tous les serpents sont dehors` + (perfect ? ' et personne ne s\'est cogné.' : '.');
+    $('end-sub').textContent = `Niveau ${game.level} terminé, tous les chats sont dehors` + (perfect ? ' et personne ne s\'est cogné.' : '.');
     $('end-go').textContent = `Niveau ${game.level + 1}`;
     $('end-go').onclick = () => { $('end').close(); start(game.level + 1); };
     $('end').showModal();
@@ -410,9 +440,9 @@ function win() {
 function lose() {
   sound.sad();
   setTimeout(() => {
-    $('end-emoji').textContent = '🐍💫';
+    $('end-emoji').textContent = '🙀💫';
     $('end-title').textContent = 'Aïe aïe aïe…';
-    $('end-sub').textContent = 'Les serpents se sont fait trop de bosses. Regarde bien où pointe chaque tête avant de toucher !';
+    $('end-sub').textContent = 'Les chats se sont fait trop de bosses. Regarde bien où pointe chaque tête avant de toucher !';
     $('end-go').textContent = 'Réessayer';
     $('end-go').onclick = () => { $('end').close(); start(game.level); };
     $('end').showModal();
@@ -422,12 +452,12 @@ function lose() {
 let hintTimer;
 function clearHint() {
   clearTimeout(hintTimer);
-  game.snakes.forEach((s) => s.el.g.classList.remove('hint'));
+  game.cats.forEach((s) => s.el.g.classList.remove('hint'));
 }
 function hint() {
   if (!game || game.over) return;
   clearHint();
-  const free = game.snakes.filter((s, k) => s.alive && !s.busy && headRay(game.n, s, game.occ, k).blocker < 0);
+  const free = game.cats.filter((s, k) => s.alive && !s.busy && headRay(game.n, s, game.occ, k).blocker < 0);
   if (!free.length) return;
   const s = free[Math.floor(Math.random() * free.length)];
   s.el.g.classList.add('hint');
@@ -498,12 +528,12 @@ function emojiBurst(list, n) {
 }
 function hearts([x, y]) {
   for (let i = 0; i < 14; i++) {
-    add({ kind: 'text', ch: pick(['💚', '💛', '💖', '💜', '🧡']), x: x + rand(-25, 25), y, vx: rand(-1.5, 1.5), vy: rand(-5, -2), size: rand(18, 30), life: rand(60, 100), g: -0.03, wave: 1.2, delay: Math.floor(rand(0, 12)) });
+    add({ kind: 'text', ch: pick(['😻', '💛', '💖', '💜', '🧡']), x: x + rand(-25, 25), y, vx: rand(-1.5, 1.5), vy: rand(-5, -2), size: rand(18, 30), life: rand(60, 100), g: -0.03, wave: 1.2, delay: Math.floor(rand(0, 12)) });
   }
 }
 function bubbles([x, y], [dx, dy]) {
   for (let i = 0; i < 20; i++) {
-    add({ kind: 'ring', x: x + rand(-20, 20), y: y + rand(-20, 20), vx: dx * rand(1, 4), vy: dy * rand(1, 4) - rand(1, 3), size: rand(5, 15), color: 'rgba(200,240,255,.9)', life: rand(50, 90), g: -0.05, wave: 1.5, grow: 0.08, delay: Math.floor(rand(0, 10)) });
+    add({ kind: 'ring', x: x + rand(-20, 20), y: y + rand(-20, 20), vx: dx * rand(1, 4), vy: dy * rand(1, 4) - rand(1, 3), size: rand(5, 15), color: 'rgba(70,150,220,.8)', life: rand(50, 90), g: -0.05, wave: 1.5, grow: 0.08, delay: Math.floor(rand(0, 10)) });
   }
 }
 function fireworks([x, y]) {
@@ -517,9 +547,9 @@ function fireworks([x, y]) {
 }
 function rocket([x, y], [dx, dy], color) {
   confetti([x, y], [dx, dy]);
-  emojiBurst(['🚀', '✨', '⭐'], 6)([x, y], [dx, dy]);
+  emojiBurst(['🚀', '🐟', '⭐'], 6)([x, y], [dx, dy]);
   for (let i = 0; i < 12; i++) {
-    add({ kind: 'dot', x, y, vx: rand(-2, 2), vy: rand(-2, 2), size: rand(10, 18), color: 'rgba(230,230,230,.6)', life: rand(40, 60), g: -0.04, grow: 0.4, delay: i });
+    add({ kind: 'dot', x, y, vx: rand(-2, 2), vy: rand(-2, 2), size: rand(10, 18), color: 'rgba(170,150,140,.45)', life: rand(40, 60), g: -0.04, grow: 0.4, delay: i });
   }
   fireworks([x, y]);
 }
@@ -533,7 +563,8 @@ function burstStars([x, y]) {
 const BURSTS = [
   confetti,
   emojiBurst(['⭐', '✨', '🌟', '💫'], 16),
-  emojiBurst(['🎉', '🥳', '🍃', '🐍', '🎊'], 12),
+  emojiBurst(['🎉', '🥳', '🐟', '🧶', '🎊'], 12),
+  emojiBurst(['🐟', '🐭', '🐾', '🥛'], 12),
   hearts,
   bubbles,
   (at) => fireworks(at),
@@ -545,7 +576,9 @@ const TRAILS = [
   ([x, y]) => add({ kind: 'text', ch: pick(['✨', '⭐']), x: x + rand(-10, 10), y: y + rand(-10, 10), vx: rand(-1, 1), vy: rand(-1, 1), size: rand(12, 20), life: 30, g: 0 }),
   ([x, y]) => add({ kind: 'dot', x: x + rand(-12, 12), y: y + rand(-12, 12), vx: rand(-0.6, 0.6), vy: rand(-2, -0.5), size: rand(6, 11), color: pick(['#ffd23f', '#ff7849', '#ef4444', '#ffb020']), life: 28, g: -0.02, grow: -0.25 }),
   ([x, y]) => add({ kind: 'dot', x, y, vx: 0, vy: 0, size: 9, color: `hsl(${(performance.now() / 4) % 360} 95% 60%)`, life: 35, g: 0, grow: -0.2 }),
-  ([x, y]) => add({ kind: 'dot', x: x + rand(-8, 8), y: y + rand(-8, 8), vx: rand(-0.5, 0.5), vy: rand(-1, 0), size: rand(6, 10), color: 'rgba(235,235,235,.55)', life: 40, g: -0.01, grow: 0.35 }),
+  ([x, y]) => add({ kind: 'dot', x: x + rand(-8, 8), y: y + rand(-8, 8), vx: rand(-0.5, 0.5), vy: rand(-1, 0), size: rand(6, 10), color: 'rgba(160,130,110,.35)', life: 40, g: -0.01, grow: 0.35 }),
+  // Traces de pattes, tournées dans le sens de la marche.
+  ([x, y], [nx, ny]) => { if (Math.random() < 0.3) add({ kind: 'text', ch: '🐾', x, y, vx: 0, vy: 0, size: 18, rot: Math.atan2(ny - y, nx - x) + Math.PI / 2, life: 60, g: 0 }); },
   ([x, y]) => { if (Math.random() < 0.35) add({ kind: 'text', ch: pick(['🎵', '🎶']), x, y, vx: rand(-1, 1), vy: rand(-2, -1), size: 18, life: 45, g: 0 }); },
 ];
 
@@ -588,6 +621,41 @@ const sound = (() => {
   return {
     unlock,
     whoosh: () => tone('triangle', 260, 1100, 0.32, 0.12),
+    // Un miaou : dent de scie filtrée dont la hauteur et le filtre montent puis redescendent.
+    meow: (c) => {
+      if (!ac || !data.sound) return;
+      const t = ac.currentTime, b = (1 + Math.min(c, 8) * 0.07) * rand(0.9, 1.15);
+      const o = ac.createOscillator(), f = ac.createBiquadFilter(), g = ac.createGain();
+      o.type = 'sawtooth';
+      o.frequency.setValueAtTime(420 * b, t);
+      o.frequency.linearRampToValueAtTime(760 * b, t + 0.13);
+      o.frequency.linearRampToValueAtTime(480 * b, t + 0.45);
+      f.type = 'bandpass';
+      f.Q.value = 4;
+      f.frequency.setValueAtTime(800, t);
+      f.frequency.linearRampToValueAtTime(2000, t + 0.15);
+      f.frequency.linearRampToValueAtTime(900, t + 0.45);
+      g.gain.setValueAtTime(0.001, t);
+      g.gain.exponentialRampToValueAtTime(0.5, t + 0.05);
+      g.gain.exponentialRampToValueAtTime(0.001, t + 0.5);
+      o.connect(f).connect(g).connect(ac.destination);
+      o.start(t);
+      o.stop(t + 0.5);
+    },
+    // Un « pfffft » de chat fâché : bruit blanc filtré.
+    hiss: () => {
+      if (!ac || !data.sound) return;
+      const t = ac.currentTime, len = ac.sampleRate * 0.35, buf = ac.createBuffer(1, len, ac.sampleRate), d = buf.getChannelData(0);
+      for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+      const src = ac.createBufferSource(), f = ac.createBiquadFilter(), g = ac.createGain();
+      src.buffer = buf;
+      f.type = 'highpass';
+      f.frequency.value = 2500;
+      g.gain.setValueAtTime(0.25, t);
+      g.gain.exponentialRampToValueAtTime(0.001, t + 0.35);
+      src.connect(f).connect(g).connect(ac.destination);
+      src.start(t);
+    },
     pop: (c) => { const f = 520 * Math.pow(1.12, Math.min(c, 8)); tone('sine', f, f * 1.6, 0.12, 0.18); tone('sine', f * 1.5, f * 2.2, 0.1, 0.1, 0.07); },
     bonk: () => { tone('square', 170, 55, 0.18, 0.12); tone('sine', 90, 40, 0.25, 0.2); },
     fanfare: () => [523, 659, 784, 1047].forEach((f, i) => tone('triangle', f, f * 1.01, 0.22, 0.14, i * 0.11)),
