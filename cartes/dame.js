@@ -35,17 +35,17 @@ const Dame = {
     T.pile('h0', 'hand', {
       ghost: true,
       pos: (i, n, T) => {
-        const step = Math.min(T.cw * .58, (T.W - 16 - T.cw) / Math.max(n - 1, 1)), w = T.cw + step * (n - 1);
+        const step = Math.min(T.cw * (g.land ? .66 : .58), (T.W - 16 - T.cw) / Math.max(n - 1, 1)), w = T.cw + step * (n - 1);
         const m = i - (n - 1) / 2, id = T.byId.h0.cards[i];
         const lift = T.meta.sel.includes(id) ? T.ch * .24 : 0;
-        return { x: (T.W - w) / 2 + i * step, y: T.H - T.ch - 22 + m * m * .45 - lift, r: +(m * 1.3).toFixed(1) };
+        return { x: (T.W - w) / 2 + i * step, y: g.handY + m * m * .45 - lift, r: +(m * 1.3).toFixed(1) };
       },
     });
     T.pile('h1', 'hand', { ghost: true, pos: (i, n, T) => ({ x: 6 + T.ch * .25 - T.cw / 2, y: g.cy - T.ch / 2 + (i - (n - 1) / 2) * fanStep(), r: 90, s: .5 }) });
     T.pile('h2', 'hand', { ghost: true, pos: (i, n, T) => ({ x: T.W / 2 - T.cw / 2 + (i - (n - 1) / 2) * fanStep(), y: 4 - T.ch / 4, s: .5 }) });
     T.pile('h3', 'hand', { ghost: true, pos: (i, n, T) => ({ x: T.W - 6 - T.ch * .25 - T.cw / 2, y: g.cy - T.ch / 2 + (i - (n - 1) / 2) * fanStep(), r: -90, s: .5 }) });
-    const off = [[0, .4, -4], [-.78, 0, 8], [0, -.4, 3], [.78, 0, -7]];
-    off.forEach(([dx, dy, r], p) => T.pile('t' + p, 'trick', { ghost: true, pos: (i, n, T) => ({ x: g.cx - T.cw / 2 + dx * T.cw, y: g.cy - T.ch / 2 + dy * T.ch, r, z: 1500 + T.meta.trick.findIndex((e) => e.p === p) }) }));
+    const off = [[0, 1, -4], [-1, 0, 8], [0, -1, 3], [1, 0, -7]];
+    off.forEach(([dx, dy, r], p) => T.pile('t' + p, 'trick', { ghost: true, pos: (i, n, T) => ({ x: g.cx - T.cw / 2 + dx * g.tdx * T.cw, y: g.cy - T.ch / 2 + dy * g.tdy * T.ch, r, z: 1500 + T.meta.trick.findIndex((e) => e.p === p) }) }));
     const away = [[0, 1], [-1, 0], [0, -1], [1, 0]];
     away.forEach(([dx, dy], p) => T.pile('w' + p, 'won', { ghost: true, pos: (i, n, T) => ({ x: g.cx - T.cw / 2 + dx * (T.W / 2 + T.cw), y: g.cy - T.ch / 2 + dy * (T.H * .6), s: .4, o: 0 }) }));
 
@@ -55,23 +55,41 @@ const Dame = {
     T.btn.addEventListener('click', () => this.doPass(T));
   },
   layout(T, W, H) {
-    const cw = Math.floor(Math.min(W / 5.2, H / 6.6, 96));
-    T.cw = cw; T.ch = Math.round(cw * 1.4);
-    T.g.cx = W / 2; T.g.cy = Math.min(H * .43, (H - T.ch * 1.6) / 2 + T.ch * .3);
-    const s = T.seats, half = 6.5 * cw * .17 + T.ch * .25, handTop = H - T.ch - 22 - T.ch * .24;
+    const g = T.g, land = (g.land = W > H * 1.3);
+    const cw = Math.floor(land ? Math.min(H / 4.6, W / 8.5, 96) : Math.min(W / 5.2, H / 6.6, 96));
+    const ch = Math.round(cw * 1.4);
+    T.cw = cw; T.ch = ch;
+    const s = T.seats, half = 6.5 * cw * .17 + ch * .25;
     const place = (el, css) => { el.style.left = el.style.right = el.style.top = el.style.transform = ''; Object.assign(el.style, css); };
-    place(s[0], { left: '50%', top: handTop - 34 + 'px', transform: 'translateX(-50%)' });
-    place(s[1], { left: '6px', top: T.g.cy + half + 8 + 'px' });
-    place(s[2], { left: '50%', top: T.ch / 2 + 10 + 'px', transform: 'translateX(-50%)' });
-    place(s[3], { left: 'auto', right: '6px', top: T.g.cy + half + 8 + 'px' });
-    T.msg.style.top = handTop - 62 + 'px';
-    T.btn.style.top = Math.min(T.g.cy - 22, handTop - 112) + 'px';
+    g.cx = W / 2;
+    if (land) {
+      // En paysage : la main dépasse un peu du bas, les adversaires se serrent sur les côtés, le pli s'étale en largeur.
+      g.handY = H - ch * .8; g.tdx = 1.05; g.tdy = .18;
+      const top = 4 + ch / 2, handTop = g.handY - ch * .24;
+      g.cy = (top + handTop) / 2;
+      place(s[0], { left: 14 + ch * .5 + 'px', top: handTop - 40 + 'px' });
+      place(s[1], { left: 14 + ch * .5 + 'px', top: Math.max(46, g.cy - half) + 'px' });
+      place(s[2], { left: W / 2 + 6.5 * cw * .17 + cw * .25 + 12 + 'px', top: '6px' });
+      place(s[3], { left: 'auto', right: 14 + ch * .5 + 'px', top: Math.max(46, g.cy - half) + 'px' });
+      T.msg.style.top = handTop - 28 + 'px';
+      T.btn.style.top = g.cy - 22 + 'px';
+    } else {
+      g.handY = H - ch - 22; g.tdx = .78; g.tdy = .4;
+      g.cy = Math.min(H * .43, (H - ch * 1.6) / 2 + ch * .3);
+      const handTop = g.handY - ch * .24;
+      place(s[0], { left: '50%', top: handTop - 34 + 'px', transform: 'translateX(-50%)' });
+      place(s[1], { left: '6px', top: g.cy + half + 8 + 'px' });
+      place(s[2], { left: '50%', top: ch / 2 + 10 + 'px', transform: 'translateX(-50%)' });
+      place(s[3], { left: 'auto', right: '6px', top: g.cy + half + 8 + 'px' });
+      T.msg.style.top = handTop - 62 + 'px';
+      T.btn.style.top = Math.min(g.cy - 22, handTop - 112) + 'px';
+    }
   },
   deal(T, rand) {
     const ids = shuffle([...Array(52).keys()], rand);
     ids.forEach((id, k) => T.put(T.byId['h' + (k % 4)], id, k % 4 === 0));
     for (let p = 0; p < 4; p++) this.sort(T, p);
-    Object.assign(T.meta, { pts: [0, 0, 0, 0], trick: [], played: [], sel: [], phase: 'deal', trickNo: 0, broken: false });
+    Object.assign(T.meta, { voids: [[], [], [], []], pts: [0, 0, 0, 0], trick: [], played: [], sel: [], phase: 'deal', trickNo: 0, broken: false });
   },
   dealOrigin: (T) => ({ x: T.g.cx - T.cw / 2, y: T.g.cy - T.ch / 2 }),
   afterDeal(T) { this.startHand(T); },
@@ -189,6 +207,8 @@ const Dame = {
     T.moving.push(id);
     m.trick.push({ p, id });
     m.played.push(id);
+    if (m.trick.length > 1 && c.s !== T.cards[m.trick[0].id].s) { m.voids ||= [[], [], [], []]; if (!m.voids[p].includes(T.cards[m.trick[0].id].s)) m.voids[p].push(T.cards[m.trick[0].id].s); }
+    if (c.s === 1 && !m.broken) T.ui.toast('Les cœurs sont ouverts');
     m.sel = [];
     if (c.s === 1) m.broken = true;
     if (m.trick.length === 4) {
@@ -251,7 +271,7 @@ const Dame = {
       const iWin = m.scores[0] === best;
       title = iWin ? 'Victoire !' : 'Partie terminée';
       text = iWin ? 'Tu finis avec le plus petit score.' : `${PLAYERS[m.scores.indexOf(best)].name} l’emporte avec ${best} points.`;
-      if (!T.won) { T.won = true; T.ui.record(this.id, iWin, { score: m.scores[0] }); if (iWin) Fx.confetti(); }
+      if (!T.won) { T.won = true; T.ui.record(this.id, iWin, { score: m.scores[0] }); if (iWin) { Fx.confetti(); Sound.play('win'); } }
       T.persist();
     }
     T.ui.show(`<h2 class="${over && m.scores[0] === best ? 'wintitle' : ''}">${title}</h2>${text ? `<p>${text}</p>` : ''}
@@ -324,6 +344,8 @@ const Dame = {
       const score = (c) => {
         let s = val(c) + count[c.s] * .3;
         if (c.s === 1) s += 8;
+        // Entamer une couleur qu'un adversaire n'a plus, c'est lui offrir de se défausser sur nous.
+        if (val(c) > 8 && (m.voids || []).some((v, q) => q !== p && v.includes(c.s))) s += 7;
         if (c.s === 0) {
           if (hasQS) s += 20;
           else if (!qsOut && val(c) >= 13) s += 30;
@@ -338,6 +360,16 @@ const Dame = {
     const top = Math.max(...inLead.map(val));
     const pts = m.trick.reduce((a, e) => a + this.points(T.cards[e.id]), 0);
     const last = m.trick.length === 3;
+    // Quelqu'un est en train de tout ramasser (grand chelem) : on prend un pli à points pour l'en empêcher.
+    const shooter = [0, 1, 2, 3].find((q) => q !== p && m.pts[q] >= 8 && m.pts.every((v, r) => r === q || v === 0));
+    if (shooter != null && L[0].s === lead && this.winner(T) === shooter) {
+      const beat = L.filter((c) => val(c) > top && c.id !== QS);
+      if (beat.length && (pts > 0 || m.played.filter((x) => T.cards[x].s === 1).length < 13)) return lo(beat).id;
+    }
+    if (shooter != null && L[0].s !== lead) {
+      const safe = L.filter((c) => c.s !== 1 && c.id !== QS);
+      if (safe.length) return hi(safe).id;
+    }
     if (L[0].s === lead) {
       if (lead === 0 && hasQS && top > 12) return QS;
       const under = L.filter((c) => val(c) < top);

@@ -129,7 +129,10 @@ class Table {
     }
     if (p.fan === 'waste') {
       const show = p.show ?? 1;
-      for (let i = 0; i < n; i++) out.push({ x: p.x + Math.max(0, i - (n - show)) * this.cw * .3, y: p.y });
+      for (let i = 0; i < n; i++) {
+        const k = Math.max(0, i - (n - show));
+        out.push(p.vertical ? { x: p.x, y: p.y + k * this.ch * .2 } : { x: p.x + k * this.cw * .3, y: p.y });
+      }
       return out;
     }
     for (let i = 0; i < n; i++) out.push({ x: p.x, y: p.y - Math.min(Math.floor(i / 6), 4) * .6 });
@@ -138,12 +141,14 @@ class Table {
   render(opts = {}) {
     const moving = new Set(this.moving);
     this.moving = [];
-    let order = 0;
+    let order = 0, flips = 0, lands = 0;
+    const box = this.board.getBoundingClientRect();
     this.piles.forEach((p, pi) => {
       const pos = this.positions(p);
       p.cards.forEach((id, i) => {
         const c = this.cards[id], q = pos[i], z = q.z ?? pi * 160 + i + 1;
-        c.el.classList.toggle('up', c.up);
+        const wasUp = c.el.classList.contains('up');
+        if (wasUp !== c.up) { c.el.classList.toggle('up', c.up); if (c.up && !opts.silent) flips++; }
         c.x = q.x; c.y = q.y;
         let tf = `translate3d(${q.x.toFixed(1)}px,${q.y.toFixed(1)}px,0)`;
         if (q.r) tf += ` rotate(${q.r}deg)`;
@@ -158,8 +163,26 @@ class Table {
         c.el.style.zIndex = (moving.has(id) ? 6000 : 3000) + z;
         clearTimeout(c.zt);
         c.zt = setTimeout(() => { c.el.style.zIndex = z; c.el.style.transitionDelay = ''; c.zt = 0; }, delay + DUR + 60);
+        if (!moving.has(id) || opts.silent) return;
+        // En vol, la carte se soulève un peu ; en arrivant sur une famille, elle brille.
+        if (wasUp && c.up) {
+          setTimeout(() => c.el.classList.add('fly'), delay);
+          setTimeout(() => c.el.classList.remove('fly'), delay + DUR);
+        }
+        if (p.kind === 'found' && i === p.cards.length - 1 && !opts.stagger) {
+          lands++;
+          setTimeout(() => {
+            c.el.classList.add('land');
+            setTimeout(() => c.el.classList.remove('land'), 700);
+            Fx.burst(box.left + q.x + this.cw / 2, box.top + q.y + this.ch / 2, isRed(c.s) ? '#ff6b7d' : '#ffd36b');
+          }, delay + DUR - 40);
+        }
       });
     });
+    if (opts.silent) return;
+    if (moving.size) Sound.play(opts.stagger ? 'deal' : 'slide', opts.stagger ? Math.min(moving.size, 12) : 1, opts.stagger || 0);
+    if (flips && !opts.stagger) setTimeout(() => Sound.play('flip'), DUR * .6);
+    if (lands) setTimeout(() => Sound.play('chime'), DUR - 40);
   }
   // Toutes les cartes partent d'un même point puis se distribuent une à une.
   dealFrom(x, y, stagger = 22) {
@@ -347,6 +370,7 @@ class Table {
   }
   nope(c) {
     if (!c?.up) return;
+    Sound.play('nope');
     c.el.classList.remove('nope'); void c.el.offsetWidth; c.el.classList.add('nope');
     setTimeout(() => c.el.classList.remove('nope'), 350);
   }
@@ -365,46 +389,136 @@ class Table {
     this.persist();
     this.ui.won(this);
   }
-  // Les cartes s'envolent pour former une rosace au centre du tapis.
+  // Les cartes s'envolent pour former une rosace (deux couronnes pour Spider) qui tourne doucement en scintillant.
   rosace() {
-    const cards = this.cards.filter((c) => c.r <= 13);
-    const n = cards.length, cx = (this.W - this.cw) / 2, cy = (this.H - this.ch) / 2;
-    const R = Math.min(this.W, this.H) * .3;
-    cards.forEach((c, i) => {
-      const a = (i / n) * Math.PI * 2 * (n > 60 ? 2 : 1);
-      const rr = n > 60 && i >= n / 2 ? R * .55 : R;
+    const n = this.cards.length, cx = this.W / 2, cy = this.H / 2;
+    const R = Math.min(this.W, this.H) / 2 - this.ch * .62;
+    const rings = n > 60 ? 2 : 1, per = Math.ceil(n / rings);
+    Sound.play('win');
+    this.cards.forEach((c, i) => {
+      const ring = Math.floor(i / per), a = ((i % per) / per) * 360 + ring * (180 / per);
+      const rr = ring ? R * .55 : R;
       c.el.classList.add('up');
-      c.el.style.transition = `transform 1.1s cubic-bezier(.2,.8,.2,1) ${i * 14}ms`;
+      c.el.style.transformOrigin = `${cx}px ${cy}px`;
+      c.el.style.transition = `transform 1.2s cubic-bezier(.2,.8,.2,1) ${i * 12}ms`;
       c.el.style.zIndex = 7000 + i;
-      c.el.style.transform = `translate3d(${cx + rr * Math.sin(a)}px,${cy - rr * Math.cos(a) * .9}px,0) rotate(${(a * 180) / Math.PI}deg)`;
+      c.el.style.transform = `rotate(${a}deg) translate(${cx - this.cw / 2}px,${cy - rr - this.ch / 2}px)`;
     });
+    setTimeout(() => {
+      if (this.stopped) return;
+      this.cards.forEach((c, i) => {
+        c.el.style.animation = `${i >= per ? 'spinr' : 'spin'} 40s linear infinite`;
+        setTimeout(() => { c.el.classList.add('shine'); }, (i % per) * 35);
+      });
+    }, 1200 + n * 12);
   }
 }
 
-// Petites aides partagées par les jeux.
+// Effets de particules (confettis en forme d'enseignes, éclats dorés) sur un seul canevas.
 const Fx = {
-  confetti(duration = 2600) {
-    const cv = document.getElementById('fx'), ctx = cv.getContext('2d');
-    const dpr = devicePixelRatio || 1;
+  parts: [],
+  running: false,
+  shapes: null,
+  shape(k) {
+    if (!this.shapes) {
+      const d = [...document.querySelectorAll('symbol[id^="su"]')].map((sym) => {
+        const p = new Path2D();
+        sym.querySelectorAll('path').forEach((e) => p.addPath(new Path2D(e.getAttribute('d'))));
+        sym.querySelectorAll('circle').forEach((e) => { const c = new Path2D(); c.arc(+e.getAttribute('cx'), +e.getAttribute('cy'), +e.getAttribute('r'), 0, 7); p.addPath(c); });
+        return p;
+      });
+      this.shapes = d;
+    }
+    return this.shapes[k];
+  },
+  start() {
+    if (this.running) return;
+    const cv = document.getElementById('fx'), ctx = cv.getContext('2d'), dpr = devicePixelRatio || 1;
     cv.width = innerWidth * dpr; cv.height = innerHeight * dpr;
-    ctx.scale(dpr, dpr);
-    const colors = ['#ffd36b', '#ff5d73', '#ffffff', '#7fe0ff', '#9cf29a', '#f2b33d'];
-    const parts = Array.from({ length: 140 }, () => ({
-      x: innerWidth / 2 + (Math.random() - .5) * 80, y: innerHeight * .45,
-      vx: (Math.random() - .5) * 13, vy: -Math.random() * 14 - 5, r: Math.random() * 6.3, vr: (Math.random() - .5) * .35,
-      w: 5 + Math.random() * 6, h: 8 + Math.random() * 8, c: colors[(Math.random() * colors.length) | 0],
-    }));
-    const t0 = performance.now();
+    this.running = true;
+    let last = performance.now();
     const tick = (t) => {
+      const dt = Math.min(2.5, (t - last) / 16.7); last = t;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, innerWidth, innerHeight);
-      const k = (t - t0) / duration;
-      for (const p of parts) {
-        p.vy += .38; p.vx *= .99; p.x += p.vx; p.y += p.vy; p.r += p.vr;
-        ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r); ctx.globalAlpha = Math.max(0, 1 - k * k);
-        ctx.fillStyle = p.c; ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h * Math.abs(Math.cos(p.r * 2))); ctx.restore();
+      this.parts = this.parts.filter((p) => (p.life -= dt) > 0 && p.y < innerHeight + 40);
+      for (const p of this.parts) {
+        p.vy += p.g * dt; p.vx *= p.drag; p.vy *= p.drag; p.x += p.vx * dt; p.y += p.vy * dt; p.r += p.vr * dt;
+        ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r);
+        ctx.globalAlpha = Math.min(1, p.life / 30);
+        ctx.fillStyle = p.c;
+        if (p.suit != null) { const k = p.w / 100; ctx.scale(k * Math.cos(p.r * 1.7), k); ctx.translate(-50, -50); ctx.fill(this.shape(p.suit)); }
+        else if (p.dot) { ctx.beginPath(); ctx.arc(0, 0, p.w, 0, 7); ctx.fill(); }
+        else ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h * Math.abs(Math.cos(p.r * 2)));
+        ctx.restore();
       }
-      if (k < 1) requestAnimationFrame(tick); else ctx.clearRect(0, 0, innerWidth, innerHeight);
+      if (this.parts.length) requestAnimationFrame(tick);
+      else { ctx.clearRect(0, 0, innerWidth, innerHeight); this.running = false; }
     };
     requestAnimationFrame(tick);
   },
+  // Pluie de fête : confettis et enseignes qui jaillissent de deux côtés.
+  confetti() {
+    const colors = ['#ffd36b', '#ff5d73', '#ffffff', '#7fe0ff', '#9cf29a', '#f2b33d'];
+    for (let k = 0; k < 170; k++) {
+      const side = k % 2 ? 1 : -1, suit = k % 3 === 0 ? k % 4 : null;
+      this.parts.push({
+        x: innerWidth / 2 - side * innerWidth * .45, y: innerHeight * .75,
+        vx: side * (4 + Math.random() * 9), vy: -10 - Math.random() * 13, g: .32, drag: .992,
+        r: Math.random() * 6.3, vr: (Math.random() - .5) * .3, life: 150 + Math.random() * 60,
+        w: suit != null ? 14 + Math.random() * 10 : 5 + Math.random() * 6, h: 8 + Math.random() * 8,
+        suit, c: suit != null ? (isRed(suit) ? '#ff5d73' : '#fff') : colors[(Math.random() * colors.length) | 0],
+      });
+    }
+    this.start();
+  },
+  // Petit éclat quand une carte rejoint sa famille.
+  burst(x, y, color = '#ffd36b') {
+    for (let k = 0; k < 14; k++) {
+      const a = (k / 14) * Math.PI * 2 + Math.random() * .4, v = 2.2 + Math.random() * 2.6;
+      this.parts.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, g: .04, drag: .93, r: 0, vr: 0, life: 26 + Math.random() * 14, w: 1.6 + Math.random() * 1.8, dot: true, c: k % 3 ? color : '#fff' });
+    }
+    this.start();
+  },
 };
+
+// Sons de cartes synthétisés (aucun fichier à télécharger), coupables dans les réglages.
+const Sound = {
+  ctx: null,
+  on() { return Store.get().prefs.sound !== false; },
+  unlock() {
+    if (this.ctx || !this.on()) return;
+    try { this.ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch { return; }
+    const b = this.ctx.createBuffer(1, this.ctx.sampleRate * .5, this.ctx.sampleRate), d = b.getChannelData(0);
+    for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+    this.noise = b;
+  },
+  hiss(t, len, freq, q, gain, type = 'bandpass') {
+    const a = this.ctx, src = a.createBufferSource(), f = a.createBiquadFilter(), g = a.createGain();
+    src.buffer = this.noise; f.type = type; f.frequency.value = freq; f.Q.value = q;
+    g.gain.setValueAtTime(gain, t); g.gain.exponentialRampToValueAtTime(.001, t + len);
+    src.connect(f).connect(g).connect(a.destination);
+    src.start(t, Math.random() * .3, len + .02);
+  },
+  tone(t, freq, len, gain, type = 'sine') {
+    const a = this.ctx, o = a.createOscillator(), g = a.createGain();
+    o.type = type; o.frequency.value = freq;
+    g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(gain, t + .012); g.gain.exponentialRampToValueAtTime(.0001, t + len);
+    o.connect(g).connect(a.destination); o.start(t); o.stop(t + len + .02);
+  },
+  play(name, n = 1, gap = 0) {
+    if (!this.on() || !this.ctx) return;
+    if (this.ctx.state === 'suspended') this.ctx.resume();
+    const t = this.ctx.currentTime + .005;
+    switch (name) {
+      case 'slide': this.hiss(t, .09, 2600, .8, .16); break;
+      case 'deal': for (let k = 0; k < n; k++) this.hiss(t + (k * gap) / 1000, .05, 3200, 1, .1); break;
+      case 'flip': this.hiss(t, .04, 4200, 1.2, .14, 'highpass'); break;
+      case 'chime': this.tone(t, 1318.5, .35, .05); this.tone(t + .05, 1975.5, .3, .03); break;
+      case 'nope': this.tone(t, 150, .12, .12, 'triangle'); break;
+      case 'win': [523.3, 659.3, 784, 1046.5, 1318.5].forEach((f, k) => this.tone(t + k * .11, f, .6, .07, 'triangle')); break;
+      case 'tick': this.hiss(t, .03, 1800, 2, .1); break;
+    }
+  },
+};
+addEventListener('pointerdown', () => Sound.unlock(), { capture: true });

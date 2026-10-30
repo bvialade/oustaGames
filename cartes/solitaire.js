@@ -21,12 +21,25 @@ const Solitaire = {
     for (let i = 0; i < 7; i++) T.pile('t' + i, 'tab', { fan: 'down', icon: '<b>R</b>' });
   },
   layout(T, W, H) {
-    const pad = Math.max(6, W * .02), gap = Math.max(4, Math.round(W * .012));
+    const pad = Math.max(6, Math.min(W, H) * .02), gap = Math.max(4, Math.round(Math.min(W, H) * .014));
+    if (W > H * 1.3) {
+      // Paysage : pioche à gauche, familles en carré à droite, toute la hauteur pour les colonnes.
+      const sep = gap * 3;
+      const cw = Math.floor(Math.min((W - 2 * pad - 7 * gap - 2 * sep) / 10, H / 2.6 / 1.4, 120));
+      T.cw = cw; T.ch = Math.round(cw * 1.4);
+      const x0 = (W - (10 * cw + 7 * gap + 2 * sep)) / 2;
+      Object.assign(T.byId.s, { x: x0, y: pad });
+      Object.assign(T.byId.w, { x: x0, y: pad + T.ch + gap * 2, vertical: true });
+      for (let i = 0; i < 7; i++) Object.assign(T.byId['t' + i], { x: x0 + cw + sep + i * (cw + gap), y: pad });
+      const fx = x0 + cw + sep + 7 * (cw + gap) - gap + sep;
+      for (let i = 0; i < 4; i++) Object.assign(T.byId['f' + i], { x: fx + (i % 2) * (cw + gap), y: pad + Math.floor(i / 2) * (T.ch + gap) });
+      return;
+    }
     const cw = Math.floor(Math.min((W - 2 * pad - 6 * gap) / 7, 112, H / 5 / 1.4));
     T.cw = cw; T.ch = Math.round(cw * 1.4);
     const x0 = (W - (7 * cw + 6 * gap)) / 2, col = (i) => x0 + i * (cw + gap);
     Object.assign(T.byId.s, { x: col(0), y: pad });
-    Object.assign(T.byId.w, { x: col(1), y: pad });
+    Object.assign(T.byId.w, { x: col(1), y: pad, vertical: false });
     for (let i = 0; i < 4; i++) Object.assign(T.byId['f' + i], { x: col(3 + i), y: pad });
     for (let i = 0; i < 7; i++) Object.assign(T.byId['t' + i], { x: col(i), y: pad + T.ch + gap * 3 });
   },

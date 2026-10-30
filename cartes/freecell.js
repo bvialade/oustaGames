@@ -20,7 +20,20 @@ const FreeCell = {
     for (let i = 0; i < 8; i++) T.pile('t' + i, 'tab', { fan: 'down' });
   },
   layout(T, W, H) {
-    const pad = Math.max(5, W * .015), gap = Math.max(3, Math.round(W * .01)), mid = gap * 2;
+    const pad = Math.max(5, Math.min(W, H) * .015), gap = Math.max(3, Math.round(Math.min(W, H) * .012));
+    if (W > H * 1.3) {
+      // Paysage : cases libres à gauche et familles à droite, en carrés, les colonnes au milieu.
+      const sep = gap * 3;
+      const cw = Math.floor(Math.min((W - 2 * pad - 9 * gap - 2 * sep) / 12, H / 2.3 / 1.4, 110));
+      T.cw = cw; T.ch = Math.round(cw * 1.4);
+      const x0 = (W - (12 * cw + 9 * gap + 2 * sep)) / 2, tx = x0 + 2 * cw + gap + sep;
+      for (let i = 0; i < 4; i++) Object.assign(T.byId['c' + i], { x: x0 + (i % 2) * (cw + gap), y: pad + Math.floor(i / 2) * (T.ch + gap) });
+      for (let i = 0; i < 8; i++) Object.assign(T.byId['t' + i], { x: tx + i * (cw + gap), y: pad, gapUp: T.ch * .25 });
+      const fx = tx + 8 * (cw + gap) - gap + sep;
+      for (let i = 0; i < 4; i++) Object.assign(T.byId['f' + i], { x: fx + (i % 2) * (cw + gap), y: pad + Math.floor(i / 2) * (T.ch + gap) });
+      return;
+    }
+    const mid = gap * 2;
     const cw = Math.floor(Math.min((W - 2 * pad - 7 * gap - mid) / 8, 106, H / 5.4 / 1.4));
     T.cw = cw; T.ch = Math.round(cw * 1.4);
     const x0 = (W - (8 * cw + 7 * gap + mid)) / 2, col = (i) => x0 + i * (cw + gap) + (i >= 4 ? mid : 0);

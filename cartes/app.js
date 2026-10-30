@@ -92,11 +92,17 @@ const UI = {
     const g = T.game, o = Store.get().opts[g.id] ||= {};
     const segs = g.options.map((op) => `<div class="opt"><label>${op.label}</label><div class="seg" data-k="${op.key}">${op.values.map(([v, l]) =>
       `<button data-v="${v}" class="${(o[op.key] ?? op.def) === v ? 'on' : ''}">${l}</button>`).join('')}</div></div>`).join('');
-    const d = this.show(`<h2>${g.name}</h2>${segs}${this.statGrid(g.id)}
+    const snd = `<button class="toggle ${Sound.on() ? 'on' : ''}" id="snd2">Bruits des cartes<i></i></button>`;
+    const d = this.show(`<h2>${g.name}</h2>${segs}${snd}${this.statGrid(g.id)}
       <details class="rules"><summary>Les règles</summary>${g.rules}</details>`,
     [{ label: 'Nouvelle donne', fn: () => this.newGame(false) },
       ...(g.noUndo ? [] : [{ label: 'Recommencer cette donne', secondary: true, fn: () => this.restart() }]),
       { label: 'Fermer', secondary: true }]);
+    d.querySelector('#snd2').addEventListener('click', (e) => {
+      const p = Store.get().prefs; p.sound = p.sound === false; Store.save();
+      e.currentTarget.classList.toggle('on', p.sound); renderPrefs();
+      if (p.sound) { Sound.unlock(); Sound.play('chime'); }
+    });
     d.querySelectorAll('.seg').forEach((seg) => seg.addEventListener('click', (e) => {
       const b = e.target.closest('button'); if (!b) return;
       seg.querySelectorAll('button').forEach((x) => x.classList.toggle('on', x === b));
@@ -184,6 +190,7 @@ function renderPrefs() {
   const p = Store.get().prefs;
   document.body.className = `felt-${p.felt || 'emeraude'} back-${p.back || 'nuit'}`;
   $('felts').innerHTML = FELTS.map(([k, a, b]) => `<button class="sw felt ${k === (p.felt || 'emeraude') ? 'on' : ''}" data-felt="${k}" aria-label="Tapis ${k}" style="background:radial-gradient(circle at 35% 30%, ${a}, ${b})"></button>`).join('');
+  $('snd').classList.toggle('on', p.sound !== false);
   const backs = $('backs');
   backs.innerHTML = '';
   for (const k of BACKS) {
@@ -195,6 +202,11 @@ function renderPrefs() {
     b.appendChild(c); backs.appendChild(b);
   }
 }
+$('snd').addEventListener('click', () => {
+  const p = Store.get().prefs;
+  p.sound = p.sound === false; Store.save(); renderPrefs();
+  if (p.sound) { Sound.unlock(); Sound.play('chime'); }
+});
 $('felts').addEventListener('click', (e) => { const b = e.target.closest('[data-felt]'); if (!b) return; Store.get().prefs.felt = b.dataset.felt; Store.save(); renderPrefs(); });
 $('backs').addEventListener('click', (e) => { const b = e.target.closest('[data-back]'); if (!b) return; Store.get().prefs.back = b.dataset.back; Store.save(); renderPrefs(); });
 
