@@ -20,6 +20,7 @@ Aucun outil de build : ce sont des fichiers HTML, CSS et JavaScript statiques.
 Pour tester en local : `python3 -m http.server` puis ouvrir http://localhost:8000.
 
 Chaque jeu vit dans son dossier (`mot/`, `sens/`, `geo/`, `frontieres/`, `quiz/`, `droit/`) et réutilise `style.css`.
+Le menu n'a qu'une entrée « Quiz » (`quiz/`) : son accueil propose Actu (`quiz/#actu`) ou Droit (`droit/`).
 Pour ajouter un jeu, créer un dossier, l'ajouter au menu dans `index.html` et à la liste `CORE` de `sw.js`.
 
 ## Données
