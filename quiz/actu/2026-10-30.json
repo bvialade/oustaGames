@@ -1,0 +1,75 @@
+{
+  "date": "2026-10-30",
+  "questions": [
+    {
+      "q": "Christine Lagarde quittera la présidence de la Banque centrale européenne avant la fin de son mandat. Quand ?",
+      "choix": ["Dès novembre 2026", "En février 2027", "En décembre 2028", "Elle reste jusqu'en 2030"],
+      "reponse": 1,
+      "explication": "Christine Lagarde partira le 7 février 2027, environ neuf mois avant la fin de son mandat de huit ans à la tête de la BCE.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/video/2026/10/29/christine-lagarde-quittera-la-presidence-de-la-bce-en-fevrier-avant-la-fin-de-son-mandat" }
+    },
+    {
+      "q": "En tournée dans les Caraïbes, le roi Charles III a dansé au rythme du Junkanoo. Dans quelle capitale ?",
+      "choix": ["Kingston (Jamaïque)", "La Havane (Cuba)", "Nassau (Bahamas)", "Bridgetown (Barbade)"],
+      "reponse": 2,
+      "explication": "À Nassau, aux Bahamas, le roi a assisté au défilé du Junkanoo, fête emblématique de la culture bahaméenne, lors de sa première tournée caribéenne comme souverain.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/video/2026/10/29/bahamas-charles-iii-danse-avec-des-habitants-lors-de-sa-visite" }
+    },
+    {
+      "q": "Pour répondre à la colère sociale, le gouvernement envisage d'avancer d'un mois la revalorisation de quoi ?",
+      "choix": ["Du Smic", "Du prix du timbre", "Des allocations de rentrée", "Du livret A"],
+      "reponse": 0,
+      "explication": "La hausse automatique du Smic pourrait intervenir dès le 1er décembre, voire s'accompagner d'un « coup de pouce ». Le cabinet du ministre du Travail Jean-Pierre Farandou a reçu les syndicats.",
+      "source": { "nom": "BFM Business", "url": "https://www.bfmtv.com/economie/video-pour-repondre-a-la-colere-sociale-le-gouvernement-envisage-d-avancer-d-un-mois-la-revalorisation-automatique-du-smic-voire-a-une-augmentation_VN-202610290131.html" }
+    },
+    {
+      "q": "À quelques jours des élections de mi-mandat américaines, quel ancien président a fait campagne à Atlanta pour le sénateur démocrate Jon Ossoff ?",
+      "choix": ["Bill Clinton", "Joe Biden", "Jimmy Carter", "Barack Obama"],
+      "reponse": 3,
+      "explication": "Barack Obama s'est engagé mercredi en Géorgie aux côtés de Jon Ossoff, avant le scrutin du 3 novembre.",
+      "source": { "nom": "Le Monde", "url": "https://www.lemonde.fr/international/article/2026/10/29/midterms-2026-barack-obama-s-engage-en-georgie-dans-la-derniere-ligne-droite-aux-cotes-d-une-nouvelle-etoile-democrate-jon-ossoff_6802081_3210.html" }
+    },
+    {
+      "q": "Muhoozi Kainerugaba, 52 ans, est pressenti pour succéder à son père, le président Yoweri Museveni. Dans quel pays ?",
+      "choix": ["Kenya", "Ouganda", "Rwanda", "Tanzanie"],
+      "reponse": 1,
+      "explication": "Le fils du président ougandais est vu comme son successeur probable en 2031, malgré des accusations de violations des droits humains.",
+      "source": { "nom": "Le Monde", "url": "https://www.lemonde.fr/videos/video/2026/10/29/qui-est-muhoozi-kainerugaba-l-heritier-brutal-et-fantasque-du-president-ougandais_6802083_1669088.html" }
+    },
+    {
+      "q": "Chez Renault et BMW, de nouveaux « collègues » arrivent dans les usines pour les tâches pénibles. Lesquels ?",
+      "choix": ["Des chiens dressés", "Des exosquelettes pour chevaux", "Des robots humanoïdes", "Des drones livreurs"],
+      "reponse": 2,
+      "explication": "Des robots humanoïdes font leurs premiers pas dans l'automobile, notamment à l'usine Renault de Douai (Nord) qui produit la R5 électrique.",
+      "source": { "nom": "L'Usine Nouvelle", "url": "https://www.usinenouvelle.com/technos-et-innovations/robotique/ils-ont-vocation-a-prendre-en-charge-des-taches-penibles-ou-dangereuses-chez-bmw-et-renault-les-robots-humanoides-font-leurs-premiers-pas-dans-les-usines-automobiles.AVSP4GREUBO2VH722QWZ55YMII.html" }
+    },
+    {
+      "q": "Les Taurides, surnommées « boules de feu d'Halloween », sont visibles en ce moment dans le ciel. De quoi s'agit-il ?",
+      "choix": ["D'aurores boréales", "D'une pluie d'étoiles filantes", "D'une éclipse de Lune", "D'un satellite en panne"],
+      "reponse": 1,
+      "explication": "Ces météores viennent des poussières de la comète 2P/Encke. Depuis Paris, on peut les guetter jusqu'au 12 novembre, avec des pics les nuits du 4-5 et du 11-12 novembre.",
+      "source": { "nom": "Sortiraparis", "url": "https://www.sortiraparis.com/en/news/in-paris/articles/356152-taurids-2026-halloween-fireballs-visible-from-paris-when-and-how" }
+    },
+    {
+      "q": "Le prix Goncourt 2026 sera décerné le 3 novembre. Où est-il traditionnellement annoncé ?",
+      "choix": ["Au restaurant Drouant, à Paris", "À l'Élysée", "Au Festival de Cannes", "À l'Académie française"],
+      "reponse": 0,
+      "explication": "Les quatre finalistes sont Yannick Haenel, Philippe Jaenada, Clémentine Mélois et Sylvain Prudhomme. Le lauréat sera révélé chez Drouant, place Gaillon.",
+      "source": { "nom": "Sortiraparis", "url": "https://www.sortiraparis.com/en/news/in-paris/articles/356135-goncourt-prize-2026-four-finalists-revealed-ahead-of-the-verdict" }
+    },
+    {
+      "q": "Quelle proportion des pompes funèbres contrôlées par la Répression des fraudes en 2024 et 2025 présentaient des anomalies ?",
+      "choix": ["Environ 5 %", "Environ un quart", "Près de la moitié", "Toutes"],
+      "reponse": 2,
+      "explication": "Près de la moitié des entreprises contrôlées présentaient des anomalies, notamment des prix excessifs ou des pratiques trompeuses.",
+      "source": { "nom": "franceinfo", "url": "https://www.franceinfo.fr/economie/fraude/ils-sont-la-pour-gagner-de-l-argent-au-detriment-des-familles-le-secteur-des-pompes-funebres-dans-le-viseur-de-la-repression-des-fraudes_8257916.html" }
+    },
+    {
+      "q": "Les États-Unis interdisent les importations de trois entreprises chinoises. Dans quel domaine travaillent-elles ?",
+      "choix": ["Les jouets", "La génomique", "Les panneaux solaires", "Les voitures électriques"],
+      "reponse": 1,
+      "explication": "BGI Genomics, MGI Tech et Shenzhen BGI Technology sont accusées d'avoir participé à la collecte de données génétiques de minorités au Xinjiang.",
+      "source": { "nom": "BFM Business", "url": "https://www.bfmtv.com/economie/international/les-etats-unis-interdisent-les-importations-de-trois-entreprises-chinoises-de-genomique-accusees-de-travail-force_AD-202610290134.html" }
+    }
+  ]
+}
