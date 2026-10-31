@@ -1,0 +1,75 @@
+{
+  "date": "2026-10-31",
+  "questions": [
+    {
+      "q": "Les Jeux olympiques de la jeunesse 2026 s'ouvrent ce samedi. Ce sont les premiers organisés en Afrique : dans quelle ville ?",
+      "choix": ["Le Caire", "Nairobi", "Dakar", "Casablanca"],
+      "reponse": 2,
+      "explication": "Dakar, au Sénégal, accueille les JOJ 2026. Khaby Lame et Omar Sy faisaient partie des ambassadeurs pour le dernier relais de la flamme.",
+      "source": { "nom": "France 24 (via Titres Presse)", "url": "https://www.titrespresse.com/27165762603/joj-dakar-afrique" }
+    },
+    {
+      "q": "L'acteur Patrick Stewart est mort à 86 ans. Quel capitaine de vaisseau incarnait-il dans « Star Trek » ?",
+      "choix": ["Jean-Luc Picard", "Han Solo", "James T. Kirk", "Jack Sparrow"],
+      "reponse": 0,
+      "explication": "Patrick Stewart était le capitaine Jean-Luc Picard dans « Star Trek » et le professeur Charles Xavier dans la saga « X-Men ».",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/video/2026/10/29/patrick-stewart-star-de-star-trek-et-x-men-meurt-a-86-ans" }
+    },
+    {
+      "q": "Neuf orangs-outans secourus des incendies ont retrouvé la forêt. Sur quelle île ?",
+      "choix": ["Madagascar", "Sumatra", "Java", "Bornéo"],
+      "reponse": 3,
+      "explication": "Ils ont été relâchés dans la forêt protégée de Batu Nyambu, au Kalimantan occidental, la partie indonésienne de Bornéo. Parmi eux, quatre mères et leurs petits.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/video/2026/10/30/indonesie-neuf-orangs-outans-secourus-des-incendies-retrouvent-la-foret" }
+    },
+    {
+      "q": "« Pusher », nouveau titre de la bande originale du jeu vidéo GTA VI, est signé par quel duo français de musique électronique, associé à Gesaffelstein ?",
+      "choix": ["Daft Punk", "Justice", "Air", "Cassius"],
+      "reponse": 1,
+      "explication": "Justice et Gesaffelstein signent « Pusher », deuxième extrait de la bande originale de GTA VI, attendu le 19 novembre.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/la-bande-son-de-gta-vi-s-etoffe-avec-pusher-un-titre-inedit-de-justice-et-gesaffelstein-11808217" }
+    },
+    {
+      "q": "Antoine Griezmann brille aux États-Unis : combien de buts a-t-il marqués en 21 matchs avec Orlando ?",
+      "choix": ["5", "10", "15", "21"],
+      "reponse": 2,
+      "explication": "Arrivé de l'Atlético de Madrid en cours de saison, Griezmann compte 15 buts et 7 passes décisives en 21 matchs de MLS.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/15-buts-et-7-passes-decisives-en-21-matches-antoine-griezmann-s-eclate-aux-usa-11808088" }
+    },
+    {
+      "q": "Quel grand magasin parisien, qui a demandé son redressement judiciaire, était examiné vendredi par le tribunal des affaires économiques de Paris ?",
+      "choix": ["Le BHV", "Les Galeries Lafayette", "Le Bon Marché", "La Samaritaine"],
+      "reponse": 0,
+      "explication": "Le BHV a demandé mardi son placement en redressement judiciaire. Le tribunal s'est penché sur sa situation vendredi.",
+      "source": { "nom": "BFM Business", "url": "https://www.bfmtv.com/economie/entreprises/le-magasin-parisien-est-en-redressement-judiciaire-le-tribunal-des-affaires-economiques-de-paris-se-penche-sur-la-situation-du-bhv_AD-202610300117.html" }
+    },
+    {
+      "q": "Vendredi, aucun chargement ni déchargement n'était prévu dans les ports français. Pourquoi ?",
+      "choix": ["Une tempête", "Une panne informatique", "Un jour férié", "Une grève des dockers"],
+      "reponse": 3,
+      "explication": "Les dockers, à l'appel d'un mouvement européen, protestaient contre la militarisation de leurs métiers et les mesures budgétaires du gouvernement.",
+      "source": { "nom": "BFM Business", "url": "https://www.bfmtv.com/economie/economie-social/aucun-chargement-ni-dechargement-prevu-les-dockers-en-greve-ce-vendredi-pour-protester-contre-le-budget-du-gouvernement_AD-202610300111.html" }
+    },
+    {
+      "q": "Dans quelle ville le Canada et l'Union européenne ont-ils tenu leur sommet cette semaine, avec Mark Carney et Ursula von der Leyen ?",
+      "choix": ["Toronto", "Montréal", "Bruxelles", "Québec"],
+      "reponse": 1,
+      "explication": "À Montréal, Canadiens et Européens ont resserré leurs liens, mais la mention d'un « statut de membre associé » du Canada a été retirée de la déclaration, l'Allemagne ayant émis des réserves.",
+      "source": { "nom": "Le Monde", "url": "https://www.lemonde.fr/international/article/2026/10/30/a-montreal-le-canada-et-l-union-europeenne-resserrent-leurs-liens-malgre-les-divergences-des-vingt-sept_6802758_3210.html" }
+    },
+    {
+      "q": "Après des législatives sans majorité claire en Israël, qui pourrait jouer les arbitres à la Knesset ?",
+      "choix": ["Le président Isaac Herzog", "Le chef d'état-major de l'armée", "Le maire de Jérusalem", "Le président de la Cour suprême"],
+      "reponse": 0,
+      "explication": "Le président Isaac Herzog, au rôle surtout honorifique, pourrait pousser à un gouvernement d'union, comme son père Chaim Herzog 42 ans plus tôt.",
+      "source": { "nom": "Le Monde", "url": "https://www.lemonde.fr/international/article/2026/10/30/en-israel-isaac-herzog-le-president-honorifique-devenu-arbitre-d-une-knesset-sans-majorite_6802757_3210.html" }
+    },
+    {
+      "q": "Un sénateur enquête sur le trafic d'animaux sauvages : à combien d'euros seraient vendus des ouistitis, selon Public Sénat ?",
+      "choix": ["35 €", "3 500 €", "35 000 €", "350 €"],
+      "reponse": 3,
+      "explication": "Des ouistitis seraient vendus 350 euros, et des glacières suspectes ont été repérées à l'aéroport de Roissy.",
+      "source": { "nom": "Public Sénat (via Titres Presse)", "url": "https://www.titrespresse.com/27157762603/videos-roissy-lr" }
+    }
+  ]
+}
