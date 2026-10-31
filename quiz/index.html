@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Quiz de l'actu · OustaGames</title>
+  <title>Quiz · OustaGames</title>
   <meta name="theme-color" content="#160f2e">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <link rel="manifest" href="../manifest.webmanifest">
@@ -65,17 +65,42 @@
     .recap { text-align: left; margin-top: 18px; display: grid; gap: 8px; }
     .recap div { padding: 10px 12px; border-radius: 12px; background: rgba(255,255,255,.05); font-size: .9rem; line-height: 1.35; }
     .recap a { color: #c4b5fd; font-weight: 600; text-decoration: none; white-space: nowrap; }
+    .choose { display: grid; gap: 14px; }
+    .choose > p { text-align: center; color: var(--muted); margin: 8px 0 4px; }
+    .pick { display: flex; align-items: center; gap: 16px; padding: 22px 18px; color: inherit; text-decoration: none;
+      border-radius: 20px; border: 1px solid var(--border); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+      transition: transform .1s; animation: pop .4s cubic-bezier(.2,.9,.3,1.2) both; }
+    .pick:active { transform: scale(.98); }
+    .pick.actu { background: linear-gradient(135deg, rgba(139,92,246,.4), rgba(236,72,153,.25)); }
+    .pick.droit { background: linear-gradient(135deg, rgba(212,169,55,.32), rgba(59,91,219,.3)); animation-delay: .06s; }
+    .pick .ico { font-size: 2.4rem; width: 64px; height: 64px; display: grid; place-items: center; border-radius: 16px; background: rgba(0,0,0,.22); flex: none; }
+    .pick h2 { margin: 0; font-size: 1.35rem; }
+    .pick p { margin: 4px 0 0; color: var(--muted); font-size: .9rem; line-height: 1.35; }
+    .pick .tag { display: inline-block; margin-top: 8px; padding: 3px 10px; border-radius: 999px; background: rgba(255,255,255,.14); font-size: .8rem; font-weight: 600; }
+    .pick .tag:empty { display: none; }
     .empty { text-align: center; color: var(--muted); padding: 40px 10px; }
   </style>
 </head>
 <body>
   <header class="topbar">
     <a href="../" id="back" aria-label="Retour">‹</a>
-    <h1>Quiz de l'actu</h1>
+    <h1 id="title">Quiz</h1>
     <span style="min-width:40px"></span>
   </header>
 
   <main class="page">
+    <section id="choose" class="choose" hidden>
+      <p>Choisis ton quiz</p>
+      <a class="pick actu" href="#actu">
+        <span class="ico">📰</span>
+        <div><h2>Actu</h2><p>10 questions sur l'actualité du jour, avec les sources.</p><span class="tag" id="actu-tag"></span></div>
+      </a>
+      <a class="pick droit" href="../droit/">
+        <span class="ico">⚖️</span>
+        <div><h2>Droit</h2><p>Citoyen, Juge ou Goat : 10 questions avec les articles et les arrêts.</p></div>
+      </a>
+    </section>
+
     <section id="intro" class="glass intro" hidden>
       <div class="day" id="intro-day"></div>
       <h2>10 questions sur l'actu</h2>

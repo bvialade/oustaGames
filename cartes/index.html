@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>OustaCards · OustaGames</title>
+  <meta name="theme-color" content="#0a3a2f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="cartes.css">
+</head>
+<body class="felt-emeraude back-nuit">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="su0" viewBox="0 0 100 100"><path d="M50 4C38 22 8 38 8 60c0 13 10 22 22 22 8 0 13-3 17-8-1 9-5 16-13 22h32c-8-6-12-13-13-22 4 5 9 8 17 8 12 0 22-9 22-22C92 38 62 22 50 4z"/></symbol>
+      <symbol id="su1" viewBox="0 0 100 100"><path d="M50 92C22 70 5 53 5 32 5 17 16 7 29 7c9 0 16 5 21 13 5-8 12-13 21-13 13 0 24 10 24 25 0 21-17 38-45 60z"/></symbol>
+      <symbol id="su2" viewBox="0 0 100 100"><path d="M50 3c10 18 25 34 41 47-16 13-31 29-41 47C40 79 25 63 9 50 25 37 40 21 50 3z"/></symbol>
+      <symbol id="su3" viewBox="0 0 100 100"><circle cx="50" cy="27" r="20"/><circle cx="26" cy="57" r="20"/><circle cx="74" cy="57" r="20"/><circle cx="50" cy="50" r="13"/><path d="M45 52h10c0 17 4 30 15 43H30c11-13 15-26 15-43z"/></symbol>
+      <symbol id="cr11" viewBox="0 0 100 100"><path d="M16 88c20-10 48-10 68 0l-5-20c-18-8-40-8-58 0z"/><path d="M50 64C56 40 70 20 94 8 86 30 74 50 60 66z" opacity=".75"/><circle cx="34" cy="66" r="5"/></symbol>
+      <symbol id="cr12" viewBox="0 0 100 100"><path d="M8 86c28-14 56-14 84 0l-6-32c-10 8-20 6-26-4-4-10-7-20-10-28-3 8-6 18-10 28-6 10-16 12-26 4z"/><circle cx="50" cy="15" r="8"/><circle cx="14" cy="48" r="5"/><circle cx="86" cy="48" r="5"/></symbol>
+      <symbol id="cr13" viewBox="0 0 100 100"><path d="M10 78 6 28l24 22L50 14l20 36 24-22-4 50z"/><rect x="10" y="83" width="80" height="11" rx="3"/><circle cx="6" cy="24" r="6"/><circle cx="50" cy="10" r="7"/><circle cx="94" cy="24" r="6"/></symbol>
+      <symbol id="ic-new" viewBox="0 0 24 24"><rect x="4" y="3" width="12" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 22h8a3 3 0 0 0 3-3V8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M10 8v6M7 11h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+      <symbol id="ic-hint" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="ic-undo" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 9h10a6 6 0 0 1 0 12h-3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+      <symbol id="ic-recycle" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    </defs>
+  </svg>
+
+  <!-- Accueil d'OustaCards -->
+  <section id="menu" class="screen">
+    <header class="topbar">
+      <a href="../" aria-label="Retour">‹</a>
+      <h1>OustaCards</h1>
+      <span style="width:40px"></span>
+    </header>
+    <main class="page">
+      <div class="hero">
+        <div class="hero-fan" id="heroFan"></div>
+        <p>Quatre grands classiques, à jouer du bout du doigt.</p>
+      </div>
+      <nav class="tiles" id="tiles"></nav>
+      <h3 class="sect">Le tapis</h3>
+      <div class="swatches" id="felts"></div>
+      <h3 class="sect">Le dos des cartes</h3>
+      <div class="swatches" id="backs"></div>
+      <h3 class="sect">Le son</h3>
+      <button class="toggle" id="snd">Bruits des cartes<i></i></button>
+    </main>
+  </section>
+
+  <!-- Une partie -->
+  <section id="game" class="screen" hidden>
+    <header class="gbar">
+      <button class="gbtn" id="bBack" aria-label="Retour au menu">‹</button>
+      <div class="gtitle"><b id="gName"></b><small id="gSub"></small></div>
+      <button class="gbtn" id="bOpts" aria-label="Options">•••</button>
+    </header>
+    <div id="stage"></div>
+    <footer class="gfoot">
+      <button id="bNew"><svg><use href="#ic-new"/></svg><span>Nouvelle</span></button>
+      <div class="gstat"><b id="sTime">0:00</b><span id="sMoves">0 coup</span></div>
+      <button id="bHint"><svg><use href="#ic-hint"/></svg><span>Indice</span></button>
+      <button id="bUndo"><svg><use href="#ic-undo"/></svg><span>Annuler</span></button>
+    </footer>
+  </section>
+
+  <dialog id="dlg"></dialog>
+  <div class="toast" id="toast"></div>
+  <canvas id="fx"></canvas>
+
+  <script src="moteur.js"></script>
+  <script src="solitaire.js"></script>
+  <script src="spider.js"></script>
+  <script src="freecell.js"></script>
+  <script src="dame.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

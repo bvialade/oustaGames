@@ -14,7 +14,7 @@ const longDate = (d) => new Date(d + 'T12:00:00').toLocaleDateString('fr-FR', { 
 const score = (date) => (saved[date] ? saved[date].filter((a, i) => a === saved[date].key[i]).length : null);
 
 function show(id) {
-  for (const s of ['intro', 'archive', 'play', 'result', 'empty']) $(s).hidden = !id.includes(s);
+  for (const s of ['choose', 'intro', 'archive', 'play', 'result', 'empty']) $(s).hidden = !id.includes(s);
   window.scrollTo(0, 0);
 }
 
@@ -25,6 +25,19 @@ async function init() {
     dates = [];
   }
   dates.sort().reverse();
+  route();
+}
+
+// Accueil du quiz : choix Actu ou Droit. L'actu s'ouvre sur #actu, le droit vit dans ../droit/.
+async function route() {
+  const actu = location.hash === '#actu';
+  $('back').href = actu ? '#' : '../';
+  $('title').textContent = actu ? "Quiz de l'actu" : 'Quiz';
+  if (!actu) {
+    const s = dates.length ? score(dates[0]) : null;
+    $('actu-tag').textContent = !dates.length ? '' : s !== null ? `Aujourd'hui : ${s}/10` : 'Quiz du jour à jouer';
+    return show(['choose']);
+  }
   if (!dates.length) return show(['empty']);
   await openQuiz(dates[0]);
 }
@@ -138,7 +151,7 @@ async function share() {
   const answers = saved[quiz.date];
   const marks = answers.map((a, i) => (a === quiz.questions[i].reponse ? '🟢' : '🔴')).join('');
   const s = answers.filter((a, i) => a === quiz.questions[i].reponse).length;
-  const text = `OustaGames · Quiz de l'actu du ${longDate(quiz.date)}\n${s}/${quiz.questions.length} ${marks}\n${location.href.split(/[?#]/)[0]}`;
+  const text = `OustaGames · Quiz de l'actu du ${longDate(quiz.date)}\n${s}/${quiz.questions.length} ${marks}\n${location.href.split(/[?#]/)[0]}#actu`;
   try {
     if (navigator.share) await navigator.share({ text });
     else { await navigator.clipboard.writeText(text); toast('Copié !'); }
@@ -157,5 +170,6 @@ function toast(msg) {
 $('start').onclick = start;
 $('share').onclick = share;
 $('home').onclick = () => openQuiz(quiz.date);
+window.addEventListener('hashchange', route);
 restore();
 init();
