@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-01",
+  "questions": [
+    {
+      "q": "Au Grand Prix du Mexique de F1, Lewis Hamilton a signé sa première pole position avec quelle écurie ?",
+      "choix": ["Mercedes", "McLaren", "Ferrari", "Red Bull"],
+      "reponse": 2,
+      "explication": "C'est la 105e pole de sa carrière, et la première depuis son arrivée chez Ferrari.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/f1-mexique-hamilton-signe-sa-premiere-pole-avec-ferrari-antonelli-cinquieme-11808745" }
+    },
+    {
+      "q": "Un étudiant de 22 ans a recréé tout un pays à l'échelle réelle (un bloc = un mètre) dans Minecraft. Lequel ?",
+      "choix": ["La Belgique", "La Suisse", "Le Luxembourg", "L'Islande"],
+      "reponse": 1,
+      "explication": "Cet étudiant de l'ETH Zurich a reproduit les 41 285 km² de la Suisse grâce aux données de swisstopo. La pointe Dufour culmine à 4 634 blocs.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/un-etudiant-de-22-ans-recree-toute-la-suisse-a-l-echelle-reelle-sur-minecraft-11807712" }
+    },
+    {
+      "q": "Sur quelle île de l'océan Indien des fouilles archéologiques ont-elles mis au jour des trésors de pirates (pièces d'or, porcelaine fine) ?",
+      "choix": ["Madagascar", "La Réunion", "Maurice", "Zanzibar"],
+      "reponse": 0,
+      "explication": "À Madagascar, les archéologues ont trouvé pièces d'or, porcelaine et un comptoir de contrebande de la fin du XVIIIe siècle.",
+      "source": { "nom": "Le Monde", "url": "https://www.lemonde.fr/sciences/article/2026/10/31/a-madagascar-des-fouilles-archeologiques-font-parler-les-tresors-des-pirates-de-l-ocean-indien_6803387_1650684.html" }
+    },
+    {
+      "q": "Quel jour ont lieu les élections de mi-mandat (« midterms ») aux États-Unis ?",
+      "choix": ["Le 1er novembre", "Le 11 novembre", "Le 7 novembre", "Le 3 novembre"],
+      "reponse": 3,
+      "explication": "Mardi 3 novembre, les Américains renouvellent une partie du Congrès, élisent des responsables locaux et votent sur des référendums.",
+      "source": { "nom": "Le Monde", "url": "https://www.lemonde.fr/les-decodeurs/article/2026/10/31/midterms-aux-etats-unis-le-petit-guide-pour-tout-comprendre-aux-elections-de-mi-mandat_6803393_4355770.html" }
+    },
+    {
+      "q": "De combien les prix du carburant doivent-ils baisser à partir du 1er novembre, après la libération de stocks stratégiques ?",
+      "choix": ["De 1 à 2 centimes par litre", "De 10 à 12 centimes par litre", "De 50 centimes par litre", "De 1 euro par litre"],
+      "reponse": 1,
+      "explication": "Le gouvernement a libéré 10 millions de barils de réserves stratégiques. TotalEnergies baisse ses prix dans 705 stations, tandis que les stations indépendantes s'inquiètent.",
+      "source": { "nom": "BFM Business", "url": "https://www.bfmtv.com/economie/video-prix-du-carburant-total-energies-baisse-les-prix-les-stations-independantes-s-alarment_VN-202610310092.html" }
+    },
+    {
+      "q": "Selon BFM Business, des Français inquiets face à l'intelligence artificielle se reconvertissent vers quels métiers ?",
+      "choix": ["Les métiers manuels", "La finance", "Le jeu vidéo", "La programmation"],
+      "reponse": 0,
+      "explication": "Secrétaire devenue fleuriste, étudiant graphiste qui veut tout plaquer… Certains métiers manuels paient bien, mais les revenus varient beaucoup selon les secteurs.",
+      "source": { "nom": "BFM Business", "url": "https://www.bfmtv.com/economie/emploi/ca-va-finir-par-se-voir-qu-on-gagne-autant-qu-avec-un-bac-5-secretaire-devenue-fleuriste-etudiant-graphiste-qui-veut-tout-plaquer-ces-francais-qui-fuient-l-ia-pour-se-refugier-dans-les-metiers-manuels_AV-202610310054.html" }
+    },
+    {
+      "q": "Quel film d'Elie Semoun est passé en tête du box-office français, devant « Les Misérables » ?",
+      "choix": ["« Karma »", "« Le Roi du Game »", "« Ducobu et le fantôme de Saint-Potache »", "« Clayface »"],
+      "reponse": 2,
+      "explication": "Porté par les vacances scolaires, le sixième Ducobu a attiré 461 518 spectateurs dans la semaine, pour un total de près de 973 000 entrées.",
+      "source": { "nom": "SeriesDeFilms", "url": "https://seriesdefilms.com/2026/10/29/box-office-france-ducobu-et-le-fantome-de-saint-potache-de-cancre-a-premier-de-la-classe/" }
+    },
+    {
+      "q": "L'exposition « Arcana Borealis », consacrée aux femmes artistes nordiques et à l'ésotérisme, se tient à la Galerie nationale de quel pays ?",
+      "choix": ["Norvège", "Danemark", "Islande", "Finlande"],
+      "reponse": 3,
+      "explication": "Au musée Ateneum de la Galerie nationale de Finlande, plus de 200 œuvres de 50 artistes, dont Hilma af Klint et Tove Jansson, sont visibles jusqu'au 28 février 2027.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/2026/10/31/arcana-borealis-au-finnish-national-gallery-explore-femmes-du-nord-esoterisme-et-spiritual" }
+    },
+    {
+      "q": "Au Grand Chelem de judo d'Abou Dhabi, quel pays a remporté sa toute première médaille d'or en Grand Chelem grâce à Hassan Doukkali ?",
+      "choix": ["Le Maroc", "La Tunisie", "L'Égypte", "Le Sénégal"],
+      "reponse": 0,
+      "explication": "Hassan Doukkali a offert au Maroc son premier titre en Grand Chelem. La Moldavie a aussi décroché son premier titre avec Petru Pelivan.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/video/2026/10/30/grand-chelem-dabou-dhabi-2026-les-poids-moyens-brillent-lors-du-deuxieme-jour" }
+    },
+    {
+      "q": "Aux Jeux olympiques de la jeunesse de Dakar, Isabelle Sambou transmet sa passion aux jeunes Sénégalais. Dans quel sport est-elle championne ?",
+      "choix": ["Le basket", "La lutte", "L'athlétisme", "Le judo"],
+      "reponse": 1,
+      "explication": "Figure de la lutte sénégalaise, Isabelle Sambou se fait « passeuse de flambeau » pour la nouvelle génération pendant ces premiers JOJ en Afrique.",
+      "source": { "nom": "France 24 (via Titres Presse)", "url": "https://www.titrespresse.com/27260092603/joj-dakar-isabelle" }
+    }
+  ]
+}
