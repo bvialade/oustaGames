@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-02",
+  "questions": [
+    {
+      "q": "En terminant troisième au Mexique, Kimi Antonelli est devenu le plus jeune champion du monde de F1 de l'histoire. Quel âge a-t-il ?",
+      "choix": ["18 ans", "20 ans", "23 ans", "25 ans"],
+      "reponse": 1,
+      "explication": "À 20 ans et 68 jours, l'Italien bat le record de Sebastian Vettel, sacré à 23 ans en 2010. Il succède à Lando Norris.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/f1-mexique-victoire-de-max-verstappen-kimi-antonelli-devient-le-plus-jeune-champion-du-monde-de-l-histoire-11809030" }
+    },
+    {
+      "q": "Qui a remporté le Grand Prix du Mexique de F1 dimanche ?",
+      "choix": ["Lewis Hamilton", "Charles Leclerc", "Lando Norris", "Max Verstappen"],
+      "reponse": 3,
+      "explication": "Max Verstappen (Red Bull) s'est imposé à Mexico, devant Lewis Hamilton, parti en pole position.",
+      "source": { "nom": "Eurosport", "url": "https://www.eurosport.fr/formule-1/grand-prix-du-mexique/2026/live-course_mtc1599479/live-commentary.shtml" }
+    },
+    {
+      "q": "Le Suédois Andreas Almgren a gagné le marathon de New York pour son premier marathon majeur. Chez les femmes, de quel pays est la gagnante Sheila Chepkirui ?",
+      "choix": ["Éthiopie", "États-Unis", "Kenya", "Ouganda"],
+      "reponse": 2,
+      "explication": "La Kényane Sheila Chepkirui (2 h 24 min 36 s) gagne pour la deuxième fois après 2024. Almgren l'emporte en 2 h 06 min 01 s.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/le-suedois-almgren-et-la-kenyane-chepkirui-remportent-le-marathon-de-new-york-11808981" }
+    },
+    {
+      "q": "Vainqueur en Malaisie, Marc Marquez se rapproche d'un titre mondial MotoGP. Ce serait son combientième ?",
+      "choix": ["Le 3e", "Le 5e", "Le 8e", "Le 10e"],
+      "reponse": 2,
+      "explication": "Après sa victoire sans appel à Sepang, l'Espagnol peut décrocher un huitième titre mondial lors de la dernière course, au Qatar.",
+      "source": { "nom": "franceinfo", "url": "https://www.franceinfo.fr/sports/auto-moto/moto/vainqueur-en-malaisie-marc-marquez-se-rapproche-a-grands-pas-d-un-huitieme-titre-en-motogp_8262509.html" }
+    },
+    {
+      "q": "De nouveaux horaires d'heures creuses pour l'électricité entrent en vigueur. Combien de foyers français utilisent ce tarif, selon BFM Business ?",
+      "choix": ["Environ 1 million", "Environ 11 millions", "Environ 30 millions", "Environ 60 millions"],
+      "reponse": 1,
+      "explication": "Environ 11 millions de foyers profitent des heures creuses, souvent pour faire tourner leurs appareils la nuit.",
+      "source": { "nom": "BFM Business", "url": "https://www.bfmtv.com/economie/video-electricite-de-nouveaux-horaires-pour-les-heures-creuses-des-cette-semaine_VN-202611010114.html" }
+    },
+    {
+      "q": "Quel pays européen vient de rouvrir officiellement son bureau diplomatique à Pyongyang, en Corée du Nord ?",
+      "choix": ["La Suisse", "La France", "La Norvège", "L'Autriche"],
+      "reponse": 0,
+      "explication": "Le ministre suisse des Affaires étrangères Ignazio Cassis a rencontré son homologue nord-coréenne Choe Son Hui le 30 octobre.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/2026/11/01/la-suisse-a-officiellement-rouvert-son-bureau-diplomatique-en-coree-du-nord" }
+    },
+    {
+      "q": "Pour sa 25e fête d'Halloween à New York, en quoi Heidi Klum s'est-elle déguisée ?",
+      "choix": ["En citrouille géante", "En vampire", "En main géante sectionnée", "En momie"],
+      "reponse": 2,
+      "explication": "La reine d'Halloween a choisi un costume de main géante coupée, inspiré de sa propre main.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/2026/11/01/heidi-klum-fete-halloween-a-new-york-dans-un-costume-inspire-de-sa-propre-main" }
+    },
+    {
+      "q": "« Sanxingdui », jugé sévèrement par des étudiants en cinéma, est présenté comme le premier film de quel type en Chine ?",
+      "choix": ["Le premier film en 3D", "Le premier film muet", "Le premier film 100 % intelligence artificielle", "Le premier film tourné sur la Lune"],
+      "reponse": 2,
+      "explication": "Ce film entièrement généré par IA arrive dans un cinéma chinois qui perd des spectateurs. « On ne ressent rien », disent des étudiants.",
+      "source": { "nom": "Le Monde", "url": "https://www.lemonde.fr/culture/article/2026/11/01/on-ne-ressent-rien-des-etudiants-en-cinema-chinois-jugent-severement-sanxingdui-le-premier-film-100-ia_6804056_3246.html" }
+    },
+    {
+      "q": "Midterms : dans quel État, gagné trois fois par Donald Trump, les républicains sont-ils en retard dans les sondages, avec Vivek Ramaswamy candidat au poste de gouverneur ?",
+      "choix": ["L'Ohio", "La Floride", "Le Texas", "L'Alabama"],
+      "reponse": 0,
+      "explication": "Dans l'Ohio, la campagne républicaine est tendue, avant le scrutin du mardi 3 novembre.",
+      "source": { "nom": "Le Monde", "url": "https://www.lemonde.fr/international/article/2026/11/01/midterms-2026-dans-l-ohio-une-campagne-republicaine-sous-tension-et-sans-retenue_6804020_3210.html" }
+    },
+    {
+      "q": "Selon L'Usine Nouvelle, comment évoluent les levées de fonds des start-up de la French Tech ?",
+      "choix": ["Plus nombreuses et plus petites", "Moins nombreuses mais plus grosses", "Toutes arrêtées", "Stables en tout point"],
+      "reponse": 1,
+      "explication": "Le nombre de levées de fonds baisse mais les montants augmentent : « la French Tech tient la barre ».",
+      "source": { "nom": "L'Usine Nouvelle", "url": "https://www.usinenouvelle.com/eco-social/economie/start-up/nombre-de-levees-de-fonds-en-baisse-mais-montants-en-hausse-la-french-tech-tient-la-barre.UTNXMAFGZVL4PHNURG5ENJ5C2Y.html" }
+    }
+  ]
+}
