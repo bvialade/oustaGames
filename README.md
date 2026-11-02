@@ -12,6 +12,7 @@ Petits jeux à jouer sur téléphone, sous forme de web app installable (PWA).
 - **Quiz de l'actu** : 10 questions sur l'actualité du jour, avec les sources.
 - **OustaCards** : quatre jeux de cartes classiques (Solitaire, Spider, FreeCell, Dame de pique contre trois adversaires), avec des cartes dessinées pour le site.
 - **Quiz du droit** : 10 questions de droit français, au niveau Citoyen, Juge ou Goat, sur une ou plusieurs matières, avec l'article ou l'arrêt de référence.
+- **Code de la route** (`code/`) : révision de l'examen théorique sur ses 10 thèmes, avec panneaux dessinés, entraînement par thème, examen blanc de 40 questions (35 pour réussir) et révision des erreurs. Questions originales, rédigées pour le site.
 
 ## Jouer
 
@@ -23,8 +24,8 @@ L'app fonctionne ensuite hors connexion. Scores et statistiques restent sur chaq
 Aucun outil de build : ce sont des fichiers HTML, CSS et JavaScript statiques.
 Pour tester en local : `python3 -m http.server` puis ouvrir http://localhost:8000.
 
-Chaque jeu vit dans son dossier (`mot/`, `sens/`, `geo/`, `frontieres/`, `chats/`, `sudochat/`, `paniers/`, `quiz/`, `droit/`, `cartes/`) et réutilise `style.css`.
-Le menu n'a qu'une entrée « Quiz » (`quiz/`) : son accueil propose Actu (`quiz/#actu`) ou Droit (`droit/`).
+Chaque jeu vit dans son dossier (`mot/`, `sens/`, `geo/`, `frontieres/`, `chats/`, `sudochat/`, `paniers/`, `quiz/`, `droit/`, `code/`, `cartes/`) et réutilise `style.css`.
+Le menu n'a qu'une entrée « Quiz » (`quiz/`) : son accueil propose Actu (`quiz/#actu`), Droit (`droit/`) ou Code de la route (`code/`).
 Pour ajouter un jeu, créer un dossier, l'ajouter au menu dans `index.html` et à la liste `CORE` de `sw.js`.
 
 ## Données
@@ -46,3 +47,5 @@ Les grilles de Chacun son panier (`paniers/niveaux.js`) sont générées par `no
 Dans `cartes/`, `moteur.js` gère le rendu, le glisser-déposer, l'annulation et la sauvegarde ; chaque jeu (`solitaire.js`, `spider.js`, `freecell.js`, `dame.js`) ne décrit que ses règles.
 
 Pour ajouter des questions au quiz du droit : les écrire dans `droit/q/<matière>.js` (format décrit en tête de `droit/themes.js`, bonne réponse en premier), et les ajouter à la fin de la liste du niveau.
+
+Pour ajouter des questions au code de la route : les écrire à la fin de `code/q/<thème>.js` (format décrit en tête de `code/themes.js`, bonne(s) réponse(s) en premier). Les panneaux sont dessinés en SVG dans `code/panneaux.js`.

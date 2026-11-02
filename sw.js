@@ -1,6 +1,6 @@
 // Garde les fichiers en cache pour jouer hors connexion.
 // Les fichiers sont toujours redemandés au réseau d'abord, donc les mises à jour arrivent seules.
-const VERSION = 'v10';
+const VERSION = 'v11';
 const CORE = [
   './', 'index.html', 'style.css', 'manifest.webmanifest',
   'icons/icon-192.png', 'icons/apple-touch-icon.png',
@@ -11,6 +11,9 @@ const CORE = [
   'droit/', 'droit/index.html', 'droit/droit.js', 'droit/themes.js',
   'droit/q/penal.js', 'droit/q/civil.js', 'droit/q/social.js', 'droit/q/affaires.js', 'droit/q/societes.js',
   'droit/q/suretes.js', 'droit/q/administratif.js', 'droit/q/dip.js', 'droit/q/europeen.js', 'droit/q/constitutionnel.js', 'droit/q/libertes.js',
+  'code/', 'code/index.html', 'code/code.js', 'code/themes.js', 'code/panneaux.js',
+  'code/q/circulation.js', 'code/q/conducteur.js', 'code/q/route.js', 'code/q/usagers.js', 'code/q/divers.js',
+  'code/q/secours.js', 'code/q/vehicule.js', 'code/q/mecanique.js', 'code/q/equipements.js', 'code/q/environnement.js',
   'chats/', 'chats/index.html', 'chats/dessins.js',
   'sudochat/', 'sudochat/index.html', 'sudochat/sudochat.js',
   'paniers/', 'paniers/index.html', 'paniers/paniers.js', 'paniers/niveaux.js',
