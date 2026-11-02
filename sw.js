@@ -1,6 +1,6 @@
 // Garde les fichiers en cache pour jouer hors connexion.
 // Les fichiers sont toujours redemandés au réseau d'abord, donc les mises à jour arrivent seules.
-const VERSION = 'v11';
+const VERSION = 'v12';
 const CORE = [
   './', 'index.html', 'style.css', 'manifest.webmanifest',
   'icons/icon-192.png', 'icons/apple-touch-icon.png',
@@ -14,9 +14,6 @@ const CORE = [
   'code/', 'code/index.html', 'code/code.js', 'code/themes.js', 'code/panneaux.js',
   'code/q/circulation.js', 'code/q/conducteur.js', 'code/q/route.js', 'code/q/usagers.js', 'code/q/divers.js',
   'code/q/secours.js', 'code/q/vehicule.js', 'code/q/mecanique.js', 'code/q/equipements.js', 'code/q/environnement.js',
-  'chats/', 'chats/index.html', 'chats/dessins.js',
-  'sudochat/', 'sudochat/index.html', 'sudochat/sudochat.js',
-  'paniers/', 'paniers/index.html', 'paniers/paniers.js', 'paniers/niveaux.js',
   'sens/', 'sens/index.html', 'sens/sens.js', 'sens/secrets.js', 'sens/vocab.txt',
   'cartes/', 'cartes/index.html', 'cartes/cartes.css', 'cartes/moteur.js', 'cartes/solitaire.js', 'cartes/spider.js',
   'cartes/freecell.js', 'cartes/dame.js', 'cartes/app.js',
