@@ -24,18 +24,20 @@ const shuffle = (a) => {
 const theme = (id) => THEMES.find((t) => t.id === id);
 const themesChoisis = () => (prefs.themes.length ? prefs.themes : THEMES.map((t) => t.id));
 const cleRecord = () => prefs.themes.length ? [...prefs.themes].sort().join(',') : 'tout';
-const total = () => THEMES.reduce((s, t) => s + (Q[t.id] || []).length, 0);
-const avecCles = (id) => (Q[id] || []).map((q, i) => ({ ...q, theme: id, cle: `${id}.${i}` }));
+const total = () => THEMES.reduce((s, t) => s + avecCles(t.id).length, 0);
+const avecCles = (id) => (Q[id] || []).map((q, i) => ({ ...q, theme: id, cle: `${id}.${i}` })).filter((q) => !q.off);
+const visuel = (q) => !!(q.s || q.plan || q.p);
+const CHRONO = 20;
 const parCle = (cle) => {
   const [id, i] = cle.split('.');
   const q = Q[id]?.[+i];
-  return q ? { ...q, theme: id, cle } : null;
+  return q && !q.off ? { ...q, theme: id, cle } : null;
 };
 const nbErreurs = () => Object.keys(prefs.erreurs).filter(parCle).length;
 
 const MODES = [
   { id: 'entrainement', emoji: '🎯', nom: 'Entraînement', desc: '10 questions, corrigées une par une' },
-  { id: 'examen', emoji: '📝', nom: 'Examen blanc', desc: `${EXAMEN} questions, correction à la fin, ${REUSSITE} pour réussir` },
+  { id: 'examen', emoji: '📝', nom: 'Examen blanc', desc: `${EXAMEN} questions en ${CHRONO} s chacune, correction à la fin, ${REUSSITE} pour réussir` },
   { id: 'erreurs', emoji: '🔁', nom: 'Mes erreurs', desc: 'Retravaille les questions ratées' },
 ];
 
@@ -83,7 +85,7 @@ function show(id) {
 }
 
 // Tire `combien` questions réparties entre les thèmes, en évitant celles déjà vues.
-function tirer(themes, combien) {
+function tirer(themes, combien, visuelsDabord = false) {
   const parTheme = themes.map((id) => {
     const liste = avecCles(id);
     const neuves = liste.filter((q) => !prefs.vues[q.cle]);
@@ -91,9 +93,9 @@ function tirer(themes, combien) {
     if (neuves.length < besoin) {
       // Thème presque épuisé : on remet ses questions en jeu.
       for (const q of liste) delete prefs.vues[q.cle];
-      return shuffle(liste);
+      return ordonner(liste, visuelsDabord);
     }
-    return shuffle(neuves);
+    return ordonner(neuves, visuelsDabord);
   }).filter((l) => l.length);
   const choisies = [];
   shuffle(parTheme);
@@ -103,16 +105,41 @@ function tirer(themes, combien) {
   return shuffle(choisies);
 }
 
+// Les questions visuelles sont tirées en dernier par pop(), donc placées à la fin.
+function ordonner(liste, visuelsDabord) {
+  const l = shuffle(liste);
+  return visuelsDabord ? [...l.filter((q) => !visuel(q)), ...l.filter(visuel)] : l;
+}
+
+// Format « examen » : r = [[question, [réponses…], bonne(s)], …], lettres A, B, C, D à la suite, sans mélange.
+// Ancien format : q + c (bonne(s) réponse(s) en premier, n = nombre de bonnes), réponses mélangées.
 function preparer(q) {
+  if (q.r) {
+    const parties = [], bons = [];
+    let k = 0;
+    for (const [texte, rep, ok] of q.r) {
+      const oks = [].concat(ok);
+      parties.push({ texte, debut: k, choix: rep });
+      rep.forEach((_, i) => { if (oks.includes(i)) bons.push(k + i); });
+      k += rep.length;
+    }
+    return { ...q, parties, choix: parties.flatMap((p) => p.choix), bons };
+  }
   const n = q.n || 1;
   const ordre = shuffle(q.c.map((_, i) => i));
-  return { ...q, n, choix: ordre.map((i) => q.c[i]), bons: ordre.map((i, pos) => (i < n ? pos : -1)).filter((p) => p >= 0) };
+  const choix = ordre.map((i) => q.c[i]);
+  return { ...q, n, parties: [{ texte: '', debut: 0, choix }], choix, bons: ordre.map((i, pos) => (i < n ? pos : -1)).filter((p) => p >= 0) };
 }
+const LETTRES = 'ABCDEFGH';
+const illustration = (q) => q.s ? SCENE(q.s) : q.plan ? PLAN(q.plan) : q.p ? `<div class="signwrap">${PANNEAUX(q.p)}</div>` : '';
+const bonnesReponses = (q) => q.r
+  ? q.r.map(([t, rep, ok]) => (t ? t + ' ' : '') + [].concat(ok).map((i) => rep[i]).join(' + ')).join(' · ')
+  : q.c.slice(0, q.n || 1).join(' · ');
 
 function start() {
   const mode = prefs.mode;
   let qs;
-  if (mode === 'examen') qs = tirer(THEMES.map((t) => t.id), EXAMEN);
+  if (mode === 'examen') qs = tirer(THEMES.map((t) => t.id), EXAMEN, true);
   else if (mode === 'erreurs') qs = shuffle(Object.keys(prefs.erreurs).map(parCle).filter(Boolean)).slice(0, PAR_PARTIE);
   else qs = tirer(themesChoisis(), PAR_PARTIE);
   if (!qs.length) { renderIntro(); return show('intro'); }
@@ -122,38 +149,51 @@ function start() {
 }
 
 let selection = [];
+let chrono;
 
 function ask() {
   const q = partie.questions[partie.index];
   const t = theme(q.theme);
   const exam = partie.mode === 'examen';
   selection = [];
+  clearInterval(chrono);
   $('progress').className = 'progress' + (exam ? ' long' : '');
   $('progress').innerHTML = partie.questions.map((_, i) =>
     `<i class="${i < partie.index ? (exam ? 'done' : partie.ok[i] ? 'ok' : 'ko') : i === partie.index ? 'now' : ''}"></i>`).join('');
+  const blocs = q.parties.map((p) => `
+      ${p.texte ? `<div class="part">${p.texte}</div>` : ''}
+      <div class="choices">${p.choix.map((c, i) => `<button class="choice" data-i="${p.debut + i}"><em>${LETTRES[p.debut + i]}</em><span>${c}</span></button>`).join('')}</div>`).join('');
   $('question').innerHTML = `
     <div class="glass qcard">
       <div class="qnum"><span>Question ${partie.index + 1} / ${partie.questions.length}</span><span>${t.emoji} ${t.nom}</span></div>
-      ${q.p ? `<div class="signwrap">${PANNEAUX(q.p)}</div>` : ''}
-      <h2>${q.q}</h2>
-      ${q.n > 1 ? `<div class="multi">☑️ ${q.n} bonnes réponses à cocher</div>` : ''}
-      <div class="choices">${q.choix.map((c, i) => `<button class="choice" data-i="${i}"><em>${'ABCD'[i]}</em><span>${c}</span></button>`).join('')}</div>
-      <div id="after">${q.n > 1 || exam ? '<button class="btn next" id="valider" disabled>Valider</button>' : ''}</div>
+      ${exam ? '<div class="chrono"><i id="chrono"></i></div>' : ''}
+      <div class="illus">${illustration(q)}</div>
+      ${q.q ? `<h2>${q.q}</h2>` : ''}
+      ${blocs}
+      <div id="after"><button class="btn next" id="valider" disabled>Valider</button></div>
     </div>`;
   const buttons = [...$('question').querySelectorAll('.choice')];
   buttons.forEach((b) => (b.onclick = () => {
     const i = +b.dataset.i;
-    if (q.n === 1 && !exam) return answer([i]);
-    if (q.n === 1) selection = [i];
-    else selection = selection.includes(i) ? selection.filter((x) => x !== i) : [...selection, i];
-    buttons.forEach((bb, j) => bb.classList.toggle('sel', selection.includes(j)));
+    selection = selection.includes(i) ? selection.filter((x) => x !== i) : [...selection, i];
+    buttons.forEach((bb) => bb.classList.toggle('sel', selection.includes(+bb.dataset.i)));
     $('valider').disabled = !selection.length;
   }));
-  const v = $('valider');
-  if (v) v.onclick = () => answer(selection);
+  $('valider').onclick = () => answer(selection);
+  if (exam) {
+    const fin = Date.now() + CHRONO * 1000;
+    const barre = $('chrono');
+    chrono = setInterval(() => {
+      const reste = (fin - Date.now()) / 1000;
+      barre.style.width = Math.max(0, reste / CHRONO * 100) + '%';
+      barre.classList.toggle('urgent', reste < 5);
+      if (reste <= 0) { clearInterval(chrono); answer(selection); }
+    }, 100);
+  }
 }
 
 function answer(choisis) {
+  clearInterval(chrono);
   const q = partie.questions[partie.index];
   const right = choisis.length === q.bons.length && choisis.every((i) => q.bons.includes(i));
   partie.ok.push(right);
@@ -173,7 +213,8 @@ function answer(choisis) {
     return suivant();
   }
   const buttons = [...$('question').querySelectorAll('.choice')];
-  buttons.forEach((b, i) => {
+  buttons.forEach((b) => {
+    const i = +b.dataset.i;
     b.disabled = true;
     b.classList.remove('sel');
     if (q.bons.includes(i)) b.classList.add(choisis.includes(i) ? 'right' : 'missed');
@@ -226,9 +267,12 @@ function finish() {
   const ordre = partie.questions.map((_, i) => i).sort((a, b) => partie.ok[a] - partie.ok[b]);
   $('recap').innerHTML = `<div class="label">Correction</div>` + ordre.map((i) => {
     const q = partie.questions[i];
-    const bonnes = q.c.slice(0, q.n).join(' · ');
-    return `<details${partie.ok[i] ? '' : ' open'}><summary>${partie.ok[i] ? '✅' : '❌'} ${q.p ? PANNEAUX(q.p).replace('class="sign"', 'class="sign mini"') : ''}${q.q}</summary>
-      <p><b>${bonnes}</b></p><p class="why">${q.e}</p></details>`;
+    const titre = q.q || q.r?.[0]?.[0] || 'Situation';
+    const lettres = (l) => l.length ? [...l].sort((a, b) => a - b).map((k) => LETTRES[k]).join('') : '—';
+    return `<details${partie.ok[i] ? '' : ' open'}><summary>${partie.ok[i] ? '✅' : '❌'} ${q.p && !q.s && !q.plan ? PANNEAUX(q.p).replace('class="sign"', 'class="sign mini"') : ''}${titre}</summary>
+      ${q.s || q.plan ? `<div class="illus small">${illustration(q)}</div>` : ''}
+      <p>Ta réponse : <b>${lettres(partie.reponses[i])}</b> · Bonne réponse : <b>${lettres(q.bons)}</b></p>
+      <p><b>${bonnesReponses(q)}</b></p><p class="why">${q.e}</p></details>`;
   }).join('');
   $('again').textContent = exam ? 'Nouvel examen blanc' : 'Rejouer';
   show('result');

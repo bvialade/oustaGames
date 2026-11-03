@@ -9,7 +9,7 @@ Petits jeux à jouer sur téléphone, sous forme de web app installable (PWA).
 - **Quiz de l'actu** : 10 questions sur l'actualité du jour, avec les sources.
 - **OustaCards** : quatre jeux de cartes classiques (Solitaire, Spider, FreeCell, Dame de pique contre trois adversaires), avec des cartes dessinées pour le site.
 - **Quiz du droit** : 10 questions de droit français, au niveau Citoyen, Juge ou Goat, sur une ou plusieurs matières, avec l'article ou l'arrêt de référence.
-- **Code de la route** (`code/`) : révision de l'examen théorique sur ses 10 thèmes, avec panneaux dessinés, entraînement par thème, examen blanc de 40 questions (35 pour réussir) et révision des erreurs. Questions originales, rédigées pour le site.
+- **Code de la route** (`code/`) : révision de l'examen théorique sur ses 10 thèmes, au format de l'examen (situations dessinées vues du conducteur, carrefours vus de dessus, tableau de bord, questions A/B + C/D en tout ou rien), entraînement par thème, examen blanc de 40 questions chronométrées (20 s, 35 pour réussir) et révision des erreurs. Questions originales, rédigées pour le site.
 
 ## Jouer
 
@@ -40,4 +40,4 @@ Dans `cartes/`, `moteur.js` gère le rendu, le glisser-déposer, l'annulation et
 
 Pour ajouter des questions au quiz du droit : les écrire dans `droit/q/<matière>.js` (format décrit en tête de `droit/themes.js`, bonne réponse en premier), et les ajouter à la fin de la liste du niveau.
 
-Pour ajouter des questions au code de la route : les écrire à la fin de `code/q/<thème>.js` (format décrit en tête de `code/themes.js`, bonne(s) réponse(s) en premier). Les panneaux sont dessinés en SVG dans `code/panneaux.js`.
+Pour ajouter des questions au code de la route : les écrire à la fin de `code/q/<thème>.js` (format décrit en tête de `code/themes.js`, bonne(s) réponse(s) en premier). Les panneaux sont dessinés en SVG dans `code/panneaux.js`. Les questions de situation sont dans `code/s/<thème>.js` (ajoutées à la suite de `Q.<thème>`), leurs scènes sont décrites par des options lues par `code/scenes.js` (documentées en tête du fichier). Pour retirer une question sans décaler les autres, lui ajouter `off: true`.

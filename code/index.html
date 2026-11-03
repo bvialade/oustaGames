@@ -62,6 +62,13 @@
     .qnum { display: flex; justify-content: space-between; gap: 8px; font-size: .8rem; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
     .qnum span:first-child { white-space: nowrap; }
     .qnum span:last-child { text-align: right; }
+    .illus .scene { display: block; width: calc(100% + 20px); margin: 12px -10px 4px; border-radius: 14px; box-shadow: 0 6px 18px rgba(0,0,0,.4); }
+    .illus .scene.plan { width: 78%; margin: 12px auto 4px; }
+    .illus.small .scene { width: 100%; margin: 8px 0; }
+    .part { margin: 14px 0 8px; font-weight: 700; font-size: 1.02rem; line-height: 1.35; }
+    .chrono { height: 5px; border-radius: 3px; background: rgba(255,255,255,.12); margin-top: 10px; overflow: hidden; }
+    .chrono i { display: block; height: 100%; width: 100%; background: var(--accent); transition: width .1s linear; }
+    .chrono i.urgent { background: var(--error); }
     .signwrap { display: grid; place-items: center; margin: 14px 0 4px; }
     .signwrap .sign { width: 130px; height: 130px; filter: drop-shadow(0 6px 14px rgba(0,0,0,.45)); }
     .sign.mini { width: 28px; height: 28px; vertical-align: middle; margin-right: 4px; }
@@ -110,7 +117,7 @@
     <section id="intro" class="glass intro">
       <div class="seal">🚦</div>
       <h2>Révise ton code</h2>
-      <p>Les 10 thèmes de l'examen, avec une explication après chaque réponse.</p>
+      <p>Des situations dessinées comme à l'examen, sur les 10 thèmes officiels, avec une explication après chaque réponse.</p>
       <div class="label">Mode</div>
       <div class="modes" id="modes"></div>
       <div id="themes-box">
@@ -141,6 +148,7 @@
   <div class="toast" id="toast"></div>
   <script src="themes.js"></script>
   <script src="panneaux.js"></script>
+  <script src="scenes.js"></script>
   <script src="q/circulation.js"></script>
   <script src="q/conducteur.js"></script>
   <script src="q/route.js"></script>
@@ -151,6 +159,16 @@
   <script src="q/mecanique.js"></script>
   <script src="q/equipements.js"></script>
   <script src="q/environnement.js"></script>
+  <script src="s/circulation.js"></script>
+  <script src="s/conducteur.js"></script>
+  <script src="s/route.js"></script>
+  <script src="s/usagers.js"></script>
+  <script src="s/divers.js"></script>
+  <script src="s/secours.js"></script>
+  <script src="s/vehicule.js"></script>
+  <script src="s/mecanique.js"></script>
+  <script src="s/equipements.js"></script>
+  <script src="s/environnement.js"></script>
   <script src="code.js"></script>
 </body>
 </html>
