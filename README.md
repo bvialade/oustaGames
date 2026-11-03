@@ -10,6 +10,7 @@ Petits jeux à jouer sur téléphone, sous forme de web app installable (PWA).
 - **OustaCards** : quatre jeux de cartes classiques (Solitaire, Spider, FreeCell, Dame de pique contre trois adversaires), avec des cartes dessinées pour le site.
 - **Quiz du droit** : 10 questions de droit français, au niveau Citoyen, Juge ou Goat, sur une ou plusieurs matières, avec l'article ou l'arrêt de référence.
 - **Code de la route** (`code/`) : révision de l'examen théorique sur ses 10 thèmes, au format de l'examen (situations dessinées vues du conducteur, carrefours vus de dessus, tableau de bord, questions A/B + C/D en tout ou rien), entraînement par thème, examen blanc de 40 questions chronométrées (20 s, 35 pour réussir) et révision des erreurs. Questions originales, rédigées pour le site.
+- **Isoloir 2027** (`elections/`) : 15 ou 40 affirmations à glisser (d'accord / pas d'accord) pour savoir de quel candidat à la présidentielle 2027 on est le plus proche, avec classement en direct, hémicycle, carte politique, détail sourcé par candidat et duel entre proches par lien. Pas encore dans le menu : accessible par lien direct, en attendant la relecture de la grille.
 
 ## Jouer
 
@@ -37,6 +38,8 @@ Pour ajouter un jeu, créer un dossier, l'ajouter au menu dans `index.html` et �
 Pour ajouter des mots secrets au jeu de proximité de sens : les ajouter à la fin de `outils/sens_indices.json` puis lancer `outils/build_sens.py` (instructions en tête du script).
 
 Dans `cartes/`, `moteur.js` gère le rendu, le glisser-déposer, l'annulation et la sauvegarde ; chaque jeu (`solitaire.js`, `spider.js`, `freecell.js`, `dame.js`) ne décrit que ses règles.
+
+Isoloir 2027 : positions des candidats d'après les synthèses de [France-Vote](https://www.france-vote.fr) (programmes, votes, déclarations), au 1er novembre 2026. `elections/data.js` et la grille à relire `elections/grille.md` sont générés par `outils/build_elections.py` (questions, positions et instructions dans le script ; ne jamais réordonner les questions, les liens de duel en dépendent).
 
 Pour ajouter des questions au quiz du droit : les écrire dans `droit/q/<matière>.js` (format décrit en tête de `droit/themes.js`, bonne réponse en premier), et les ajouter à la fin de la liste du niveau.
 
