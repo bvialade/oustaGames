@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-03",
+  "questions": [
+    {
+      "q": "Qui est devenu officiellement n°1 mondial du tennis au classement ATP de lundi ?",
+      "choix": ["Jannik Sinner", "Carlos Alcaraz", "Novak Djokovic", "Alexander Zverev"],
+      "reponse": 3,
+      "explication": "À 29 ans, Alexander Zverev détrône Jannik Sinner. Il est le deuxième Allemand n°1 mondial, après Boris Becker.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/classement-atp-zverev-officiellement-n-1-mondial-blockx-et-bergs-perdent-une-place-11809162" }
+    },
+    {
+      "q": "Des bricoleurs suisses ont transformé une maquette LEGO en vraie console de jeu jouable. Laquelle ?",
+      "choix": ["La Game Boy", "La PlayStation 1", "La Nintendo 64", "La Mega Drive"],
+      "reponse": 1,
+      "explication": "Le kit « BrickStation » de Substance Labs fait tourner de vrais jeux PS1 grâce à un émulateur et une carte microSD, avec branchement HDMI.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/la-minute-insolite-ils-transforment-la-playstation-1-en-lego-en-console-jouable-11809252" }
+    },
+    {
+      "q": "Le médicament anti-obésité Wegovy arrive en comprimés dans les pharmacies françaises. Combien coûte-t-il par mois ?",
+      "choix": ["Entre 16 et 23 €", "Entre 169 et 235 €", "Environ 1 000 €", "Il est gratuit"],
+      "reponse": 1,
+      "explication": "Le traitement coûte entre 169 et 235 euros par mois et n'est pas remboursé par l'Assurance maladie.",
+      "source": { "nom": "BFM Business", "url": "https://www.bfmtv.com/economie/economie-social/il-coute-entre-169-et-235-euros-par-mois-le-medicament-anti-obesite-wegovy-arrive-ce-lundi-en-comprime-dans-les-pharmacies-francaises_AD-202611020124.html" }
+    },
+    {
+      "q": "Lundi, le CAC 40 a repassé une barre symbolique malgré la chute d'Alstom. Laquelle ?",
+      "choix": ["4 000 points", "6 000 points", "8 000 points", "10 000 points"],
+      "reponse": 2,
+      "explication": "La Bourse de Paris a dépassé les 8 000 points, tandis qu'Alstom plongeait d'environ 26 % à cause de retards sur ses trains Coradia Max.",
+      "source": { "nom": "Boursorama", "url": "https://www.boursorama.com/bourse/actualites/le-cac-40-repasse-la-barre-des-8-000-points-malgre-la-deroute-d-alstom-ed4e49765c53a195d33245fa93369038" }
+    },
+    {
+      "q": "Grâce aux commandes militaires, quel secteur industriel français connaît un « nouvel âge d'or », à la veille du salon Euronaval ?",
+      "choix": ["Les chantiers navals", "Les usines textiles", "Les mines de charbon", "Les studios de cinéma"],
+      "reponse": 0,
+      "explication": "Les chantiers navals ont dû se réorganiser face à l'afflux de commandes. Le salon Euronaval ouvre mardi à Villepinte (Seine-Saint-Denis).",
+      "source": { "nom": "Le Monde", "url": "https://www.lemonde.fr/economie/article/2026/11/02/dans-les-chantiers-navals-francais-un-nouvel-age-d-or-grace-aux-commandes-militaires_6804984_3234.html" }
+    },
+    {
+      "q": "Avant les élections de mi-mandat de ce mardi aux États-Unis, combien d'Américains avaient déjà voté par anticipation ?",
+      "choix": ["Plus de 5 millions", "Plus de 54 millions", "Plus de 150 millions", "Personne, c'est interdit"],
+      "reponse": 1,
+      "explication": "Plus de 54 millions de votes anticipés ont été enregistrés. Donald Trump a terminé sa campagne par des meetings dans l'Iowa et le Kansas.",
+      "source": { "nom": "Le Monde", "url": "https://www.lemonde.fr/international/live/2026/11/02/en-direct-midterms-2026-le-dernier-meeting-de-donald-trump-plus-de-54-millions-de-votes-anticipes-retrouvez-les-dernieres-informations-de-la-campagne_6801590_3210.html" }
+    },
+    {
+      "q": "En Chine, des robots humanoïdes et à quatre pattes ont gravi les 3 100 marches de pierre d'une montagne sacrée. Laquelle ?",
+      "choix": ["L'Everest", "Le mont Fuji", "Le mont Tai", "Le Kilimandjaro"],
+      "reponse": 2,
+      "explication": "Dans la province du Shandong, robots et exosquelettes ont grimpé 600 mètres de dénivelé sur le mont Tai. Certains robots portaient même des vivres.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/video/2026/11/02/robots-humanoides-quadrupedes-et-exosquelettes-escaladent-le-mont-tai-en-chine" }
+    },
+    {
+      "q": "Dans quel quartier de Manhattan s'est déroulée la 53e parade d'Halloween de New York ?",
+      "choix": ["Harlem", "Brooklyn", "Times Square", "Greenwich Village"],
+      "reponse": 3,
+      "explication": "Des milliers de fêtards déguisés ont envahi les rues de Greenwich Village samedi soir.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/video/2026/11/02/la-53e-parade-dhalloween-de-new-york-remplit-les-rues-de-greenwich-village" }
+    },
+    {
+      "q": "Faute d'accord sur le budget, quel Premier ministre a remis lundi sa démission à son roi, qui l'a tenue en suspens ?",
+      "choix": ["Le Belge Bart De Wever", "Le Néerlandais Dick Schoof", "L'Espagnol Pedro Sánchez", "Le Suédois Ulf Kristersson"],
+      "reponse": 0,
+      "explication": "Le gouvernement belge n'a pas trouvé d'accord sur un effort budgétaire d'environ 10 milliards d'euros. Le roi Philippe consulte les présidents de parti toute la semaine.",
+      "source": { "nom": "La Libre", "url": "https://www.lalibre.be/belgique/politique-belge/2026/11/02/budget-federal-le-kern-ne-parvient-pas-a-degager-un-accord-bart-de-wever-va-remettre-sa-demission-au-roi-RGR57E7BQNEDXMAZTANYJWRJNI/" }
+    },
+    {
+      "q": "La start-up Vema veut accélérer une réaction géologique naturelle pour produire de l'hydrogène. Quelle couleur lui donne-t-elle ?",
+      "choix": ["Vert", "Gris", "Orange", "Bleu"],
+      "reponse": 2,
+      "explication": "Vema parie sur l'« hydrogène orange », produit en accélérant une réaction spontanée dans les roches, à l'échelle industrielle.",
+      "source": { "nom": "L'Usine Nouvelle", "url": "https://www.usinenouvelle.com/energie/hydrogene/accelerer-une-reaction-geologique-spontanee-pour-produire-de-lhydrogene-a-lechelle-industrielle-la-start-up-vema-fait-le-pari-de-lhydrogene-orange.XK7WMDZZNRIC5BX6LNYIOXRW6M.html" }
+    }
+  ]
+}
