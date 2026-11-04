@@ -1,0 +1,16 @@
+Q.environnement.push(
+  { s: { route: 'ville', feu: { d: 0.55, etat: 'rouge' }, carrefour: { d: 0.62, cote: 'deux' }, v: [{ L: 0, d: 0.6, stop: true }], compteur: 50 },
+    r: [["Le feu est rouge plus loin. Pour consommer moins, je :", ["Lève le pied tôt et laisse rouler, vitesse engagée", "Garde mon allure et freine au dernier moment"], 0]],
+    e: "Pied levé, vitesse engagée, l’injection est coupée : la voiture ne consomme presque rien. Anticiper économise carburant et freins." },
+  { s: { tableau: { vitesse: 0, regime: 800, voyants: [] } },
+    q: "J’attends quelqu’un devant l’école pendant 10 minutes.",
+    r: [["Je laisse tourner le moteur pour garder le chauffage :", ["Oui", "Non"], 1]],
+    e: "Faire tourner le moteur à l’arrêt est interdit et pollue inutilement, surtout devant une école." },
+  { s: { route: 'autoroute', compteur: 130 },
+    r: [["Sur un trajet de 100 km, rouler à 120 au lieu de 130 km/h me fait perdre :", ["Environ 4 minutes", "Environ 30 minutes"], 0], ["Et me fait consommer :", ["Moins", "Plus"], 0]],
+    e: "100 km à 130 km/h : 46 min ; à 120 km/h : 50 min. On gagne environ 10 % de carburant pour 4 minutes." },
+  { s: { route: 'ville', panneaux: [{ p: 'interdit', d: 0.35, txt: 'Crit’Air\n4, 5, non classés' }], compteur: 30 },
+    q: "Pic de pollution : ma voiture a une vignette Crit’Air 4.",
+    r: [["Je peux circuler dans cette zone :", ["Oui", "Non"], 1]],
+    e: "Pendant un épisode de pollution, la circulation peut être interdite à certaines vignettes Crit’Air. Le panonceau précise lesquelles." },
+);
