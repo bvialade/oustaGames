@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-04",
+  "questions": [
+    {
+      "q": "Qui a remporté le prix Goncourt 2026, mardi chez Drouant ?",
+      "choix": ["Yannick Haenel", "Philippe Jaenada", "Clémentine Mélois", "Sylvain Prudhomme"],
+      "reponse": 1,
+      "explication": "Philippe Jaenada est récompensé pour « L'Inconnue du quai de Javel ». Il succède à Laurent Mauvignier.",
+      "source": { "nom": "franceinfo", "url": "https://www.franceinfo.fr/culture/livres/prix-litteraires/philippe-jaenada-laureat-du-prix-goncourt-2026-pour-l-inconnue-du-quai-de-javel_8265872.html" }
+    },
+    {
+      "q": "Le prix Renaudot 2026 a été attribué à François-Henri Désérable. Quel est le titre de son roman ?",
+      "choix": ["« Le Château »", "« La Maison vide »", "« Le Palais »", "« La Cathédrale »"],
+      "reponse": 2,
+      "explication": "François-Henri Désérable reçoit le Renaudot pour « Le Palais », publié chez Gallimard.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/le-prix-renaudot-2026-attribue-a-francois-henri-deserable-pour-le-palais-11809873" }
+    },
+    {
+      "q": "Quatre volontaires de la NASA viennent de sortir d'une base de Houston où ils simulaient la vie sur quelle planète ?",
+      "choix": ["Mars", "Vénus", "Jupiter", "Mercure"],
+      "reponse": 0,
+      "explication": "La mission CHAPEA les a coupés du monde pendant 378 jours dans un habitat imitant une base martienne, au Johnson Space Center.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/378-jours-coupes-du-monde-la-fin-de-la-mission-qui-simulait-la-vie-sur-mars-11809085" }
+    },
+    {
+      "q": "Pour construire un data center de Google, combien d'arbres ont été abattus sans autorisation en Finlande ?",
+      "choix": ["2 500", "25 000", "2,5 millions", "250 000"],
+      "reponse": 3,
+      "explication": "Environ 250 000 arbres, soit 530 hectares de forêt sur deux sites, ont été coupés avant l'étude d'impact. Le gouvernement finlandais veut durcir la loi.",
+      "source": { "nom": "Le Monde", "url": "https://www.lemonde.fr/planete/article/2026/11/03/en-finlande-l-abattage-sans-autorisation-de-250-000-arbres-pour-construire-un-data-center-de-google-embarrasse-le-gouvernement_6805532_3244.html" }
+    },
+    {
+      "q": "Dans quelle ville doivent se tenir les 10 et 11 novembre des négociations entre la Russie et l'Ukraine, sous médiation américaine ?",
+      "choix": ["Genève", "Istanbul", "Abou Dhabi", "Riyad"],
+      "reponse": 2,
+      "explication": "L'émissaire américain Steve Witkoff a annoncé ces discussions à Abou Dhabi, consacrées aux « dispositions de sécurité d'après-guerre ».",
+      "source": { "nom": "Le Monde", "url": "https://www.lemonde.fr/international/live/2026/11/03/en-direct-guerre-en-ukraine-l-emissaire-americain-annonce-des-negociations-entre-moscou-et-kiev-la-semaine-prochaine-a-abou-dhabi-sous-mediation-de-washington_6803934_3210.html" }
+    },
+    {
+      "q": "L'aventurier britannique Karl Bushby est rentré chez lui en Angleterre après un tour du monde à pied. Combien de temps a-t-il duré ?",
+      "choix": ["8 mois", "3 ans", "28 ans", "50 ans"],
+      "reponse": 2,
+      "explication": "Parti du Chili en novembre 1998, il a parcouru environ 50 000 km sans moyen de transport classique, avant d'arriver lundi à Hull, chez sa mère.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/video/2026/11/02/laventurier-britannique-karl-bushby-rentre-chez-lui-apres-28-ans-de-voyage" }
+    },
+    {
+      "q": "L'argent du Livret A, qui finance surtout le logement social, servira aussi à rénover quels bâtiments ?",
+      "choix": ["Les stades de foot", "Les lycées et les collèges", "Les châteaux", "Les aéroports"],
+      "reponse": 1,
+      "explication": "Le gouvernement veut élargir l'usage du Livret A, dont le plafond passera de 22 950 € à une fourchette de 25 000 à 30 000 € à partir de février.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/2026/11/03/livret-a-lepargne-des-francais-contribuera-au-financement-des-lycees-et-des-colleges" }
+    },
+    {
+      "q": "En réécrivant la partie « recettes » du budget, les députés ont réduit la TVA sur l'électricité à quel taux ?",
+      "choix": ["5,5 %", "10 %", "20 %", "0 %"],
+      "reponse": 0,
+      "explication": "Les députés ont voté une TVA à 5,5 % sur l'électricité et supprimé le doublement de la taxe sur la télévision payante, mais le gouvernement pourrait garder la main sur la version finale.",
+      "source": { "nom": "BFM Business", "url": "https://www.bfmtv.com/economie/tva-sur-l-electricite-reduite-a-5-5-suppression-du-doublement-de-la-celle-sur-la-television-payante-les-deputes-ont-reecrit-des-pans-de-la-partie-recettes-du-budget-de-l-etat-mais-le-gouvernement-pourrait-garder-la-main-sur-la-copie-finale_AD-202611030145.html" }
+    },
+    {
+      "q": "Le salon naval Euronaval s'ouvre avec beaucoup plus d'exposants que d'habitude. Combien de plus ?",
+      "choix": ["4 %", "40 %", "400 %", "Autant que d'habitude"],
+      "reponse": 1,
+      "explication": "Avec 40 % d'exposants en plus et une « pluie de contrats » attendue, le salon illustre la vague de réarmement des marines dans le monde.",
+      "source": { "nom": "L'Usine Nouvelle", "url": "https://www.usinenouvelle.com/aero-spatial/defense/40-dexposants-en-plus-et-une-pluie-de-contrats-attendue-euronaval-illustre-la-vague-de-rearmement-des-marines-dans-le-monde-dans-laquelle-la-france-veut-jouer-un-role.6ZJY4KD2PBFQ7BAO74P62FATQI.html" }
+    },
+    {
+      "q": "Ligue des champions : sur quel score le PSG s'est-il imposé à Villarreal mardi soir ?",
+      "choix": ["1-0", "2-2", "3-1", "6-0"],
+      "reponse": 3,
+      "explication": "En démonstration, Paris a écrasé Villarreal 6-0 lors de la 4e journée de la phase de ligue.",
+      "source": { "nom": "Foot Mercato", "url": "https://www.footmercato.net/live/6852966789100614643-villarreal-vs-paris-saint-germain" }
+    }
+  ]
+}

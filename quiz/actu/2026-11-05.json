@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-05",
+  "questions": [
+    {
+      "q": "Aux élections de mi-mandat américaines (midterms) de mardi, quel parti a repris le contrôle du Sénat ?",
+      "choix": ["Le Parti républicain", "Le Parti démocrate", "Le Parti libertarien", "Aucun, égalité parfaite"],
+      "reponse": 1,
+      "explication": "Les démocrates reprennent le Sénat, y compris avec des sièges pris dans des bastions républicains comme le Kansas et le Texas, et visent aussi la Chambre des représentants.",
+      "source": { "nom": "Le Monde", "url": "https://www.lemonde.fr/international/article/2026/11/04/midterms-2026-les-democrates-reprennent-la-main-sur-le-senat-et-visent-la-majorite-a-la-chambre-des-representants_6806113_3210.html" }
+    },
+    {
+      "q": "Comment Donald Trump a-t-il réagi à la victoire démocrate aux midterms ?",
+      "choix": ["Il a refusé de reconnaître les résultats", "Il a annoncé sa démission", "Il a accepté les résultats et promis de « trouver un terrain d'entente »", "Il a demandé un nouveau vote"],
+      "reponse": 2,
+      "explication": "Après avoir menacé les parlementaires de son veto, il a reconnu la victoire démocrate : « Nous parviendrons à trouver un terrain d'entente ».",
+      "source": { "nom": "BFM Business", "url": "https://www.bfmtv.com/economie/video-midterms-donald-trump-accepte-les-resultats_VN-202611040150.html" }
+    },
+    {
+      "q": "En Russie, l'entrepôt de quelle entreprise a pris feu après une attaque de drones ukrainiens dans la nuit de mardi à mercredi ?",
+      "choix": ["Gazprom", "Ozon (e-commerce)", "Aeroflot", "Lukoil"],
+      "reponse": 1,
+      "explication": "Un entrepôt du géant russe de la vente en ligne Ozon, dans le sud-ouest de la Russie, a été touché, selon l'entreprise elle-même.",
+      "source": { "nom": "Le Monde", "url": "https://www.lemonde.fr/international/live/2026/11/04/en-direct-guerre-en-ukraine-un-entrepot-d-e-commerce-russe-vise-par-une-attaque-de-drones-ukrainiens_6803934_3210.html" }
+    },
+    {
+      "q": "Combien de stations-service françaises ont baissé leurs prix du carburant, selon franceinfo ?",
+      "choix": ["600", "2 000", "6 000", "20 000"],
+      "reponse": 2,
+      "explication": "6 000 stations ont baissé leurs prix ; la chronique évoque aussi une possible hausse du SMIC.",
+      "source": { "nom": "franceinfo", "url": "https://www.franceinfo.fr/economie/a-suivre-avec-alban-mikoczy-carburants-6000-stations-ont-baisse-les-prix_8267183.html" }
+    },
+    {
+      "q": "Combien de start-up ont ouvert ou agrandi une usine en France depuis le début de 2026 ?",
+      "choix": ["7", "37", "137", "370"],
+      "reponse": 1,
+      "explication": "37 start-up industrielles ont ouvert ou agrandi un site en France cette année : elles s'en sortent mieux que le reste de l'industrie.",
+      "source": { "nom": "L'Usine Nouvelle", "url": "https://www.usinenouvelle.com/eco-social/economie/start-up/elles-sen-sortent-mieux-que-le-reste-de-lindustrie-voici-les-37-start-up-qui-ont-ouvert-ou-agrandi-une-usine-en-france-depuis-le-debut-de-lannee-2026.O5AIW22WVNHVJP6KW7GIG5PDT4.html" }
+    },
+    {
+      "q": "Quel salaire moyen de sortie les écoles d'ingénieurs mettent-elles en avant dans leurs brochures ?",
+      "choix": ["32 000 € bruts par an", "47 000 € bruts par an", "65 000 € bruts par an", "80 000 € bruts par an"],
+      "reponse": 1,
+      "explication": "Les écoles affichent 47 000 € bruts et 90 % d'emploi avant le diplôme… mais de jeunes diplômés racontent jusqu'à dix mois de recherche pour un premier poste.",
+      "source": { "nom": "L'Usine Nouvelle", "url": "https://www.usinenouvelle.com/l-usine-campus/diplome-d-ingenieur/jai-mis-dix-mois-a-decrocher-mon-premier-emploi-entre-changement-de-secteur-et-compromis-sur-le-salaire-la-douche-froide-des-jeunes-ingenieurs-en-sortie-decole.AODYUT7425I53KQCB2SKNBLUJA.html" }
+    },
+    {
+      "q": "En Ligue des champions mercredi, par quel score historique Lens a-t-il été battu par Côme à Bollaert ?",
+      "choix": ["0-4", "2-6", "1-9", "0-7"],
+      "reponse": 2,
+      "explication": "Côme s'impose 9-1, avec un triplé d'Anastasios Douvikas : c'est la plus lourde défaite d'un club français en C1.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/champions-league-come-en-passe-neuf-a-lens-et-lui-inflige-la-plus-lourde-defaite-d-un-club-francais-en-c1-11810917" }
+    },
+    {
+      "q": "Qui a reçu le prix Femina 2026 pour « La solitude des professeurs est infinie » ?",
+      "choix": ["Philippe Jaenada", "Yannick Haenel", "Sylvain Tesson", "Kamel Daoud"],
+      "reponse": 1,
+      "explication": "Yannick Haenel remporte le Femina, au lendemain du Goncourt attribué à Philippe Jaenada.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/prix-litteraires-le-femina-a-ete-decerne-a-l-ecrivain-francais-yannick-haenel-pour-la-solitude-des-professeurs-est-infinie-11810576" }
+    },
+    {
+      "q": "De combien ont augmenté les ventes d'iPhone d'Apple sur le dernier trimestre ?",
+      "choix": ["+2 %", "+7 %", "+17 %", "+47 %"],
+      "reponse": 2,
+      "explication": "Les ventes d'iPhone bondissent de 17 %, à 57,6 milliards de dollars, mais des marges décevantes font reculer l'action.",
+      "source": { "nom": "Rekto News", "url": "https://rekto.substack.com/p/mercredi-4-novembre-2026" }
+    },
+    {
+      "q": "Combien de « streamers » compte désormais la plateforme TF1+ ?",
+      "choix": ["4,3 millions", "13,5 millions", "43,5 millions", "143 millions"],
+      "reponse": 2,
+      "explication": "TF1+ progresse de 19,2 % et revendique 43,5 millions de streamers, alors que le chiffre d'affaires du groupe TF1 recule de 7 % au 3e trimestre.",
+      "source": { "nom": "Rekto News", "url": "https://rekto.substack.com/p/mercredi-4-novembre-2026" }
+    }
+  ]
+}
