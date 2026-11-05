@@ -18,7 +18,10 @@ const shuffle = (a) => { for (let i = a.length - 1; i > 0; i--) { const j = Math
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const theme = (id) => T.find((t) => t.id === id);
 const initiales = (nom) => nom.split(/[ -]/).filter((m) => m && m[0] === m[0].toUpperCase()).map((m) => m[0]).join('').slice(0, 2);
-const avatar = (ci, cls = '') => `<span class="avatar ${cls}" style="background:${COULEURS[ci]}">${initiales(C[ci].nom)}</span>`;
+// Photo Wikimedia Commons par-dessus les initiales ; si elle ne charge pas (hors ligne), on garde les initiales.
+const photo = (ci, w = 160) => C[ci].photo ? `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(C[ci].photo)}?width=${w}` : '';
+const pagePhoto = (ci) => `https://commons.wikimedia.org/wiki/File:${encodeURIComponent(C[ci].photo)}`;
+const avatar = (ci, cls = '') => `<span class="avatar ${cls}" style="background:${COULEURS[ci]};--c:${COULEURS[ci]}">${initiales(C[ci].nom)}${C[ci].photo ? `<img src="${photo(ci)}" alt="" loading="lazy" onerror="this.remove()">` : ''}</span>`;
 const vibre = (ms = 10) => { try { navigator.vibrate && navigator.vibrate(ms); } catch {} };
 
 /* ---------- Calcul ---------- */
@@ -435,7 +438,7 @@ function vueCarte(res) {
   const px = (v) => M + S + v * S * 0.88, py = (v) => M + S - v * S * 0.88;
   const toi = coords((qi) => (res.reps[qi] ? res.reps[qi].v : null));
   const cands = C.map((c, ci) => coords((qi) => Q[qi].pos[ci]));
-  $('vue').innerHTML = `<svg class="carte-svg" viewBox="0 0 ${W} ${W}" width="100%">
+  $('vue').innerHTML = `<svg class="carte-svg" viewBox="0 0 ${W} ${W}" width="100%"><defs><clipPath id="rond"><circle r="11"/></clipPath></defs>
     <rect x="${M}" y="${M}" width="${2 * S}" height="${2 * S}" rx="14" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.12)"/>
     <line x1="${M}" y1="${M + S}" x2="${M + 2 * S}" y2="${M + S}" stroke="rgba(255,255,255,.18)" stroke-dasharray="4 4"/>
     <line x1="${M + S}" y1="${M}" x2="${M + S}" y2="${M + 2 * S}" stroke="rgba(255,255,255,.18)" stroke-dasharray="4 4"/>
@@ -444,7 +447,9 @@ function vueCarte(res) {
     <text x="${M - 4}" y="${M + S + 4}" font-size="11" text-anchor="end" transform="rotate(-90 ${M - 14} ${M + S})">Plus d'État</text>
     <text x="${W - M + 18}" y="${M + S}" font-size="11" text-anchor="middle" transform="rotate(90 ${W - M + 14} ${M + S})">Plus de marché</text>
     ${cands.map((p, ci) => `<g class="pt" data-x="${px(p.x)}" data-y="${py(p.y)}" style="transform:translate(${M + S}px,${M + S}px)">
-      <circle r="11" fill="${COULEURS[ci]}"/><text y="3.5" text-anchor="middle" font-size="8" font-weight="800" style="fill:#0b1020">${initiales(C[ci].nom)}</text></g>`).join('')}
+      <circle r="11" fill="${COULEURS[ci]}"/><text y="3.5" text-anchor="middle" font-size="8" font-weight="800" style="fill:#0b1020">${initiales(C[ci].nom)}</text>
+      ${C[ci].photo ? `<image href="${photo(ci, 80)}" x="-11" y="-11" width="22" height="22" clip-path="url(#rond)" preserveAspectRatio="xMidYMin slice" onerror="this.remove()"/>` : ''}
+      <circle r="11" fill="none" stroke="${COULEURS[ci]}" stroke-width="2"/></g>`).join('')}
     <g class="pt" id="toi" data-x="${px(toi.x)}" data-y="${py(toi.y)}" style="transform:translate(${M + S}px,${M + S}px)">
       <circle r="13" fill="none" stroke="#fff" stroke-width="2" class="halo"/><circle r="13" fill="#fff"/>
       <text y="4" text-anchor="middle" font-size="9" font-weight="900" style="fill:#0b1020">TOI</text></g>
@@ -510,7 +515,7 @@ function fiche(ci, reps) {
   const s = document.createElement('div');
   s.className = 'sheet';
   s.innerHTML = `<div class="in">
-    <div style="display:flex;gap:12px;align-items:center">${avatar(ci)}<div style="flex:1"><h3>${esc(c.nom)}</h3><div class="muted small">${esc(c.parti)} · ${esc(c.statut)}</div></div>
+    <div style="display:flex;gap:12px;align-items:center">${avatar(ci)}<div style="flex:1"><h3>${esc(c.nom)}</h3><div class="muted small">${esc(c.parti)} · ${esc(c.statut)}</div>${c.photo ? `<a class="small" href="${pagePhoto(ci)}" target="_blank" rel="noopener">Photo : Wikimedia Commons (auteur et licence)</a>` : ''}</div>
     <button class="lien" id="fermer" style="font-size:1.4rem">✕</button></div>
     <h4 style="margin:16px 0 4px">Question par question</h4>
     ${qs.map((qi) => {
@@ -532,6 +537,16 @@ function fiche(ci, reps) {
 }
 
 /* ---------- Image à partager ---------- */
+function chargeImage(src) {
+  if (!src) return Promise.resolve(null);
+  return new Promise((ok) => {
+    const i = new Image();
+    i.crossOrigin = 'anonymous';
+    i.onload = () => ok(i); i.onerror = () => ok(null);
+    setTimeout(() => ok(null), 4000);
+    i.src = src;
+  });
+}
 async function partageImage(r) {
   const W = 1080, H = 1350;
   const cv = document.createElement('canvas'); cv.width = W; cv.height = H;
@@ -548,6 +563,14 @@ async function partageImage(r) {
   const t = r[0];
   x.fillStyle = COULEURS[t.ci]; x.beginPath(); x.arc(W / 2, 400, 90, 0, 7); x.fill();
   x.fillStyle = '#0b1020'; x.font = '900 70px -apple-system, Helvetica, sans-serif'; x.fillText(initiales(C[t.ci].nom), W / 2, 425);
+  const img = await chargeImage(photo(t.ci, 400));
+  if (img) {
+    x.save(); x.beginPath(); x.arc(W / 2, 400, 90, 0, 7); x.clip();
+    const k = Math.max(180 / img.width, 180 / img.height);
+    x.drawImage(img, W / 2 - (img.width * k) / 2, 310, img.width * k, img.height * k);
+    x.restore();
+  }
+  x.strokeStyle = COULEURS[t.ci]; x.lineWidth = 8; x.beginPath(); x.arc(W / 2, 400, 92, 0, 7); x.stroke();
   x.fillStyle = '#fff'; x.font = '900 64px -apple-system, Helvetica, sans-serif'; x.fillText(C[t.ci].nom, W / 2, 570);
   x.font = '900 150px -apple-system, Helvetica, sans-serif'; x.fillText(`${Math.round(t.pct)} %`, W / 2, 740);
   r.slice(1, 4).forEach((y, k) => {
@@ -561,7 +584,9 @@ async function partageImage(r) {
   x.textAlign = 'center'; x.fillStyle = '#94a3c4'; x.font = '500 32px -apple-system, Helvetica, sans-serif';
   x.fillText('Et toi, de qui es-tu le plus proche ?', W / 2, 1250);
   x.fillText(location.host + location.pathname, W / 2, 1300);
-  const blob = await new Promise((ok) => cv.toBlob(ok, 'image/png'));
+  let blob;
+  try { blob = await new Promise((ok) => cv.toBlob(ok, 'image/png')); } catch { blob = null; }
+  if (!blob) return toast('Image indisponible');
   const file = new File([blob], 'isoloir-2027.png', { type: 'image/png' });
   try {
     if (navigator.canShare && navigator.canShare({ files: [file] })) return await navigator.share({ files: [file], title: 'Isoloir 2027' });
@@ -581,12 +606,12 @@ function methode() {
     <p>« Je passe » et les positions inconnues (?) ne comptent pas. Un candidat dont on connaît la position sur moins de 60 % de tes réponses est affiché en grisé et ne peut pas arriver premier.</p>
     <h3>D'où viennent les positions</h3>
     <p>Des synthèses de <a href="${DATA.source}" target="_blank" rel="noopener">France-Vote</a> au ${dateFr(DATA.maj)}, établies d'après les programmes, les votes et les déclarations publiques. Les programmes 2027 ne sont pas encore tous publiés : les positions seront mises à jour. Aucun sondage n'est utilisé.</p>
-    <p>Pas de photos ni de couleurs de parti : chaque candidat a une couleur neutre.</p>
+    <p>Photos issues de Wikimedia Commons, sous licences libres : auteur et licence de chacune via le lien « Photo » ci-dessous. Chaque candidat a une couleur neutre, pas celle de son parti.</p>
     <h3>La grille complète</h3>
     <div class="table-wrap"><table class="grille"><tr><th>Affirmation</th>${C.map((c) => `<th>${esc(c.nom)}</th>`).join('')}</tr>
     ${Q.map((q) => `<tr><td>${esc(q.texte)}</td>${q.pos.map((p) => `<td style="color:${col[p]}">${sym[p]}</td>`).join('')}</tr>`).join('')}</table></div>
     <h3>Candidats</h3>
-    ${C.map((c, ci) => `<p class="small">${avatar(ci)} <b>${esc(c.nom)}</b>, ${esc(c.parti)}, ${esc(c.statut)}. <a href="${c.source}" target="_blank" rel="noopener">Fiche</a></p>`).join('')}
+    ${C.map((c, ci) => `<p class="small">${avatar(ci)} <b>${esc(c.nom)}</b>, ${esc(c.parti)}, ${esc(c.statut)}. <a href="${c.source}" target="_blank" rel="noopener">Fiche</a>${c.photo ? ` · <a href="${pagePhoto(ci)}" target="_blank" rel="noopener">Photo</a>` : ''}</p>`).join('')}
   </section>`;
   $('b-retour').onclick = accueil;
   window.scrollTo(0, 0);

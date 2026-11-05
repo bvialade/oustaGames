@@ -34,6 +34,25 @@ CANDIDATS = [
 ]
 N = None
 
+# Photos : fichiers de Wikimedia Commons (licences libres), chargés depuis Commons par le navigateur.
+# Auteur et licence sur la page https://commons.wikimedia.org/wiki/File:<nom>, liée dans le jeu.
+PHOTOS = {
+    "arthaud": "Nathalie_Arthaud_(LO)_19-05-2024.jpg",
+    "melenchon": "Jean-Luc_Mélenchon_2022_(cropped).jpg",
+    "roussel": "Fabien_Roussel_2022.jpg",
+    "ruffin": "François_Ruffin_(cropped).jpg",
+    "tondelier": "Huma2023MarineTondelier_(cropped).jpg",
+    "glucksmann": "Raphaël_Glucksmann-1040795_(cropped).jpg",
+    "attal": "Gabriel_Attal_2025_(cropped).jpg",
+    "philippe": "Édouard_Philippe_2021_(cropped).jpg",
+    "bertrand": "Xavier_Bertrand_-_2025_(cropped).jpg",
+    "retailleau": "Bruno_Retailleau_-_Ministre_de_l'Intérieur_français_(cropped).jpg",
+    "lisnard": "David_Lisnard_en_2026.jpg",
+    "dupontaignan": "Nicolas_Dupont-Aignan,_homme_politique_français_(cropped).jpg",
+    "lepen": "Marine_Le_Pen_2025_(3x4_cropped).jpg",
+    "zemmour": "Portrait_d'Éric_Zemmour,_avril_2022_(cropped).jpg",
+}
+
 # Grille France-Vote : clé -> positions dans l'ordre de CANDIDATS.
 GRILLE = {
     "eco.isf":      [2, 2, 2, 2, 2, 2, -2, -2, -2, -2, -2, -1, 0, -2],
@@ -415,7 +434,7 @@ def main():
     assert all(len(v) == len(CANDIDATS) for v in GRILLE.values())
     cands = []
     for i, (cid, nom, parti, slug, statut) in enumerate(CANDIDATS):
-        cands.append(dict(id=cid, nom=nom, parti=parti, statut=statut, source=f"{SOURCE}/candidats/{slug}"))
+        cands.append(dict(id=cid, nom=nom, parti=parti, statut=statut, source=f"{SOURCE}/candidats/{slug}", photo=PHOTOS.get(cid)))
     qs = []
     for q in QUESTIONS:
         pfx = q["cle"].split(".")[0]
