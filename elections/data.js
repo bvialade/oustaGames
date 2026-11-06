@@ -8,98 +8,112 @@ const DATA = {
 "nom": "Nathalie Arthaud",
 "parti": "Lutte ouvrière",
 "statut": "Déclarée",
-"source": "https://www.france-vote.fr/candidats/nathalie-arthaud"
+"source": "https://www.france-vote.fr/candidats/nathalie-arthaud",
+"photo": "Nathalie_Arthaud_(LO)_19-05-2024.jpg"
 },
 {
 "id": "melenchon",
 "nom": "Jean-Luc Mélenchon",
 "parti": "La France insoumise",
 "statut": "Déclaré",
-"source": "https://www.france-vote.fr/candidats/jean-luc-melenchon"
+"source": "https://www.france-vote.fr/candidats/jean-luc-melenchon",
+"photo": "Jean-Luc_Mélenchon_2022_(cropped).jpg"
 },
 {
 "id": "roussel",
 "nom": "Fabien Roussel",
 "parti": "PCF",
 "statut": "Déclaré",
-"source": "https://www.france-vote.fr/candidats/fabien-roussel"
+"source": "https://www.france-vote.fr/candidats/fabien-roussel",
+"photo": "Fabien_Roussel_2022.jpg"
 },
 {
 "id": "ruffin",
 "nom": "François Ruffin",
 "parti": "Debout !",
 "statut": "Déclaré",
-"source": "https://www.france-vote.fr/candidats/francois-ruffin"
+"source": "https://www.france-vote.fr/candidats/francois-ruffin",
+"photo": "François_Ruffin_(cropped).jpg"
 },
 {
 "id": "tondelier",
 "nom": "Marine Tondelier",
 "parti": "Les Écologistes",
 "statut": "Déclarée (vote des militants le 13 décembre)",
-"source": "https://www.france-vote.fr/candidats/marine-tondelier"
+"source": "https://www.france-vote.fr/candidats/marine-tondelier",
+"photo": "Huma2023MarineTondelier_(cropped).jpg"
 },
 {
 "id": "glucksmann",
 "nom": "Raphaël Glucksmann",
 "parti": "Place publique",
 "statut": "Vainqueur de la primaire sociale-démocrate",
-"source": "https://www.france-vote.fr/candidats/raphael-glucksmann"
+"source": "https://www.france-vote.fr/candidats/raphael-glucksmann",
+"photo": "Raphaël_Glucksmann-1040795_(cropped).jpg"
 },
 {
 "id": "attal",
 "nom": "Gabriel Attal",
 "parti": "Renaissance",
 "statut": "Déclaré",
-"source": "https://www.france-vote.fr/candidats/gabriel-attal"
+"source": "https://www.france-vote.fr/candidats/gabriel-attal",
+"photo": "Gabriel_Attal_2025_(cropped).jpg"
 },
 {
 "id": "philippe",
 "nom": "Édouard Philippe",
 "parti": "Horizons",
 "statut": "Déclaré",
-"source": "https://www.france-vote.fr/candidats/edouard-philippe"
+"source": "https://www.france-vote.fr/candidats/edouard-philippe",
+"photo": "Édouard_Philippe_2021_(cropped).jpg"
 },
 {
 "id": "bertrand",
 "nom": "Xavier Bertrand",
 "parti": "Nous France",
 "statut": "Déclaré",
-"source": "https://www.france-vote.fr/candidats/xavier-bertrand"
+"source": "https://www.france-vote.fr/candidats/xavier-bertrand",
+"photo": "Xavier_Bertrand_-_2025_(cropped).jpg"
 },
 {
 "id": "retailleau",
 "nom": "Bruno Retailleau",
 "parti": "Les Républicains",
 "statut": "Désigné par les militants LR",
-"source": "https://www.france-vote.fr/candidats/bruno-retailleau"
+"source": "https://www.france-vote.fr/candidats/bruno-retailleau",
+"photo": "Bruno_Retailleau_-_Ministre_de_l'Intérieur_français_(cropped).jpg"
 },
 {
 "id": "lisnard",
 "nom": "David Lisnard",
 "parti": "Nouvelle Énergie",
 "statut": "Déclaré",
-"source": "https://www.france-vote.fr/candidats/david-lisnard"
+"source": "https://www.france-vote.fr/candidats/david-lisnard",
+"photo": "David_Lisnard_en_2026.jpg"
 },
 {
 "id": "dupontaignan",
 "nom": "Nicolas Dupont-Aignan",
 "parti": "Debout la France",
 "statut": "Déclaré",
-"source": "https://www.france-vote.fr/candidats/nicolas-dupont-aignan"
+"source": "https://www.france-vote.fr/candidats/nicolas-dupont-aignan",
+"photo": "Nicolas_Dupont-Aignan,_homme_politique_français_(cropped).jpg"
 },
 {
 "id": "lepen",
 "nom": "Marine Le Pen",
 "parti": "Rassemblement national",
 "statut": "Déclarée",
-"source": "https://www.france-vote.fr/candidats/marine-le-pen"
+"source": "https://www.france-vote.fr/candidats/marine-le-pen",
+"photo": "Marine_Le_Pen_2025_(3x4_cropped).jpg"
 },
 {
 "id": "zemmour",
 "nom": "Éric Zemmour",
 "parti": "Reconquête",
 "statut": "Annoncé, pas encore officialisé",
-"source": "https://www.france-vote.fr/candidats/eric-zemmour"
+"source": "https://www.france-vote.fr/candidats/eric-zemmour",
+"photo": "Portrait_d'Éric_Zemmour,_avril_2022_(cropped).jpg"
 }
 ],
 "themes": [
