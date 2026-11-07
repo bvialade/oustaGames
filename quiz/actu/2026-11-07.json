@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-07",
+  "questions": [
+    {
+      "q": "Selon une nouvelle étude, quelle part des cancers dans le monde serait due à une infection ?",
+      "choix": ["Environ 1 sur 100", "Environ 1 sur 8", "Environ 1 sur 2", "Aucun"],
+      "reponse": 1,
+      "explication": "Environ 2,3 millions de cas en 2024, soit 12 %, liés surtout à la bactérie Helicobacter pylori et aux papillomavirus.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/dans-le-monde-un-cancer-sur-huit-serait-du-a-une-infection-selon-une-nouvelle-etude-11811060" }
+    },
+    {
+      "q": "Le réalisateur Sebastián Lelio, mort vendredi à 52 ans, avait reçu l'Oscar pour quel film ?",
+      "choix": ["« Roma »", "« Une femme fantastique »", "« Parasite »", "« Le Secret de ses yeux »"],
+      "reponse": 1,
+      "explication": "Le cinéaste chilien avait remporté l'Oscar du meilleur film étranger en 2018 pour « Une femme fantastique ».",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/cinema-le-realisateur-chilien-sebastian-lelio-oscarise-pour-une-femme-fantastique-est-decede-a-l-age-de-52-ans-11812039" }
+    },
+    {
+      "q": "Tesla va réduire la production de quel véhicule à partir de 2027 pour miser sur ses robotaxis ?",
+      "choix": ["La Model 3", "Le Cybertruck", "Le Semi", "Le Roadster"],
+      "reponse": 1,
+      "explication": "Elon Musk veut libérer de la capacité pour le Cybercab. Les ventes du Cybertruck aux États-Unis avaient chuté de 48 % en 2025.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/2026/11/06/tesla-va-reduire-la-production-du-cybertruck-en-2027-pour-miser-sur-les-vehicules-autonome" }
+    },
+    {
+      "q": "À Amsterdam, une centaine de militants ont envahi le chantier de quel type de bâtiment ?",
+      "choix": ["Un stade", "Un centre de données pour Microsoft", "Un aéroport", "Une centrale nucléaire"],
+      "reponse": 1,
+      "explication": "Le futur data center de Sloterdijk prévoit trois tours de 85 m. Les militants dénoncent la consommation d'énergie liée à l'IA.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/video/2026/11/06/amsterdam-des-manifestants-envahissent-le-chantier-du-centre-de-donnees-de-microsoft" }
+    },
+    {
+      "q": "Une juge fédérale a fait suspendre les travaux de quel monument voulu par Donald Trump à Washington ?",
+      "choix": ["Une statue géante de l'aigle américain", "Un arc de triomphe de 76 m", "Une tour Trump de 300 m", "Une pyramide en verre"],
+      "reponse": 1,
+      "explication": "La juge Tanya Chutkan a ordonné l'arrêt du chantier juste après son feu vert par la commission de planification.",
+      "source": { "nom": "Le Monde", "url": "https://www.lemonde.fr/international/article/2026/11/06/l-immense-arc-de-triomphe-souhaite-par-donald-trump-a-washington-valide-par-une-commission-publique_6807717_3210.html" }
+    },
+    {
+      "q": "Dans quel pays le pape Léon XIV, qui y a vécu vingt ans, est-il attendu « en enfant du pays » ?",
+      "choix": ["Le Brésil", "Le Mexique", "Le Pérou", "La Colombie"],
+      "reponse": 2,
+      "explication": "Malgré une récente opération du poumon, il maintient son voyage au Pérou, après l'Uruguay et l'Argentine.",
+      "source": { "nom": "Le Monde", "url": "https://www.lemonde.fr/international/article/2026/11/06/voyage-du-pape-en-amerique-latine-au-perou-leon-xiv-attendu-en-enfant-du-pays_6807725_3210.html" }
+    },
+    {
+      "q": "De combien les émissions de CO2 de la Chine ont-elles baissé sur un an au 3e trimestre ?",
+      "choix": ["-0,3 %", "-3,1 %", "-13 %", "-31 %"],
+      "reponse": 1,
+      "explication": "C'est leur plus forte baisse depuis le Covid ; la Chine reste toutefois le premier émetteur mondial.",
+      "source": { "nom": "BFM Business", "url": "https://www.bfmtv.com/economie/international/elles-ont-baisse-de-3-1-sur-un-an-les-emissions-de-co2-de-la-chine-ont-connu-leur-diminution-la-plus-rapide-depuis-le-covid-au-troisieme-trimestre_AD-202611060148.html" }
+    },
+    {
+      "q": "Entre quelles villes le « TGV du futur » a-t-il accueilli ses premiers voyageurs, avec plus de deux ans de retard ?",
+      "choix": ["Paris et Lyon", "Paris et Marseille", "Paris et Bordeaux", "Lille et Strasbourg"],
+      "reponse": 1,
+      "explication": "Le nouveau TGV M d'Alstom roule enfin commercialement sur Paris–Marseille.",
+      "source": { "nom": "L'Usine Nouvelle", "url": "https://www.usinenouvelle.com/transports-et-logistique/ferroviaire/apres-plus-de-deux-ans-de-retard-le-tgv-du-futur-accueille-enfin-ses-premiers-voyageurs-entre-paris-et-marseille.T2CUAIOJP5DDJK37QXQ4JESLCY.html" }
+    },
+    {
+      "q": "À combien d'exemplaires a été tiré le nouvel album de Gaston Lagaffe, sorti le 21 octobre ?",
+      "choix": ["100 000", "350 000", "1 million", "5 millions"],
+      "reponse": 2,
+      "explication": "Ce 23e album est tiré à 1 million d'exemplaires ; le précédent s'était vendu à 850 000.",
+      "source": { "nom": "Rekto News", "url": "https://rekto.substack.com/p/vendredi-6-novembre-2026" }
+    },
+    {
+      "q": "Quelle marque a provoqué un tollé au Japon en augmentant de 60 centimes le prix de ses chaussettes ?",
+      "choix": ["Muji", "Uniqlo", "Sony", "Nintendo"],
+      "reponse": 1,
+      "explication": "Au Japon, une hausse même minime sur un produit basique d'Uniqlo fait réagir.",
+      "source": { "nom": "Rekto News", "url": "https://rekto.substack.com/p/vendredi-6-novembre-2026" }
+    }
+  ]
+}
