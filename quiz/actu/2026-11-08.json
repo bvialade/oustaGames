@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-08",
+  "questions": [
+    {
+      "q": "Quel pilote a signé la 20e pole position de sa carrière au Grand Prix du Brésil de F1, sous la pluie ?",
+      "choix": ["Max Verstappen", "Lando Norris", "Charles Leclerc", "Lewis Hamilton"],
+      "reponse": 1,
+      "explication": "Le pilote McLaren s'est imposé dans une qualification chaotique, retardée d'environ 1 h 30 ; Verstappen et Hamilton partent en fond de grille.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/f1-bresil-norris-signe-la-20e-pole-de-sa-carriere-au-terme-d-une-qualification-chaotique-a-cause-de-la-pluie-11812348" }
+    },
+    {
+      "q": "Des nanoparticules d'aluminium résistent à des pressions environ combien de fois plus fortes que l'aluminium « normal » ?",
+      "choix": ["2 fois", "10 fois", "1 000 fois", "1 million de fois"],
+      "reponse": 2,
+      "explication": "Sans défauts cristallins ni joints de grains, elles supportent 15 à 25 gigapascals, contre une vingtaine de mégapascals pour le métal massif.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/pourquoi-un-materiau-est-il-beaucoup-plus-costaud-a-petite-qu-a-grande-echelle-11810673" }
+    },
+    {
+      "q": "Combien de mesures compte « L'Avenir en commun », le programme présidentiel présenté par Jean-Luc Mélenchon au Bourget ?",
+      "choix": ["69", "269", "1 069", "10 069"],
+      "reponse": 2,
+      "explication": "Le programme de LFI, vendu 4,99 €, compte 1 069 mesures ; le meeting du Bourget a réuni jusqu'à 20 000 personnes.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/2026/11/07/jean-luc-melenchon-mise-sur-le-meeting-du-bourget-pour-imposer-son-programme-presidentiel" }
+    },
+    {
+      "q": "De combien le SMIC a-t-il augmenté depuis 2017 ?",
+      "choix": ["Environ +8 %", "Plus de 28 %", "Environ +50 %", "Il a doublé"],
+      "reponse": 1,
+      "explication": "Plus de 28 % en 14 revalorisations automatiques… qui ont surtout suivi l'inflation, sans vrai gain de pouvoir d'achat.",
+      "source": { "nom": "Le Monde", "url": "https://www.lemonde.fr/comprendre-en-3-minutes/video/2026/11/07/pourquoi-personne-ne-semble-satisfait-de-l-augmentation-du-smic-comprendre-en-trois-minutes_6808237_6176282.html" }
+    },
+    {
+      "q": "Quel projet de bouclier antimissile américain les démocrates, vainqueurs des midterms, veulent-ils attaquer ?",
+      "choix": ["Iron Dome", "Golden Dome", "Star Wars", "Silver Shield"],
+      "reponse": 1,
+      "explication": "Ils jugent le « Golden Dome » hors de prix et veulent s'attaquer au budget du Pentagone ainsi qu'à la guerre contre l'Iran.",
+      "source": { "nom": "Le Monde", "url": "https://www.lemonde.fr/international/article/2026/11/07/midterms-2026-les-democrates-lances-a-l-assaut-du-budget-du-pentagone-et-de-la-guerre-contre-l-iran_6808203_3210.html" }
+    },
+    {
+      "q": "Selon Eurostat, quelle part de son PIB la France consacre-t-elle à la protection sociale ?",
+      "choix": ["12 %", "22 %", "32 %", "52 %"],
+      "reponse": 2,
+      "explication": "Avec 32 % du PIB, la France est 3e de l'Union européenne, derrière l'Autriche et la Finlande.",
+      "source": { "nom": "BFM Business", "url": "https://www.bfmtv.com/economie/economie-social/finances-publiques/la-france-est-3e-en-europe-pour-les-depenses-sociales-avec-32-du-pib-pourquoi-les-francais-recoivent-ils-alors-moins-de-prestations-que-les-allemands-les-danois-ou-les-neerlandais_AN-202611070061.html" }
+    },
+    {
+      "q": "Quel secteur du commerce de centre-ville a perdu 8 % de chiffre d'affaires depuis le 17 octobre, à cause des manifestations ?",
+      "choix": ["La boulangerie", "L'habillement", "La pharmacie", "Les librairies"],
+      "reponse": 1,
+      "explication": "L'étude porte sur 70 enseignes d'habillement et plus de 10 000 magasins touchés par les dégradations et pillages.",
+      "source": { "nom": "BFM Business", "url": "https://www.bfmtv.com/economie/video-les-commerces-du-secteur-de-l-habillement-plombes-par-les-manifestations_VN-202611070087.html" }
+    },
+    {
+      "q": "Qui affronte Carlos Alcaraz en finale du Masters 1000 de Paris ce dimanche ?",
+      "choix": ["Novak Djokovic", "Jannik Sinner", "Ben Shelton", "Arthur Fils"],
+      "reponse": 2,
+      "explication": "L'Américain Ben Shelton s'est qualifié le premier, puis Alcaraz l'a rejoint samedi.",
+      "source": { "nom": "Tennis Majors", "url": "https://www.tennismajors.com/fr/matches/atp/rolex-paris-masters/ben-shelton-vs-carlos-alcaraz-3" }
+    },
+    {
+      "q": "Quelle entreprise veut rattraper à la fois sa fusée et son vaisseau avec les bras géants d'une tour, lors d'un vol prévu mi-novembre ?",
+      "choix": ["Blue Origin", "SpaceX", "ArianeGroup", "Rocket Lab"],
+      "reponse": 1,
+      "explication": "Pour le 15e vol d'essai de Starship, SpaceX veut attraper le booster Super Heavy et le vaisseau à Starbase (Texas), sous réserve de l'accord de la FAA.",
+      "source": { "nom": "Futura", "url": "https://www.futura-sciences.com/sciences/actualites/starship-spacex-va-tenter-rattraper-starship-deux-bras-geants-manoeuvre-aussi-spectaculaire-risquee-139095/" }
+    },
+    {
+      "q": "En 1948, l'Idaho a parachuté 76 animaux dans une région sauvage, dont l'héritage se voit encore aujourd'hui. Lesquels ?",
+      "choix": ["Des loups", "Des castors", "Des ours", "Des lapins"],
+      "reponse": 1,
+      "explication": "75 des 76 castors largués d'avion ont survécu ; leurs descendants construisent encore des barrages dans la région.",
+      "source": { "nom": "Futura", "url": "https://www.futura-sciences.com/planete/actualites/ecosysteme-1948-idaho-parachute-76-castors-region-sauvage-75-ans-plus-tard-leur-heritage-toujours-k2m6-139100/" }
+    }
+  ]
+}
