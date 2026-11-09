@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-09",
+  "questions": [
+    {
+      "q": "Qui a remporté dimanche le Masters 1000 de Paris, son premier titre dans ce tournoi ?",
+      "choix": ["Ben Shelton", "Carlos Alcaraz", "Jannik Sinner", "Novak Djokovic"],
+      "reponse": 1,
+      "explication": "Carlos Alcaraz bat Ben Shelton 7-6, 7-5 : c'est son 29e titre et son 9e Masters 1000.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/carlos-alcaraz-domine-ben-shelton-et-remporte-son-premier-masters-1000-de-paris-11812676" }
+    },
+    {
+      "q": "À Alba, en Italie, combien a été vendue une truffe blanche d'un peu plus d'un kilo ?",
+      "choix": ["1 100 €", "11 000 €", "110 000 €", "1,1 million €"],
+      "reponse": 2,
+      "explication": "La truffe de 1,009 kg a été adjugée 110 000 € à un acheteur de Hong Kong lors de la 27e vente aux enchères mondiale.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/italie-une-truffe-blanche-adjugee-110-000-euros-11812641" }
+    },
+    {
+      "q": "Quel skipper a remporté la Route du Rhum, avec un record à la clé ?",
+      "choix": ["François Gabart", "Charles Caudrelier", "Tom Laperche", "Thomas Coville"],
+      "reponse": 2,
+      "explication": "À la barre de l'Ultim SVR-Lazartigue, Tom Laperche s'impose dans une édition marquée par de nombreux abandons.",
+      "source": { "nom": "Figaro Nautisme", "url": "https://figaronautisme.meteoconsult.fr/actus-courses/2026-11-06/93916-route-du-rhum-destination-guadeloupe-tom-laperche-fonce-vers-un-record-historique-les-premieres-arrivees-se-precisent" }
+    },
+    {
+      "q": "Quel phénomène rare a été filmé samedi au-dessus des célèbres rochers Faraglioni de Capri ?",
+      "choix": ["Une aurore boréale", "Une double trombe marine", "Un arc-en-ciel lunaire", "Une pluie de grêle rose"],
+      "reponse": 1,
+      "explication": "Deux tornades au-dessus de la mer se sont formées en même temps près de l'île italienne, qui reçoit environ 3 millions de visiteurs par an.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/video/2026/11/08/capri-rare-double-trombe-marine-filmee-au-dessus-des-rochers-faraglioni" }
+    },
+    {
+      "q": "Où doivent se tenir les 10 et 11 novembre des pourparlers russo-ukrainiens auxquels les Européens seront associés ?",
+      "choix": ["Genève", "Istanbul", "Abu Dhabi", "Riyad"],
+      "reponse": 2,
+      "explication": "Jean-Noël Barrot a annoncé que les Européens, dont la France, participeront aux discussions d'Abu Dhabi, sous médiation américaine.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/2026/11/08/ukraine-les-europeens-sinvitent-a-la-table-des-negociations-a-abu-dhabi-annonce-barrot" }
+    },
+    {
+      "q": "Selon une étude Google et MIT, combien de temps l'IA ferait-elle gagner à un chercheur chaque semaine ?",
+      "choix": ["Environ 7 minutes", "Environ 1 heure", "Environ 7 heures", "Environ 3 jours"],
+      "reponse": 2,
+      "explication": "Environ 7 heures par semaine, d'après 15 millions d'interactions avec Gemini… mais cela ne veut pas forcément dire plus de découvertes.",
+      "source": { "nom": "Futura", "url": "https://www.futura-sciences.com/tech/actualites/intelligence-artificielle-ia-accelere-recherche-mais-pas-forcement-decouvertes-paradoxe-devrait-nous-faire-reflechir-139149/" }
+    },
+    {
+      "q": "Le kudzu, plante asiatique plantée par les Américains pour protéger leurs sols, est devenu envahissant. De quel type de plante s'agit-il ?",
+      "choix": ["Une liane", "Un cactus", "Une algue", "Un champignon"],
+      "reponse": 0,
+      "explication": "Cette liane, introduite à la fin du XIXe siècle, recouvre désormais arbres et maisons dans 31 États américains.",
+      "source": { "nom": "Futura", "url": "https://www.futura-sciences.com/planete/actualites/nature-xxe-siecle-americains-plantent-liane-asiatique-proteger-leurs-sols-decennies-plus-tard-elle-recouvre-arbres-maisons-139151/" }
+    },
+    {
+      "q": "Quel pays africain fournit un tiers des fleurs importées par l'Union européenne ?",
+      "choix": ["Le Maroc", "Le Kenya", "L'Afrique du Sud", "Le Sénégal"],
+      "reponse": 1,
+      "explication": "Les horticulteurs kényans s'inquiètent de l'arrivée d'un « super El Niño ».",
+      "source": { "nom": "Le Monde", "url": "https://www.lemonde.fr/economie/article/2026/11/08/le-super-el-nino-inquiete-les-horticulteurs-kenyans-qui-fournissent-un-tiers-des-fleurs-importees-de-l-ue_6808402_3234.html" }
+    },
+    {
+      "q": "Autrefois, 95 % des Français gagnaient à 30 ans plus que leurs parents au même âge. Et aujourd'hui ?",
+      "choix": ["99 %", "80 %", "58 %", "25 %"],
+      "reponse": 2,
+      "explication": "Ils ne sont plus que 58 %. Mais est-ce vraiment la preuve qu'on vivait mieux avant ? BFM pose la question.",
+      "source": { "nom": "BFM Business", "url": "https://www.bfmtv.com/economie/economie-social/france/est-ce-que-vous-gagnez-plus-que-vos-parents-a-30-ans-avant-c-etait-le-cas-de-95-des-francais-maintenant-c-est-plus-que-58-mais-est-ce-vraiment-la-preuve-qu-on-vivait-mieux-avant_AV-202611080054.html" }
+    },
+    {
+      "q": "Quelle part des voitures neuves immatriculées le mois dernier en France étaient électriques ?",
+      "choix": ["Moins de 5 %", "Environ 15 %", "Plus de 40 %", "Plus de 80 %"],
+      "reponse": 2,
+      "explication": "Plus de 40 % des immatriculations… pendant que le prix des assurances pour ces voitures flambe.",
+      "source": { "nom": "BFM Business", "url": "https://www.bfmtv.com/economie/entreprises/assurance-banque/video-voiture-electrique-le-prix-des-assurances-flambe_VN-202611080071.html" }
+    }
+  ]
+}
