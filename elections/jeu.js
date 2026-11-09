@@ -3,8 +3,9 @@ const STORE = 'ousta.isoloir';
 const C = DATA.candidats, Q = DATA.questions, T = DATA.themes;
 const RAPIDE = 15;
 const PREMIER_TOUR = new Date('2027-04-18T08:00:00+02:00');
-const COULEURS = ['#fbbf24', '#22d3ee', '#c084fc', '#a3e635', '#f472b6', '#2dd4bf', '#fb923c',
-  '#818cf8', '#facc15', '#38bdf8', '#e879f9', '#34d399', '#fda4af', '#a78bfa'];
+const COULEURS = ['#fbbf24', '#fb7185', '#a78bfa', '#22d3ee', '#a3e635', '#f472b6', '#fdba74', '#2dd4bf', '#86efac',
+  '#c084fc', '#fcd34d', '#93c5fd', '#fb923c', '#818cf8', '#5eead4', '#facc15', '#38bdf8', '#e879f9', '#34d399',
+  '#f0abfc', '#bef264', '#fda4af', '#7dd3fc'];
 const LIBELLES = { '-2': 'Pas du tout', '-1': 'Plutôt non', 0: 'Neutre', 1: 'Plutôt oui', 2: 'Tout à fait' };
 const $ = (id) => document.getElementById(id);
 const app = $('app');
@@ -26,14 +27,15 @@ const vibre = (ms = 10) => { try { navigator.vibrate && navigator.vibrate(ms); }
 
 /* ---------- Calcul ---------- */
 // reps : { [indexQuestion]: { v: -2..2 | null (je passe), c: bool (important) } }
-function scores(reps, filtre) {
+function scores(reps, filtre, poidsThemes) {
   const repondues = Object.keys(reps).map(Number).filter((qi) => reps[qi].v !== null && (!filtre || filtre(qi)));
   return C.map((cand, ci) => {
     let s = 0, w = 0, n = 0;
     for (const qi of repondues) {
       const p = Q[qi].pos[ci];
       if (p === null) continue;
-      const poids = reps[qi].c ? 2 : 1;
+      const poids = (reps[qi].c ? 2 : 1) * (poidsThemes ? poidsThemes[Q[qi].theme] ?? 1 : 1);
+      if (!poids) continue;
       // Écart rapporté au plus grand écart possible face à cette position : évite d'avantager
       // les candidats aux positions nuancées quand on répond au hasard.
       s += poids * (1 - Math.abs(reps[qi].v - p) / (2 + Math.abs(p)));
@@ -42,8 +44,8 @@ function scores(reps, filtre) {
     return { ci, pct: w ? (100 * s) / w : null, n, partiel: repondues.length > 0 && n / repondues.length < 0.6 };
   });
 }
-function classement(reps, filtre) {
-  const r = scores(reps, filtre).filter((x) => x.pct !== null).sort((a, b) => b.pct - a.pct);
+function classement(reps, filtre, poidsThemes) {
+  const r = scores(reps, filtre, poidsThemes).filter((x) => x.pct !== null).sort((a, b) => b.pct - a.pct);
   const k = r.findIndex((x) => !x.partiel); // un candidat aux données partielles ne peut pas être premier
   if (k > 0) r.unshift(r.splice(k, 1)[0]);
   return r;
@@ -333,8 +335,20 @@ function fin() {
 
 /* ---------- Résultats ---------- */
 let onglet = 'classement';
+const ONGLETS = ['duel', 'classement', 'themes', 'carte', 'hemicycle', 'partage'];
+const court = (ci) => C[ci].nom.replace(/^\S+ /, '');
+const pourcent = (x) => `${Math.round(x)} %`;
+
+// Questions où l'on est d'accord / pas d'accord avec un candidat.
+function ecarts(ci, reps) {
+  return Object.keys(reps).map(Number)
+    .filter((qi) => reps[qi].v !== null && Q[qi].pos[ci] !== null)
+    .map((qi) => ({ qi, v: reps[qi].v, p: Q[qi].pos[ci], gap: Math.abs(reps[qi].v - Q[qi].pos[ci]) }));
+}
+
 function resultats(res, premiere) {
   clearInterval(tic);
+  res.poids = res.poids || {};
   const r = classement(res.reps);
   if (!r.length) {
     app.innerHTML = `<section class="screen"><p>Tu as passé toutes les questions : impossible de te situer !</p><button class="btn go" id="b-acc">Rejouer</button></section>`;
@@ -343,77 +357,209 @@ function resultats(res, premiere) {
   const g = r[0];
   const exaequo = r[1] && !r[1].partiel && g.pct - r[1].pct < 1 ? r[1] : null;
   const neutres = Object.values(res.reps).filter((x) => x.v === 0).length;
-  const nb = Object.values(res.reps).filter((x) => x.v !== null).length;
+  const e = ecarts(g.ci, res.reps);
+  const proches = e.filter((x) => x.gap <= 1).length;
+  // Thèmes où l'on colle le plus au gagnant.
+  const fort = T.map((t) => ({ t, x: scores(res.reps, (qi) => Q[qi].theme === t.id)[g.ci] }))
+    .filter((y) => y.x.pct !== null).sort((a, b) => b.x.pct - a.x.pct).slice(0, 2);
   onglet = res.duel ? 'duel' : 'classement';
-  app.innerHTML = `<section class="screen">
-    <div class="podium-hero">
+  const marches = [r[1], r[0], r[2]].map((x, k) => x && `<div class="marche m${[2, 1, 3][k]}" style="--d:${[0.9, 1.6, 0.3][k]}s" data-ci="${x.ci}">
+      ${k === 1 ? '<div class="couronne">👑</div>' : ''}${avatar(x.ci)}
+      <div class="pn">${esc(court(x.ci))}</div>
+      <div class="pp" data-pct="${x.pct}">${premiere ? '0 %' : pourcent(x.pct)}</div>
+      <div class="socle">${[2, 1, 3][k]}</div></div>`).join('');
+  app.innerHTML = `<section class="screen res">
+    <div class="podium ${premiere ? 'anime' : ''}">${marches}</div>
+    <div class="verdict">
       <div class="label">${exaequo ? 'Ex aequo en tête' : 'Ton candidat le plus proche'}</div>
-      ${avatar(g.ci)}
       <div class="nom">${esc(C[g.ci].nom)}${exaequo ? ` <span class="muted">et</span> ${esc(C[exaequo.ci].nom)}` : ''}</div>
-      <div class="muted small">${esc(C[g.ci].parti)}</div>
-      <div class="big" id="pct-big">0 %</div>
-      <div class="muted small">d'accord sur ${nb} réponse${nb > 1 ? 's' : ''}</div>
+      <div class="muted small">${esc(C[g.ci].parti)}${exaequo ? ` · ${esc(C[exaequo.ci].parti)}` : ''}</div>
+      <p>Vous êtes sur la même ligne pour <b>${proches} question${proches > 1 ? 's' : ''} sur ${e.length}</b>${fort.length ? `, surtout en ${fort.map((y) => `${y.t.emoji} ${y.t.nom.toLowerCase()}`).join(' et ')}` : ''}.</p>
+      ${neutres > Object.keys(res.reps).length / 2 ? `<p class="note">Résultat peu marqué : plus de la moitié de tes réponses sont « Neutre ».</p>` : ''}
     </div>
-    ${neutres > nb / 2 ? `<p class="note">Résultat peu marqué : plus de la moitié de tes réponses sont « Neutre ».</p>` : ''}
     <div class="onglets" id="onglets">
       ${res.duel ? '<button data-o="duel">⚔️ Duel</button>' : ''}
       <button data-o="classement">🏆 Classement</button>
-      <button data-o="hemicycle">🏛️ Hémicycle</button>
+      <button data-o="themes">📊 Thèmes</button>
       <button data-o="carte">🧭 Carte</button>
-      <button data-o="themes">📊 Par thème</button>
+      <button data-o="hemicycle">🏛️ Hémicycle</button>
       <button data-o="partage">📤 Partager</button>
     </div>
     <div id="vue"></div>
     <button class="btn secondary" id="b-rejouer" style="margin-top:18px">Rejouer</button>
   </section>`;
-  const big = app.querySelector('.podium-hero .avatar');
-  big.style.cssText += ';width:76px;height:76px;font-size:1.5rem';
-  compteAnime($('pct-big'), g.pct, premiere ? 1400 : 0);
-  if (premiere) setTimeout(confettis, 300);
+  window.scrollTo(0, 0);
+  app.querySelectorAll('.marche').forEach((m) => {
+    const pp = m.querySelector('.pp');
+    if (premiere) setTimeout(() => compteAnime(pp, +pp.dataset.pct, 900), parseFloat(m.style.getPropertyValue('--d')) * 1000 + 300);
+    m.onclick = () => fiche(+m.dataset.ci, res.reps);
+  });
+  if (premiere) setTimeout(confettis, 2100);
   $('b-rejouer').onclick = () => { duel = null; history.replaceState(null, '', location.pathname); accueil(); };
   const ongl = $('onglets');
+  const dispo = ONGLETS.filter((o) => ongl.querySelector(`[data-o="${o}"]`));
   const montre = (o) => {
     onglet = o;
-    ongl.querySelectorAll('button').forEach((b) => b.classList.toggle('on', b.dataset.o === o));
-    ({ classement: vueClassement, hemicycle: vueHemicycle, carte: vueCarte, themes: vueThemes, partage: vuePartage, duel: vueDuel })[o](res, r);
+    ongl.querySelectorAll('button').forEach((b) => {
+      b.classList.toggle('on', b.dataset.o === o);
+      if (b.dataset.o === o) b.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+    });
+    const vue = $('vue');
+    vue.classList.remove('glisse'); void vue.offsetWidth; vue.classList.add('glisse');
+    ({ classement: vueClassement, hemicycle: vueHemicycle, carte: vueCarte, themes: vueThemes, partage: vuePartage, duel: vueDuel })[o](res);
   };
   ongl.querySelectorAll('button').forEach((b) => (b.onclick = () => montre(b.dataset.o)));
+  // Glisser à gauche / à droite sur la vue pour changer d'onglet.
+  let x0 = null, y0 = 0;
+  const vue = $('vue');
+  vue.addEventListener('touchstart', (ev) => { x0 = ev.touches[0].clientX; y0 = ev.touches[0].clientY; }, { passive: true });
+  vue.addEventListener('touchend', (ev) => {
+    if (x0 === null) return;
+    const dx = ev.changedTouches[0].clientX - x0, dy = ev.changedTouches[0].clientY - y0;
+    x0 = null;
+    if (Math.abs(dx) < 70 || Math.abs(dy) > 50) return;
+    const k = dispo.indexOf(onglet) + (dx < 0 ? 1 : -1);
+    if (k >= 0 && k < dispo.length) montre(dispo[k]);
+  });
   montre(onglet);
 }
 
 function compteAnime(el, cible, ms) {
-  if (!ms) { el.textContent = `${Math.round(cible)} %`; return; }
+  if (!ms) { el.textContent = pourcent(cible); return; }
   const t0 = performance.now();
   const pas = (t) => {
     const k = Math.min(1, (t - t0) / ms), e = 1 - Math.pow(1 - k, 3);
-    el.textContent = `${Math.round(cible * e)} %`;
+    el.textContent = pourcent(cible * e);
     if (k < 1) requestAnimationFrame(pas);
   };
   requestAnimationFrame(pas);
 }
 
-function vueClassement(res, r) {
-  const n = r.length;
-  $('vue').innerHTML = r.map((x, k) => `<div class="rang ${x.partiel ? 'partiel' : ''}" data-ci="${x.ci}" style="animation-delay:${(n - k) * 70}ms">
-      <span class="num">${k + 1}</span>${avatar(x.ci)}
+/* Classement : réglage de l'importance des thèmes, lignes qui se déplient. */
+function vueClassement(res) {
+  const joues = T.filter((t) => Object.keys(res.reps).some((qi) => Q[qi].theme === t.id && res.reps[qi].v !== null));
+  const regle = Object.values(res.poids).some((w) => w !== 1);
+  $('vue').innerHTML = `<div class="reglage ${regle ? 'ouvert' : ''}" id="reglage">
+      <button class="reg-tete" id="reg-tete"><span>🎚️ Ce qui compte pour toi</span><span class="muted small" id="reg-etat">${regle ? 'réglages actifs' : 'touche pour régler'}</span></button>
+      <div class="reg-corps"><p class="note">Touche un thème : ×1 normal, ×2 très important, ×0 ignoré. Le classement se met à jour en direct.</p>
+      <div class="tchips">${joues.map((t) => { const w = res.poids[t.id] ?? 1;
+        return `<button class="tchip w${w}" data-t="${t.id}">${t.emoji} ${t.nom}<i>×${w}</i></button>`; }).join('')}</div>
+      <button class="lien small" id="reg-raz">Tout remettre à ×1</button></div>
+    </div>
+    <div id="liste"></div>
+    <p class="note">Touche un candidat pour voir vos accords et désaccords.</p>`;
+  $('reg-tete').onclick = () => $('reglage').classList.toggle('ouvert');
+  $('vue').querySelectorAll('.tchip').forEach((b) => (b.onclick = () => {
+    const w = res.poids[b.dataset.t] ?? 1;
+    const n = w === 1 ? 2 : w === 2 ? 0 : 1;
+    res.poids[b.dataset.t] = n;
+    b.className = `tchip w${n}`; b.querySelector('i').textContent = `×${n}`;
+    vibre(8); majListe(res); save();
+    $('reg-etat').textContent = Object.values(res.poids).some((x) => x !== 1) ? 'réglages actifs' : 'touche pour régler';
+  }));
+  $('reg-raz').onclick = () => { res.poids = {}; save(); vueClassement(res); };
+  const r = classement(res.reps, null, res.poids);
+  $('liste').innerHTML = r.map((x, k) => ligneRang(x, k, r.length)).join('');
+  $('liste').querySelectorAll('.rang').forEach((el) => brancheRang(el, res));
+  if (prefs.dernier === res) save();
+}
+function ligneRang(x, k, n) {
+  return `<div class="rang ${x.partiel ? 'partiel' : ''}" data-ci="${x.ci}" style="animation-delay:${(n - k) * 50}ms">
+    <div class="rang-ligne"><span class="num">${k + 1}</span>${avatar(x.ci)}
       <div class="info"><b>${esc(C[x.ci].nom)}</b><span>${esc(C[x.ci].parti)}${x.partiel ? ' · données partielles' : ''}</span>
         <div class="jauge"><i style="width:${x.pct}%;background:${COULEURS[x.ci]}"></i></div></div>
-      <span class="pct">${Math.round(x.pct)} %</span></div>`).join('') +
-    `<p class="note">Touche un candidat pour voir pourquoi : ses positions, question par question, avec les sources.</p>`;
-  $('vue').querySelectorAll('.rang').forEach((el) => (el.onclick = () => fiche(+el.dataset.ci, res.reps)));
+      <span class="pct">${pourcent(x.pct)}</span><span class="chevron">›</span></div>
+    <div class="detail"></div></div>`;
+}
+function brancheRang(el, res) {
+  el.querySelector('.rang-ligne').onclick = () => {
+    const ouvert = el.classList.toggle('ouvert');
+    if (ouvert) remplitDetail(el.querySelector('.detail'), +el.dataset.ci, res);
+    vibre(6);
+  };
+}
+function remplitDetail(box, ci, res) {
+  const e = ecarts(ci, res.reps);
+  const acc = e.filter((x) => x.gap <= 1).sort((a, b) => a.gap - b.gap || Math.abs(b.v) - Math.abs(a.v)).slice(0, 3);
+  const des = e.filter((x) => x.gap >= 2).sort((a, b) => b.gap - a.gap).slice(0, 3);
+  const parTheme = T.map((t) => ({ t, x: scores(res.reps, (qi) => Q[qi].theme === t.id)[ci] })).filter((y) => y.x.pct !== null);
+  const item = (x, ok) => `<li><span class="${ok ? 'ok' : 'ko'}">${ok ? '✔' : '✘'}</span><div>${esc(Q[x.qi].texte)}<small>Toi : ${LIBELLES[x.v]} · ${esc(court(ci))} : ${LIBELLES[x.p]}</small></div></li>`;
+  box.innerHTML = `<div class="detail-in">
+    ${acc.length ? `<h5>Vous êtes d'accord</h5><ul>${acc.map((x) => item(x, true)).join('')}</ul>` : ''}
+    ${des.length ? `<h5>Vous divergez</h5><ul>${des.map((x) => item(x, false)).join('')}</ul>` : ''}
+    <h5>Thème par thème</h5>
+    <div class="mini">${parTheme.map((y) => `<div title="${y.t.nom}"><span>${y.t.emoji}</span><b style="height:${Math.max(4, y.x.pct)}%;background:${couleurPct(y.x.pct)}"></b><em>${Math.round(y.x.pct)}</em></div>`).join('')}</div>
+    <button class="btn secondary" style="margin-top:10px">Toutes les questions et les sources</button></div>`;
+  box.querySelector('.btn').onclick = () => fiche(ci, res.reps);
+}
+// Réordonne la liste en animant les déplacements (technique FLIP).
+function majListe(res) {
+  const liste = $('liste');
+  if (!liste) return;
+  const avant = {};
+  liste.querySelectorAll('.rang').forEach((el) => (avant[el.dataset.ci] = el.getBoundingClientRect().top));
+  const r = classement(res.reps, null, res.poids);
+  r.forEach((x, k) => {
+    const el = liste.querySelector(`.rang[data-ci="${x.ci}"]`);
+    el.querySelector('.num').textContent = k + 1;
+    el.querySelector('.pct').textContent = pourcent(x.pct);
+    el.querySelector('.jauge i').style.width = `${x.pct}%`;
+    el.classList.toggle('partiel', x.partiel);
+    el.style.animation = 'none'; el.style.opacity = 1;
+    liste.appendChild(el);
+    if (el.classList.contains('ouvert')) remplitDetail(el.querySelector('.detail'), x.ci, res);
+  });
+  liste.querySelectorAll('.rang').forEach((el) => {
+    const d = avant[el.dataset.ci] - el.getBoundingClientRect().top;
+    if (!d) return;
+    el.style.transition = 'none'; el.style.transform = `translateY(${d}px)`;
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      el.style.transition = 'transform .55s cubic-bezier(.3,.9,.3,1)'; el.style.transform = '';
+    }));
+  });
+}
+const couleurPct = (p) => `hsl(${Math.round(Math.max(0, Math.min(100, p)) * 1.25)}, 70%, 48%)`;
+
+/* Thèmes : tableau de chaleur thèmes × 5 premiers candidats. */
+function vueThemes(res) {
+  const top = classement(res.reps, null, res.poids).slice(0, 5);
+  const lignes = T.map((t) => ({ t, s: scores(res.reps, (qi) => Q[qi].theme === t.id) })).filter((y) => top.some((x) => y.s[x.ci].pct !== null));
+  if (!lignes.length) { $('vue').innerHTML = '<p class="note">Pas assez de réponses.</p>'; return; }
+  $('vue').innerHTML = `<div class="heat" style="grid-template-columns:minmax(0,1.3fr) repeat(${top.length}, minmax(0,1fr))">
+      <div></div>${top.map((x) => `<div class="hc-tete">${avatar(x.ci)}<span>${esc(court(x.ci))}</span></div>`).join('')}
+      ${lignes.map((y, i) => {
+        const vals = top.map((x) => y.s[x.ci].pct);
+        const best = Math.max(...vals.filter((v) => v !== null));
+        return `<div class="hc-theme">${y.t.emoji} ${esc(y.t.nom)}</div>` + top.map((x, j) => {
+          const v = vals[j];
+          return v === null ? '<div class="hc vide">?</div>' :
+            `<button class="hc ${v === best ? 'best' : ''}" data-t="${y.t.id}" data-ci="${x.ci}" style="background:${couleurPct(v)};animation-delay:${(i * top.length + j) * 25}ms">${Math.round(v)}</button>`;
+        }).join('');
+      }).join('')}
+    </div>
+    <div class="hc-info" id="hc-info">Touche une case pour le détail. En surbrillance : le plus proche de toi sur chaque thème.</div>`;
+  $('vue').querySelectorAll('button.hc').forEach((b) => (b.onclick = () => {
+    $('vue').querySelectorAll('button.hc.sel').forEach((x) => x.classList.remove('sel'));
+    b.classList.add('sel');
+    const t = theme(b.dataset.t), ci = +b.dataset.ci;
+    const qs = ecarts(ci, res.reps).filter((x) => Q[x.qi].theme === t.id);
+    $('hc-info').innerHTML = `<b>${t.emoji} ${t.nom} · ${esc(C[ci].nom)}</b>` + qs.map((x) =>
+      `<div class="hc-q"><span class="${x.gap <= 1 ? 'ok' : 'ko'}">${x.gap <= 1 ? '✔' : '✘'}</span><div>${esc(Q[x.qi].texte)}<small>Toi : ${LIBELLES[x.v]} · ${esc(court(ci))} : ${LIBELLES[x.p]}</small></div></div>`).join('');
+    vibre(6);
+  }));
 }
 
-function vueHemicycle(res, r) {
-  // Sièges répartis selon la proximité (accentuée), candidats rangés comme dans la grille.
+/* Hémicycle : touche un groupe pour le mettre en avant. */
+function vueHemicycle(res) {
+  const r = classement(res.reps, null, res.poids);
   const SIEGES = 120, RANGS = 6;
   const min = Math.min(...r.map((x) => x.pct));
   const poids = C.map((c, ci) => { const x = r.find((y) => y.ci === ci); return x ? Math.pow(x.pct - min + 2, 2.2) : 0; });
   const tot = poids.reduce((a, b) => a + b, 0);
   const brut = poids.map((p) => (p / tot) * SIEGES);
   const s = brut.map(Math.floor);
-  let reste = SIEGES - s.reduce((a, b) => a + b, 0);
+  const reste = SIEGES - s.reduce((a, b) => a + b, 0);
   brut.map((b, i) => [b - Math.floor(b), i]).sort((a, b) => b[0] - a[0]).slice(0, reste).forEach(([, i]) => s[i]++);
-  // Coordonnées des sièges en demi-cercle, triés par angle.
   const pts = [];
   const tours = []; let totR = 0;
   for (let k = 0; k < RANGS; k++) { const rr = 60 + k * 18; tours.push(rr); totR += rr; }
@@ -426,19 +572,36 @@ function vueHemicycle(res, r) {
   pts.sort((p, q) => q.a - p.a);
   const qui = []; s.forEach((n, ci) => { for (let j = 0; j < n; j++) qui.push(ci); });
   const legende = s.map((n, ci) => [n, ci]).filter(([n]) => n > 0).sort((a, b) => b[0] - a[0]);
-  $('vue').innerHTML = `<svg viewBox="0 0 320 180" width="100%">${pts.map((p, k) =>
-    `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="5.2" fill="${COULEURS[qui[k]]}" style="opacity:0;animation:entre .3s ${k * 9}ms forwards"/>`).join('')}
-    <text x="160" y="165" text-anchor="middle" font-size="22" font-weight="900">${SIEGES}</text></svg>
-    <p class="note">Ton hémicycle idéal : plus tu es proche d'un candidat, plus son groupe a de sièges.</p>
-    ${legende.map(([n, ci]) => `<div class="theme-res">${avatar(ci)}<div class="t">${esc(C[ci].nom)}</div><b>${n}</b></div>`).join('')}`;
+  $('vue').innerHTML = `<svg viewBox="0 0 320 180" width="100%" id="hemi">${pts.map((p, k) =>
+    `<circle data-ci="${qui[k]}" cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="5.4" fill="${COULEURS[qui[k]]}" style="opacity:0;animation:entre .3s ${k * 9}ms forwards"/>`).join('')}
+    <text x="160" y="150" text-anchor="middle" font-size="26" font-weight="900" id="hemi-n">${SIEGES}</text>
+    <text x="160" y="168" text-anchor="middle" font-size="10" fill="#94a3c4" id="hemi-l">sièges</text></svg>
+    <p class="note">Ton hémicycle idéal : plus tu es proche d'un candidat, plus son groupe a de sièges. Touche un groupe.</p>
+    <div id="hemi-leg">${legende.map(([n, ci]) => `<button class="theme-res leg" data-ci="${ci}">${avatar(ci)}<div class="t">${esc(C[ci].nom)}</div><b>${n}</b></button>`).join('')}</div>`;
+  let actif = null;
+  const focus = (ci) => {
+    actif = actif === ci ? null : ci;
+    $('hemi').classList.toggle('focus', actif !== null);
+    $('hemi').querySelectorAll('circle').forEach((c) => c.classList.toggle('on', +c.dataset.ci === actif));
+    $('hemi-leg').querySelectorAll('.leg').forEach((b) => b.classList.toggle('on', +b.dataset.ci === actif));
+    $('hemi-n').textContent = actif === null ? SIEGES : s[actif];
+    $('hemi-l').textContent = actif === null ? 'sièges' : `sièges · ${court(actif)}`;
+    vibre(6);
+  };
+  $('hemi').querySelectorAll('circle').forEach((c) => (c.onclick = () => focus(+c.dataset.ci)));
+  $('hemi-leg').querySelectorAll('.leg').forEach((b) => (b.onclick = () => focus(+b.dataset.ci)));
 }
 
+/* Carte : touche un candidat pour voir où il est par rapport à toi. */
 function vueCarte(res) {
   const W = 320, M = 30, S = (W - 2 * M) / 2;
   const px = (v) => M + S + v * S * 0.88, py = (v) => M + S - v * S * 0.88;
   const toi = coords((qi) => (res.reps[qi] ? res.reps[qi].v : null));
   const cands = C.map((c, ci) => coords((qi) => Q[qi].pos[ci]));
-  $('vue').innerHTML = `<svg class="carte-svg" viewBox="0 0 ${W} ${W}" width="100%"><defs><clipPath id="rond"><circle r="11"/></clipPath></defs>
+  const sc = scores(res.reps, null, res.poids);
+  const dist = cands.map((p) => Math.hypot(p.x - toi.x, p.y - toi.y));
+  const voisin = dist.indexOf(Math.min(...dist));
+  $('vue').innerHTML = `<svg class="carte-svg" viewBox="0 0 ${W} ${W}" width="100%" id="carte-svg"><defs><clipPath id="rond"><circle r="11"/></clipPath></defs>
     <rect x="${M}" y="${M}" width="${2 * S}" height="${2 * S}" rx="14" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.12)"/>
     <line x1="${M}" y1="${M + S}" x2="${M + 2 * S}" y2="${M + S}" stroke="rgba(255,255,255,.18)" stroke-dasharray="4 4"/>
     <line x1="${M + S}" y1="${M}" x2="${M + S}" y2="${M + 2 * S}" stroke="rgba(255,255,255,.18)" stroke-dasharray="4 4"/>
@@ -446,33 +609,39 @@ function vueCarte(res) {
     <text x="${M + S}" y="${W - 10}" text-anchor="middle" font-size="11">Ouverture</text>
     <text x="${M - 4}" y="${M + S + 4}" font-size="11" text-anchor="end" transform="rotate(-90 ${M - 14} ${M + S})">Plus d'État</text>
     <text x="${W - M + 18}" y="${M + S}" font-size="11" text-anchor="middle" transform="rotate(90 ${W - M + 14} ${M + S})">Plus de marché</text>
-    ${cands.map((p, ci) => `<g class="pt" data-x="${px(p.x)}" data-y="${py(p.y)}" style="transform:translate(${M + S}px,${M + S}px)">
+    <line id="lien" x1="${px(toi.x)}" y1="${py(toi.y)}" x2="${px(toi.x)}" y2="${py(toi.y)}" stroke="#fff" stroke-width="2" stroke-dasharray="3 4" opacity="0"/>
+    ${cands.map((p, ci) => `<g class="pt cand" data-ci="${ci}" data-x="${px(p.x)}" data-y="${py(p.y)}" style="transform:translate(${M + S}px,${M + S}px)">
+      <circle r="15" fill="transparent"/>
       <circle r="11" fill="${COULEURS[ci]}"/><text y="3.5" text-anchor="middle" font-size="8" font-weight="800" style="fill:#0b1020">${initiales(C[ci].nom)}</text>
       ${C[ci].photo ? `<image href="${photo(ci, 80)}" x="-11" y="-11" width="22" height="22" clip-path="url(#rond)" preserveAspectRatio="xMidYMin slice" onerror="this.remove()"/>` : ''}
-      <circle r="11" fill="none" stroke="${COULEURS[ci]}" stroke-width="2"/></g>`).join('')}
+      <circle class="anneau" r="11" fill="none" stroke="${COULEURS[ci]}" stroke-width="2"/></g>`).join('')}
     <g class="pt" id="toi" data-x="${px(toi.x)}" data-y="${py(toi.y)}" style="transform:translate(${M + S}px,${M + S}px)">
       <circle r="13" fill="none" stroke="#fff" stroke-width="2" class="halo"/><circle r="13" fill="#fff"/>
       <text y="4" text-anchor="middle" font-size="9" font-weight="900" style="fill:#0b1020">TOI</text></g>
   </svg>
-  <p class="note">Axe horizontal : tes réponses sur l'économie, le travail et les services publics. Axe vertical : immigration, sécurité, Europe, école et société. Les autres questions (énergie, défense, institutions) ne comptent pas sur la carte.</p>`;
-  const pts = $('vue').querySelectorAll('.pt');
+  <div class="carte-info" id="carte-info"></div>
+  <p class="note">Axe horizontal : économie, travail et services publics. Axe vertical : immigration, sécurité, Europe, école et société. Énergie, défense et institutions ne comptent pas sur la carte.</p>`;
+  const svg = $('carte-svg');
+  const choisit = (ci) => {
+    svg.querySelectorAll('.cand').forEach((g) => g.classList.toggle('sel', +g.dataset.ci === ci));
+    const g = svg.querySelector(`.cand[data-ci="${ci}"]`);
+    const l = $('lien');
+    l.setAttribute('x2', g.dataset.x); l.setAttribute('y2', g.dataset.y); l.setAttribute('opacity', '.8');
+    svg.appendChild(g); svg.appendChild($('toi'));
+    $('carte-info').innerHTML = `${avatar(ci)}<div><b>${esc(C[ci].nom)}</b><span>${pourcent(sc[ci].pct ?? 0)} d'accord avec toi${ci === voisin ? ' · ton plus proche voisin sur la carte' : ''}</span></div>`;
+    vibre(6);
+  };
+  svg.querySelectorAll('.cand').forEach((g) => (g.onclick = () => choisit(+g.dataset.ci)));
+  const pts = svg.querySelectorAll('.pt');
   requestAnimationFrame(() => requestAnimationFrame(() => pts.forEach((g, k) => {
-    g.style.transitionDelay = g.id === 'toi' ? '1.1s' : `${k * 60}ms`;
+    g.style.transitionDelay = g.id === 'toi' ? '1.1s' : `${k * 50}ms`;
     g.style.transform = `translate(${g.dataset.x}px,${g.dataset.y}px)`;
   })));
+  setTimeout(() => $('carte-info') && choisit(voisin), 2000);
 }
 
-function vueThemes(res) {
-  const lignes = T.map((t) => {
-    const r = classement(res.reps, (qi) => Q[qi].theme === t.id);
-    if (!r.length) return '';
-    const x = r[0];
-    return `<div class="theme-res"><span class="e">${t.emoji}</span><div class="t">${t.nom}<span>le plus proche : ${esc(C[x.ci].nom)}</span></div>${avatar(x.ci)}<b>${Math.round(x.pct)} %</b></div>`;
-  }).join('');
-  $('vue').innerHTML = lignes || '<p class="note">Pas assez de réponses.</p>';
-}
-
-function vuePartage(res, r) {
+function vuePartage(res) {
+  const r = classement(res.reps, null, res.poids);
   $('vue').innerHTML = `<button class="btn go" id="b-img">Partager l'image de mon résultat</button>
     <p class="note" style="margin-top:18px">Défie un proche : il répond aux mêmes questions et vous comparez vos réponses.</p>
     <input class="nom" id="nom" placeholder="Ton prénom" value="${esc(prefs.nom || '')}" maxlength="20">

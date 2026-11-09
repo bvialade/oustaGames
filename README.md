@@ -39,7 +39,7 @@ Pour ajouter des mots secrets au jeu de proximité de sens : les ajouter à la f
 
 Dans `cartes/`, `moteur.js` gère le rendu, le glisser-déposer, l'annulation et la sauvegarde ; chaque jeu (`solitaire.js`, `spider.js`, `freecell.js`, `dame.js`) ne décrit que ses règles.
 
-Isoloir 2027 : positions des candidats d'après les synthèses de [France-Vote](https://www.france-vote.fr) (programmes, votes, déclarations), au 1er novembre 2026. Photos des candidats : [Wikimedia Commons](https://commons.wikimedia.org) (licences libres, chargées depuis Commons ; auteur et licence sur la page de chaque fichier, liée dans le jeu, liste dans `PHOTOS` de `outils/build_elections.py`). `elections/data.js` et la grille à relire `elections/grille.md` sont générés par `outils/build_elections.py` (questions, positions et instructions dans le script ; ne jamais réordonner les questions, les liens de duel en dépendent).
+Isoloir 2027 : positions des candidats d'après les synthèses de [France-Vote](https://www.france-vote.fr) (programmes, votes, déclarations), au 9 novembre 2026. Photos des candidats : [Wikimedia Commons](https://commons.wikimedia.org) (licences libres, chargées depuis Commons ; auteur et licence sur la page de chaque fichier, liée dans le jeu, liste dans `PHOTOS` de `outils/build_elections.py`). `elections/data.js` et la grille à relire `elections/grille.md` sont générés par `outils/build_elections.py` (questions, positions et instructions dans le script ; ne jamais réordonner les questions, les liens de duel en dépendent).
 
 Pour ajouter des questions au quiz du droit : les écrire dans `droit/q/<matière>.js` (format décrit en tête de `droit/themes.js`, bonne réponse en premier), et les ajouter à la fin de la liste du niveau.
 
