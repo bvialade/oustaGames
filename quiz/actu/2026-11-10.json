@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-10",
+  "questions": [
+    {
+      "q": "Quel champion olympique a annoncé lundi sa candidature à l'élection présidentielle de 2027 ?",
+      "choix": ["Tony Parker", "Teddy Riner", "Kylian Mbappé", "Léon Marchand"],
+      "reponse": 1,
+      "explication": "Le judoka veut être « le Président qui réconcilie et qui fédère ».",
+      "source": { "nom": "Ouest-France", "url": "https://www.ouest-france.fr/elections/presidentielle/presidentielle-2027-le-triple-champion-olympique-de-judo-teddy-riner-annonce-sa-candidature-4bd50a7c-dc29-11f1-a45f-49114163a350" }
+    },
+    {
+      "q": "À combien le Smic net mensuel passera-t-il dès le 1er décembre, selon l'annonce de Sébastien Lecornu ?",
+      "choix": ["1 302 €", "1 402 €", "1 502 €", "1 802 €"],
+      "reponse": 2,
+      "explication": "Une hausse anticipée de 1,6 %, soit environ 24 € de plus par mois, pour un Smic à 1 502 € net.",
+      "source": { "nom": "Public Sénat", "url": "https://www.publicsenat.fr/actualites/politique/pouvoir-dachat-sebastien-lecornu-annonce-une-hausse-anticipee-du-smic-a-1-502-euros-des-le-1er-decembre" }
+    },
+    {
+      "q": "Selon la France, des cyberattaques iraniennes ont visé plus de 700 supermarchés. Qu'ont-elles perturbé ?",
+      "choix": ["Les caisses automatiques", "Les systèmes de réfrigération", "Les portes automatiques", "L'éclairage des rayons"],
+      "reponse": 1,
+      "explication": "Jean-Noël Barrot accuse les Gardiens de la révolution ; Carrefour, Monoprix, Intermarché et U font partie des enseignes touchées.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/2026/11/09/la-france-accuse-liran-de-cyberattaques-contre-les-frigos-de-supermarches" }
+    },
+    {
+      "q": "Selon l'agence américaine du médicament (FDA), quel risque les médicaments amaigrissants comme Ozempic doivent-ils désormais signaler ?",
+      "choix": ["Une perte de cheveux", "Une perte de vision possible", "Une perte d'audition", "Une perte de mémoire"],
+      "reponse": 1,
+      "explication": "Une atteinte rare du nerf optique, repérée après l'examen de 126 essais cliniques et plus de 134 000 patients.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/2026/11/09/fda-alerte-sur-risque-possible-de-perte-de-vision-avec-les-medicaments-amaigrissants-glp-1" }
+    },
+    {
+      "q": "Quelle ville française a décidé de ne plus imprimer ni relayer d'affiches générées par intelligence artificielle ?",
+      "choix": ["Sète", "Nantes", "Brest", "Annecy"],
+      "reponse": 0,
+      "explication": "Le maire Hervé Marquès veut « sauver nos graphistes et nos artistes » : une première en France.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/le-maire-de-sete-dit-stop-aux-affiches-generees-par-ia-il-fallait-absolument-sauver-nos-graphistes-et-nos-artistes-11813142" }
+    },
+    {
+      "q": "Quel groupe de metal brésilien a donné son concert d'adieu à São Paulo après 42 ans de carrière ?",
+      "choix": ["Sepultura", "Metallica", "Gojira", "Iron Maiden"],
+      "reponse": 0,
+      "explication": "Sepultura a joué 30 titres devant 9 000 personnes, avec de nombreux invités.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/sepultura-fait-ses-adieux-apres-42-ans-de-carriere-30-chansons-et-des-invites-pour-un-dernier-concert-historique-11812919" }
+    },
+    {
+      "q": "L'astéroïde 1998 KY26 accélère de façon inexpliquée. Quelle sonde doit le rejoindre en 2031 ?",
+      "choix": ["Rosetta", "Hayabusa2", "Voyager 1", "Perseverance"],
+      "reponse": 1,
+      "explication": "La sonde japonaise doit l'atteindre en juillet 2031. Ce petit astéroïde fait seulement une dizaine de mètres.",
+      "source": { "nom": "Futura", "url": "https://www.futura-sciences.com/sciences/actualites/asteroide-depuis-annees-cet-asteroide-accelere-facon-inexpliquee-quelque-chose-modifie-trajectoire-personne-ne-sait-encore-139184/" }
+    },
+    {
+      "q": "Sous le lac Turkana, en Afrique de l'Est, la croûte terrestre ne mesure plus que…",
+      "choix": ["13 mètres", "13 kilomètres", "130 kilomètres", "1 300 kilomètres"],
+      "reponse": 1,
+      "explication": "13 km contre plus de 35 km sur les bords du rift : l'Afrique se fracture lentement.",
+      "source": { "nom": "Futura", "url": "https://www.futura-sciences.com/planete/actualites/croute-continentale-13-km-epaisseur-seulement-sous-lac-turkana-geologues-mesurent-lente-fracture-afrique-k2m6-139148/" }
+    },
+    {
+      "q": "Sous quel seuil le Bitcoin est-il passé, à son plus bas niveau depuis la mi-avril ?",
+      "choix": ["7 500 $", "25 000 $", "75 000 $", "175 000 $"],
+      "reponse": 2,
+      "explication": "Il est tombé à environ 74 255 $, après plus de 2 milliards de dollars de retraits des fonds ETF américains en deux semaines.",
+      "source": { "nom": "Rekto News", "url": "https://rekto.substack.com/p/lundi-9-novembre-2026" }
+    },
+    {
+      "q": "Selon un sondage Elabe, quelle part des Français refuse toute hausse des frais d'inscription à l'université ?",
+      "choix": ["19 %", "39 %", "59 %", "79 %"],
+      "reponse": 3,
+      "explication": "79 % y sont opposés, et 57 % préfèrent le dossier scolaire pour l'admission dans le supérieur.",
+      "source": { "nom": "Rekto News", "url": "https://rekto.substack.com/p/lundi-9-novembre-2026" }
+    }
+  ]
+}
