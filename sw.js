@@ -1,6 +1,6 @@
 // Garde les fichiers en cache pour jouer hors connexion.
 // Les fichiers sont toujours redemandés au réseau d'abord, donc les mises à jour arrivent seules.
-const VERSION = 'v17';
+const VERSION = 'v18';
 const CORE = [
   './', 'index.html', 'style.css', 'manifest.webmanifest',
   'icons/icon-192.png', 'icons/apple-touch-icon.png',
@@ -18,6 +18,7 @@ const CORE = [
   'sens/', 'sens/index.html', 'sens/sens.js', 'sens/secrets.js', 'sens/vocab.txt',
   'cartes/', 'cartes/index.html', 'cartes/cartes.css', 'cartes/moteur.js', 'cartes/solitaire.js', 'cartes/spider.js',
   'elections/', 'elections/index.html', 'elections/jeu.js', 'elections/data.js',
+  'couleurs/', 'couleurs/index.html', 'couleurs/palette.js', 'couleurs/data.js',
   'cartes/freecell.js', 'cartes/dame.js', 'cartes/app.js',
 ];
 
