@@ -1,0 +1,110 @@
+// Palette : test de personnalité en quatre couleurs, d'après le modèle de William Marston (1928).
+// Textes originaux, rédigés pour le site.
+//
+// QUESTIONS : chaque question a 4 réponses, une par couleur (r rouge, j jaune, v vert, b bleu).
+// Le joueur choisit la réponse qui lui ressemble le plus (3 points), puis le moins (0 point) ;
+// les deux autres valent 1 point. Total : 5 points par question.
+// Ne pas réordonner les couleurs des réponses : l'ordre d'affichage est mélangé par le jeu.
+
+const COULEURS = {
+  r: {
+    nom: 'Rouge', element: 'Feu', emoji: '🔥', hex: '#ef4444', clair: '#fca5a5', fonce: '#991b1b',
+    pole: 'Dominance', devise: 'Tu fonces.',
+    mots: ['Direct', 'Décidé', 'Ambitieux', 'Rapide', 'Compétitif'],
+    resume: "Le Rouge aime l'action, les défis et les résultats. Il décide vite, dit les choses en face et prend naturellement les commandes quand ça patine.",
+    forces: ["Tu décides vite, même dans le flou", "Tu transformes les idées en actes", "Les obstacles te motivent au lieu de te freiner", "Tu oses dire ce que les autres pensent tout bas"],
+    vigilance: ["Ta franchise peut blesser sans que tu t'en rendes compte", "Tu peux écraser les plus discrets en réunion", "L'impatience te fait parfois sauter des étapes"],
+    communiquer: ["Va droit au but, sans détour", "Propose des options plutôt qu'un long exposé", "Parle résultats et objectifs"],
+    stress: "Tu deviens autoritaire et cassant, et tu veux tout contrôler.",
+    besoin: 'Du défi et de la liberté d\'action',
+    effort: "trancher vite, t'imposer ou dire non",
+    avec: "Avec un Rouge : sois bref, précis, et montre où vous allez. Il respecte qu'on lui tienne tête avec de bons arguments.",
+  },
+  j: {
+    nom: 'Jaune', element: 'Soleil', emoji: '☀️', hex: '#facc15', clair: '#fef08a', fonce: '#a16207',
+    pole: 'Influence', devise: 'Tu rayonnes.',
+    mots: ['Enthousiaste', 'Sociable', 'Créatif', 'Expressif', 'Optimiste'],
+    resume: "Le Jaune carbure aux rencontres, aux idées et à la bonne humeur. Il entraîne les autres par son énergie et voit toujours le verre à moitié plein.",
+    forces: ["Ton enthousiasme est contagieux", "Tu crées du lien avec n'importe qui", "Tu as des idées à revendre", "Tu sais convaincre et donner envie"],
+    vigilance: ["Tu commences beaucoup de choses et en finis moins", "Les détails et l'organisation t'ennuient vite", "Tu peux promettre plus que tu ne peux tenir"],
+    communiquer: ["Laisse de la place à l'échange et à l'humour", "Montre de l'intérêt pour ses idées", "Mets les détails par écrit, après coup"],
+    stress: "Tu parles encore plus, tu t'éparpilles et tu cherches à plaire à tout le monde.",
+    besoin: 'De la reconnaissance et du contact',
+    effort: "aller vers les inconnus, improviser ou te mettre en avant",
+    avec: "Avec un Jaune : prends le temps de discuter, valorise ses idées et garde le ton léger. Évite de l'enfermer dans trop de procédures.",
+  },
+  v: {
+    nom: 'Vert', element: 'Forêt', emoji: '🌿', hex: '#22c55e', clair: '#86efac', fonce: '#166534',
+    pole: 'Stabilité', devise: 'Tu apaises.',
+    mots: ['Calme', 'Loyal', 'Patient', 'À l\'écoute', 'Fiable'],
+    resume: "Le Vert est le pilier discret du groupe. Patient, fidèle et attentif aux autres, il cherche l'harmonie et préfère la stabilité aux grands bouleversements.",
+    forces: ["Tu écoutes vraiment, sans juger", "On peut compter sur toi, toujours", "Tu apaises les tensions autour de toi", "Ta patience fait tenir les projets dans la durée"],
+    vigilance: ["Tu as du mal à dire non", "Les changements soudains te déstabilisent", "Tu gardes tes désaccords pour toi, jusqu'à saturation"],
+    communiquer: ["Prends le temps, sans le brusquer", "Annonce les changements à l'avance", "Demande-lui son avis : il ne le donnera pas tout seul"],
+    stress: "Tu te refermes, tu dis oui à tout et tu rumines en silence.",
+    besoin: 'De la sécurité et de l\'harmonie',
+    effort: "ralentir, écouter longuement ou supporter la routine",
+    avec: "Avec un Vert : sois chaleureux et patient, explique le pourquoi des changements et laisse-lui le temps de s'adapter.",
+  },
+  b: {
+    nom: 'Bleu', element: 'Océan', emoji: '💧', hex: '#3b82f6', clair: '#93c5fd', fonce: '#1e3a8a',
+    pole: 'Conformité', devise: 'Tu approfondis.',
+    mots: ['Précis', 'Rigoureux', 'Analytique', 'Prudent', 'Exigeant'],
+    resume: "Le Bleu veut comprendre avant d'agir. Méthodique et exigeant, il aime les faits, la logique et le travail bien fait, quitte à prendre son temps.",
+    forces: ["Tu repères l'erreur que personne n'a vue", "Ton travail est fiable et soigné", "Tu analyses avant de te lancer", "Tu restes objectif quand les autres s'emballent"],
+    vigilance: ["Le perfectionnisme peut te paralyser", "Tu peux paraître distant ou froid", "Tu as du mal avec l'improvisation"],
+    communiquer: ["Apporte des faits et des chiffres", "Laisse-lui le temps de réfléchir", "Sois précis : le flou l'agace"],
+    stress: "Tu te réfugies dans les détails, tu deviens critique et tu te fermes.",
+    besoin: 'De la clarté et de la qualité',
+    effort: "vérifier chaque détail, suivre les procédures ou tout planifier",
+    avec: "Avec un Bleu : prépare tes arguments, sois structuré et ne le presse pas. Il appréciera que tu aies vérifié tes sources.",
+  },
+};
+
+// Profils : couleur dominante + couleur secondaire. « rr » = profil pur, « eq » = profil équilibré.
+const PROFILS = {
+  rr: { titre: 'Le Volcan', accroche: "Pur feu : tu avances, et le monde suit." },
+  bb: { titre: 'L\'Abysse', accroche: "Pur océan : tu vas au fond des choses, toujours." },
+  jj: { titre: 'Le Zénith', accroche: "Plein soleil : tu illumines chaque pièce où tu entres." },
+  vv: { titre: 'Le Chêne', accroche: "Forêt profonde : solide, patient, indispensable." },
+  rj: { titre: 'La Comète', accroche: "Tu fonces et tu embarques tout le monde dans ton sillage." },
+  rv: { titre: 'Le Capitaine', accroche: "Tu mènes ta troupe avec poigne… et tu ne laisses personne derrière." },
+  rb: { titre: 'Le Bâtisseur', accroche: "Des objectifs ambitieux, un plan solide : tu construis du durable." },
+  jr: { titre: 'L\'Étincelle', accroche: "Charisme et culot : tes idées deviennent des projets." },
+  jv: { titre: 'Le Rayon', accroche: "Chaleureux et attentif, tu fais du bien aux gens." },
+  jb: { titre: 'Le Conteur', accroche: "Imaginatif mais soigneux : tu fais rêver avec des détails justes." },
+  vr: { titre: 'Le Roc', accroche: "Calme en surface, tenace en profondeur : tu ne lâches rien." },
+  vj: { titre: 'Le Confident', accroche: "Accueillant et bienveillant, on vient vers toi pour se sentir mieux." },
+  vb: { titre: 'Le Gardien', accroche: "Fiable et méthodique : avec toi, tout est entre de bonnes mains." },
+  br: { titre: 'Le Stratège', accroche: "Tu analyses, puis tu frappes juste." },
+  bj: { titre: 'Le Pédagogue', accroche: "Précis et souriant : tu rends clair ce qui est compliqué." },
+  bv: { titre: 'L\'Horloger', accroche: "Minutieux et patient, tu fais les choses parfaitement, sans bruit." },
+  eq: { titre: 'L\'Arc-en-ciel', accroche: "Un peu de chaque couleur : tu t'adaptes à toutes les situations." },
+};
+
+const QUESTIONS = [
+  { q: "Lundi matin, tu commences par…", r: "Attaquer la tâche la plus importante", j: "Prendre des nouvelles de tout le monde", v: "Reprendre tranquillement tes habitudes", b: "Faire la liste de ce qui t'attend" },
+  { q: "Un ami te montre un projet un peu bancal.", r: "Tu lui dis franchement ce qui ne va pas", j: "Tu t'emballes et proposes plein d'idées", v: "Tu l'écoutes et l'encourages avec douceur", b: "Tu poses des questions précises sur le budget" },
+  { q: "Ce qu'on remarque d'abord chez toi :", r: "Ton aplomb", j: "Ton humour", v: "Ta gentillesse", b: "Ton sérieux" },
+  { q: "Tes vacances idéales :", r: "Un défi sportif ou une vraie aventure", j: "Une grande maison pleine d'amis", v: "Un endroit que tu connais déjà, au calme", b: "Un voyage préparé dans les moindres détails" },
+  { q: "Un dîner de famille s'éternise sur un sujet qui tourne en rond.", r: "Tu tranches pour passer à autre chose", j: "Tu lances une blague pour relancer l'ambiance", v: "Tu attends patiemment que ça passe", b: "Tu rectifies les approximations" },
+  { q: "Deux proches se disputent devant toi.", r: "Tu leur demandes d'arrêter, net", j: "Tu essaies de dédramatiser", v: "Tu joues les médiateurs, avec tact", b: "Tu veux connaître les faits avant de prendre parti" },
+  { q: "Ce qui te motive vraiment :", r: "Gagner et relever des défis", j: "Rencontrer des gens, être reconnu", v: "Une ambiance sereine et stable", b: "Le travail bien fait" },
+  { q: "Ce que tu redoutes le plus :", r: "Perdre le contrôle", j: "Être mis à l'écart", v: "Les changements brutaux", b: "Commettre une erreur" },
+  { q: "Tu changes de téléphone.", r: "Tu prends vite le plus puissant", j: "Tu choisis celui qui a le plus de style", v: "Tu reprends le même modèle, en plus récent", b: "Tu compares les fiches techniques pendant des jours" },
+  { q: "Autour d'un jeu de société, tu…", r: "Joues pour gagner, point", j: "Animes la partie et fais le show", v: "Joues surtout pour passer un bon moment", b: "Connais les règles par cœur et les fais respecter" },
+  { q: "On te demande un travail pour dans une heure.", r: "Tu accélères : tu adores l'urgence", j: "Tu improvises, ça passera", v: "Tu stresses, mais tu t'y mets sans rien dire", b: "Tu râles : mieux vaut bien faire que vite faire" },
+  { q: "Ton espace (bureau, chambre) ressemble à…", r: "Un poste de commande, rien de superflu", j: "Un joyeux bazar plein de photos", v: "Un cocon, avec des objets qui ont une histoire", b: "Un endroit où chaque chose a sa place" },
+  { q: "Un nouveau projet démarre.", r: "Tu prends la tête", j: "Tu motives les troupes", v: "Tu aides là où on a besoin de toi", b: "Tu poses le plan et les étapes" },
+  { q: "Ce qui t'agace le plus chez les autres :", r: "La lenteur et l'indécision", j: "La froideur et la routine", v: "L'agressivité et les éclats de voix", b: "Le travail bâclé" },
+  { q: "Quand tu racontes une histoire…", r: "Tu vas droit à la chute", j: "Tu en rajoutes, avec gestes et imitations", v: "Tu prends ton temps, sans brusquer personne", b: "Tu donnes tous les détails, dans l'ordre" },
+  { q: "Le mot qui te ressemble le plus :", r: "Action", j: "Fête", v: "Harmonie", b: "Précision" },
+  { q: "On te fait une critique.", r: "Tu réponds du tac au tac", j: "Ça te touche, tu as besoin d'en parler", v: "Tu encaisses sans rien dire", b: "Tu vérifies si elle est fondée, point par point" },
+  { q: "Ta soirée parfaite :", r: "Une activité intense : escape game, compétition", j: "Une fête où tu rencontres plein de monde", v: "Un dîner avec tes amis de toujours", b: "Un bon livre ou un documentaire passionnant" },
+  { q: "Face à une grande décision…", r: "Tu suis ton instinct, et vite", j: "Tu en parles autour de toi, puis tu suis ton cœur", v: "Tu prends ton temps et penses à tes proches", b: "Tu fais un tableau des pour et des contre" },
+  { q: "Les règles, pour toi…", r: "Se contournent si elles freinent", j: "S'oublient souvent, sans faire exprès", v: "Se respectent, ça évite les histoires", b: "Existent pour une bonne raison" },
+  { q: "Ta qualité principale :", r: "Le courage", j: "Le charisme", v: "La fidélité", b: "La rigueur" },
+  { q: "Sous pression, tu as tendance à…", r: "Donner des ordres sans prendre de gants", j: "Parler beaucoup et t'éparpiller", v: "Te refermer et dire oui à tout", b: "Te noyer dans les détails" },
+  { q: "Au téléphone avec un ami :", r: "Deux minutes, l'essentiel est dit", j: "Une heure, et on a parlé de tout", v: "Tu écoutes surtout, il en avait besoin", b: "Tu aurais préféré un message écrit, plus clair" },
+  { q: "Ce que tu aimerais qu'on dise de toi :", r: "« Avec toi, ça avance. »", j: "« Avec toi, on ne s'ennuie jamais. »", v: "« On peut toujours compter sur toi. »", b: "« Ce que tu fais est impeccable. »" },
+];

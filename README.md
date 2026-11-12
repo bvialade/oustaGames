@@ -11,6 +11,7 @@ Petits jeux à jouer sur téléphone, sous forme de web app installable (PWA).
 - **Quiz du droit** : 10 questions de droit français, au niveau Citoyen, Juge ou Goat, sur une ou plusieurs matières, avec l'article ou l'arrêt de référence.
 - **Code de la route** (`code/`) : révision de l'examen théorique sur ses 10 thèmes, au format de l'examen (situations dessinées vues du conducteur, carrefours vus de dessus, tableau de bord, questions A/B + C/D en tout ou rien), entraînement par thème, examen blanc de 40 questions chronométrées (20 s, 35 pour réussir) et révision des erreurs. Questions originales, rédigées pour le site.
 - **Isoloir 2027** (`elections/`) : 15 ou 40 affirmations à glisser (d'accord / pas d'accord) pour savoir de quel candidat à la présidentielle 2027 on est le plus proche, avec classement en direct, hémicycle, carte politique, détail sourcé par candidat et duel entre proches par lien.
+- **Palette** (`couleurs/`) : test de personnalité en quatre couleurs (rouge, jaune, vert, bleu), inspiré du modèle de William Marston. 24 situations où l'on choisit la réponse qui nous ressemble le plus et le moins, résultat animé (mélange des couleurs, profil dominant et secondaire, boussole), partage en image et par lien pour se comparer entre proches. Questions et textes originaux dans `couleurs/data.js`.
 
 ## Jouer
 
@@ -22,7 +23,7 @@ L'app fonctionne ensuite hors connexion. Scores et statistiques restent sur chaq
 Aucun outil de build : ce sont des fichiers HTML, CSS et JavaScript statiques.
 Pour tester en local : `python3 -m http.server` puis ouvrir http://localhost:8000.
 
-Chaque jeu vit dans son dossier (`mot/`, `sens/`, `geo/`, `frontieres/`, `quiz/`, `droit/`, `code/`, `cartes/`, `elections/`) et réutilise `style.css`.
+Chaque jeu vit dans son dossier (`mot/`, `sens/`, `geo/`, `frontieres/`, `quiz/`, `droit/`, `code/`, `cartes/`, `elections/`, `couleurs/`) et réutilise `style.css`.
 Le menu n'a qu'une entrée « Quiz » (`quiz/`) : son accueil propose Actu (`quiz/#actu`), Droit (`droit/`) ou Code de la route (`code/`).
 Pour ajouter un jeu, créer un dossier, l'ajouter au menu dans `index.html` et à la liste `CORE` de `sw.js`.
 
