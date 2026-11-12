@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-12",
+  "questions": [
+    {
+      "q": "Pour le 11-Novembre, quelle fleur la ministre Catherine Vautrin a-t-elle appelé à porter en hommage aux soldats ?",
+      "choix": ["Le coquelicot", "Le bleuet de France", "La rose blanche", "Le muguet"],
+      "reponse": 1,
+      "explication": "Le Bleuet de France est le symbole français du souvenir des combattants, comme le coquelicot pour les Britanniques.",
+      "source": { "nom": "Europe 1", "url": "https://www.europe1.fr/emissions/pascal-praud-et-vous/11-novembre-catherine-vautrin-appelle-a-porter-le-bleuet-de-france-pour-rendre-hommage-aux-soldats-francais-1225937" }
+    },
+    {
+      "q": "À quelle heure l'armistice du 11 novembre 1918 a-t-il été signé dans le wagon du maréchal Foch ?",
+      "choix": ["5 h 15 du matin", "11 h du matin", "Midi pile", "23 h la veille au soir"],
+      "reponse": 0,
+      "explication": "Il a été signé vers 5 h 15, et le cessez-le-feu est entré en vigueur à 11 h.",
+      "source": { "nom": "Rekto News", "url": "https://rekto.substack.com/p/mercredi-11-novembre-2026" }
+    },
+    {
+      "q": "Quelle phrase est gravée sur le monument pacifiste de Gentioux, dans la Creuse, où s'est rendu Jean-Luc Mélenchon ?",
+      "choix": ["« Plus jamais ça »", "« Maudite soit la guerre »", "« Morts pour rien »", "« Paix sur la Terre »"],
+      "reponse": 1,
+      "explication": "Ce monument aux morts est célèbre pour son message pacifiste. Emmanuel Macron présidait, lui, son dernier 11-Novembre de chef de l'État à l'Arc de Triomphe.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/2026/11/11/11-novembre-entre-memoire-nationale-et-pacifisme-les-hommages-de-macron-le-pen-et-melencho" }
+    },
+    {
+      "q": "Avec son « Digital Fairness Act », que veut permettre l'Union européenne sur les applis et réseaux sociaux ?",
+      "choix": ["Payer en cryptomonnaie", "Désactiver le défilement infini et la lecture automatique", "Interdire les selfies", "Limiter les messages à 100 par jour"],
+      "reponse": 1,
+      "explication": "Le texte vise aussi les « dark patterns » et les pièges à abonnement, avec des amendes jusqu'à 6 % du chiffre d'affaires mondial.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/2026/11/11/lue-devoile-un-digital-fairness-act-contre-pieges-dabonnements-et-designs-addictifs" }
+    },
+    {
+      "q": "En Espagne, pour quelle cause environ 175 000 personnes ont-elles manifesté à Madrid et Barcelone lors d'une grève générale ?",
+      "choix": ["Le logement", "Les retraites", "Le climat", "La corrida"],
+      "reponse": 0,
+      "explication": "120 000 manifestants à Madrid et 55 000 à Barcelone : une première grève de ce type depuis 14 ans.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/espagne-175-000-manifestants-dans-les-rues-de-madrid-et-barcelone-en-point-d-orgue-d-une-journee-de-greve-generale-pour-le-logement-11814214" }
+    },
+    {
+      "q": "Comment s'appelle le 16e album studio de U2, qui sort ce vendredi 13 novembre ?",
+      "choix": ["« The Joshua Tree »", "« Carnaval De Luz »", "« Songs of Tomorrow »", "« Achtung Paris »"],
+      "reponse": 1,
+      "explication": "Il est produit par Jacknife Lee, après 50 ans d'une carrière façonnée par des producteurs comme Steve Lillywhite.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/u2-comment-ses-producteurs-ont-faconne-50-ans-de-carriere-11813547" }
+    },
+    {
+      "q": "Un immense triangle noir de 20 mètres est apparu au cœur de Madrid. Qu'affichent ses écrans ?",
+      "choix": ["Des publicités", "Des images de caméras de surveillance", "La météo", "Des matchs de foot"],
+      "reponse": 1,
+      "explication": "L'œuvre de l'artiste SpY, place de Cybèle, invite à réfléchir à la surveillance permanente.",
+      "source": { "nom": "Futura", "url": "https://www.futura-sciences.com/tech/actualites/technologie-immense-triangle-noir-20-metres-apparu-coeur-madrid-ce-quil-cache-troublant-139251/" }
+    },
+    {
+      "q": "Quelle première vient d'être réussie par un robot, selon Futura ?",
+      "choix": ["Courir un marathon", "Construire une structure dans l'espace", "Gagner un tournoi d'échecs", "Cuisiner un repas étoilé"],
+      "reponse": 1,
+      "explication": "Un robot a assemblé seul une structure en orbite : une étape vers les futurs chantiers spatiaux.",
+      "source": { "nom": "Futura", "url": "https://www.futura-sciences.com/tech/actualites/technologie-premiere-fois-histoire-robot-construit-structure-espace-nouvelle-ere-commence-139244/" }
+    },
+    {
+      "q": "Sony relance un objet culte des années 1980. Lequel ?",
+      "choix": ["La console PlayStation 1", "Le casque du premier Walkman", "Le magnétoscope", "Le Minidisc"],
+      "reponse": 1,
+      "explication": "Le casque MDR-3R reprend le look de 1979, mousses orange comprises, avec une prise USB-C, pour 59 €.",
+      "source": { "nom": "Rekto News", "url": "https://rekto.substack.com/p/mercredi-11-novembre-2026" }
+    },
+    {
+      "q": "Combien de personnes ont assisté à la dernière messe du pape Léon XIV en Argentine, à Luján ?",
+      "choix": ["20 000", "200 000", "Plus de 2 millions", "20 millions"],
+      "reponse": 2,
+      "explication": "Plus de deux millions de fidèles, avant l'étape au Pérou où le pape a vécu vingt ans.",
+      "source": { "nom": "Europe 1", "url": "https://www.europe1.fr/societe/plus-de-deux-millions-de-personnes-a-lujan-pour-la-derniere-messe-de-leon-xiv-en-argentine-1225598" }
+    }
+  ]
+}
