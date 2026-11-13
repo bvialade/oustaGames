@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-13",
+  "questions": [
+    {
+      "q": "En Ligue des nations, quelle équipe a infligé à Zinédine Zidane sa première défaite à la tête des Bleus ?",
+      "choix": ["L'Espagne", "L'Italie", "La Belgique", "L'Allemagne"],
+      "reponse": 1,
+      "explication": "Sans Mbappé, la France a ouvert le score par Olise, mais l'Italie l'a emporté avec notamment un doublé d'Esposito.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/ligue-des-nations-l-italie-l-emporte-contre-la-france-les-diables-rouges-obliges-de-battre-la-nazionale-dimanche-11814863" }
+    },
+    {
+      "q": "Le célèbre domaine des Grottes de Han, en Belgique, va être racheté. Combien de visiteurs accueille-t-il chaque année ?",
+      "choix": ["Environ 3 000", "Environ 30 000", "Environ 300 000", "Environ 3 millions"],
+      "reponse": 2,
+      "explication": "Le groupe français Kléber Rossillon doit en devenir l'actionnaire au 31 décembre ; les 50 salariés permanents sont conservés.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/le-groupe-francais-kleber-rossilon-sur-le-point-de-racheter-le-domaine-des-grottes-de-han-11814527" }
+    },
+    {
+      "q": "Quel grand patron de la tech a annoncé jeudi sa démission ?",
+      "choix": ["Tim Cook (Apple)", "Jensen Huang (Nvidia)", "Satya Nadella (Microsoft)", "Sundar Pichai (Google)"],
+      "reponse": 1,
+      "explication": "Le cofondateur de Nvidia quitte la direction ; Colette Kress assure l'intérim.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/2026/11/12/demission-de-jensen-huang-quelles-prochaines-etapes-pour-nvidia-et-lia" }
+    },
+    {
+      "q": "Le démocrate Scott Colom devient le premier sénateur noir du Mississippi depuis combien d'années ?",
+      "choix": ["16 ans", "46 ans", "146 ans", "246 ans"],
+      "reponse": 2,
+      "explication": "Une première depuis l'époque de la Reconstruction, après la guerre de Sécession.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/video/2026/11/12/le-democrate-scott-colom-devient-le-premier-senateur-noir-du-mississippi-depuis-146-ans" }
+    },
+    {
+      "q": "En Sibérie, le mystérieux « cratère de Patom » est en réalité…",
+      "choix": ["Un trou de 1 km de profondeur", "Un cône de calcaire de 40 m de haut", "Un lac en forme d'étoile", "Une météorite géante"],
+      "reponse": 1,
+      "explication": "Près d'un million de tonnes de calcaire au milieu de la taïga, découvert en 1949 : son origine reste inexpliquée.",
+      "source": { "nom": "Futura", "url": "https://www.futura-sciences.com/planete/actualites/geologie-personne-na-jamais-pu-expliquer-million-tonnes-calcaire-forme-ce-cone-milieu-taiga-k2m6-139237/" }
+    },
+    {
+      "q": "Un générateur posé sur un volcan sous-marin a produit plus d'électricité qu'il n'en consommait. Pendant combien de temps ?",
+      "choix": ["8,7 secondes", "8,7 minutes", "8,7 heures", "8,7 jours"],
+      "reponse": 0,
+      "explication": "Une première mondiale très courte, au large de l'Oregon, avec un appareil de 3 tonnes baptisé « Adélie ».",
+      "source": { "nom": "Futura", "url": "https://www.futura-sciences.com/planete/actualites/terre-premiere-mondiale-chaleur-volcan-sous-marin-transformee-electricite-mais-pendant-87-secondes-seulement-139152/" }
+    },
+    {
+      "q": "Quelle marque de fromage lance un sac en cuir de luxe vendu 195 € ?",
+      "choix": ["La Vache qui rit", "Babybel", "Kiri", "Président"],
+      "reponse": 1,
+      "explication": "Une collaboration avec la créatrice Anya Hindmarch, reprenant la forme du petit fromage rouge.",
+      "source": { "nom": "Rekto News", "url": "https://rekto.substack.com/p/jeudi-12-novembre-2026" }
+    },
+    {
+      "q": "Quel pays européen a le salaire moyen le plus élevé, avec 7 134 € brut par mois ?",
+      "choix": ["La Suisse", "Le Luxembourg", "La Norvège", "L'Allemagne"],
+      "reponse": 1,
+      "explication": "Le Luxembourg bat un record en Europe.",
+      "source": { "nom": "Rekto News", "url": "https://rekto.substack.com/p/jeudi-12-novembre-2026" }
+    },
+    {
+      "q": "Combien de places supplémentaires en licence le Premier ministre a-t-il annoncées pour les universités ?",
+      "choix": ["500", "5 000", "50 000", "500 000"],
+      "reponse": 1,
+      "explication": "Sébastien Lecornu a formalisé ces 5 000 places par courrier aux présidents d'université, en plein mouvement étudiant.",
+      "source": { "nom": "Public Sénat", "url": "https://www.publicsenat.fr/actualites/education/mouvement-etudiant-le-premier-ministre-annonce-5-000-places-supplementaires-en-licence" }
+    },
+    {
+      "q": "Sur combien d'années s'étale le plan de relance agricole de 725 millions d'euros dévoilé par le gouvernement ?",
+      "choix": ["1 an", "3 ans", "10 ans", "50 ans"],
+      "reponse": 2,
+      "explication": "Ce plan sur 10 ans vise l'adaptation au climat, la souveraineté agricole et la transmission des fermes.",
+      "source": { "nom": "Public Sénat", "url": "https://www.publicsenat.fr/actualites/politique/plan-de-relance-agricole-une-des-thematiques-majeures-du-compromis-budgetaire-affirme-sebastien-lecornu" }
+    }
+  ]
+}
