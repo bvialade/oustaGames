@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-14",
+  "questions": [
+    {
+      "q": "Vendredi, l'aviation civile américaine (FAA) a ordonné que tous les avions restent au sol aux États-Unis. Pour quelle raison ?",
+      "choix": ["Une tempête géante", "Un problème de communication dans les centres de contrôle aérien", "Une grève des pilotes", "Une pénurie de kérosène"],
+      "reponse": 1,
+      "explication": "Une panne de communication dans les centres de contrôle « en route ». La dernière suspension nationale remontait à janvier 2023.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/tous-les-avions-cloues-au-sol-aux-etats-unis-pour-des-raisons-de-securite-11815441" }
+    },
+    {
+      "q": "Par quel score les Pays-Bas, entraînés par Xavi, ont-ils battu la Grèce en Ligue des nations ?",
+      "choix": ["2-0", "4-1", "7-0", "9-2"],
+      "reponse": 2,
+      "explication": "Un 7-0 à Amsterdam avec un triplé de Reijnders : les Pays-Bas prennent la tête de leur groupe.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/7-0-les-pays-bas-de-xavi-atomisent-la-grece-en-ligue-des-nations-11815439" }
+    },
+    {
+      "q": "Il y a combien d'années ont eu lieu les attentats du 13 novembre à Paris et Saint-Denis, commémorés vendredi ?",
+      "choix": ["5 ans", "8 ans", "11 ans", "15 ans"],
+      "reponse": 2,
+      "explication": "C'était le 13 novembre 2015 : onze ans après, la France a rendu hommage aux victimes.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/2026/11/13/attentats-du-13-novembre-onze-ans-apres-la-france-rend-hommage-aux-victimes" }
+    },
+    {
+      "q": "Quelle compagnie pétrolière conteste l'obligation européenne de contribuer au stockage du CO2 sous terre ?",
+      "choix": ["TotalEnergies", "ExxonMobil", "Shell", "BP"],
+      "reponse": 1,
+      "explication": "L'UE vise 50 millions de tonnes de capacité de stockage de CO2 par an d'ici 2030, avec l'aide de 44 grands producteurs.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/2026/11/13/exxonmobil-attaque-lue-sur-lobligation-de-contribuer-au-stockage-de-co" }
+    },
+    {
+      "q": "Quelle messagerie a subi une panne géante touchant au moins 74 pays depuis jeudi ?",
+      "choix": ["Gmail", "Outlook (Microsoft 365)", "WhatsApp", "Yahoo Mail"],
+      "reponse": 1,
+      "explication": "Outlook, Teams et Copilot ont été perturbés ; Microsoft dit ne voir aucun signe d'attaque.",
+      "source": { "nom": "Futura", "url": "https://www.futura-sciences.com/tech/actualites/cyber-risque-panne-geante-chez-microsoft-ce-ce-blocage-mondial-outlook-revele-notre-dependance-139327/" }
+    },
+    {
+      "q": "Malgré le retour des pluies, quelle part des nappes phréatiques françaises reste sous son niveau habituel ?",
+      "choix": ["6 %", "24 %", "64 %", "94 %"],
+      "reponse": 2,
+      "explication": "64 % des nappes sont sous la normale selon le BRGM, et plus de la moitié continuent de baisser.",
+      "source": { "nom": "Futura", "url": "https://www.futura-sciences.com/planete/actualites/terre-pluies-sont-retour-nappes-phreatiques-restent-danger-france-139296/" }
+    },
+    {
+      "q": "Quelle taxe le Sénat a-t-il supprimée de façon presque unanime (339 voix contre 1) ?",
+      "choix": ["La taxe sur les mutuelles", "La redevance télé", "La taxe sur les sodas", "La taxe d'habitation"],
+      "reponse": 0,
+      "explication": "Les sénateurs ont supprimé la taxe de 2,05 % sur les mutuelles, qui devait rapporter environ 1,12 milliard d'euros.",
+      "source": { "nom": "Public Sénat", "url": "https://www.publicsenat.fr/actualites/economie/budget-de-la-secu-le-senat-supprime-la-taxe-de-205-sur-les-mutuelles" }
+    },
+    {
+      "q": "Grâce à l'IA et aux photos aériennes, combien de piscines non déclarées le fisc a-t-il déjà repérées ?",
+      "choix": ["1 400", "14 000", "140 000", "1,4 million"],
+      "reponse": 2,
+      "explication": "140 000 piscines repérées et 40 millions d'euros récupérés ; la traque s'étend à d'autres constructions.",
+      "source": { "nom": "Rekto News", "url": "https://rekto.substack.com/p/vendredi-13-novembre-2026" }
+    },
+    {
+      "q": "Dans une publicité, l'acteur David Schwimmer reprend son rôle de Friends à la recherche de son pull rouge. Quel personnage joue-t-il ?",
+      "choix": ["Joey", "Chandler", "Ross", "Phoebe"],
+      "reponse": 2,
+      "explication": "Ross Geller est de retour, 25 ans après, pour la marque Quince.",
+      "source": { "nom": "Rekto News", "url": "https://rekto.substack.com/p/vendredi-13-novembre-2026" }
+    },
+    {
+      "q": "En visite au Pérou, le pape Léon XIV ravive l'espoir de paysans qui se disent dépossédés de quoi ?",
+      "choix": ["De leurs terres", "De leurs troupeaux", "De leurs églises", "De leurs mines d'or"],
+      "reponse": 0,
+      "explication": "À Catacaos, des villageois accusent une organisation liée à l'Église de leur avoir pris leurs terres ; le Vatican leur a demandé pardon en mai.",
+      "source": { "nom": "Le Monde", "url": "https://www.lemonde.fr/international/article/2026/11/13/la-visite-du-pape-au-perou-ravive-l-espoir-de-justice-pour-des-populations-paysannes-autochtones-qui-se-disent-spoliees_6809287_3210.html" }
+    }
+  ]
+}
