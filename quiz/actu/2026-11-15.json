@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-15",
+  "questions": [
+    {
+      "q": "En rugby, le pays de Galles a battu la Nouvelle-Zélande pour la première fois depuis quelle année ?",
+      "choix": ["1953", "1987", "2003", "2015"],
+      "reponse": 0,
+      "explication": "Un exploit historique : les Gallois n'avaient plus battu les All Blacks depuis 73 ans.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/rugby-exploit-du-pays-de-galles-victorieux-de-la-nouvelle-zelande-pour-la-premiere-fois-depuis-1953-11815645" }
+    },
+    {
+      "q": "Quel oiseau originaire d'Amérique a été observé pour la première fois en Belgique, près de Zeebruges ?",
+      "choix": ["Un héron vert", "Un colibri", "Un pygargue à tête blanche", "Un toucan"],
+      "reponse": 0,
+      "explication": "Ce petit héron vient du centre et de l'est des États-Unis ; il serait probablement arrivé par bateau.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/une-premiere-en-belgique-un-heron-vert-originaire-d-amerique-observe-pres-de-zeebruges-11815690" }
+    },
+    {
+      "q": "En Macédoine du Nord, la ville de Kriva Palanka est envahie par plus de 1 000 animaux errants. Lesquels ?",
+      "choix": ["Des chiens", "Des bovins", "Des chèvres", "Des sangliers"],
+      "reponse": 1,
+      "explication": "Ils étaient 400 il y a quatre ans ; le maire réclame un état de crise de 30 jours.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/2026/11/14/en-macedoine-du-nord-la-ville-de-kriva-palanka-envahie-par-des-bovins-errants" }
+    },
+    {
+      "q": "Des producteurs de cinq pays européens lancent une campagne pour mieux indiquer l'origine de quel légume ?",
+      "choix": ["La pomme de terre", "La tomate", "La carotte", "L'oignon"],
+      "reponse": 1,
+      "explication": "La campagne « We Tomato Europe » réunit l'Espagne, la France, l'Italie, le Portugal et la Pologne.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/2026/11/14/plusieurs-pays-europeens-lancent-une-campagne-pour-clarifier-lorigine-des-tomates" }
+    },
+    {
+      "q": "Dans quel pays se tient la COP31, la conférence de l'ONU sur le climat ?",
+      "choix": ["Au Brésil", "En Turquie", "En Australie", "En Égypte"],
+      "reponse": 1,
+      "explication": "Elle se déroule à Antalya jusqu'au 20 novembre. Les océans ont atteint 20,95 °C en moyenne en octobre, un record pour ce mois.",
+      "source": { "nom": "Futura", "url": "https://www.futura-sciences.com/planete/actualites/rechauffement-climatique-cop31-chiffres-montrent-vraiment-planete-face-rechauffement-139288/" }
+    },
+    {
+      "q": "Quel lac français a accueilli un record de plus de 268 000 grues cendrées en une journée ?",
+      "choix": ["Le lac d'Annecy", "Le lac du Der", "Le lac Léman", "Le lac de Serre-Ponçon"],
+      "reponse": 1,
+      "explication": "Ce lac artificiel de Champagne n'existait pas il y a 50 ans : il a été créé en 1974.",
+      "source": { "nom": "Futura", "url": "https://www.futura-sciences.com/planete/actualites/oiseaux-268-000-grues-cendrees-jour-lac-francais-record-ne-eau-nexistait-pas-il-y-50-ans-k2m6-139286/" }
+    },
+    {
+      "q": "Sous quelle barre symbolique est enfin repassé le prix du litre de sans-plomb ?",
+      "choix": ["1 €", "1,50 €", "2 €", "2,50 €"],
+      "reponse": 2,
+      "explication": "Gazole et sans-plomb coûtent en moyenne 20 centimes de moins qu'il y a quinze jours.",
+      "source": { "nom": "BFM Business", "url": "https://www.bfmtv.com/economie/video-carburants-le-prix-du-sans-plomb-passe-enfin-sous-la-barre-des-deux-euros_VN-202611140089.html" }
+    },
+    {
+      "q": "Combien de visiteurs le salon du Made in France attend-il pour sa 14e édition ?",
+      "choix": ["Environ 1 000", "Environ 10 000", "Plus de 100 000", "Plus d'un million"],
+      "reponse": 2,
+      "explication": "Plus de 100 000 visiteurs et un millier d'exposants : le « fabriqué en France » séduit de plus en plus les jeunes.",
+      "source": { "nom": "BFM Business", "url": "https://www.bfmtv.com/economie/video-le-made-in-france-de-plus-en-plus-plebiscite-par-les-jeunes_VN-202611140099.html" }
+    },
+    {
+      "q": "Dans quelle ville se tient le sommet de la Francophonie, du 14 au 16 novembre ?",
+      "choix": ["Dakar", "Phnom Penh", "Montréal", "Kinshasa"],
+      "reponse": 1,
+      "explication": "Au Cambodge, l'élection du secrétaire général de l'OIF tourne au duel entre le Rwanda et la RDC.",
+      "source": { "nom": "Le Monde", "url": "https://www.lemonde.fr/international/article/2026/11/14/reunie-au-cambodge-pour-reinvestir-dans-la-paix-la-francophonie-rattrapee-par-la-guerre-dans-les-grands-lacs_6809691_3210.html" }
+    },
+    {
+      "q": "Qui a déclaré que « l'Amérique ne peut pas négocier à notre place » sur l'Ukraine ?",
+      "choix": ["Ursula von der Leyen", "Kaja Kallas, cheffe de la diplomatie européenne", "Emmanuel Macron", "Friedrich Merz"],
+      "reponse": 1,
+      "explication": "L'Estonienne Kaja Kallas s'exprimait dans l'émission « Ici l'Europe ».",
+      "source": { "nom": "Public Sénat", "url": "https://www.publicsenat.fr/actualites/politique/ukraine-lamerique-ne-peut-pas-negocier-a-notre-place-alerte-la-cheffe-de-la-diplomatie-europeenne" }
+    }
+  ]
+}
