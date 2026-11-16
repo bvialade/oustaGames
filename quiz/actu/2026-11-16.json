@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-16",
+  "questions": [
+    {
+      "q": "Par quel score la Belgique a-t-elle battu l'Italie pour se qualifier pour les quarts de finale de la Ligue des nations ?",
+      "choix": ["1-0", "2-1", "4-1", "5-3"],
+      "reponse": 2,
+      "explication": "Menés dès la 11e minute, les Diables rouges ont renversé l'Italie 4-1 au stade Roi-Baudouin.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/victoire-obligatoire-demonstration-en-bonus-les-diables-rouges-battent-l-italie-et-filent-en-quarts-de-nations-league-11815948" }
+    },
+    {
+      "q": "À 46 ans, quelle légende brésilienne du football rejoue en troisième division italienne ?",
+      "choix": ["Ronaldo", "Kaká", "Ronaldinho", "Roberto Carlos"],
+      "reponse": 2,
+      "explication": "Ronaldinho, Ballon d'or 2005, a rejoint le club de Ravenne.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/a-46-ans-ronaldinho-rejoue-en-troisieme-division-italienne-11815923" }
+    },
+    {
+      "q": "Qui a remporté les WTA Finals, le « Masters » du tennis féminin, pour sa toute première participation ?",
+      "choix": ["Iga Swiatek", "Mirra Andreeva", "Coco Gauff", "Elina Svitolina"],
+      "reponse": 1,
+      "explication": "La Russe de 19 ans a battu l'Ukrainienne Elina Svitolina en finale.",
+      "source": { "nom": "France 24", "url": "https://www.france24.com/en/live-news/20261115-andreeva-defeats-svitolina-to-win-wta-finals" }
+    },
+    {
+      "q": "Quel exploit SpaceX a-t-il réussi pour la première fois avec Starship samedi ?",
+      "choix": ["Se poser sur la Lune", "Faire attraper le vaisseau en vol par les bras de sa tour de lancement", "Faire un tour de Mars", "Lancer 1 000 satellites d'un coup"],
+      "reponse": 1,
+      "explication": "Après le booster, c'est l'étage supérieur de Starship qui a été rattrapé par la tour à Starbase (Texas).",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/video/2026/11/15/spacex-reussit-la-premiere-capture-en-vol-de-starship-par-sa-tour-de-lancement" }
+    },
+    {
+      "q": "Quel pays balte va fermer sa frontière avec la Russie le 1er décembre, après une tentative de sabotage d'une usine de drones ?",
+      "choix": ["La Finlande", "L'Estonie", "La Lettonie", "La Lituanie"],
+      "reponse": 1,
+      "explication": "Un incendie visant une usine près de Tallinn a été déjoué ; huit personnes ont été arrêtées.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/2026/11/15/lestonie-denonce-une-tentative-dincendie-dune-usine-de-drones-orchestree-par-moscou-et-fer" }
+    },
+    {
+      "q": "Quel animal a été filmé pour la première fois dans les eaux de l'Antarctique, à près de 490 m de profondeur ?",
+      "choix": ["Un calmar géant", "Un requin dormeur", "Un poisson-lune", "Une baleine bleue"],
+      "reponse": 1,
+      "explication": "Ce requin des profondeurs a été repéré près des îles Shetland du Sud, après environ 400 heures d'images.",
+      "source": { "nom": "Futura", "url": "https://www.futura-sciences.com/planete/actualites/requin-490-metres-sous-surface-camera-capte-ce-personne-navait-jamais-vu-antarctique-requin-w2t8-139322/" }
+    },
+    {
+      "q": "Pourquoi attrape-t-on plus de rhumes quand il fait froid ? Parce que le froid affaiblit les défenses…",
+      "choix": ["De nos pieds", "De notre nez", "De nos oreilles", "De notre estomac"],
+      "reponse": 1,
+      "explication": "À 4,4 °C, les défenses naturelles de l'intérieur du nez chutent de 42 %, selon une étude américaine.",
+      "source": { "nom": "Futura", "url": "https://www.futura-sciences.com/sante/actualites/rhume-attrape-t-on-plus-rhumes-il-fait-froid-reponse-trouve-bout-votre-nez-k2m6-139289/" }
+    },
+    {
+      "q": "Selon les assureurs, combien ont coûté les dégradations et pillages liés aux manifestations de cet automne ?",
+      "choix": ["10 millions d'euros", "100 millions d'euros", "Plus d'un milliard d'euros", "10 milliards d'euros"],
+      "reponse": 2,
+      "explication": "Plus d'un milliard d'euros, un record qui dépasse les dégâts des Gilets jaunes.",
+      "source": { "nom": "BFM Business", "url": "https://www.bfmtv.com/economie/video-pillages-et-degradations-les-assureurs-prets-a-durcir-leurs-conditions_VN-202611150079.html" }
+    },
+    {
+      "q": "Dans quel pays une épidémie d'Ebola dure-t-elle depuis six mois ?",
+      "choix": ["Au Sénégal", "En République démocratique du Congo", "Au Maroc", "À Madagascar"],
+      "reponse": 1,
+      "explication": "Déclarée le 15 mai, l'épidémie a fait plus de 5 400 morts en RDC ; Le Monde donne la parole aux soignants en première ligne.",
+      "source": { "nom": "Le Monde", "url": "https://www.lemonde.fr/afrique/article/2026/11/15/six-mois-d-epidemie-d-ebola-en-rdc-ils-racontent-leur-vie-en-premiere-ligne-face-au-virus_6810987_3212.html" }
+    },
+    {
+      "q": "Combien d'exemplaires le remake de Zelda : Ocarina of Time s'est-il vendu en seulement quatre jours sur Switch 2 ?",
+      "choix": ["520 000", "1 million", "5,2 millions", "52 millions"],
+      "reponse": 2,
+      "explication": "5,2 millions d'exemplaires : un record pour un jeu Switch 2.",
+      "source": { "nom": "ActuGaming", "url": "https://www.actugaming.net/?p=833182" }
+    }
+  ]
+}
