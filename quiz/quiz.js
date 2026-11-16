@@ -64,6 +64,15 @@ function start() {
   show(['play']);
 }
 
+// Rubrique de chaque question (champ facultatif « categorie » du JSON).
+const RUBRIQUES = {
+  international: '🌍 International',
+  national: '🇫🇷 France',
+  local: '📍 Toulouse',
+  culture: '🎭 Culture',
+  insolite: '🤪 Insolite',
+};
+
 function ask() {
   const q = quiz.questions[state.index];
   const n = quiz.questions.length;
@@ -71,7 +80,7 @@ function ask() {
     `<i class="${i < state.index ? (state.answers[i] === quiz.questions[i].reponse ? 'ok' : 'ko') : i === state.index ? 'now' : ''}"></i>`).join('');
   $('question').innerHTML = `
     <div class="glass qcard">
-      <div class="qnum">Question ${state.index + 1} / ${n}</div>
+      <div class="qnum">Question ${state.index + 1} / ${n}${RUBRIQUES[q.categorie] ? ` · <span class="rub">${RUBRIQUES[q.categorie]}</span>` : ''}</div>
       <h2>${q.q}</h2>
       <div class="choices">${q.choix.map((c, i) => `<button class="choice" data-i="${i}">${c}</button>`).join('')}</div>
       <div id="after"></div>
