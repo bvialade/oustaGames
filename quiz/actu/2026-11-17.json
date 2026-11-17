@@ -1,0 +1,85 @@
+{
+  "date": "2026-11-17",
+  "questions": [
+    {
+      "categorie": "international",
+      "q": "Dans quelle ville le pape Léon XIV a-t-il célébré la dernière messe de sa tournée de douze jours en Amérique du Sud ?",
+      "choix": ["Buenos Aires", "Montevideo", "Lima", "Santiago"],
+      "reponse": 2,
+      "explication": "Après l'Uruguay et l'Argentine, le pape a conclu son voyage au Pérou, à Lima, devant des centaines de milliers de fidèles.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/le-pape-leon-xiv-conclut-sa-tournee-en-amerique-du-sud-11816455" }
+    },
+    {
+      "categorie": "international",
+      "q": "Selon le maire de Moscou, combien de drones ont été neutralisés à l'approche de la capitale russe dans la nuit de dimanche à lundi ?",
+      "choix": ["Une vingtaine", "Près de 200", "Près de 2 000", "Aucun"],
+      "reponse": 1,
+      "explication": "Près de 200 drones ont été abattus à l'approche de Moscou, l'une des plus grosses attaques de ce type.",
+      "source": { "nom": "Le Monde", "url": "https://www.lemonde.fr/international/live/2026/11/16/en-direct-guerre-en-ukraine-pres-de-200-drones-neutralises-a-l-approche-de-moscou-selon-le-maire-de-la-capitale-russe_6810982_3210.html" }
+    },
+    {
+      "categorie": "international",
+      "q": "En Suisse, un journaliste qui a révélé un scandale bancaire a été inculpé en vertu de quelle loi, ce qui inquiète la profession ?",
+      "choix": ["La loi sur les banques", "La loi sur le chocolat", "La loi sur la chasse", "La loi sur les montres"],
+      "reponse": 0,
+      "explication": "Lukas Hässig est poursuivi au nom de la loi sur les banques, une inculpation inédite.",
+      "source": { "nom": "Le Monde", "url": "https://www.lemonde.fr/les-decodeurs/article/2026/11/16/en-suisse-l-inculpation-inedite-d-un-journaliste-via-la-loi-sur-les-banques-nourrit-des-inquietudes_6811403_4355770.html" }
+    },
+    {
+      "categorie": "national",
+      "q": "Quelle part des foyers fiscaux français a payé l'impôt sur le revenu en 2025 ?",
+      "choix": ["18 %", "48 %", "68 %", "88 %"],
+      "reponse": 1,
+      "explication": "48 % des foyers, soit 500 000 de plus en un an, pour 92,6 milliards d'euros de recettes.",
+      "source": { "nom": "Rekto News", "url": "https://rekto.substack.com/p/lundi-16-novembre-2026" }
+    },
+    {
+      "categorie": "national",
+      "q": "Quel grand magasin parisien, dont les ventes du boulevard Haussmann ont reculé, présente un plan pour 2030 ?",
+      "choix": ["Le Printemps", "La Samaritaine", "Le Bon Marché", "Le BHV"],
+      "reponse": 0,
+      "explication": "Son nouveau président, Rémy Baume, dévoile un plan pour le groupe (20 magasins et 9 Citadium).",
+      "source": { "nom": "Rekto News", "url": "https://rekto.substack.com/p/lundi-16-novembre-2026" }
+    },
+    {
+      "categorie": "national",
+      "q": "Sur quel type d'embarcation la Marine française a-t-elle saisi au moins 146 kg de cocaïne dans l'Atlantique ?",
+      "choix": ["Un voilier de course", "Un semi-submersible", "Un paquebot de croisière", "Un hydravion"],
+      "reponse": 1,
+      "explication": "Ces engins à moitié immergés sont utilisés par les trafiquants pour échapper aux radars.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/video/2026/11/16/la-marine-francaise-saisit-au-moins-146-kg-de-cocaine-sur-un-semi-submersible-dans-latlant" }
+    },
+    {
+      "categorie": "local",
+      "q": "Combien d'hectares Airbus est-il autorisé à aménager en plus autour de Toulouse d'ici 2031 ?",
+      "choix": ["5 hectares", "54 hectares", "540 hectares", "5 400 hectares"],
+      "reponse": 1,
+      "explication": "Une dérogation de l'État permet d'artificialiser jusqu'à 54 ha, pour viser 75 A320 produits par mois en 2027. Le site toulousain couvre déjà environ 700 ha.",
+      "source": { "nom": "Le Journal Toulousain", "url": "https://www.lejournaltoulousain.fr/occitanie/haute-garonne/toulouse/pourquoi-airbus-prevoit-de-creer-une-usine-supplementaire-en-2031-pres-de-toulouse-403791/" }
+    },
+    {
+      "categorie": "local",
+      "q": "Pour la grève de ce mardi 17 novembre à Toulouse, d'où part le cortège ?",
+      "choix": ["Place du Capitole", "Allées Jean-Jaurès", "Place Saint-Pierre", "Jardin des Plantes"],
+      "reponse": 1,
+      "explication": "Rendez-vous à 11 h aux allées Jean-Jaurès, puis direction Saint-Cyprien, à l'appel de six syndicats de la fonction publique.",
+      "source": { "nom": "Le Journal Toulousain", "url": "https://www.lejournaltoulousain.fr/occitanie/haute-garonne/toulouse/greve-17-novembre-toulouse-transports-ecoles-quels-secteurs-perturbes-404145/" }
+    },
+    {
+      "categorie": "culture",
+      "q": "Quel acteur a été officiellement annoncé comme le nouveau James Bond ?",
+      "choix": ["Tom Holland", "Robert Pattinson", "Idris Elba", "Timothée Chalamet"],
+      "reponse": 1,
+      "explication": "Il succède à Daniel Craig ; le prochain 007 sera réalisé par Denis Villeneuve.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/robert-pattinson-est-officiellement-le-nouveau-james-bond-11816372" }
+    },
+    {
+      "categorie": "insolite",
+      "q": "Quels animaux ont traversé par centaines le centre-ville de Nuremberg, en Allemagne, pour rejoindre leurs quartiers d'hiver ?",
+      "choix": ["Des vaches", "Des moutons", "Des oies", "Des rennes"],
+      "reponse": 1,
+      "explication": "Environ 600 moutons ont défilé dans les rues de la ville.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/video/2026/11/16/environ-600-moutons-traversent-le-centre-de-nuremberg-vers-leurs-quartiers-dhiver" }
+    }
+  ]
+}
