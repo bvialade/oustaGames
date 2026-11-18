@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <title>Pousse-pièces · OustaGames</title>
+  <meta name="theme-color" content="#12081f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="pousse.css">
+</head>
+<body>
+  <header class="barre">
+    <a class="rond" href="../" aria-label="Retour au menu">‹</a>
+    <div class="porte" id="porte" aria-label="Pièces dans le porte-monnaie">
+      <span class="sou"></span><b id="nPorte">0</b>
+      <small id="recharge"></small>
+    </div>
+    <div class="niv" id="niv">
+      <b id="nNiv">Niv. 1</b>
+      <i><s id="xp"></s></i>
+    </div>
+    <button class="rond" id="bAide" aria-label="Comment jouer">?</button>
+  </header>
+
+  <div id="scene"><canvas id="cv"></canvas></div>
+
+  <nav class="actions">
+    <button id="bSec" class="act"><span>💥</span>Secousse<b id="nSec">0</b></button>
+    <button id="bMis" class="act"><span>🎯</span>Missions<i id="pointMis" hidden></i></button>
+    <button id="bTre" class="act"><span>🎁</span>Trésors<b id="nTre">0</b></button>
+    <button id="bReg" class="act"><span>⚙️</span>Réglages</button>
+  </nav>
+
+  <div class="voile" id="voile" hidden>
+    <section class="feuille" id="feuille" role="dialog" aria-modal="true">
+      <button class="fermer" id="bFermer" aria-label="Fermer">×</button>
+      <div id="contenu"></div>
+    </section>
+  </div>
+
+  <div id="bulles"></div>
+
+  <script src="physique.js"></script>
+  <script src="jeu.js"></script>
+</body>
+</html>
