@@ -1,0 +1,85 @@
+{
+  "date": "2026-11-18",
+  "questions": [
+    {
+      "categorie": "international",
+      "q": "Quel pays a fait décoller des avions de combat après une intrusion d'avions russes dans sa zone de défense aérienne ?",
+      "choix": ["La Corée du Sud", "L'Australie", "Le Canada", "La Norvège"],
+      "reponse": 0,
+      "explication": "Séoul a déployé des chasseurs ; Taïwan et le Japon ont aussi été mis en alerte, et Tokyo a protesté auprès de Moscou.",
+      "source": { "nom": "Le Monde", "url": "https://www.lemonde.fr/international/live/2026/11/17/en-direct-guerre-en-ukraine-seoul-deploie-des-avions-apres-une-intrusion-russe-dans-sa-zone-de-defense-aerienne-taiwan-et-tokyo-egalement-en-alerte_6810982_3210.html" }
+    },
+    {
+      "categorie": "international",
+      "q": "Quelle ville chinoise, vitrine de la modernisation du pays, accueille le sommet de l'APEC les 18 et 19 novembre ?",
+      "choix": ["Pékin", "Shanghai", "Shenzhen", "Hong Kong"],
+      "reponse": 2,
+      "explication": "Shenzhen, ancien village de pêcheurs devenu métropole high-tech, reçoit les dirigeants d'Asie-Pacifique.",
+      "source": { "nom": "Le Monde", "url": "https://www.lemonde.fr/international/article/2026/11/17/shenzhen-vitrine-de-la-modernisation-chinoise-ici-tout-a-tellement-change_6812909_3210.html" }
+    },
+    {
+      "categorie": "international",
+      "q": "Quelle amende l'Italie a-t-elle infligée à Meta pour avoir accédé aux photos d'utilisateurs Android sans consentement clair ?",
+      "choix": ["8 millions d'euros", "80 millions d'euros", "805 millions d'euros", "8 milliards d'euros"],
+      "reponse": 2,
+      "explication": "805 millions d'euros ; environ 20 millions d'Italiens seraient concernés. Meta peut faire appel.",
+      "source": { "nom": "Rekto News", "url": "https://rekto.substack.com/p/mardi-17-novembre-2026" }
+    },
+    {
+      "categorie": "national",
+      "q": "Le Sénat a voté le retour de la réforme des retraites de 2023. Quel âge légal de départ rétablit-elle ?",
+      "choix": ["60 ans", "62 ans", "64 ans", "67 ans"],
+      "reponse": 2,
+      "explication": "Amendement adopté par 200 voix contre 129, contre l'avis du gouvernement ; le vote n'est pas définitif.",
+      "source": { "nom": "Public Sénat", "url": "https://www.publicsenat.fr/actualites/politique/le-senat-vote-la-reactivation-de-la-reforme-des-retraites-de-2023-contre-lavis-du-gouvernement" }
+    },
+    {
+      "categorie": "national",
+      "q": "À partir du 20 novembre, les petits découverts bancaires seront traités comme…",
+      "choix": ["Un crédit à la consommation", "Un cadeau de la banque", "Une amende", "Un livret d'épargne"],
+      "reponse": 0,
+      "explication": "Les découverts de moins de 200 € ou de moins d'un mois suivront les règles du crédit à la consommation, avec vérification de la solvabilité.",
+      "source": { "nom": "Rekto News", "url": "https://rekto.substack.com/p/mardi-17-novembre-2026" }
+    },
+    {
+      "categorie": "national",
+      "q": "Quelle marque est jugée à Paris pour obsolescence programmée et blocage des réparations de ses téléphones ?",
+      "choix": ["Samsung", "Apple", "Xiaomi", "Google"],
+      "reponse": 1,
+      "explication": "Apple est accusée d'avoir rendu plus difficile la réparation des iPhone.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/2026/11/17/apple-jugee-a-paris-pour-obsolescence-programmee-et-blocage-des-reparations-diphone" }
+    },
+    {
+      "categorie": "local",
+      "q": "Quel joueur du Stade toulousain reprend, avec son frère, une célèbre charcuterie toulousaine ?",
+      "choix": ["Antoine Dupont", "Matthis Lebel", "Thomas Ramos", "Romain Ntamack"],
+      "reponse": 1,
+      "explication": "L'ailier et son frère Melvyn ont repris la maison Deux-Chavanne, qui deviendra « Maison Lebel » en janvier 2027.",
+      "source": { "nom": "Le Journal Toulousain", "url": "https://www.lejournaltoulousain.fr/occitanie/haute-garonne/toulouse/matthis-lebel-lailier-du-stade-toulousain-qui-reprend-une-institution-de-la-charcuterie-toulousaine-403878/" }
+    },
+    {
+      "categorie": "local",
+      "q": "À l'usine d'eau potable de Pech-David, que traite le nouveau dispositif « Qualité + » ?",
+      "choix": ["Le calcaire seulement", "Les PFAS, pesticides et résidus de médicaments", "Le goût de chlore", "La couleur de l'eau"],
+      "reponse": 1,
+      "explication": "Charbon actif et ultraviolets traitent jusqu'à 150 000 m³ d'eau par jour pour les Toulousains.",
+      "source": { "nom": "Le Journal Toulousain", "url": "https://www.lejournaltoulousain.fr/occitanie/haute-garonne/toulouse/pfas-pesticides-nouveau-dispositif-installe-pech-david-ameliorer-eau-robinet-404086/" }
+    },
+    {
+      "categorie": "culture",
+      "q": "Quel jeu vidéo ultra-attendu sort ce jeudi 19 novembre ?",
+      "choix": ["Minecraft 2", "GTA 6", "Mario Kart 10", "Fortnite 2"],
+      "reponse": 1,
+      "explication": "Grand Theft Auto VI, de Rockstar Games, est l'un des lancements les plus attendus de l'histoire du jeu vidéo.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/gta-6-sort-ce-19-novembre-dix-chiffres-qui-montrent-deja-l-ampleur-du-phenomene-11816644" }
+    },
+    {
+      "categorie": "insolite",
+      "q": "Lancée en 1977, la sonde Voyager 1 atteint ce mercredi une distance record de la Terre. Laquelle ?",
+      "choix": ["Une heure-lumière", "Un jour-lumière", "Une semaine-lumière", "Une année-lumière"],
+      "reponse": 1,
+      "explication": "Près de 26 milliards de km : la lumière met 24 heures pour faire le trajet.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/la-sonde-voyager-1-premier-explorateur-interstellaire-proche-d-un-record-elle-sera-a-un-jour-lumiere-de-la-terre-ce-mercredi-18-novembre-11816625" }
+    }
+  ]
+}
