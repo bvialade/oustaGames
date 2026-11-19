@@ -27,6 +27,14 @@ def verifier(chemin):
         if not src.get('nom') or not str(src.get('url', '')).startswith('https://'):
             erreurs.append(f'article {i} : source incomplète')
         urls[src.get('url')] += 1
+        det = a.get('detail')
+        if not isinstance(det, list) or len(det) < 2:
+            erreurs.append(f'article {i} : résumé détaillé (detail) absent ou trop court')
+        elif any(len(p.split()) > 140 for p in det):
+            erreurs.append(f'article {i} : paragraphe de detail trop long (140 mots max)')
+        img = a.get('image')
+        if img is not None and not str(img).startswith('https://'):
+            erreurs.append(f'article {i} : image doit être une URL https')
         if len(a.get('resume', '')) > 450:
             erreurs.append(f'article {i} : résumé trop long ({len(a["resume"])} caractères)')
     for u, n in urls.items():
@@ -39,7 +47,8 @@ def verifier(chemin):
         if n > 6:
             erreurs.append(f'{m} cité {n} fois (maximum 6)')
     une = sum(1 for a in arts if a.get('une'))
-    print(f"{len(arts)} articles, {len(medias)} médias, {une} à la une")
+    imgs = sum(1 for a in arts if a.get('image'))
+    print(f"{len(arts)} articles, {len(medias)} médias, {une} à la une, {imgs} vignettes")
     print('Rubriques :', dict(Counter(a.get('rubrique') for a in arts)))
     print('Médias :', dict(medias.most_common()))
     for e in erreurs:
