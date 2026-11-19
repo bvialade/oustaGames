@@ -1,0 +1,296 @@
+{
+ "date": "2026-11-19",
+ "articles": [
+  {
+   "rubrique": "monde",
+   "une": true,
+   "titre": "Xi Jinping réunit Donald Trump et Vladimir Poutine à Shenzhen",
+   "resume": "En marge du sommet de l'APEC, le président chinois a accueilli à Shenzhen les présidents américain et russe pour leur première réunion à trois. Trump et Poutine ne s'étaient plus rencontrés depuis le sommet d'Alaska en août 2025 ; le Kremlin n'a pas détaillé l'ordre du jour.",
+   "source": {
+    "nom": "Euronews",
+    "url": "https://fr.euronews.com/2026/11/18/donald-trump-xi-jinping-et-vladimir-poutine-a-shenzhen-pour-une-rencontre-historique"
+   }
+  },
+  {
+   "rubrique": "france",
+   "une": true,
+   "titre": "Édouard Philippe présente un programme de 142 mesures pour 2027",
+   "resume": "Le candidat d'Horizons propose notamment de supprimer 250 000 postes de fonctionnaires, de mettre fin aux 35 heures, d'introduire une part de capitalisation dans les retraites et de verser une allocation familiale de 350 € dès le premier enfant. Il vise un déficit sous 3 % du PIB.",
+   "source": {
+    "nom": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+   }
+  },
+  {
+   "rubrique": "economie",
+   "une": true,
+   "titre": "Anthropic fait son entrée en Bourse au Nasdaq",
+   "resume": "L'entreprise d'intelligence artificielle, qui développe Claude, est cotée à partir du 19 novembre sous le symbole ANT, avec un prix d'introduction annoncé entre 70 et 78 dollars par action. Selon les calculs de la RTBF, l'opération pourrait la valoriser autour de 1 300 à 1 500 milliards de dollars.",
+   "source": {
+    "nom": "RTBF",
+    "url": "https://www.rtbf.be/article/entree-en-bourse-d-anthropic-un-premier-test-financier-pour-l-intelligence-artificielle-11817255"
+   }
+  },
+  {
+   "rubrique": "monde",
+   "titre": "Bruxelles propose un prêt de 45 milliards d'euros à l'Ukraine pour 2027",
+   "resume": "Ursula von der Leyen propose 25 milliards pour l'armée ukrainienne et 20 milliards pour le budget de l'État, financés par un emprunt commun de l'UE. L'Ukraine ne rembourserait qu'après avoir reçu des réparations de guerre de la Russie.",
+   "source": {
+    "nom": "Euronews",
+    "url": "https://fr.euronews.com/2026/11/18/ue-von-der-leyen-propose-un-pret-de-45-milliards-deuros-a-lukraine"
+   }
+  },
+  {
+   "rubrique": "monde",
+   "titre": "Gaza : Israël mène une opération dans le centre du territoire malgré le cessez-le-feu",
+   "resume": "L'armée israélienne a lancé mercredi ce qu'elle présente comme une « opération précise » dans le centre de la bande de Gaza, visant selon elle un tunnel du Hamas. Elle a annoncé jeudi l'avoir achevée.",
+   "source": {
+    "nom": "Euronews",
+    "url": "https://fr.euronews.com/2026/11/18/israel-lance-une-operation-precise-dans-le-centre-de-gaza-malgre-le-cessez-le-feu"
+   }
+  },
+  {
+   "rubrique": "monde",
+   "titre": "États-Unis : Mary Peltola remporte le siège de sénatrice de l'Alaska",
+   "resume": "La démocrate l'emporte dans un État longtemps acquis aux républicains. Sa victoire porte la majorité démocrate au Sénat américain à 56 sièges sur 100.",
+   "source": {
+    "nom": "Euronews",
+    "url": "https://fr.euronews.com/2026/11/18/mary-peltola-remporte-le-siege-du-senat-en-alaska-et-fait-basculer-la-majorite-democrate-a"
+   }
+  },
+  {
+   "rubrique": "monde",
+   "titre": "Hakeem Jeffries en passe de présider la Chambre des représentants",
+   "resume": "Le chef des démocrates à la Chambre américaine s'approche du perchoir après la victoire de son camp. Il deviendrait le premier président noir de la Chambre des représentants.",
+   "source": {
+    "nom": "RTBF",
+    "url": "https://www.rtbf.be/article/hakeem-jeffries-en-passe-de-devenir-le-premier-president-noir-de-la-chambre-americaine-des-representants-aux-etats-unis-11817495"
+   }
+  },
+  {
+   "rubrique": "monde",
+   "titre": "La rougeole redevient endémique aux États-Unis",
+   "resume": "Selon l'Organisation panaméricaine de la santé, les États-Unis perdent leur statut de pays ayant éliminé la rougeole, faute d'avoir interrompu la circulation du virus sur leur territoire.",
+   "source": {
+    "nom": "RTBF",
+    "url": "https://www.rtbf.be/article/les-etats-unis-perdent-leur-statut-de-pays-ayant-elimine-la-rougeole-selon-l-organisation-panamericaine-de-la-sante-11817260"
+   }
+  },
+  {
+   "rubrique": "monde",
+   "titre": "Tempêtes Bruna et Charles : records de pluie au Portugal et à Madère",
+   "resume": "Selon l'institut météo portugais (IPMA), les deux tempêtes ont battu des records de pluie et de vent entre le 7 et le 12 novembre. À Madère, une station a relevé 502,7 mm de pluie en 24 heures, un record national.",
+   "source": {
+    "nom": "Euronews",
+    "url": "https://fr.euronews.com/2026/11/18/les-tempetes-bruna-et-charles-battent-des-records-de-pluie-et-de-vent-au-portugal-et-a-mad"
+   }
+  },
+  {
+   "rubrique": "france",
+   "titre": "Défenseur des droits : 106 saisines sur le maintien de l'ordre en manifestation",
+   "resume": "Pour son premier point presse, le nouveau Défenseur des droits, François-Noël Buffet, indique avoir reçu 106 saisines visant les forces de l'ordre lors de manifestations, dont 39 pour des violences avec armes. Il appelle à « reposer la question du maintien de l'ordre ».",
+   "source": {
+    "nom": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/societe/mobilisation-sociale-le-nouveau-defenseur-des-droits-francois-noel-buffet-declare-avoir-recu-106-saisines-relatives-au-maintien-de-lordre-lors-de-manifestations"
+   }
+  },
+  {
+   "rubrique": "france",
+   "titre": "Logement : les députés suppriment l'interdiction de louer les passoires thermiques",
+   "resume": "Un amendement du RN adopté à l'Assemblée supprime le calendrier qui interdisait progressivement la location des logements les plus mal isolés, classés selon leur diagnostic de performance énergétique (DPE). Le texte doit encore poursuivre son parcours parlementaire.",
+   "source": {
+    "nom": "BFM Business",
+    "url": "https://www.bfmtv.com/economie/video-l-edito-eco-logement-les-deputes-adoptent-un-amendement-rn-supprimant-les-interdictions-de-louer-des-passoires-thermiques_VN-202611180166.html"
+   }
+  },
+  {
+   "rubrique": "france",
+   "titre": "Budget 2027 : les sénateurs socialistes dénoncent l'absence de dialogue avec Matignon",
+   "resume": "Les sénateurs PS jugent le projet de budget « très marqué à droite » et disent n'avoir reçu aucun signe d'ouverture de Sébastien Lecornu. Ils annoncent environ 200 amendements sur le volet fiscal avant l'examen du projet de loi de finances au Sénat.",
+   "source": {
+    "nom": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/politique/nada-aucun-signe-face-au-risque-de-censure-sur-le-budget-les-socialistes-denoncent-labsence-de-dialogue-avec-sebastien-lecornu"
+   }
+  },
+  {
+   "rubrique": "france",
+   "titre": "Primaire à droite : Bruno Retailleau ne veut pas d'Éric Zemmour",
+   "resume": "Les équipes d'Attal, Retailleau et Lisnard ont évoqué une primaire en janvier. Pour Bruno Retailleau, la participation d'Éric Zemmour la ferait échouer ; le principe n'est pas encore acté et une nouvelle réunion est prévue la semaine prochaine.",
+   "source": {
+    "nom": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/politique/presidentielle-2027-la-participation-deric-zemmour-flinguerait-la-primaire-estime-bruno-retailleau"
+   }
+  },
+  {
+   "rubrique": "france",
+   "titre": "Rénovation des lycées : les régions demandent déjà plus d'un milliard d'euros",
+   "resume": "Selon le directeur de la Banque des Territoires, Antoine Saintoyant, plusieurs régions discutent de prêts de « plusieurs centaines de millions d'euros » pour rénover leurs lycées, dans un contexte de mobilisation lycéenne depuis octobre.",
+   "source": {
+    "nom": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/education/renovation-des-lycees-les-demandes-des-regions-depassent-deja-le-milliard-deuros-rapporte-le-president-de-la-banque-des-territoires"
+   }
+  },
+  {
+   "rubrique": "france",
+   "titre": "Asile aux frontières : Laurent Nuñez interrogé sur les failles de la nouvelle procédure",
+   "resume": "Auditionné au Sénat, le ministre de l'Intérieur reconnaît des lacunes dans l'application du Pacte européen sur l'asile et la migration. Après une visite à Roissy, la sénatrice LR Nadine Bellurot affirme que 90 à 95 % des personnes concernées prennent la fuite.",
+   "source": {
+    "nom": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/parlementaire/demandes-dasile-95-des-personnes-concernees-en-fuite-laurent-nunez-interpelle-au-senat-sur-les-rates-de-la-nouvelle-procedure-aux-frontieres"
+   }
+  },
+  {
+   "rubrique": "france",
+   "titre": "Pluies : quatre départements en vigilance orange ce jeudi",
+   "resume": "Météo-France annonce des cumuls de pluie exceptionnels et place quatre départements en vigilance orange pluie-inondation. Des orages sont aussi possibles dans 35 départements en vigilance jaune, et de fortes vagues sur une partie du littoral.",
+   "source": {
+    "nom": "franceinfo",
+    "url": "https://www.franceinfo.fr/environnement/meteo/alertes-meteo-et-vigilances/vigilance-orange-pluies-inondations-cumuls-exceptionnels-attendus-dans-4-departements-ce-19-novembre-2026_8289473.html"
+   }
+  },
+  {
+   "rubrique": "toulouse",
+   "titre": "Métro ligne C : le tunnelier Jeanne Marvig atteint la station Saint-Martin Airbus",
+   "resume": "Le tunnelier est arrivé le 16 novembre à la future station Saint-Martin Airbus. Plus au sud, à Montaudran, la pose des rails a commencé dans le tunnel de la troisième ligne du métro toulousain.",
+   "source": {
+    "nom": "Le Journal Toulousain",
+    "url": "https://www.lejournaltoulousain.fr/occitanie/haute-garonne/toulouse/pose-rails-tunnelier-chantier-ligne-c-metro-franchit-plusieurs-caps-404269/"
+   }
+  },
+  {
+   "rubrique": "toulouse",
+   "titre": "LGV Bordeaux-Toulouse : la Cour des comptes recommande cinq ans de pause",
+   "resume": "Dans une note du 16 novembre, la Cour des comptes propose de suspendre pendant cinq ans les grands projets d'infrastructure non encore lancés, dont la LGV Bordeaux-Toulouse-Dax, estimée à 15,4 milliards d'euros. Les travaux au nord de Toulouse, déjà engagés, ne sont pas concernés.",
+   "source": {
+    "nom": "Le Journal Toulousain",
+    "url": "https://www.lejournaltoulousain.fr/occitanie/haute-garonne/toulouse/lgv-toulouse-bordeaux-la-cour-des-comptes-preconise-cinq-ans-de-pause-404424/"
+   }
+  },
+  {
+   "rubrique": "toulouse",
+   "titre": "Pollution au plomb : les habitants de six quartiers invités à rejoindre une action en justice",
+   "resume": "Le collectif CTPP31 prépare une action collective contre la pollution laissée par l'ancienne usine STCM de Fondeyre, qui a fondu du plomb de 1952 à 2011. Les habitants de Fondeyre, Barrière de Paris, Minimes, Ginestous, Lalande et La Salade peuvent s'y joindre jusqu'au 31 décembre.",
+   "source": {
+    "nom": "Le Journal Toulousain",
+    "url": "https://www.lejournaltoulousain.fr/occitanie/haute-garonne/toulouse/pollution-au-plomb-a-toulouse-les-habitants-de-six-quartiers-appeles-a-rejoindre-une-action-en-justice-404415/"
+   }
+  },
+  {
+   "rubrique": "toulouse",
+   "titre": "Labège : le futur quartier Enova se précise",
+   "resume": "Le Sicoval a finalisé le plan guide de l'ancien Labège-Innopole : 230 hectares à transformer d'ici 2050 avec logements, commerces, bureaux et espaces verts. Le prolongement de la ligne B du métro doit desservir trois stations à Labège en septembre 2027.",
+   "source": {
+    "nom": "Le Journal Toulousain",
+    "url": "https://www.lejournaltoulousain.fr/occitanie/haute-garonne/actualites-haute-garonne/labege-projet-xxl-enova-franchit-etape-voici-comment-quartier-changer-404360/"
+   }
+  },
+  {
+   "rubrique": "toulouse",
+   "titre": "Le château de Laréole, joyau Renaissance né du pastel",
+   "resume": "À une quarantaine de kilomètres de Toulouse, ce château a été bâti en 1579 par Pierre de Cheverry, enrichi par le commerce du pastel, la plante qui donnait le bleu. Il appartient au Département de la Haute-Garonne depuis 1984 et se visite avec ses jardins.",
+   "source": {
+    "nom": "Le Journal Toulousain",
+    "url": "https://www.lejournaltoulousain.fr/occitanie/haute-garonne/toulouse/pres-de-toulouse-ce-chateau-renaissance-et-ses-jardins-semblent-sortis-dun-conte-de-fees-404001/"
+   }
+  },
+  {
+   "rubrique": "economie",
+   "titre": "Deutsche Bank contourne ses propres règles pour financer des fabricants d'armes",
+   "resume": "Selon des documents internes révélés par Le Monde et ses partenaires, la première banque allemande passe outre l'avis de son service de contrôle des risques pour financer des marchands d'armes.",
+   "source": {
+    "nom": "Le Monde",
+    "url": "https://www.lemonde.fr/les-decodeurs/article/2026/11/18/inside-deutsche-bank-les-contorsions-du-geant-bancaire-pour-financer-les-marchands-d-armes_6813080_4355770.html"
+   }
+  },
+  {
+   "rubrique": "economie",
+   "titre": "Royaume-Uni : l'inflation remonte à 3,6 % en octobre",
+   "resume": "Selon l'Office national des statistiques (ONS), la hausse des prix est passée de 3,5 % en septembre à 3,6 % en octobre sur un an. Les carburants en sont le principal moteur, en hausse de 33,2 % sur un an, avec un gazole à un niveau record.",
+   "source": {
+    "nom": "Euronews",
+    "url": "https://fr.euronews.com/2026/11/18/royaume-uni-linflation-monte-a-36-en-octobre-portee-par-les-carburants"
+   }
+  },
+  {
+   "rubrique": "economie",
+   "titre": "Pompes à chaleur : un « leasing social » pour les ménages modestes",
+   "resume": "Lancé le 17 novembre, le dispositif permet de remplacer une chaudière au gaz ou au fioul par une pompe à chaleur sans avancer tout le coût. L'aide, financée par les certificats d'économies d'énergie, atteint 9 800 € en moyenne, avec un remboursement étalé sur deux à trois ans.",
+   "source": {
+    "nom": "Rekto",
+    "url": "https://rekto.substack.com/p/jeudi-19-novembre-2026"
+   }
+  },
+  {
+   "rubrique": "sciences",
+   "titre": "Mars : Curiosity détecte des indices d'eau à la surface",
+   "resume": "En analysant plus de dix ans de mesures du rover dans le cratère Gale, des chercheurs de la Nasa observent des variations saisonnières des isotopes de l'oxygène du CO2 inexpliquées. L'étude, publiée dans PNAS, évoque de l'eau fixée aux grains du sol ; la piste reste à confirmer.",
+   "source": {
+    "nom": "Futura",
+    "url": "https://www.futura-sciences.com/sciences/actualites/mars-depuis-13-ans-rover-nasa-observe-phenomene-etrange-mars-chercheurs-soupconnent-desormais-presence-eau-surface-139429/"
+   }
+  },
+  {
+   "rubrique": "sciences",
+   "titre": "Vieillissement : 51 études passées au crible",
+   "resume": "Une méta-analyse publiée dans Nature Medicine compare l'effet de nombreuses interventions sur plus de 110 marqueurs de l'âge biologique. Une alimentation saine, l'activité physique et certains médicaments (metformine, sémaglutide) le réduisent, tandis que les compléments alimentaires n'ont pas montré d'effet probant.",
+   "source": {
+    "nom": "Futura",
+    "url": "https://www.futura-sciences.com/sante/actualites/vieillissement-nous-avons-analyse-resultats-51-etudes-ralentissement-vieillissement-voici-bonnes-habitudes-font-vraiment-vivre-plus-longtemps-139412/"
+   }
+  },
+  {
+   "rubrique": "sciences",
+   "titre": "Diagnostic médical : une IA de Microsoft plus précise que des généralistes sur des cas complexes",
+   "resume": "Selon une étude publiée dans Science, l'outil, qui raisonne étape par étape en demandant des examens, a été plus de deux fois plus précis que des médecins généralistes sur plus de 300 cas inhabituels. Un test en conditions réelles est prévu dans un hôpital de Boston.",
+   "source": {
+    "nom": "Futura",
+    "url": "https://www.futura-sciences.com/sante/actualites/medecine-ia-pose-deux-fois-plus-bons-diagnostics-medecins-cas-complexes-voici-elle-y-prend-k8p9-139407/"
+   }
+  },
+  {
+   "rubrique": "culture",
+   "titre": "GTA VI sort ce jeudi, un lancement hors norme",
+   "resume": "Le jeu de Rockstar Games, qui se déroule à Vice City, inspirée de Miami, sort le 19 novembre. Selon Sensor Tower, plus de 10 millions de copies auraient déjà été vendues ; au Royaume-Uni, environ 83 000 jours de congé auraient été posés pour l'occasion.",
+   "source": {
+    "nom": "Futura",
+    "url": "https://www.futura-sciences.com/tech/actualites/jeux-video-gta-vi-sort-demain-monde-travail-prepare-phenomene-totalement-inedit-139320/"
+   }
+  },
+  {
+   "rubrique": "culture",
+   "titre": "Coldplay : Chris Martin et Jonny Buckland annoncent un concert caritatif à Londres",
+   "resume": "Les deux membres du groupe joueront le 15 décembre à la Hackney Church, une petite église londonienne. Les places seront tirées au sort au profit d'associations.",
+   "source": {
+    "nom": "RTBF",
+    "url": "https://www.rtbf.be/article/coldplay-chris-martin-et-jonny-buckland-annoncent-un-concert-intimiste-caritatif-11817055"
+   }
+  },
+  {
+   "rubrique": "sport",
+   "titre": "Masters de Turin : Alcaraz domine Medvedev",
+   "resume": "Carlos Alcaraz a battu Daniil Medvedev 6-2, 6-4 mercredi au Masters ATP de Turin et se rapproche des demi-finales, où Alexander Zverev est déjà qualifié.",
+   "source": {
+    "nom": "RTBF",
+    "url": "https://www.rtbf.be/article/masters-atp-alcaraz-tout-proche-du-dernier-carre-apres-avoir-ec-ure-medvedev-11817452"
+   }
+  },
+  {
+   "rubrique": "sport",
+   "titre": "Classement FIFA : la France termine l'année à la 3e place",
+   "resume": "Dans le dernier classement mondial de 2026, les Bleus restent troisièmes derrière l'Espagne et l'Argentine. Le Maroc figure dans le top 5.",
+   "source": {
+    "nom": "France 24",
+    "url": "https://www.titrespresse.com/29726072603/fifa-maroc-espagne"
+   }
+  },
+  {
+   "rubrique": "insolite",
+   "titre": "Fordlândia, la ville rêvée d'Henry Ford en pleine Amazonie",
+   "resume": "En 1928, le constructeur automobile fait bâtir une ville au Brésil pour produire lui-même le caoutchouc de ses pneus. Plantations malades, gestion à distance et conflits avec les ouvriers : le projet tourne au fiasco.",
+   "source": {
+    "nom": "RTBF",
+    "url": "https://www.rtbf.be/article/fordlandia-le-reve-amazonien-d-henry-ford-qui-a-vire-au-fiasco-11816929"
+   }
+  }
+ ]
+}
