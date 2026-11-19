@@ -56,7 +56,7 @@ et un lien vers le Quiz de l'actu du jour.
 - Répartition indicative : 7 `monde`, 7 `france`, 4 `toulouse` (Toulouse, Haute-Garonne, Occitanie proche),
   4 `economie`, 3 `sciences` (sciences, santé, environnement, tech), 2 `culture`, 2 `sport`, 1 `insolite`.
 - Actualités des dernières 24 à 48 heures. Pour Toulouse, jusqu'à 7 jours si besoin.
-- **Sources variées** : au moins 8 médias différents, au plus 6 articles par média.
+- **Sources variées** : au moins 8 médias différents, au plus 6 articles par média ; viser au moins 3 articles pour chacun des 4 journaux ci-dessous quand leurs flux sont accessibles.
   Un agrégateur (Titres Presse, Presse Évasion, Rekto) compte comme le média qu'il cite, et on cite de préférence l'article original.
 - Chaque résumé vient d'un article lu (ou d'un extrait de recherche qui énonce clairement le fait, confirmé ailleurs),
   et `source.url` est le lien de cet article. Ne jamais inventer une URL.
@@ -67,6 +67,27 @@ et un lien vers le Quiz de l'actu du jour.
 - Ne pas modifier les éditions précédentes.
 
 ## Sources
+
+**À privilégier (demande de Bastien, 19/11/2026)** : Le Monde, Libération, Le Figaro et La Dépêche du Midi.
+Ils bloquent l'agent web-fetch, mais leurs flux RSS se lisent avec `curl` quand l'environnement cloud du projet
+autorise leurs domaines (www.lemonde.fr, www.liberation.fr, www.lefigaro.fr, www.ladepeche.fr) :
+
+| Média | Flux |
+|---|---|
+| Le Monde | https://www.lemonde.fr/rss/une.xml (et /international/rss_full.xml, /politique/rss_full.xml, /economie/rss_full.xml, /sciences/rss_full.xml, /culture/rss_full.xml, /sport/rss_full.xml) |
+| Libération | https://www.liberation.fr/arc/outboundfeeds/rss-all/?outputType=xml |
+| Le Figaro | https://www.lefigaro.fr/rss/figaro_actualites.xml |
+| La Dépêche | https://www.ladepeche.fr/rss.xml et https://www.ladepeche.fr/communes/toulouse,31555.rss |
+
+```sh
+curl -sL -m 20 -A "Mozilla/5.0" "https://www.lemonde.fr/rss/une.xml" -o /tmp/lemonde.xml
+```
+
+Ces adresses n'ont pas encore pu être testées depuis le cloud (réseau fermé le 19/11/2026) : corriger ce tableau si l'une d'elles ne répond pas.
+Chaque élément donne le titre, le lien, la date, un chapeau et souvent l'image (`media:content`, `enclosure`) :
+utiliser ce lien et cette image tels quels. Pour le résumé détaillé, lire l'article avec `curl` si la page est accessible
+(les articles réservés aux abonnés n'ont souvent que le début) ; sinon, 2 paragraphes à partir du chapeau et d'autres articles lus sur le même sujet.
+Si `curl` échoue (accès refusé par le réseau), le noter dans le compte rendu et passer aux autres sources.
 
 Les grands sites français (franceinfo, Le Monde, BFMTV, Le Figaro, Libération, 20 Minutes, La Dépêche, actu.fr, Europe 1…)
 bloquent souvent la lecture directe : les citer depuis un résultat de recherche quand l'extrait énonce le fait.
