@@ -1,0 +1,85 @@
+{
+  "date": "2026-11-19",
+  "questions": [
+    {
+      "categorie": "international",
+      "q": "Quel prêt Ursula von der Leyen propose-t-elle d'accorder à l'Ukraine pour 2027 ?",
+      "choix": ["4,5 milliards d'euros", "45 milliards d'euros", "450 milliards d'euros", "4 500 milliards d'euros"],
+      "reponse": 1,
+      "explication": "25 milliards pour l'armée et 20 pour le budget, financés par un emprunt commun ; l'Ukraine ne rembourserait qu'après des réparations russes.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/2026/11/18/ue-von-der-leyen-propose-un-pret-de-45-milliards-deuros-a-lukraine" }
+    },
+    {
+      "categorie": "international",
+      "q": "Dans quel État américain la démocrate Mary Peltola a-t-elle remporté le siège de sénatrice ?",
+      "choix": ["Le Texas", "L'Alaska", "Hawaï", "La Floride"],
+      "reponse": 1,
+      "explication": "Sa victoire porte la majorité démocrate au Sénat à 56 sièges sur 100.",
+      "source": { "nom": "Euronews", "url": "https://fr.euronews.com/2026/11/18/mary-peltola-remporte-le-siege-du-senat-en-alaska-et-fait-basculer-la-majorite-democrate-a" }
+    },
+    {
+      "categorie": "international",
+      "q": "Selon des documents internes révélés par Le Monde, quelle grande banque allemande contourne ses propres règles pour financer des fabricants d'armes ?",
+      "choix": ["Deutsche Bank", "Commerzbank", "BNP Paribas", "UBS"],
+      "reponse": 0,
+      "explication": "Une fuite montre comment Deutsche Bank passe outre son service de contrôle des risques.",
+      "source": { "nom": "Le Monde", "url": "https://www.lemonde.fr/les-decodeurs/article/2026/11/18/inside-deutsche-bank-les-contorsions-du-geant-bancaire-pour-financer-les-marchands-d-armes_6813080_4355770.html" }
+    },
+    {
+      "categorie": "national",
+      "q": "Combien de mesures compte le programme présidentiel présenté par Édouard Philippe ?",
+      "choix": ["42", "142", "420", "1 420"],
+      "reponse": 1,
+      "explication": "Parmi ses 142 mesures : 250 000 postes de fonctionnaires en moins et une allocation familiale de 350 € dès le premier enfant.",
+      "source": { "nom": "Public Sénat", "url": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et" }
+    },
+    {
+      "categorie": "national",
+      "q": "Les députés ont voté la suppression de l'interdiction progressive de louer quels logements ?",
+      "choix": ["Les logements sans ascenseur", "Les « passoires thermiques » mal isolées", "Les studios de moins de 9 m²", "Les maisons sans jardin"],
+      "reponse": 1,
+      "explication": "Un amendement supprime le calendrier d'interdiction fondé sur le diagnostic de performance énergétique (DPE).",
+      "source": { "nom": "BFM Business", "url": "https://www.bfmtv.com/economie/video-l-edito-eco-logement-les-deputes-adoptent-un-amendement-rn-supprimant-les-interdictions-de-louer-des-passoires-thermiques_VN-202611180166.html" }
+    },
+    {
+      "categorie": "national",
+      "q": "Qui est le nouveau Défenseur des droits, qui a reçu 106 saisines liées au maintien de l'ordre pendant les manifestations ?",
+      "choix": ["Claire Hédon", "François-Noël Buffet", "Jacques Toubon", "Gérald Darmanin"],
+      "reponse": 1,
+      "explication": "Parmi ces saisines, 39 concernent des violences avec armes.",
+      "source": { "nom": "Public Sénat", "url": "https://www.publicsenat.fr/actualites/societe/mobilisation-sociale-le-nouveau-defenseur-des-droits-francois-noel-buffet-declare-avoir-recu-106-saisines-relatives-au-maintien-de-lordre-lors-de-manifestations" }
+    },
+    {
+      "categorie": "local",
+      "q": "Comment s'appelle le tunnelier de la ligne C du métro toulousain qui vient d'atteindre la station Saint-Martin Airbus ?",
+      "choix": ["Jeanne Marvig", "Claude Nougaro", "Marie Curie", "Olympe de Gouges"],
+      "reponse": 0,
+      "explication": "Jeanne Marvig est arrivée le 16 novembre ; à Montaudran, la pose des rails en tunnel a commencé.",
+      "source": { "nom": "Le Journal Toulousain", "url": "https://www.lejournaltoulousain.fr/occitanie/haute-garonne/toulouse/pose-rails-tunnelier-chantier-ligne-c-metro-franchit-plusieurs-caps-404269/" }
+    },
+    {
+      "categorie": "local",
+      "q": "Le château Renaissance de Laréole, près de Toulouse, a été bâti en 1579 par un riche marchand de quelle plante tinctoriale ?",
+      "choix": ["Le safran", "Le pastel", "La lavande", "L'indigo des Indes"],
+      "reponse": 1,
+      "explication": "Pierre de Cheverry a fait fortune grâce au pastel, le « bleu » qui a enrichi Toulouse. Le château appartient au Département depuis 1984.",
+      "source": { "nom": "Le Journal Toulousain", "url": "https://www.lejournaltoulousain.fr/occitanie/haute-garonne/toulouse/pres-de-toulouse-ce-chateau-renaissance-et-ses-jardins-semblent-sortis-dun-conte-de-fees-404001/" }
+    },
+    {
+      "categorie": "culture",
+      "q": "Chris Martin et Jonny Buckland donneront un petit concert caritatif de Noël dans une église de Londres. De quel groupe sont-ils membres ?",
+      "choix": ["U2", "Coldplay", "Muse", "Oasis"],
+      "reponse": 1,
+      "explication": "Rendez-vous le 15 décembre à la Hackney Church ; les places sont tirées au sort au profit d'associations.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/coldplay-chris-martin-et-jonny-buckland-annoncent-un-concert-intimiste-caritatif-11817055" }
+    },
+    {
+      "categorie": "insolite",
+      "q": "Quel industriel américain avait rêvé de bâtir sa propre ville en pleine Amazonie, un projet qui a viré au fiasco ?",
+      "choix": ["Henry Ford", "Thomas Edison", "Walt Disney", "Steve Jobs"],
+      "reponse": 0,
+      "explication": "Fordlândia, au Brésil, devait produire le caoutchouc des pneus Ford.",
+      "source": { "nom": "RTBF", "url": "https://www.rtbf.be/article/fordlandia-le-reve-amazonien-d-henry-ford-qui-a-vire-au-fiasco-11816929" }
+    }
+  ]
+}
