@@ -1,6 +1,6 @@
 // Garde les fichiers en cache pour jouer hors connexion.
 // Les fichiers sont toujours redemandés au réseau d'abord, donc les mises à jour arrivent seules.
-const VERSION = 'v18';
+const VERSION = 'v19';
 const CORE = [
   './', 'index.html', 'style.css', 'manifest.webmanifest',
   'icons/icon-192.png', 'icons/apple-touch-icon.png',
@@ -20,6 +20,7 @@ const CORE = [
   'elections/', 'elections/index.html', 'elections/jeu.js', 'elections/data.js',
   'couleurs/', 'couleurs/index.html', 'couleurs/palette.js', 'couleurs/data.js',
   'cartes/freecell.js', 'cartes/dame.js', 'cartes/app.js',
+  'pousse/', 'pousse/index.html', 'pousse/pousse.css', 'pousse/physique.js', 'pousse/jeu.js',
 ];
 
 self.addEventListener('install', (event) => {
