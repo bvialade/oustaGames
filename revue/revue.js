@@ -55,13 +55,31 @@ async function route() {
   window.scrollTo(0, 0);
 }
 
+// Vignette : l'image d'aperçu de l'article, chargée depuis le site du média (rien n'est copié ici).
+// Sans image, ou si elle ne se charge pas, une vignette colorée selon la rubrique la remplace.
+function thumb(a, big) {
+  const r = RUBRIQUES.find((x) => x[0] === a.rubrique) || ['', '📰'];
+  const fallback = `<span class="ph r-${esc(a.rubrique)}">${r[1]}</span>`;
+  if (!a.image) return `<div class="thumb${big ? ' big' : ''}">${fallback}</div>`;
+  return `<div class="thumb${big ? ' big' : ''}">${fallback}
+    <img src="${esc(a.image)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.querySelector('.credit-img')?.remove(); this.remove()">
+    ${big ? `<span class="credit-img">Photo · ${esc(a.source.nom)}</span>` : ''}</div>`;
+}
+
 function card(a, i, kicker) {
   const read = (lus[edition.date] || []).includes(i);
+  const big = !!kicker;
   return `<article class="art${read ? ' read' : ''}" data-i="${i}">
+    ${big ? thumb(a, true) : ''}
     ${kicker ? `<div class="kicker">${kicker}</div>` : ''}
-    <h4 class="serif">${esc(a.titre)}</h4>
+    <div class="head"><h4 class="serif">${esc(a.titre)}</h4>${big ? '' : thumb(a, false)}</div>
     <p>${esc(a.resume)}</p>
-    <div class="meta"><a href="${esc(a.source.url)}" target="_blank" rel="noopener">Lire · ${esc(a.source.nom)} ↗</a></div>
+    ${a.detail && a.detail.length ? `<div class="detail" hidden>${a.detail.map((d) => `<p>${esc(d)}</p>`).join('')}
+      <p class="credit">Résumé détaillé rédigé par OustaGames d'après l'article de ${esc(a.source.nom)}.</p></div>` : ''}
+    <div class="meta">
+      ${a.detail && a.detail.length ? '<button class="more" aria-expanded="false">Voir plus ▾</button>' : ''}
+      <a href="${esc(a.source.url)}" target="_blank" rel="noopener">Article · ${esc(a.source.nom)} ↗</a>
+    </div>
   </article>`;
 }
 
@@ -96,13 +114,25 @@ function render() {
     target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }));
 
-  $('content').querySelectorAll('.art a').forEach((link) => (link.onclick = () => {
-    const art = link.closest('.art');
+  const markRead = (art, delay) => {
     const i = +art.dataset.i;
     const l = lus[edition.date] || (lus[edition.date] = []);
     if (!l.includes(i)) l.push(i);
     save();
-    setTimeout(() => { art.classList.add('read'); stats(medias); }, 300);
+    setTimeout(() => { art.classList.add('read'); stats(medias); }, delay);
+  };
+  $('content').querySelectorAll('.art a').forEach((link) => (link.onclick = () => markRead(link.closest('.art'), 300)));
+  // « Voir plus » : déplie le résumé détaillé dans la page, sans quitter l'appli.
+  $('content').querySelectorAll('.art .more').forEach((btn) => (btn.onclick = () => {
+    const art = btn.closest('.art');
+    const det = art.querySelector('.detail');
+    const open = det.hidden;
+    det.hidden = !open;
+    art.classList.toggle('open', open);
+    btn.textContent = open ? 'Voir moins ▴' : 'Voir plus ▾';
+    btn.setAttribute('aria-expanded', open);
+    if (open) markRead(art, 0);
+    else art.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }));
   stats(medias);
   quizTag();

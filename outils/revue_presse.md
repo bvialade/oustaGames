@@ -16,7 +16,14 @@ et un lien vers le Quiz de l'actu du jour.
       "une": true,
       "titre": "Titre factuel, au présent, sans point final",
       "resume": "Deux ou trois phrases neutres : qui, quoi, où, quand, et un chiffre ou un contexte utile.",
-      "source": { "nom": "Nom du média", "url": "https://lien-direct-vers-l-article" }
+      "source": { "nom": "Nom du média", "url": "https://lien-direct-vers-l-article" },
+      "image": "https://url-de-l-image-d-apercu-de-l-article.jpg",
+      "detail": [
+        "Paragraphe 1 : les faits principaux (qui, quoi, où, quand).",
+        "Paragraphe 2 : les détails et les chiffres clés.",
+        "Paragraphe 3 : le contexte ou les antécédents.",
+        "Paragraphe 4 (facultatif) : les réactions ou la suite attendue."
+      ]
     }
   ]
 }
@@ -24,6 +31,24 @@ et un lien vers le Quiz de l'actu du jour.
 
 `rubrique` vaut `monde`, `france`, `toulouse`, `economie`, `sciences`, `culture`, `sport` ou `insolite`.
 `une` (facultatif) met l'article en tête de page, en grand : 3 articles par jour, les plus importants.
+`detail` est le résumé détaillé affiché par le bouton « Voir plus » (demande de Bastien, 19/11/2026).
+`image` (facultatif) est la vignette de l'article.
+
+## Résumé détaillé (« Voir plus »)
+
+- 3 ou 4 paragraphes de 50 à 90 mots, rédigés avec nos propres mots à partir de l'article lu :
+  faits principaux, détails et chiffres, contexte, puis réactions ou suite attendue.
+- **Jamais l'article recopié** : le site est public et les articles appartiennent aux médias (droit d'auteur).
+  Pas de phrase reprise telle quelle ; au plus une citation courte (moins de 15 mots), entre guillemets et attribuée.
+- Uniquement des informations présentes dans l'article (ou dans d'autres articles lus sur le même sujet) ; rien d'inventé.
+- Si l'article n'a pas pu être lu (site bloqué), 2 paragraphes suffisent, à partir des extraits de recherche et d'articles lus ailleurs.
+
+## Vignette
+
+- `image` est l'image d'aperçu officielle de l'article (og:image ou photo en tête d'article), recopiée exactement depuis la page.
+  Elle est affichée depuis le site du média, jamais copiée dans le dépôt, avec le nom du média en crédit.
+- Si l'image est introuvable ou incertaine, ne pas mettre de champ `image` : la page affiche une vignette colorée selon la rubrique.
+- Ne jamais deviner ni reconstruire une URL d'image.
 
 ## Règles
 
