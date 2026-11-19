@@ -7,6 +7,7 @@ Petits jeux à jouer sur téléphone, sous forme de web app installable (PWA).
 - **Géographie** : quiz drapeaux, capitales et capitale → pays, par continent.
 - **Passe-frontières** : relier deux pays tirés au sort en citant les pays à traverser, sur une carte qui se colore. Défi du jour par zone (Europe, Monde, Afrique, Asie, Amériques) et parties numérotées à partager.
 - **Quiz de l'actu** : 10 questions sur l'actualité du jour, avec les sources.
+- **Revue de presse** (`revue/`) : une trentaine d'articles du jour résumés par rubrique, avec le lien vers chaque article, les éditions précédentes et le lien vers le quiz du jour. Rédigée chaque matin selon `outils/revue_presse.md`.
 - **OustaCards** : quatre jeux de cartes classiques (Solitaire, Spider, FreeCell, Dame de pique contre trois adversaires), avec des cartes dessinées pour le site.
 - **Quiz du droit** : 10 questions de droit français, au niveau Citoyen, Juge ou Goat, sur une ou plusieurs matières, avec l'article ou l'arrêt de référence.
 - **Code de la route** (`code/`) : révision de l'examen théorique sur ses 10 thèmes, au format de l'examen (situations dessinées vues du conducteur, carrefours vus de dessus, tableau de bord, questions A/B + C/D en tout ou rien), entraînement par thème, examen blanc de 40 questions chronométrées (20 s, 35 pour réussir) et révision des erreurs. Questions originales, rédigées pour le site.
