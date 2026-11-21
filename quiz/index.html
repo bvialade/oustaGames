@@ -94,18 +94,19 @@
   <main class="page">
     <section id="choose" class="choose" hidden>
       <p>Choisis ton quiz</p>
-      <a class="pick actu" href="#actu">
-        <span class="ico">📰</span>
-        <div><h2>Actu</h2><p>10 questions sur l'actualité du jour, avec les sources.</p><span class="tag" id="actu-tag"></span></div>
-      </a>
-      <a class="pick droit" href="../droit/">
-        <span class="ico">⚖️</span>
-        <div><h2>Droit</h2><p>Citoyen, Juge ou Goat : 10 questions avec les articles et les arrêts.</p></div>
-      </a>
-      <a class="pick code" href="../code/">
-        <span class="ico">🚦</span>
-        <div><h2>Code de la route</h2><p>Révise l'examen : entraînement par thème, examen blanc de 40 questions, panneaux.</p></div>
-      </a>
+      <div class="bento-grid">
+        <a class="bento-tile wide" href="#actu" style="--bgc:#ffd23f;--fg:#1a1a1a;min-height:150px">
+          <span class="bt-tag" id="actu-tag"></span>
+          <div><span class="bt-e">📰</span><h2 class="bt-t" style="font-size:1.6rem;margin-top:6px">Actu</h2><p class="bt-d">10 questions sur l'actualité du jour, avec les sources.</p></div>
+          <span class="bt-deco" aria-hidden="true">❓</span>
+        </a>
+        <a class="bento-tile" href="../droit/" style="--bgc:#2154d6;min-height:170px">
+          <span class="bt-e">⚖️</span><div><h2 class="bt-t">Droit</h2><p class="bt-d">Citoyen, Juge ou Goat, avec les articles et les arrêts.</p></div>
+        </a>
+        <a class="bento-tile" href="../code/" style="--bgc:#0f9d6b;min-height:170px">
+          <span class="bt-e">🚦</span><div><h2 class="bt-t">Code de la route</h2><p class="bt-d">Thèmes, examen blanc et panneaux.</p></div>
+        </a>
+      </div>
     </section>
 
     <section id="intro" class="glass intro" hidden>

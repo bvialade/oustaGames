@@ -3,9 +3,9 @@ const SVGNS = 'http://www.w3.org/2000/svg';
 const $ = (id) => document.getElementById(id);
 
 const MODES = {
-  flag: { label: 'Drapeaux', icon: '🏳️', hint: 'À quel pays est ce drapeau ?' },
-  capital: { label: 'Capitales', icon: '🏛️', hint: 'Quelle est la capitale de ce pays ?' },
-  country: { label: 'Capitale → pays', icon: '📍', hint: 'De quel pays est-ce la capitale ?' },
+  flag: { label: 'Drapeaux', icon: '🏳️', hint: 'À quel pays est ce drapeau ?', color: '--bgc:#ff5a36' },
+  capital: { label: 'Capitales', icon: '🏛️', hint: 'Quelle est la capitale de ce pays ?', color: '--bgc:#2154d6' },
+  country: { label: 'Capitale → pays', icon: '📍', hint: 'De quel pays est-ce la capitale ?', color: '--bgc:#ffd23f;--fg:#1a1a1a' },
 };
 const REGIONS = {
   monde: 'Monde entier', europe: 'Europe', afrique: 'Afrique',
@@ -141,9 +141,10 @@ function renderSetup() {
   for (const [k, m] of Object.entries(MODES)) {
     const best = prefs.points[`${k}-${prefs.region}-${prefs.length}`];
     const b = document.createElement('button');
-    b.className = 'mode' + (k === prefs.mode ? ' active' : '');
-    b.innerHTML = `<span class="ico">${m.icon}</span><span><b>${m.label}</b><small>${m.hint}</small></span>`
-      + (best !== undefined ? `<span class="best">🏆 ${ptsLabel(best)}</span>` : '');
+    b.className = 'bento-tile' + (k === 'flag' ? ' wide' : '') + (k === prefs.mode ? ' active' : '');
+    b.style.cssText = m.color;
+    b.innerHTML = `<span class="bt-e">${m.icon}</span><span><b class="bt-t">${m.label}</b><small class="bt-d">${m.hint}</small>`
+      + (best !== undefined ? `<small class="bt-d"><b>🏆 ${ptsLabel(best)}</b></small>` : '') + '</span>';
     b.onclick = () => { prefs.mode = k; save(); renderSetup(); };
     modes.appendChild(b);
   }

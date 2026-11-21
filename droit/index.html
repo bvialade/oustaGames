@@ -33,11 +33,10 @@
     .intro > p { color: var(--muted); margin: 0 0 18px; }
     .label { font-size: .78rem; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); margin: 18px 2px 8px; text-align: left; }
     .levels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-    .level { padding: 12px 6px; border-radius: 14px; border: 1px solid var(--border); background: rgba(255,255,255,.04); }
+    .levels .level { min-height: 100px; padding: 12px 6px; text-align: center; justify-content: center; gap: 0; }
     .level b { display: block; font-size: 1.4rem; }
     .level span { display: block; font-weight: 700; margin-top: 2px; }
-    .level small { display: block; color: var(--muted); font-size: .72rem; margin-top: 2px; }
-    .level.on { border-color: var(--accent); background: rgba(212,169,55,.18); box-shadow: 0 0 0 1px var(--accent) inset; }
+    .level small { display: block; opacity: .85; font-size: .72rem; margin-top: 2px; }
     .themes { display: flex; flex-wrap: wrap; gap: 8px; }
     .theme { padding: 9px 12px; border-radius: 999px; border: 1px solid var(--border); background: rgba(255,255,255,.04); font-size: .9rem; }
     .theme.on { border-color: var(--accent); background: rgba(212,169,55,.2); }
@@ -89,7 +88,7 @@
       <h2>10 questions de droit</h2>
       <p>Choisis ton niveau et tes matières. Chaque réponse est expliquée, avec l'article ou l'arrêt qui va avec.</p>
       <div class="label">Niveau</div>
-      <div class="levels" id="levels"></div>
+      <div class="levels bento-pick" id="levels"></div>
       <div class="label">Matières</div>
       <div class="themes" id="themes"></div>
       <button class="btn start" id="start">C'est parti !</button>
