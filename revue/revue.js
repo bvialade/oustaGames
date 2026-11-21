@@ -17,6 +17,17 @@ const RUBRIQUES = [
 let dates = [];
 let lus = load(); // { 'AAAA-MM-JJ': [index des articles ouverts] }
 let edition;
+let source = loadSource(); // média choisi dans le filtre ('' = tous)
+
+// Filtre par source : un même média peut être écrit de deux façons selon les jours.
+const ALIAS = { 'La Dépêche du Midi': 'La Dépêche' };
+const media = (a) => ALIAS[a.source.nom] || a.source.nom;
+function loadSource() {
+  try { return localStorage.getItem(STORE + '.source') || ''; } catch { return ''; }
+}
+function saveSource() {
+  try { localStorage.setItem(STORE + '.source', source); } catch {}
+}
 
 function load() {
   try { return JSON.parse(localStorage.getItem(STORE)) || {}; } catch { return {}; }
@@ -88,10 +99,30 @@ function render() {
   const isToday = edition.date === dates[0];
   $('day').textContent = (isToday ? 'Édition du ' : 'Archive · ') + longDate(edition.date);
   $('today').hidden = isToday;
-  const medias = new Set(arts.map((a) => a.source.nom)).size;
+  const medias = new Set(arts.map(media)).size;
+
+  // Sources de l'édition, de la plus citée à la moins citée.
+  const counts = {};
+  arts.forEach((a) => (counts[media(a)] = (counts[media(a)] || 0) + 1));
+  const sources = Object.keys(counts).sort((x, y) => counts[y] - counts[x] || x.localeCompare(y, 'fr'));
+  const actif = sources.includes(source) ? source : ''; // un média absent ce jour-là : on montre tout
+  const pairs = arts.map((a, i) => [a, i]).filter(([a]) => !actif || media(a) === actif);
+  $('sources').innerHTML = `<button data-s="" class="${actif ? '' : 'on'}">Toutes les sources</button>` +
+    sources.map((m) => `<button data-s="${esc(m)}" class="${m === actif ? 'on' : ''}">${esc(m)} <span>${counts[m]}</span></button>`).join('');
+  $('sources').querySelectorAll('button').forEach((b) => (b.onclick = () => {
+    source = b.dataset.s;
+    saveSource();
+    render();
+    $('sources').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }));
+  const on = $('sources').querySelector('.on');
+  $('sources').scrollLeft = on ? on.offsetLeft - 16 : 0;
+  $('filtre').hidden = !actif;
+  $('filtre').innerHTML = actif ? `${counts[actif]} article${counts[actif] > 1 ? 's' : ''} de <b>${esc(actif)}</b> <button id="nofiltre">Tout afficher ✕</button>` : '';
+  if (actif) $('nofiltre').onclick = () => { source = ''; saveSource(); render(); };
 
   // À la une : les articles marqués "une", affichés en grand en tête.
-  const une = arts.map((a, i) => [a, i]).filter(([a]) => a.une);
+  const une = pairs.filter(([a]) => a.une);
   let html = '';
   if (une.length) {
     html += `<section class="une">${une.map(([a, i]) => {
@@ -99,9 +130,9 @@ function render() {
       return card(a, i, '★ À la une' + (r ? ' · ' + r[2] : ''));
     }).join('')}</section>`;
   }
-  const present = RUBRIQUES.filter(([k]) => arts.some((a) => a.rubrique === k && !a.une));
+  const present = RUBRIQUES.filter(([k]) => pairs.some(([a]) => a.rubrique === k && !a.une));
   for (const [k, ico, nom] of present) {
-    const list = arts.map((a, i) => [a, i]).filter(([a]) => a.rubrique === k && !a.une);
+    const list = pairs.filter(([a]) => a.rubrique === k && !a.une);
     html += `<section class="rub" id="r-${k}"><h3 class="serif">${ico} ${nom}<small>${list.length} article${list.length > 1 ? 's' : ''}</small></h3>
       ${list.map(([a, i]) => card(a, i)).join('')}</section>`;
   }
