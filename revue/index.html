@@ -38,6 +38,15 @@
     .quizlink span { font-size: .85rem; opacity: .9; }
     .quizlink .go { margin-left: auto; font-size: 1.4rem; }
 
+    .sources { display: flex; gap: 6px; overflow-x: auto; padding: 10px 16px 4px; margin: 4px -16px 0; scrollbar-width: none; scroll-margin-top: 8px; }
+    .sources::-webkit-scrollbar { display: none; }
+    .sources button { flex: none; padding: 6px 11px; border-radius: 10px; border: 1px solid var(--border); background: var(--card);
+      font-size: .82rem; font-weight: 600; white-space: nowrap; }
+    .sources button span { color: var(--muted); font-weight: 500; margin-left: 2px; }
+    .sources button.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .sources button.on span { color: rgba(255,255,255,.8); }
+    .filtre { display: flex; align-items: center; gap: 8px; margin-top: 8px; padding: 8px 12px; border-radius: 10px; background: var(--chip); font-size: .88rem; }
+    .filtre button { margin-left: auto; border: 0; background: none; color: var(--accent); font-weight: 600; font-size: .85rem; }
     .chips { position: sticky; top: 0; z-index: 5; display: flex; gap: 6px; overflow-x: auto; padding: 10px 16px; margin: 6px -16px 0;
       background: var(--bg); scrollbar-width: none; border-bottom: 1px solid var(--border); }
     .chips::-webkit-scrollbar { display: none; }
@@ -119,6 +128,8 @@
         <div><b>Lis la revue, puis teste-toi</b><span id="quiztag">10 questions sur l'actu du jour</span></div>
         <span class="go">›</span>
       </a>
+      <nav class="sources" id="sources" aria-label="Filtrer par source"></nav>
+      <div class="filtre" id="filtre" hidden></div>
       <nav class="chips" id="chips"></nav>
       <div id="content"></div>
       <section class="archive" id="archive" hidden>

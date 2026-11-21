@@ -68,6 +68,9 @@ et un lien vers le Quiz de l'actu du jour.
 
 ## Sources
 
+Le nom du média (`source.nom`) sert au filtre par source de la page : toujours l'écrire de la même façon,
+par exemple « Le Monde », « Libération », « Le Figaro », « La Dépêche », « franceinfo », « Le Journal Toulousain ».
+
 **À privilégier (demande de Bastien, 19/11/2026)** : Le Monde, Libération, Le Figaro et La Dépêche du Midi.
 Ils bloquent l'agent web-fetch, mais leurs flux RSS se lisent avec `curl` quand l'environnement cloud du projet
 autorise leurs domaines (www.lemonde.fr, www.liberation.fr, www.lefigaro.fr, www.ladepeche.fr) :
