@@ -1,6 +1,6 @@
 # Grille Isoloir 2027 : positions des candidats
 
-Positions au 2026-11-09, d'après les synthèses de [France-Vote](https://www.france-vote.fr) (programmes, votes, déclarations).
+Positions au 2026-11-21, d'après les synthèses de [France-Vote](https://www.france-vote.fr) (programmes, votes, déclarations).
 ++ tout à fait d'accord · + plutôt d'accord · ~ nuancé · − plutôt pas d'accord · −− pas du tout · ? inconnu
 
 | Question | Arthaud | Kazib | Labib | Mélenchon | Roussel | Ruffin | Branco | Tondelier | Batho | Glucksmann | Bouamrane | Cazeneuve | Attal | Philippe | de Villepin | Bertrand | Retailleau | Lisnard | Dupont-Aignan | Asselineau | Philippot | Le Pen | Zemmour |
@@ -22,7 +22,7 @@ Positions au 2026-11-09, d'après les synthèses de [France-Vote](https://www.fr
 | Les aides sociales non liées à des cotisations doivent être réservées aux Français. | −− | −− | −− | −− | −− | −− | −− | −− | −− | −− | −− | −− | − | − | −− | ~ | + | ~ | ++ | − | ++ | ++ | ++ |
 | Il faut des peines minimales automatiques pour les récidivistes. | −− | −− | −− | −− | − | − | −− | −− | − | − | ? | − | ~ | + | ~ | ++ | ++ | ++ | ++ | ++ | ++ | ++ | ++ |
 | Les mineurs délinquants récidivistes doivent être jugés comme des adultes. | −− | −− | −− | −− | − | − | −− | −− | −− | − | ? | − | ++ | + | ~ | ++ | ++ | ++ | ++ | + | + | ++ | ++ |
-| Il faut un organisme vraiment indépendant pour contrôler la police. | ++ | ++ | ++ | ++ | + | ++ | ++ | ++ | ++ | + | ? | − | −− | − | + | − | −− | − | − | ~ | ~ | −− | −− |
+| Il faut un organisme vraiment indépendant pour contrôler la police. | ++ | ++ | ++ | ++ | ++ | ++ | ++ | ++ | ++ | + | ? | − | −− | − | + | − | −− | − | − | ~ | ~ | −− | −− |
 | La France doit construire une nouvelle génération de réacteurs nucléaires. | ? | − | −− | −− | ++ | − | + | −− | −− | + | ? | ++ | ++ | ++ | + | ++ | ++ | ++ | ++ | + | ++ | ++ | ++ |
 | Il faut accélérer fortement l'éolien et le solaire. | ? | + | ++ | ++ | ~ | + | ~ | ++ | + | + | ? | ~ | + | + | ~ | − | −− | − | −− | − | −− | −− | −− |
 | Les objectifs climatiques doivent passer en premier, même s'ils imposent des efforts aux ménages et aux entreprises. | ? | ~ | ++ | ++ | ~ | + | ~ | ++ | ++ | + | ? | ~ | ~ | ~ | + | − | − | − | −− | − | −− | −− | −− |
@@ -43,5 +43,5 @@ Positions au 2026-11-09, d'après les synthèses de [France-Vote](https://www.fr
 | Les députés doivent être élus à la proportionnelle. | + | + | ++ | ++ | ++ | ++ | + | ++ | ++ | ++ | ? | ~ | ~ | − | + | − | −− | − | ~ | ~ | ++ | ++ | ++ |
 | Il faut passer à une VIe République, avec un président aux pouvoirs réduits. | − | ++ | ++ | ++ | ++ | ++ | ++ | ++ | ++ | ~ | ? | − | − | −− | − | − | −− | − | − | − | ~ | − | −− |
 | Les grandes questions d'immigration doivent être tranchées par référendum. | − | − | ~ | ~ | ~ | ~ | + | −− | − | − | ? | −− | + | ~ | − | ++ | ++ | ++ | ++ | ++ | ++ | ++ | ++ |
-| Il faut légaliser une aide à mourir strictement encadrée. | ++ | + | + | ++ | ++ | ++ | + | ++ | ++ | ++ | ~ | + | ++ | ~ | + | ~ | −− | ~ | −− | ~ | − | −− | −− |
+| Il faut légaliser une aide à mourir strictement encadrée. | ++ | + | + | ++ | ++ | ++ | + | ++ | ++ | ++ | ~ | + | ++ | ~ | + | ~ | − | ~ | −− | ~ | − | −− | −− |
 | Il faut légaliser ou dépénaliser le cannabis. | + | + | ++ | ++ | + | ~ | + | ++ | + | + | ? | − | + | ~ | ~ | −− | −− | −− | −− | − | −− | −− | −− |

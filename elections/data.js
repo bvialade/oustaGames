@@ -1,6 +1,6 @@
 // Généré par outils/build_elections.py : ne pas modifier à la main.
 const DATA = {
-"maj": "2026-11-09",
+"maj": "2026-11-21",
 "source": "https://www.france-vote.fr",
 "candidats": [
 {
@@ -119,7 +119,7 @@ const DATA = {
 "id": "villepin",
 "nom": "Dominique de Villepin",
 "parti": "La France humaniste",
-"statut": "Candidature probable",
+"statut": "Déclaré (20 novembre)",
 "source": "https://www.france-vote.fr/candidats/dominique-de-villepin",
 "photo": "Dominique_de_Villepin_20100330_Salon_du_livre_de_Paris_2_cropped.jpg"
 },
@@ -900,7 +900,7 @@ null,
 2,
 2,
 2,
-1,
+2,
 2,
 2,
 2,
@@ -1666,7 +1666,7 @@ null,
 0,
 1,
 0,
--2,
+-1,
 0,
 -2,
 0,

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Génère elections/data.js (jeu Isoloir 2027) et elections/grille.md (grille à relire).
 
-Positions : lecture éditoriale de France-Vote (https://www.france-vote.fr, positions au 9 novembre 2026),
+Positions : lecture éditoriale de France-Vote (https://www.france-vote.fr, positions au 21 novembre 2026),
 établie d'après programmes, votes et déclarations. Échelle ++ + ~ - -- convertie en 2 1 0 -1 -2.
 None = pas de position connue (exclu du calcul).
 
@@ -11,7 +11,7 @@ Ne jamais réordonner QUESTIONS (les liens de duel codent les réponses dans cet
 import json
 from pathlib import Path
 
-MAJ = "2026-11-09"
+MAJ = "2026-11-21"
 SOURCE = "https://www.france-vote.fr"
 
 # Ordre des colonnes de la grille (de gauche à droite, comme sur France-Vote).
@@ -29,7 +29,7 @@ CANDIDATS = [('arthaud', 'Nathalie Arthaud', 'Lutte ouvrière', 'nathalie-arthau
  ('cazeneuve', 'Bernard Cazeneuve', 'La Convention', 'bernard-cazeneuve', 'Déclaré'),
  ('attal', 'Gabriel Attal', 'Renaissance', 'gabriel-attal', 'Déclaré'),
  ('philippe', 'Édouard Philippe', 'Horizons', 'edouard-philippe', 'Déclaré'),
- ('villepin', 'Dominique de Villepin', 'La France humaniste', 'dominique-de-villepin', 'Candidature probable'),
+ ('villepin', 'Dominique de Villepin', 'La France humaniste', 'dominique-de-villepin', 'Déclaré (20 novembre)'),
  ('bertrand', 'Xavier Bertrand', 'Nous France', 'xavier-bertrand', 'Déclaré'),
  ('retailleau', 'Bruno Retailleau', 'Les Républicains', 'bruno-retailleau', 'Désigné par les militants LR'),
  ('lisnard', 'David Lisnard', 'Nouvelle Énergie', 'david-lisnard', 'Déclaré'),
@@ -85,7 +85,7 @@ GRILLE = {
     "imm.prio": [-2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -1, -1, -2, 0, 1, 0, 2, -1, 2, 2, 2],
     "sec.planchers": [-2, -2, -2, -2, -1, -1, -2, -2, -1, -1, N, -1, 0, 1, 0, 2, 2, 2, 2, 2, 2, 2, 2],
     "sec.cannabis": [1, 1, 2, 2, 1, 0, 1, 2, 1, 1, N, -1, 1, 0, 0, -2, -2, -2, -2, -1, -2, -2, -2],
-    "sec.police": [2, 2, 2, 2, 1, 2, 2, 2, 2, 1, N, -1, -2, -1, 1, -1, -2, -1, -1, 0, 0, -2, -2],
+    "sec.police": [2, 2, 2, 2, 2, 2, 2, 2, 2, 1, N, -1, -2, -1, 1, -1, -2, -1, -1, 0, 0, -2, -2],
     "sec.mineurs": [-2, -2, -2, -2, -1, -1, -2, -2, -2, -1, N, -1, 2, 1, 0, 2, 2, 2, 2, 1, 1, 2, 2],
     "env.nucleaire": [N, -1, -2, -2, 2, -1, 1, -2, -2, 1, N, 2, 2, 2, 1, 2, 2, 2, 2, 1, 2, 2, 2],
     "env.enr": [N, 1, 2, 2, 0, 1, 0, 2, 1, 1, N, 0, 1, 1, 0, -1, -2, -1, -2, -1, -2, -2, -2],
@@ -105,7 +105,7 @@ GRILLE = {
     "ins.referendum": [-1, -1, 0, 0, 0, 0, 1, -2, -1, -1, N, -2, 1, 0, -1, 2, 2, 2, 2, 2, 2, 2, 2],
     "san.hopital": [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 0, -1, 1, 1, -1, -1, 2, 2, 2, 2, 2],
     "san.install": [1, 1, 2, 2, 2, 2, 1, 2, 2, 1, 0, 1, -1, -1, 1, 1, -2, -1, 1, 0, 1, 0, -1],
-    "san.mourir": [2, 1, 1, 2, 2, 2, 1, 2, 2, 2, 0, 1, 2, 0, 1, 0, -2, 0, -2, 0, -1, -2, -2],
+    "san.mourir": [2, 1, 1, 2, 2, 2, 1, 2, 2, 2, 0, 1, 2, 0, 1, 0, -1, 0, -2, 0, -1, -2, -2],
     "san.secu": [2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, -1, -2, 0, -2, -2, -2, 1, 1, 1, 0, -2],
     "edu.uniforme": [-2, -2, -2, -2, -1, -1, -1, -2, -1, -1, N, N, 2, 1, 0, 1, 2, 1, 2, N, 2, 2, 2],
     "edu.college": [-2, -2, -2, -2, -1, -1, -1, -2, -1, -1, N, N, 1, 1, -2, 1, 2, 2, 1, N, 1, 2, 2],
