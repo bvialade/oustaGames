@@ -41,14 +41,17 @@ const MODES = [
   { id: 'erreurs', emoji: '🔁', nom: 'Mes erreurs', desc: 'Retravaille les questions ratées' },
 ];
 
+// Couleur des tuiles de mode, comme sur la page d'accueil.
+const COULEURS = { entrainement: '--bgc:#ffd23f;--fg:#1a1a1a', examen: '--bgc:#2154d6', erreurs: '--bgc:#ff5a36' };
+
 function renderIntro() {
   const err = nbErreurs();
   if (prefs.mode === 'erreurs' && !err) prefs.mode = 'entrainement';
   $('modes').innerHTML = MODES.map((m) => {
     const off = m.id === 'erreurs' && !err;
     const extra = m.id === 'erreurs' ? (err ? ` (${err})` : ' (aucune)') : '';
-    return `<button class="mode${m.id === prefs.mode ? ' on' : ''}" data-id="${m.id}"${off ? ' disabled' : ''}>
-      <b>${m.emoji}</b><span><strong>${m.nom}${extra}</strong><small>${m.desc}</small></span></button>`;
+    return `<button class="bento-tile${m.id === 'erreurs' ? ' wide' : ''}${m.id === prefs.mode ? ' on' : ''}" style="${COULEURS[m.id]}" data-id="${m.id}"${off ? ' disabled' : ''}>
+      <span class="bt-e">${m.emoji}</span><span><strong class="bt-t">${m.nom}${extra}</strong><small class="bt-d">${m.desc}</small></span></button>`;
   }).join('');
   $('modes').querySelectorAll('button').forEach((b) => (b.onclick = () => { prefs.mode = b.dataset.id; save(); renderIntro(); }));
 

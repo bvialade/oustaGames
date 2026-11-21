@@ -25,7 +25,7 @@ const cleRecord = () => prefs.niveau + ':' + (prefs.themes.length ? [...prefs.th
 
 function renderIntro() {
   $('levels').innerHTML = NIVEAUX.map((n) =>
-    `<button class="level${n.n === prefs.niveau ? ' on' : ''}" data-n="${n.n}"><b>${n.emoji}</b><span>${n.nom}</span><small>${n.desc}</small></button>`).join('');
+    `<button class="level bento-tile${n.n === prefs.niveau ? ' on' : ''}" style="${['--bgc:#0f9d6b', '--bgc:#2154d6', '--bgc:#ff5a36'][n.n - 1] || ''}" data-n="${n.n}"><b>${n.emoji}</b><span>${n.nom}</span><small>${n.desc}</small></button>`).join('');
   $('levels').querySelectorAll('button').forEach((b) => (b.onclick = () => { prefs.niveau = +b.dataset.n; save(); renderIntro(); }));
 
   $('themes').innerHTML = `<button class="theme all${prefs.themes.length ? '' : ' on'}" data-id="">Toutes</button>` +

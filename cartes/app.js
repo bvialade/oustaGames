@@ -2,6 +2,8 @@
 // Accueil d'OustaCards, barre de jeu, options, statistiques et victoires.
 
 const GAMES = { solitaire: Solitaire, spider: Spider, freecell: FreeCell, dame: Dame };
+// Couleur de chaque tuile du menu, comme sur la page d'accueil.
+const TILE_COLORS = ['--bgc:#ffd23f;--fg:#1a1a1a', '--bgc:#c7b8ff;--fg:#1a1a1a', '--bgc:#ff5a36', '--bgc:#ffb3c7;--fg:#1a1a1a'];
 const MINI = {
   solitaire: [[1, 1], [0, 13], [2, 7]],
   spider: [[0, 13], [0, 12], [0, 11]],
@@ -178,7 +180,7 @@ function renderTiles() {
   box.innerHTML = '';
   Object.values(GAMES).forEach((g, k) => {
     const a = document.createElement('a');
-    a.className = 'tile'; a.href = '#' + g.id; a.style.animationDelay = k * 70 + 'ms';
+    a.className = 'tile bento-tile'; a.href = '#' + g.id; a.style.cssText = TILE_COLORS[k]; a.style.animationDelay = k * 70 + 'ms';
     const s = st.stats[g.id];
     const line = s && s.played ? `${plural(s.won, 'victoire')} sur ${s.played}` + (s.best != null ? ` · record ${g.id === 'dame' ? s.best + ' pts' : fmt(s.best)}` : '') : 'Jamais joué';
     a.innerHTML = `<div class="mini"></div><div><h2>${g.name}</h2><p>${g.desc}</p><div class="st">${line}</div></div>${st.saves[g.id] ? '<span class="resume">Reprendre</span>' : ''}`;
