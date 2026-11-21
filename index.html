@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>OustaGames</title>
-  <meta name="theme-color" content="#4f46e5">
+  <meta name="theme-color" content="#f4f1ea" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121110" media="(prefers-color-scheme: dark)">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="OustaGames">
@@ -13,79 +14,156 @@
   <link rel="icon" href="icons/icon-192.png">
   <link rel="stylesheet" href="style.css">
   <style>
-    header.hero { padding: 28px 16px 8px; text-align: center; }
-    header.hero h1 { margin: 0; font-size: 1.9rem; }
-    header.hero p { margin: 6px 0 0; color: var(--muted); }
-    .games { display: grid; gap: 12px; }
-    .game {
-      display: flex; align-items: center; gap: 14px; padding: 16px;
-      background: var(--card); border: 1px solid var(--border); border-radius: 16px;
-      color: inherit; text-decoration: none;
+    :root { --home-bg: #f4f1ea; --ink: #1a1a1a; --plain: #ffffff; --soft: #e3ddd0; --cards: #1a1a1a; }
+    @media (prefers-color-scheme: dark) {
+      :root { --home-bg: #121110; --ink: #f4f1ea; --plain: #24221f; --soft: #2e2b27; --cards: #33313f; }
     }
-    .game .emoji { font-size: 2rem; width: 52px; height: 52px; display: grid; place-items: center; border-radius: 12px; background: var(--bg); }
-    .game h2 { margin: 0; font-size: 1.1rem; }
-    .game p { margin: 2px 0 0; color: var(--muted); font-size: .9rem; }
-    .game.soon { opacity: .5; }
-    .tip { margin-top: 20px; font-size: .85rem; color: var(--muted); text-align: center; }
+    body { background: var(--home-bg); color: var(--ink); }
+    .home { max-width: 560px; margin: 0 auto; padding: 22px 14px 28px; }
+    .top { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin: 10px 4px 16px; }
+    .top h1 { margin: 0; font-size: 2.1rem; font-weight: 900; letter-spacing: -1px; line-height: 1; }
+    .top h1 em { font-style: normal; color: #ff5a36; }
+    .top .date { font-size: .85rem; font-weight: 600; opacity: .6; text-align: right; }
+    .top .date::first-letter { text-transform: uppercase; }
+    .bento { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .c {
+      position: relative; overflow: hidden; min-height: 132px; padding: 16px; border-radius: 24px;
+      display: flex; flex-direction: column; justify-content: space-between; gap: 10px;
+      color: var(--fg, #fff); background: var(--bgc); text-decoration: none;
+      transition: transform .15s ease; animation: pop .45s cubic-bezier(.2,.9,.3,1.2) both;
+    }
+    .c:active { transform: scale(.96); }
+    .c h2 { margin: 0; font-size: 1.2rem; font-weight: 800; letter-spacing: -.3px; line-height: 1.1; }
+    .c p { margin: 4px 0 0; font-size: .82rem; opacity: .8; line-height: 1.3; }
+    .c .e { font-size: 2.1rem; line-height: 1; }
+    .c .deco { position: absolute; right: -14px; bottom: -20px; font-size: 6rem; opacity: .2; transform: rotate(-12deg); pointer-events: none; }
+    .c > * { position: relative; }
+    .c > .deco { position: absolute; }
+    .wide { grid-column: span 2; }
+    .tall { grid-row: span 2; }
+    .row { flex-direction: row; align-items: center; justify-content: flex-start; gap: 14px; min-height: 96px; }
+    .tag {
+      align-self: flex-start; font-size: .68rem; font-weight: 800; padding: 4px 9px; border-radius: 99px;
+      background: #1a1a1a; color: #fff; text-transform: uppercase; letter-spacing: .5px;
+    }
+    .play { position: absolute; right: 16px; top: 16px; width: 42px; height: 42px; border-radius: 50%; background: #fff; color: #2154d6; display: grid; place-items: center; font-size: 1rem; }
+    .sutom { min-height: 160px; }
+    .sutom h2 { font-size: 1.7rem; }
+    .tiles { display: flex; gap: 5px; margin-top: 10px; flex-wrap: wrap; }
+    .tiles i {
+      width: 28px; height: 28px; border-radius: 6px; background: rgba(255,255,255,.22);
+      display: grid; place-items: center; font-style: normal; font-weight: 800; font-size: .95rem; color: #fff;
+    }
+    .tiles i.good { background: #ef4444; }
+    .tiles i.close { background: #facc15; border-radius: 50%; color: #1a1a1a; }
+    .tip { margin: 22px 8px 0; font-size: .82rem; opacity: .6; text-align: center; }
+    @keyframes pop { from { opacity: 0; transform: translateY(14px) scale(.97); } }
+    @media (prefers-reduced-motion: reduce) { .c { animation: none; } }
   </style>
 </head>
 <body>
-  <header class="hero">
-    <h1>OustaGames</h1>
-    <p>Choisis ton jeu</p>
-  </header>
-  <main class="page">
-    <nav class="games">
-      <a class="game" href="mot/">
-        <span class="emoji">🟥</span>
-        <div><h2>SUTOM</h2><p>Trouve le mot en 6 essais, la première lettre est donnée.</p></div>
+  <main class="home">
+    <header class="top">
+      <h1>Ousta<em>Games</em></h1>
+      <div class="date" id="date"></div>
+    </header>
+    <nav class="bento">
+      <a class="c wide sutom" href="mot/" style="--bgc:#2154d6">
+        <span class="tag" id="sutom-tag" style="background:#fff;color:#2154d6">Mot du jour</span>
+        <span class="play" aria-hidden="true">▶</span>
+        <div><h2>SUTOM</h2><p id="sutom-sub">Trouve le mot en 6 essais, la première lettre est donnée.</p><div class="tiles" id="sutom-tiles"></div></div>
       </a>
-      <a class="game" href="geo/">
-        <span class="emoji">🌍</span>
-        <div><h2>Géographie</h2><p>Drapeaux et capitales du monde.</p></div>
+      <a class="c tall" href="quiz/" style="--bgc:#ffd23f;--fg:#1a1a1a">
+        <div class="e">🧠</div>
+        <div><span class="tag" id="quiz-tag">Quiz du jour</span><h2 style="margin-top:8px">Quiz</h2><p id="quiz-sub">L'actu du jour, le droit et le code de la route.</p></div>
+        <span class="deco" aria-hidden="true">❓</span>
       </a>
-      <a class="game" href="frontieres/">
-        <span class="emoji">🧭</span>
-        <div><h2>Passe-frontières</h2><p>Relie deux pays par la terre, de frontière en frontière.</p></div>
+      <a class="c" href="sens/" style="--bgc:#ff5a36">
+        <div class="e">🔥</div><h2>Mot chaud, mot froid</h2>
       </a>
-      <a class="game" href="sens/">
-        <span class="emoji">🔥</span>
-        <div><h2>Mot chaud, mot froid</h2><p>Trouve le mot secret par proximité de sens, avec des énigmes.</p></div>
+      <a class="c" href="geo/" style="--bgc:#0f9d6b">
+        <div class="e">🌍</div><div><h2>Géographie</h2><p>Drapeaux et capitales</p></div>
+        <span class="deco" aria-hidden="true">🗺️</span>
       </a>
-      <a class="game" href="elections/">
-        <span class="emoji">🗳️</span>
-        <div><h2>Isoloir 2027</h2><p>De quel candidat à la présidentielle es-tu le plus proche ?</p></div>
+      <a class="c" href="revue/" style="--bgc:var(--plain);--fg:var(--ink)">
+        <div class="e">📰</div><div><h2>Revue de presse</h2><p id="revue-sub">L'essentiel de l'actu du jour</p></div>
       </a>
-      <a class="game" href="couleurs/">
-        <span class="emoji">🎨</span>
-        <div><h2>Palette</h2><p>Test de personnalité : es-tu plutôt rouge, jaune, vert ou bleu ?</p></div>
+      <a class="c" href="frontieres/" style="--bgc:#c7b8ff;--fg:#1a1a1a">
+        <div class="e">🧭</div><div><h2>Passe-frontières</h2><p>De frontière en frontière</p></div>
       </a>
-      <a class="game" href="revue/">
-        <span class="emoji">📰</span>
-        <div><h2>Revue de presse</h2><p>L'essentiel de l'actu du jour en 30 articles, par rubrique.</p></div>
+      <a class="c wide row" href="cartes/" style="--bgc:var(--cards)">
+        <div class="e" style="font-size:2.5rem">🃏</div><div><h2>OustaCards</h2><p>Solitaire · Spider · FreeCell · Dame de pique</p></div>
       </a>
-      <a class="game" href="quiz/">
-        <span class="emoji">🧠</span>
-        <div><h2>Quiz</h2><p>Actu du jour, droit en 3 niveaux, et code de la route.</p></div>
+      <a class="c" href="couleurs/" style="--bgc:#ffb3c7;--fg:#1a1a1a">
+        <div class="e">🎨</div><div><h2>Palette</h2><p>Es-tu rouge, jaune, vert ou bleu ?</p></div>
       </a>
-      <a class="game" href="cartes/">
-        <span class="emoji">🃏</span>
-        <div><h2>OustaCards</h2><p>Solitaire, Spider, FreeCell et Dame de pique.</p></div>
+      <a class="c" href="elections/" style="--bgc:var(--soft);--fg:var(--ink)">
+        <div class="e">🗳️</div><div><h2>Isoloir 2027</h2><p>De quel candidat es-tu proche ?</p></div>
       </a>
       <!-- Pousse-pièces (pousse/) masqué pour l'instant à la demande de Bastien : remettre le lien pour le réafficher.
-      <a class="game" href="pousse/">
-        <span class="emoji">🪙</span>
-        <div><h2>Pousse-pièces</h2><p>La machine de fête foraine : fais tomber les pièces du bord.</p></div>
+      <a class="c" href="pousse/" style="--bgc:#f59e0b">
+        <div class="e">🪙</div><div><h2>Pousse-pièces</h2><p>Fais tomber les pièces du bord</p></div>
       </a>
       -->
     </nav>
     <p class="tip" id="tip">Sur iPhone : bouton Partager puis « Sur l'écran d'accueil » pour l'installer.</p>
   </main>
+  <script src="mot/words.js"></script>
   <script>
     if (navigator.standalone || matchMedia('(display-mode: standalone)').matches) {
       document.getElementById('tip').hidden = true;
     }
     if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+
+    // Petite entrée en cascade des tuiles.
+    document.querySelectorAll('.c').forEach((c, i) => { c.style.animationDelay = (i * 40) + 'ms'; });
+
+    const now = new Date();
+    const iso = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+    const read = (k) => { try { return JSON.parse(localStorage.getItem(k)) || {}; } catch { return {}; } };
+    document.getElementById('date').textContent = now.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
+
+    // SUTOM : même calcul du mot du jour que mot/mot.js.
+    try {
+      const day = Math.round((new Date(now.getFullYear(), now.getMonth(), now.getDate()) - new Date(2026, 0, 1)) / 86400000);
+      const answer = SOLUTIONS[DAILY[((day % SOLUTIONS.length) + SOLUTIONS.length) % SOLUTIONS.length]];
+      const num = SOLUTIONS.indexOf(answer) + 1;
+      const saved = read('ousta.mot').daily;
+      const game = saved && saved.day === day ? saved : null;
+      const guesses = game ? game.guesses : [];
+      const colors = (g) => {
+        const res = Array(answer.length).fill('bad'), left = {};
+        for (let i = 0; i < answer.length; i++) {
+          if (g[i] === answer[i]) res[i] = 'good'; else left[answer[i]] = (left[answer[i]] || 0) + 1;
+        }
+        for (let i = 0; i < answer.length; i++) if (res[i] !== 'good' && left[g[i]]) { res[i] = 'close'; left[g[i]]--; }
+        return res;
+      };
+      let cells;
+      if (game && game.done && !game.won) cells = [...answer].map((ch) => ['', ch]);
+      else if (guesses.length) { const g = guesses[guesses.length - 1]; cells = colors(g).map((c, i) => [c, g[i]]); }
+      else cells = [...answer].map((ch, i) => i ? ['', ''] : ['good', ch]);
+      document.getElementById('sutom-tiles').innerHTML = cells.map(([c, ch]) => `<i class="${c}">${ch}</i>`).join('');
+      document.getElementById('sutom-tag').textContent = `Mot du jour · n°${num}`;
+      document.getElementById('sutom-sub').textContent =
+        game && game.done ? (game.won ? `Trouvé en ${guesses.length}/6 ! Une partie libre ?` : 'Raté pour aujourd\'hui. Une partie libre ?')
+        : guesses.length ? `${guesses.length} essai${guesses.length > 1 ? 's' : ''} joué${guesses.length > 1 ? 's' : ''}, il t'en reste ${6 - guesses.length}.`
+        : `${answer.length} lettres, ça commence par ${answer[0]}.`;
+    } catch {}
+
+    // Quiz de l'actu : score du jour s'il a été joué.
+    const q = read('ousta.quiz')[iso];
+    if (q && q.a && q.k) {
+      document.getElementById('quiz-tag').textContent = 'Fait ✓';
+      document.getElementById('quiz-sub').textContent = `Quiz de l'actu : ${q.a.filter((x, i) => x === q.k[i]).length}/10 aujourd'hui. Et le droit ou le code ?`;
+    } else {
+      document.getElementById('quiz-tag').textContent = 'Nouveau';
+      document.getElementById('quiz-sub').textContent = '10 questions sur l\'actu de ce matin, plus le droit et le code de la route.';
+    }
+
+    // Revue de presse : articles déjà lus aujourd'hui.
+    const lus = (read('ousta.revue')[iso] || []).length;
+    if (lus) document.getElementById('revue-sub').textContent = `${lus} article${lus > 1 ? 's' : ''} lu${lus > 1 ? 's' : ''} aujourd'hui`;
   </script>
 </body>
 </html>
