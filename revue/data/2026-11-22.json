@@ -1,0 +1,421 @@
+{
+  "date": "2026-11-22",
+  "articles": [
+    {
+      "rubrique": "monde",
+      "une": true,
+      "titre": "COP31 : le nouveau projet d'accord ne cite toujours pas les énergies fossiles",
+      "resume": "À Antalya, en Turquie, la COP31 a largement dépassé sa fin prévue vendredi. Le projet de décision publié dans la nuit de samedi à dimanche appelle à électrifier l'économie mais ne nomme pas le pétrole, le gaz ni le charbon. Une plénière est attendue dimanche.",
+      "source": {
+        "nom": "Le Figaro",
+        "url": "https://www.lefigaro.fr/international/cop31-nouveau-projet-de-decision-finale-toujours-sans-mention-des-energies-fossiles-20261122"
+      },
+      "image": "https://i.f1g.fr/media/cms/1200x630_crop/2026/11/22/56fca0e849b8f57f23174a24ecf224a614b859044cfa126ae814068de525bfac.jpg",
+      "detail": [
+        "La conférence de l'ONU sur le climat, réunie à Antalya, dans le sud-ouest de la Turquie, joue les prolongations. Prévue pour s'achever vendredi soir, elle a vu les présidences turque et australienne publier dans la nuit de samedi à dimanche un nouveau projet de décision finale. Une séance plénière devait se tenir dimanche matin pour tenter de faire adopter un compromis par près de 200 pays.",
+        "Le texte ne contient aucun appel explicite à abandonner le charbon, le pétrole ou le gaz, principale cause du réchauffement. Il se contente de renvoyer à la COP28 de Dubaï, qui avait évoqué en 2023 une transition hors des énergies fossiles. Il propose en revanche de porter à 35 % d'ici 2035 la part de l'électricité dans la consommation finale d'énergie mondiale, et encourage le captage et le stockage du carbone, une mention contestée.",
+        "Les pays producteurs, Arabie saoudite en tête, refusent toute nouvelle référence aux fossiles, tandis que des États du Pacifique, d'Europe et d'Amérique latine réclament qu'ils soient nommés. Autre point disputé : le calendrier des prochains rapports du Giec, que l'Inde et l'Arabie saoudite voudraient repousser à 2029, après le bilan mondial des efforts climatiques prévu en 2028."
+      ]
+    },
+    {
+      "rubrique": "monde",
+      "titre": "Emmanuel Macron dénonce un « nouveau niveau » d'agression russe en Europe",
+      "resume": "Après la chute de deux missiles russes et d'un drone en Pologne, sans faire de blessé, le président français a exprimé sa solidarité avec Varsovie. Il évoque aussi une tentative d'assassinat à Copenhague attribuée aux services russes et parle d'un « pari irresponsable » de Moscou.",
+      "source": {
+        "nom": "Euronews",
+        "url": "https://fr.euronews.com/2026/11/21/macron-alerte-sur-un-nouveau-niveau-dagression-russe-en-europe"
+      },
+      "detail": [
+        "Dans un message publié sur X, Emmanuel Macron a affirmé que plusieurs partenaires européens avaient été confrontés en 24 heures à des incidents graves, signe selon lui d'une agressivité nouvelle de la Russie. Il a d'abord marqué sa solidarité avec la Pologne, où deux missiles et probablement un drone sont tombés dans le sud-est du pays, sans faire de blessé, puis évoqué une tentative d'assassinat présumée au Danemark.",
+        "Pour le chef de l'État, Moscou fait un pari irresponsable en intensifiant la guerre en Ukraine tout en menant un agenda agressif sur le territoire européen. Varsovie a parlé de provocation, et le secrétaire général de l'OTAN a dénoncé de graves violations de l'espace aérien polonais. Ces incidents surviennent alors que l'invasion à grande échelle de l'Ukraine approche de son cinquième anniversaire."
+      ]
+    },
+    {
+      "rubrique": "monde",
+      "titre": "Israël : Gadi Eisenkot invite le Likoud de Benyamin Nétanyahou à négocier une coalition",
+      "resume": "Chargé de former un gouvernement après des législatives sans majorité fin octobre, Gadi Eisenkot propose au parti du premier ministre sortant une série de discussions dès dimanche. Il a jusqu'au mois prochain pour réunir 61 députés sur 120.",
+      "source": {
+        "nom": "Le Monde",
+        "url": "https://www.lemonde.fr/international/article/2026/11/21/israel-gadi-eisenkot-invite-le-parti-de-benyamin-netanyahou-a-des-negociations-de-coalition_6814066_3210.html"
+      },
+      "image": "https://img.lemde.fr/2026/11/17/634/0/7613/3806/644/322/60/0/ca55061_ftp-1-weq7m5gcmjev-fb05246d6e7e4e278ce60fe9c7f2f923-0-b0ef1a5086784403a71984eddbadc920.jpg",
+      "detail": [
+        "Gadi Eisenkot, ancien chef d'état-major de l'armée israélienne, a annoncé samedi que son équipe de négociation proposerait au Likoud un long cycle de discussions, à commencer par une réunion prévue dimanche. Il dit vouloir former le gouvernement le plus large possible, les législatives de fin octobre n'ayant donné de majorité absolue ni à son camp ni à celui de Benyamin Nétanyahou.",
+        "Le président Isaac Herzog lui a confié la mission de former un gouvernement le 8 novembre, pour 28 jours prolongeables de 14. Selon la presse internationale, Gadi Eisenkot exclut de rejoindre une coalition dirigée par Benyamin Nétanyahou, mais reste ouvert à des membres du Likoud, et n'écarte pas un gouvernement minoritaire d'urgence en cas d'échec. Naftali Bennett a de son côté réaffirmé son refus d'un retour du premier ministre sortant."
+      ]
+    },
+    {
+      "rubrique": "monde",
+      "titre": "Bahreïn accuse l'Iran d'avoir frappé l'un de ses sites industriels",
+      "resume": "Le ministère bahreïni de l'Intérieur fait état d'une frappe iranienne contre un site industriel civil, avec des dégâts matériels mais sans blessé. Téhéran affirme avoir visé des bases américaines en riposte à des frappes sur l'île de Qechm, dans le détroit d'Ormuz.",
+      "source": {
+        "nom": "France 24",
+        "url": "https://www.france24.com/fr/info-en-continu/20261121-deux-nouveaux-p%C3%A9troliers-touch%C3%A9s-dans-le-d%C3%A9troit-d-ormuz"
+      },
+      "detail": [
+        "Samedi, les autorités de Bahreïn ont accusé l'Iran d'avoir frappé un site industriel civil, dont la localisation n'a pas été précisée. Les premiers rapports font état de dégâts matériels et d'un incendie combattu par la défense civile, sans blessé signalé. La population a été appelée au calme, les autorités évoquant une menace toujours présente.",
+        "Selon l'agence iranienne Fars, les Gardiens de la révolution disent avoir attaqué deux bases américaines à Bahreïn, en réponse à des frappes américaines sur l'île de Qechm. Le même jour, deux pétroliers ont été touchés près du détroit d'Ormuz, sans faire de blessé selon l'agence maritime britannique UKMTO ; l'armée iranienne attribue l'un des incidents à une mine."
+      ]
+    },
+    {
+      "rubrique": "monde",
+      "titre": "Un drone ukrainien frappe un cargo russe dans le golfe de Finlande",
+      "resume": "Les forces finlandaises ont détecté samedi une attaque de drone contre le cargo russe Sparta II, en eaux internationales. Un incendie s'est déclaré à bord et l'équipage a été évacué. Helsinki a confirmé une frappe ukrainienne et restreint la circulation dans l'est du golfe.",
+      "source": {
+        "nom": "France 24",
+        "url": "https://www.france24.com/fr/europe/20261121-une-attaque-de-drone-contre-un-cargo-russe-d%C3%A9tect%C3%A9e-dans-le-golfe-de-finlande"
+      },
+      "detail": [
+        "Le ministère finlandais de la Défense a signalé samedi une attaque de drone contre un cargo battant pavillon russe, à l'ouest de l'île de Suursaari, dans les eaux internationales du golfe de Finlande. Le navire de 121 mètres, parti de Saint-Pétersbourg pour Kaliningrad, a pris feu, a jeté l'ancre et son équipage a été évacué. Un responsable des garde-frontières a ensuite confirmé qu'il s'agissait d'un drone ukrainien.",
+        "Le premier ministre finlandais Petteri Orpo a déclaré que l'Ukraine avait le droit de se défendre face à son agresseur. Dans le même temps, un hélicoptère russe a pénétré dans l'espace aérien finlandais au large de Loviisa, possiblement lors d'opérations de secours. Helsinki a instauré des restrictions temporaires de circulation aérienne et maritime dans l'est du golfe."
+      ]
+    },
+    {
+      "rubrique": "monde",
+      "titre": "« Robots tueurs » : 128 États s'accordent à l'ONU sur un encadrement, sans interdiction",
+      "resume": "Réunis à Genève, les pays de la Convention sur certaines armes classiques ont adopté samedi un mandat pour élaborer des règles sur les armes autonomes. La Russie, les États-Unis et Israël se sont opposés à toute interdiction, alors que le CICR en réclamait une partielle.",
+      "source": {
+        "nom": "Libération",
+        "url": "https://www.liberation.fr/international/robots-tueurs-un-accord-trouve-a-lonu-mais-pas-dinterdiction-20261121_5WLRNTYQY5GIZGCNZCFTCJVFZM/"
+      },
+      "detail": [
+        "Après une semaine de négociations à Genève, lors de la conférence d'examen de la Convention sur certaines armes classiques, 128 États se sont entendus samedi sur un mandat visant à élaborer un futur instrument sur les systèmes d'armes létales autonomes. Selon la Suisse, qui présidait les travaux, il s'agit d'un premier pas, les discussions devant se poursuivre pendant environ deux ans.",
+        "L'accord ne comporte toutefois aucune interdiction ni règle contraignante. La Russie, les États-Unis et Israël ont bloqué toute prohibition, alors que le Comité international de la Croix-Rouge demandait d'interdire au moins les armes au comportement imprévisible et celles conçues pour viser des êtres humains."
+      ]
+    },
+    {
+      "rubrique": "monde",
+      "titre": "Indonésie : trois morts et 36 disparus dans l'incendie d'une usine de confiseries",
+      "resume": "Un incendie s'est déclaré samedi après-midi dans une usine de bonbons située à une cinquantaine de kilomètres de Jakarta. Les secours font état de trois morts, quatre blessés et 36 disparus. Le feu restait actif dimanche matin, compliquant les recherches.",
+      "source": {
+        "nom": "Le Figaro",
+        "url": "https://www.lefigaro.fr/international/indonesie-39-disparus-apres-un-incendie-dans-une-usine-20261122"
+      },
+      "image": "https://i.f1g.fr/media/cms/1200x630_crop/2026/11/22/3a03bb11529d62c8916a379c47218e1142eb0b05c00dff5ba574d34bbe20aee8.jpg",
+      "detail": [
+        "L'incendie a ravagé samedi après-midi une usine de l'entreprise de confiseries PT Fonua Agung Mulia, à l'ouest de la capitale indonésienne. Dimanche, un responsable des secours a annoncé la mort de trois personnes et ramené à 36 le nombre de disparus. Quatre blessés ont été transférés vers des centres de santé.",
+        "Le feu était encore actif par endroits dimanche matin, ce qui gênait les recherches. Des images de télévision ont montré le site en flammes pendant la nuit, une partie du toit s'étant effondrée. L'agence des secours a indiqué que l'origine du sinistre faisait l'objet d'une enquête."
+      ]
+    },
+    {
+      "rubrique": "france",
+      "une": true,
+      "titre": "Présidentielle 2027 : François Ruffin retire sa candidature",
+      "resume": "Le député de la Somme renonce à se présenter, constatant l'échec de la primaire de la gauche qu'il défendait, face à un Rassemblement national qu'il juge « aux portes du pouvoir ». Il ne soutient aucun autre candidat et souhaite « bonne campagne » à la gauche encore en lice.",
+      "source": {
+        "nom": "Le Monde",
+        "url": "https://www.lemonde.fr/politique/article/2026/11/21/presidentielle-2027-francois-ruffin-renonce-a-sa-candidature-face-au-risque-de-l-arrivee-de-l-extreme-droite-au-pouvoir_6814051_823448.html"
+      },
+      "image": "https://img.lemde.fr/2026/11/21/56/0/4612/2306/644/322/60/0/50d4b32_upload-1-grha8zqpj7hb-000-c7zy796.jpg",
+      "detail": [
+        "François Ruffin a annoncé samedi qu'il renonçait à être candidat à l'élection présidentielle d'avril 2027. Le fondateur du mouvement Debout! explique prendre acte de l'impasse dans laquelle se trouve son projet de grande primaire à gauche, rejeté par les appareils des partis, ce qui laisse selon lui face à face deux gauches irréconciliables.",
+        "Crédité de 1 à 3 % des intentions de vote dans les sondages, il refuse une candidature de témoignage. Il n'apporte son soutien à personne et souhaite bon courage aux candidats de gauche restants pour porter un projet capable de rassembler une majorité. Ce retrait intervient une semaine après celui de Marine Tondelier ; le premier tour est fixé au 18 avril 2027."
+      ]
+    },
+    {
+      "rubrique": "france",
+      "une": true,
+      "titre": "Vie chère : entre 82 500 et 150 000 manifestants pour le sixième samedi de mobilisation",
+      "resume": "Le ministère de l'Intérieur a compté 82 500 manifestants en France samedi, les organisateurs 150 000. Autorités comme syndicats décrivent des cortèges moins fournis que la semaine précédente. Des incidents ont été signalés à Paris, Marseille et Toulouse, avec 144 interpellations.",
+      "source": {
+        "nom": "Libération",
+        "url": "https://www.liberation.fr/societe/en-direct-mobilisation-contre-la-vie-chere-coup-denvoi-du-sixieme-samedi-de-manifestations-20261121_VKY5SCSHIRDTXE7DUOQNMMRLWY/"
+      },
+      "detail": [
+        "Pour l'« acte VI » du mouvement contre la vie chère, né chez les étudiants et les lycéens, le ministère de l'Intérieur a recensé 82 500 personnes dans les cortèges, les organisateurs en revendiquant 150 000. Les deux camps s'accordent sur une baisse de la participation par rapport au samedi précédent.",
+        "Selon Le Figaro, 144 personnes ont été interpellées dans le pays. À Paris, de premiers incidents ont éclaté après l'arrivée du cortège place de la Nation, et des débordements ont été constatés à Marseille. À Toulouse, la préfecture a fait état d'une vingtaine d'interpellations et de six policiers blessés."
+      ]
+    },
+    {
+      "rubrique": "france",
+      "titre": "Inondations dans le Pas-de-Calais : 800 personnes évacuées, la Canche à son maximum",
+      "resume": "Après de fortes pluies, près de 800 habitants du Pas-de-Calais ont été évacués depuis jeudi. La Canche a atteint son niveau maximal et la Lys est passée en vigilance orange samedi. Des pompes de grande puissance ont été acheminées et des écoles fermées.",
+      "source": {
+        "nom": "Libération",
+        "url": "https://www.liberation.fr/societe/inondations-dans-le-pas-de-calais-800-personnes-evacuees-depuis-jeudi-la-canche-reste-en-vigilance-orange-20261121_UL3RUAMHAZGP5A2MBEUUDKN5MQ/"
+      },
+      "detail": [
+        "Le Pas-de-Calais subit de nouvelles inondations après plusieurs jours de fortes pluies. Environ 800 personnes ont été évacuées depuis jeudi, selon les autorités. La Canche a atteint son pic de crue, et la Lys a été placée à son tour en vigilance orange samedi. Des écoles ont dû fermer dans les secteurs touchés.",
+        "La préfecture a fait venir dès vendredi des pompes de grande puissance pour accélérer l'évacuation de l'eau dans les zones les plus touchées. Samedi, la Canche et la Lys étaient toutes deux placées en vigilance orange pour les crues, selon Libération, et les cours d'eau restaient sous étroite surveillance dans l'attente d'une décrue."
+      ]
+    },
+    {
+      "rubrique": "france",
+      "titre": "Soupçonné de fuites vers le RN, le préfet Hugues Moutouh demande à être relevé de ses fonctions",
+      "resume": "Le préfet de la région Centre-Val de Loire, ancien numéro deux du ministère de l'Intérieur, est soupçonné d'avoir transmis au Rassemblement national des informations sur des enquêtes le visant. Convoqué place Beauvau, il dénonce une campagne de déstabilisation et reste présumé innocent.",
+      "source": {
+        "nom": "Libération",
+        "url": "https://www.liberation.fr/societe/police-justice/suspecte-detre-une-taupe-du-rn-le-prefet-moutouh-demande-a-etre-releve-de-ses-fonctions-20261121_LUXHW7N52BELTCNJHZ6VHWMFHU/"
+      },
+      "detail": [
+        "Hugues Moutouh a annoncé samedi avoir demandé à quitter son poste de préfet de la région Centre-Val de Loire. Il a été convoqué vendredi au ministère de l'Intérieur par Laurent Nuñez, après des révélations sur une information judiciaire ouverte en juillet par le parquet de Paris pour violation du secret professionnel et du secret de l'enquête.",
+        "Selon la presse, un document confidentiel du ministère retrouvé lors d'une perquisition laisse penser que le RN aurait eu accès à des informations sensibles sur des enquêtes le concernant ; le siège du parti a été perquisitionné le 9 novembre. Le préfet, numéro deux de Beauvau entre avril 2025 et mai 2026, dénonce une campagne de déstabilisation et reste présumé innocent."
+      ]
+    },
+    {
+      "rubrique": "france",
+      "titre": "Présidentielle : la CFDT demande d'avancer l'élection pour éviter un second tour le 2 mai",
+      "resume": "Marylise Léon, secrétaire générale de la CFDT, demande au gouvernement d'avancer la présidentielle d'une semaine, jugeant le 2 mai « le pire scénario » au lendemain des défilés du 1er-Mai. Gérard Larcher avait formulé la même demande jeudi.",
+      "source": {
+        "nom": "Le Figaro",
+        "url": "https://www.lefigaro.fr/politique/presidentielle-2027-marylise-leon-appelle-a-son-tour-a-changer-la-date-pour-eviter-un-second-tour-le-2-mai-20261121"
+      },
+      "image": "https://i.f1g.fr/media/cms/1200x630_crop/2026/11/21/b2f43ee7d3c18e9ddd1d52012f006e291b80517c21c647c3dd6679bc8447adf0.jpg",
+      "detail": [
+        "Dans un entretien à La Tribune Dimanche, Marylise Léon demande formellement au gouvernement d'avancer d'une semaine l'élection présidentielle. Le calendrier retenu prévoit un premier tour le 18 avril et un second tour le 2 mai, juste après la fête du Travail. La dirigeante syndicale redoute de fortes tensions et estime qu'aucune raison convaincante ne justifie cette date.",
+        "Le président du Sénat, Gérard Larcher, avait déjà réclamé ce changement jeudi, rappelant que les défilés du 1er-Mai sont un moment d'expression des syndicats et des partis, alors que la campagne officielle doit s'arrêter le 30 avril à minuit.",
+        "La secrétaire générale de la CFDT réclame aussi des mesures immédiates face à l'urgence sociale : revalorisation du point d'indice des fonctionnaires et refonte des grilles, plus d'un million d'agents ayant selon elle un indice inférieur au smic. Elle regrette que seules deux branches professionnelles sur 179 aient ouvert des négociations salariales, et critique le projet de réforme des retraites du RN."
+      ]
+    },
+    {
+      "rubrique": "france",
+      "titre": "Justice : malgré un budget en hausse, le Sénat alerte sur la surpopulation carcérale",
+      "resume": "Le budget de la justice doit progresser d'environ 4 % en 2027, à 11 milliards d'euros. Un rapport du Sénat juge pourtant cette hausse insuffisante face à l'augmentation « alarmante » du nombre de détenus, plus rapide que la création de places de prison.",
+      "source": {
+        "nom": "Public Sénat",
+        "url": "https://www.publicsenat.fr/actualites/institutions/justice-malgre-un-budget-en-hausse-le-senat-alerte-sur-laugmentation-alarmante-de-la-surpopulation-carcerale"
+      },
+      "detail": [
+        "Dans le projet de loi de finances pour 2027, la justice fait partie des rares missions dont les crédits augmentent : ils passeraient de 10,5 à 11 milliards d'euros, soit environ 4 % de plus. Le texte, rejeté en première lecture à l'Assemblée, est examiné au Sénat depuis le 20 novembre.",
+        "Un rapport sénatorial estime que cette hausse ne suffira pas à enrayer la dégradation des prisons, le nombre de personnes incarcérées progressant plus vite que les places créées. Le rapporteur LR Antoine Lefèvre parle d'une paupérisation persistante de l'institution, alors que le plan de 15 000 places supplémentaires a été repoussé à 2029."
+      ]
+    },
+    {
+      "rubrique": "toulouse",
+      "titre": "Manifestation à Toulouse : centre-ville gazé et une vingtaine d'interpellations",
+      "resume": "Environ 3 000 personnes selon la préfecture se sont rassemblées samedi à Toulouse pour l'« acte VI » contre la vie chère. Après des sommations, des gaz lacrymogènes ont été tirés jusqu'au Capitole. Vingt personnes ont été interpellées et six policiers blessés.",
+      "source": {
+        "nom": "La Dépêche",
+        "url": "https://www.ladepeche.fr/2026/11/21/manifestation-du-21-novembre-a-toulouse-une-colere-intacte-et-un-centre-ville-noye-sous-les-gaz-lacrymogenes-13664715.php"
+      },
+      "image": "https://images.ladepeche.fr/api/v1/images/view/6b01d1e9699d21477308ed30/hd/image.jpg?v=1",
+      "detail": [
+        "Le rassemblement, non autorisé, a débuté vers 14 heures sur les allées Jean-Jaurès et au métro Esquirol. La préfecture de la Haute-Garonne a compté environ 3 000 participants, parmi lesquels de nombreux étudiants et lycéens dénonçant notamment le manque de personnel dans l'Éducation nationale, mais aussi des retraités et des salariés.",
+        "Vers 15 heures, les forces de l'ordre ont lancé des sommations de dispersion, avant de tirer des gaz lacrymogènes près de la médiathèque. Une femme blessée à la tête par un tir de lanceur de balles a été prise en charge par le Samu. En fin d'après-midi, la place du Capitole a été évacuée et un cordon installé pour protéger l'hypercentre.",
+        "La préfecture a annoncé un retour au calme à 18 h 15. Elle fait état de vingt interpellations, de quelques feux de poubelles, de sept blessés légers et de six policiers blessés. Deux stations de métro avaient été fermées pendant la manifestation."
+      ]
+    },
+    {
+      "rubrique": "toulouse",
+      "titre": "Capture de CO2 en Comminges : un projet de 600 millions d'euros à la cimenterie de Martres-Tolosane",
+      "resume": "La cimenterie Lafarge de Martres-Tolosane veut capter 700 000 tonnes de CO2 par an et les enfouir à plus de 1 000 mètres sous terre, via 35 km de canalisations. Mise en service visée en 2032. Une concertation publique s'ouvre le 30 novembre.",
+      "source": {
+        "nom": "La Dépêche",
+        "url": "https://www.ladepeche.fr/2026/11/22/35-km-de-canalisations-1-500-metres-de-profondeur-le-projet-de-capture-du-co2-au-sud-de-la-haute-garonne-prend-une-dimension-titanesque-13661624.php"
+      },
+      "image": "https://images.ladepeche.fr/api/v1/images/view/6aff267712f871344b0b4134/hd/image.jpg?v=1",
+      "detail": [
+        "Baptisé Cap CO2mminges, le projet doit capter le gaz carbonique à la sortie des cheminées de la cimenterie Lafarge de Martres-Tolosane, qui emploie 140 salariés, le purifier puis l'acheminer par canalisation vers le sud du département et les Hautes-Pyrénées. Il serait ensuite injecté entre 1 000 et 1 500 mètres de profondeur, dans une roche poreuse surmontée d'une couche étanche.",
+        "Selon le directeur du site, le dispositif permettrait de capter 700 000 tonnes de CO2 par an, soit environ 20 % des émissions de l'Occitanie, et de réduire de 97 % celles de l'usine. Les conduites, de 40 cm de diamètre, courraient sur environ 35 km ; 66 communes sont concernées, et le stockage pourrait se faire sous Boulogne-sur-Gesse, Blajan ou Saint-Pé-Delbosc.",
+        "L'investissement dépasse 600 millions d'euros, avec une décision définitive attendue en 2030 et une mise en service en 2032, en partenariat avec Teréga. Une concertation publique se tiendra du 30 novembre au 19 février 2027. Les deux tiers des émissions du site proviennent du calcaire lui-même, transformé en clinker à 1 450 degrés."
+      ]
+    },
+    {
+      "rubrique": "toulouse",
+      "titre": "Ligne C : première pierre d'un pôle d'échanges avec un parking de 1 000 places à Labège",
+      "resume": "Au futur terminus sud-est de la troisième ligne de métro, Tisséo a posé jeudi la première pierre d'un pôle d'échanges à Labège. Il comprendra un parking relais de 1 000 places sur sept niveaux, une gare de bus et une passerelle reliant métro et train.",
+      "source": {
+        "nom": "Le Journal Toulousain",
+        "url": "https://www.lejournaltoulousain.fr/occitanie/haute-garonne/toulouse/ligne-c-un-parking-de-1-000-places-et-une-passerelle-pour-connecter-metro-train-et-bus-a-labege-404589/"
+      },
+      "detail": [
+        "Tisséo a lancé jeudi 19 novembre, en présence d'élus du Sicoval, la construction du pôle d'échanges de Labège, au terminus de la future ligne C du métro toulousain. L'objectif est de connecter en un même lieu le métro, les trains régionaux, les bus, la voiture et le vélo.",
+        "Le programme prévoit un parking relais de 1 000 places sur sept étages, avec une aire de covoiturage et des panneaux solaires, une gare de bus, une zone de dépose-minute et une passerelle d'une soixantaine de mètres au-dessus des voies ferrées pour rejoindre la station aérienne du métro. La date de mise en service n'est pas encore consolidée."
+      ]
+    },
+    {
+      "rubrique": "toulouse",
+      "titre": "Le Toulousain Joshua Roux, 20 ans, sacré parmi les meilleurs jeunes boulangers de France",
+      "resume": "Boulanger à la maison Credo, Joshua Roux a pris la quatrième place ex aequo de la finale nationale du Concours des meilleurs jeunes boulangers de France, à Livron-sur-Drôme. Avec plus de 16 de moyenne, il décroche le titre, malgré la déception de manquer le podium.",
+      "source": {
+        "nom": "La Dépêche",
+        "url": "https://www.ladepeche.fr/2026/11/21/temoignage-cette-annee-il-y-avait-vraiment-du-tres-gros-niveau-le-toulousains-joshua-roux-20-ans-obtient-le-titre-du-meilleur-jeune-boulanger-de-13664766.php"
+      },
+      "image": "https://images.ladepeche.fr/api/v1/images/view/6b01c2c665986099d104bdfc/hd/image.jpg?v=1",
+      "detail": [
+        "Joshua Roux, 20 ans, travaille à la boulangerie Credo, avenue Saint-Exupéry à Toulouse. Il faisait partie des 18 finalistes de moins de 21 ans réunis dans la Drôme pour la 45e finale nationale du concours organisé par la Confédération nationale de la boulangerie-pâtisserie française, après trois jours d'épreuves théoriques et pratiques.",
+        "Le jeune artisan termine quatrième ex aequo, derrière un vainqueur venu d'Ille-et-Vilaine. Le titre récompense les candidats atteignant 16 de moyenne. Il s'est distingué en viennoiserie et avec sa pièce de décor, mais reconnaît avoir été moins à l'aise sur les pains de tradition et de campagne et sur le snacking.",
+        "S'il avoue une part de déception, lui qui visait le podium, Joshua Roux salue le très haut niveau de cette édition et dit y trouver une motivation pour progresser. Il garde déjà en tête un nouveau défi, qu'il préfère ne pas dévoiler."
+      ]
+    },
+    {
+      "rubrique": "economie",
+      "titre": "Budget de l'UE : Antonio Costa propose 204 milliards d'économies et une taxe numérique",
+      "resume": "Pour le budget européen 2028-2034, le président du Conseil européen propose une enveloppe réduite de 204 milliards d'euros par rapport au projet de la Commission, et une taxe de 3 % sur les grandes entreprises du numérique. Paris a aussitôt rejeté le texte.",
+      "source": {
+        "nom": "Le Monde",
+        "url": "https://www.lemonde.fr/economie/article/2026/11/21/budget-de-l-ue-antonio-costa-le-president-du-conseil-europeen-propose-204-milliards-d-euros-d-economies-et-une-taxe-numerique_6813983_3234.html"
+      },
+      "image": "https://img.lemde.fr/2026/11/20/476/0/5712/2856/644/322/60/0/138f446_ftp-1-zcn4jvzlfhs4-2026-11-20t140649z-844608601-rc2oroa6b6of-rtrmadp-3-eu-britain-summit-burnham.JPG",
+      "detail": [
+        "Antonio Costa a dévoilé samedi sa proposition de compromis pour le prochain cadre financier pluriannuel de l'Union, qui couvrira les années 2028 à 2034. Elle prévoit une baisse d'environ 204 milliards d'euros par rapport au projet de la Commission, soit une coupe de l'ordre de 10 %, ainsi qu'une nouvelle taxe de 3 % sur le chiffre d'affaires des grandes entreprises du numérique.",
+        "La France a immédiatement rejeté le texte, l'Élysée jugeant qu'il ne constitue pas une base d'accord, notamment pour la politique agricole commune et le revenu des agriculteurs. À l'inverse, les pays dits frugaux trouvent le budget encore trop élevé. Les dirigeants des Vingt-Sept en débattront lors d'un sommet à Bruxelles jeudi et vendredi."
+      ]
+    },
+    {
+      "rubrique": "economie",
+      "titre": "Le groupe Castel, géant de la bière et du vin, secoué par une guerre de pouvoir",
+      "resume": "Un conflit de gouvernance oppose une partie de la famille fondatrice à la direction du groupe de boissons, autour de l'héritage de Pierre Castel. Le fondateur, 11e fortune française, vient de fêter ses 100 ans.",
+      "source": {
+        "nom": "Le Monde",
+        "url": "https://www.lemonde.fr/economie/article/2026/11/22/le-groupe-castel-empire-discret-de-la-biere-et-du-vin-secoue-par-une-guerre-de-pouvoir_6814179_3234.html"
+      },
+      "image": "https://img.lemde.fr/2026/11/20/252/0/2625/1312/644/322/60/0/4f5c077_upload-1-wly4lqpugvxj-gettyimages-2187492495.jpg",
+      "detail": [
+        "Le groupe Castel, présent dans la bière et le vin, traverse une crise de gouvernance. Une partie de la famille du fondateur conteste depuis des mois l'organisation mise en place à la tête du groupe et le pouvoir de son directeur général, le Suisse Gregory Clerc, qu'elle accuse d'avoir pris le contrôle sans contre-pouvoir.",
+        "La direction met en avant de bons résultats financiers et affirme respecter le cadre voulu par Pierre Castel. La famille elle-même apparaît divisée, plusieurs branches ayant pris leurs distances avec l'une de ses membres. Selon Le Monde, la crise est compliquée par une architecture de holdings, de fonds et de trusts."
+      ]
+    },
+    {
+      "rubrique": "economie",
+      "titre": "Retraites : le gouvernement renonce in extremis à revoir la majoration pour familles nombreuses",
+      "resume": "Le gouvernement envisageait de remplacer la majoration de 10 % des pensions accordée aux parents de trois enfants et plus par une allocation forfaitaire, jugée plus favorable aux femmes. Face à la colère des familles, il est revenu sur ce projet en début de semaine.",
+      "source": {
+        "nom": "Le Figaro",
+        "url": "https://www.lefigaro.fr/conjoncture/retraites-le-nouveau-coup-du-gouvernement-contre-les-familles-nombreuses-20261121"
+      },
+      "image": "https://i.f1g.fr/media/cms/1200x630_crop/2026/11/19/fc92940466c8aae8e52d56d981293a3d7910d92b09c4d6ed47ade50f9e54c997.jpg",
+      "detail": [
+        "Aujourd'hui, les retraités ayant élevé au moins trois enfants bénéficient d'une hausse de 10 % de leur pension, voire 15 % pour les fonctionnaires ayant élevé quatre enfants ou plus. Comme les femmes touchent en moyenne des pensions plus faibles, en raison de carrières interrompues et de salaires moindres, elles profitent moins de ce bonus proportionnel que les hommes.",
+        "Le gouvernement souhaitait donc, dans le projet de loi de financement de la Sécurité sociale pour 2027, lui substituer un montant forfaitaire présenté comme plus égalitaire. Le projet a suscité une forte opposition des associations familiales, et l'exécutif a fait marche arrière en début de semaine."
+      ]
+    },
+    {
+      "rubrique": "sciences",
+      "titre": "BepiColombo en orbite autour de Mercure après huit ans de voyage",
+      "resume": "Les deux sondes de la mission européenne et japonaise BepiColombo se sont placées en orbite autour de Mercure. Elles doivent aider à percer les énigmes de la plus petite planète du Système solaire. Les observations scientifiques débuteront au printemps 2027.",
+      "source": {
+        "nom": "Le Monde",
+        "url": "https://www.lemonde.fr/sciences/article/2026/11/21/les-mysteres-de-mercure-l-etrange-planete-du-systeme-solaire-que-la-mission-bepicolombo-devrait-lever_6814059_1650684.html"
+      },
+      "image": "https://img.lemde.fr/2026/11/20/625/0/7500/3750/644/322/60/0/1e80d94_upload-1-rgvig7bfofvs-global-high-resolution-view-from-mercury-flyby-2-07-02-2011.jpg",
+      "detail": [
+        "Lancée en 2018, la mission BepiColombo, menée par l'Agence spatiale européenne et son homologue japonaise, est arrivée à destination après huit ans de transit. L'insertion en orbite, prévue samedi 21 novembre, reposait sur une poussée de 37 minutes de l'orbiteur européen. Un problème de propulsion survenu en 2024 avait repoussé l'arrivée, initialement prévue fin 2025.",
+        "Les deux orbiteurs, l'un européen, l'autre japonais, doivent se séparer début décembre, et les mesures scientifiques commenceront en avril 2027. Selon Le Monde, les scientifiques en attendent des réponses aux nombreuses énigmes que pose cette petite planète, la plus proche du Soleil."
+      ]
+    },
+    {
+      "rubrique": "sciences",
+      "titre": "Des ondes gravitationnelles pour détecter des planètes invisibles aux télescopes",
+      "resume": "Deux études proposent d'utiliser la future mission spatiale LISA pour repérer des planètes géantes autour de couples d'étoiles naines blanches. Leur présence modifierait légèrement les ondes gravitationnelles émises par ces étoiles, une signature mesurable.",
+      "source": {
+        "nom": "Futura",
+        "url": "https://www.futura-sciences.com/sciences/actualites/exoplanete-si-ondes-gravitationnelles-permettaient-decouvrir-planetes-invisibles-139425/"
+      },
+      "detail": [
+        "LISA, observatoire spatial développé par l'Agence spatiale européenne avec la NASA et attendu dans les années 2030, comptera trois sondes séparées de 2,5 millions de kilomètres. Sa mission première est de capter les ondes gravitationnelles, notamment celles émises par des couples de naines blanches très proches qui tournent l'une autour de l'autre.",
+        "Selon deux études publiées dans The Astrophysical Journal, une planète en orbite autour d'un tel couple perturberait le signal de façon mesurable. LISA pourrait ainsi révéler des planètes de la masse de Jupiter à plusieurs milliers d'années-lumière, hors de portée des méthodes classiques. Il ne s'agit pour l'instant que d'une capacité théorique, à vérifier une fois l'instrument en service."
+      ]
+    },
+    {
+      "rubrique": "sciences",
+      "titre": "Au Nord-Kivu, la lutte contre Ebola freinée par la grève des soignants",
+      "resume": "Dans l'est de la République démocratique du Congo, l'épidémie d'Ebola la plus meurtrière de l'histoire du pays continue de progresser. Des soignants des centres de traitement, qui réclament des arriérés de salaire, durcissent leur grève, et les ONG multiplient les alertes.",
+      "source": {
+        "nom": "Libération",
+        "url": "https://www.liberation.fr/international/afrique/au-nord-kivu-la-lutte-contre-ebola-se-heurte-a-la-colere-des-soignants-20261121_EFXABKMUP5DP5DXVC3MHTEFS2I/"
+      },
+      "detail": [
+        "Selon Libération, l'épidémie d'Ebola qui frappe le Nord-Kivu est devenue la plus meurtrière jamais enregistrée en RDC. Depuis le 12 novembre, des personnels des centres de traitement de Butembo, Katwa et Musienene observent une grève illimitée, qu'ils ont décidé de prolonger après une rencontre avec les autorités provinciales.",
+        "Selon la presse congolaise, ils réclament le paiement de plusieurs mois d'arriérés, une révision de leur barème et de meilleurs équipements. La société civile de Butembo s'inquiète de la prise en charge des malades, et des organisations humanitaires internationales alertent sur le risque d'une propagation accrue."
+      ]
+    },
+    {
+      "rubrique": "culture",
+      "titre": "Au MoMu d'Anvers, une exposition retrace l'aventure des « Six d'Anvers »",
+      "resume": "Le musée de la mode d'Anvers consacre une grande exposition aux six créateurs belges, dont Dries Van Noten et Ann Demeulemeester, qui ont bousculé la mode mondiale après un défilé remarqué à Londres en 1986. Elle est visible jusqu'au 17 janvier 2027.",
+      "source": {
+        "nom": "RTBF",
+        "url": "https://www.rtbf.be/article/les-six-d-anvers-au-momu-comment-six-createurs-belges-ont-bouscule-la-mode-mondiale-11817235"
+      },
+      "detail": [
+        "Quarante ans après leur percée à Londres, les « Six d'Anvers » font l'objet d'une première grande rétrospective au MoMu, le musée de la mode de la ville. Ann Demeulemeester, Dirk Bikkembergs, Dries Van Noten et trois autres stylistes y sont réunis jusqu'au 17 janvier 2027.",
+        "Selon la RTBF, c'est la presse qui a forgé ce surnom collectif. Leur style, qui brouillait déjà la frontière entre vêtements féminins et masculins, a contribué à faire d'Anvers une capitale de la mode. Un documentaire, The Six, est sorti dans les salles belges début novembre."
+      ]
+    },
+    {
+      "rubrique": "culture",
+      "titre": "Marionnettes, BD, théâtre et ciné-concerts : quatre festivals animent Toulouse ce week-end",
+      "resume": "Le festival Marionnettissimo, consacré à l'art de la marionnette, s'achève dimanche après une semaine de spectacles à Toulouse, Tournefeuille et dans la métropole. Trois autres rendez-vous, autour de la BD, du théâtre et du ciné-concert, se tiennent aussi ce week-end.",
+      "source": {
+        "nom": "Le Journal Toulousain",
+        "url": "https://www.lejournaltoulousain.fr/occitanie/haute-garonne/toulouse/theatre-bd-marionnettes-cine-concert-4-festivals-week-end-toulouse-404549/"
+      },
+      "detail": [
+        "La 29e édition de Marionnettissimo, organisée du 17 au 22 novembre, réunit 22 compagnies dans plusieurs salles de Tournefeuille, de Toulouse et de la région, dont le Théâtre Garonne. Selon les organisateurs, elle compte environ 70 représentations, dont des spectacles mêlant cirque et marionnettes.",
+        "Le week-end toulousain compte aussi un festival de bande dessinée à Colomiers, des ciné-concerts où des musiciens accompagnent des films sur scène, ainsi que des rendez-vous de théâtre. Le Journal Toulousain recense ces quatre événements, qui se terminent pour la plupart dimanche soir."
+      ]
+    },
+    {
+      "rubrique": "culture",
+      "titre": "En Ariège, un château-falaise de 800 ans menacé d'effondrement lance un appel aux dons",
+      "resume": "Accrochées à 60 mètres de haut au-dessus de la vallée, les grottes fortifiées de Bouan se dégradent. La commune a lancé avec la Fondation du patrimoine une souscription de 180 000 euros pour financer des travaux de consolidation estimés à 514 000 euros.",
+      "source": {
+        "nom": "La Dépêche",
+        "url": "https://www.ladepeche.fr/2026/11/22/cest-un-patrimoine-militaire-unique-ce-chateau-falaise-de-800-ans-menace-de-seffondrer-en-ariege-un-appel-aux-dons-est-lance-pour-le-sauver-13635388.php"
+      },
+      "image": "https://images.ladepeche.fr/api/v1/images/view/6aeaff3abc2377efa50d66a5/hd/image.jpg?v=1",
+      "detail": [
+        "Visible depuis la RN20 en Haute-Ariège, le site des Spoulgas de Bouan est mentionné dès 1272. Il réunit une quinzaine de porches creusés dans la falaise et reliés par une terrasse artificielle de 120 mètres. Point stratégique du comté de Foix, il pouvait accueillir une soixantaine de personnes et aurait servi de poste de guet, de péage sur la route de l'Espagne, puis de refuge.",
+        "L'érosion, la végétation et les fouilles clandestines de chercheurs de trésors ont accéléré sa dégradation : des pans de murs ont disparu en quelques décennies. La commune, propriétaire, a établi avec une historienne et un architecte du patrimoine un programme de consolidation de 513 885 euros hors taxes, sans reconstruction, réalisé en plusieurs tranches.",
+        "Pour boucler le financement, la mairie et l'association Les Gardiens de Las Gleizes ont lancé une souscription publique avec la Fondation du patrimoine, avec un objectif de 180 000 euros. Le délégué de la fondation rappelle que le reste à charge reste lourd pour une petite commune, même après les subventions."
+      ]
+    },
+    {
+      "rubrique": "sport",
+      "titre": "Rugby : le XV de France bat l'Argentine 45-17 et retrouvera l'Afrique du Sud en finale",
+      "resume": "Au Stade de France, les Bleus ont souffert avant de s'imposer largement face aux Pumas samedi. Ils affronteront les Springboks en finale du Championnat des nations, dimanche 29 novembre à Londres, deux semaines après les avoir battus.",
+      "source": {
+        "nom": "Le Monde",
+        "url": "https://www.lemonde.fr/sport/article/2026/11/22/championnat-des-nations-le-xv-de-france-ecarte-l-argentine-et-donne-rendez-vous-aux-springboks-pour-des-retrouvailles-musclees-en-finale_6814075_3242.html"
+      },
+      "image": "https://img.lemde.fr/2026/11/21/143/0/3192/1596/644/322/60/0/3dea399_ftp-1-g3iufhueisee-afp-d89n2zb.jpg",
+      "detail": [
+        "Pour la sixième et dernière journée du Championnat des nations, le XV de France recevait l'Argentine au Stade de France. Longtemps accrochés, les joueurs de Fabien Galthié ont fini par prendre le large pour l'emporter 45-17. Côté argentin, Santiago Chocobares, joueur du Stade toulousain, a déclaré forfait à la dernière minute sur blessure.",
+        "Cette victoire qualifie les Bleus pour la finale de la nouvelle compétition, face à l'Afrique du Sud, dimanche 29 novembre à Londres. Les deux équipes se sont déjà affrontées il y a deux semaines, et la France l'avait emporté. Dans ses notes, Le Figaro a notamment salué les prestations de Gourgues, Capilla et Antoine Dupont."
+      ]
+    },
+    {
+      "rubrique": "sport",
+      "titre": "Ligue 1 : dominé à Lens, le Toulouse FC ramène un match nul (1-1)",
+      "resume": "Pour la 11e journée de Ligue 1, le TFC a obtenu samedi soir un point à Bollaert face à des Lensois en difficulté. Dominés une bonne partie du match, les Violets ont pu compter sur leur gardien Guillaume Restes ; Jacen Russell-Rowe a marqué pour Toulouse.",
+      "source": {
+        "nom": "La Dépêche",
+        "url": "https://www.ladepeche.fr/2026/11/22/rcl-tfc-peu-doccasions-et-une-defense-sous-pression-comment-les-violets-sont-parvenus-a-ramener-un-point-de-leur-deplacement-a-bollaert-13664937.php"
+      },
+      "image": "https://images.ladepeche.fr/api/v1/images/view/6b0220f7ddc7ed75e50cfa6e/standard/image.jpg?v=1",
+      "detail": [
+        "Lens et Toulouse avaient le même nombre de points, 13, avant le coup d'envoi samedi à 20 h 45. Mais les deux clubs vivaient des moments opposés : le TFC restait sur une victoire nette contre Strasbourg (3-1), tandis que Lens venait de changer d'entraîneur pour la troisième fois de la saison, avec l'arrivée de Didier Digard, après une lourde défaite en Ligue des champions.",
+        "Sur la pelouse de Bollaert, les Lensois ont dominé la rencontre, et les Toulousains se sont créé peu d'occasions. L'attaquant Jacen Russell-Rowe a marqué pour le TFC, et le gardien Guillaume Restes a préservé le nul par plusieurs arrêts. L'entraîneur Jens Berthel Askou s'est dit satisfait du point ramené, malgré une fin de match stressante."
+      ]
+    },
+    {
+      "rubrique": "insolite",
+      "titre": "La « piste Concorde » de Toulouse-Blagnac est encore assez plane pour le supersonique",
+      "resume": "Construite en 1968 pour les essais du Concorde, la piste 32L de l'aéroport de Toulouse-Blagnac a été jugée parfaitement plane par une association de spécialistes. Le supersonique pourrait encore y décoller à sa masse maximale de 185 tonnes sans risque pour sa structure.",
+      "source": {
+        "nom": "La Dépêche",
+        "url": "https://www.ladepeche.fr/2026/11/21/la-piste-concorde-de-toulouse-blagnac-affiche-une-planeite-exemplaire-apres-analyse-le-supersonique-pourrait-encore-y-decoller-a-pleine-charge-13663325.php"
+      },
+      "image": "https://images.ladepeche.fr/api/v1/images/view/6b006f4099de2243450a51ba/hd/image.jpg?v=1",
+      "detail": [
+        "L'Association des professionnels de Concorde et du supersonique a rendu les conclusions de relevés effectués le 30 avril 2025 sur la piste 32L de Toulouse-Blagnac, construite en 1968 pour le premier avion supersonique. Résultat : aucune bosse critique. Si Concorde volait encore, il pourrait en décoller à pleine charge, soit 185 tonnes, sans abîmer son fuselage.",
+        "Ce contrôle remonte à 1998, quand une fatigue prématurée avait été découverte sur un Concorde d'Air France, aujourd'hui exposé au musée Aeroscopia. Elle était attribuée aux secousses sur des pistes de mauvaise qualité. Les constructeurs avaient alors imposé aux compagnies de vérifier le profil des pistes utilisées.",
+        "À la fin des années 1990, la mesure se faisait avec deux stations GPS, dont une tirée sur un chariot à 5 km/h, avec une précision d'environ un centimètre. Aujourd'hui, un camion équipé de lidar et de caméras scanne la piste en un seul passage, avec 1 200 points par mètre carré et une précision de trois millimètres."
+      ]
+    },
+    {
+      "rubrique": "insolite",
+      "titre": "Des mouches envahissent un laboratoire et révèlent par hasard une piste pour protéger les myrtilles",
+      "resume": "À l'université Rutgers, aux États-Unis, des mouches entrées par accident dans des élevages ont mis des chercheurs sur la voie d'une levure qui repousse la drosophile à ailes tachetées, un ravageur des myrtilles. L'effet doit encore être testé dans les vergers.",
+      "source": {
+        "nom": "Futura",
+        "url": "https://www.futura-sciences.com/planete/actualites/insecte-mouches-envahissent-laboratoire-gachent-experience-chercheurs-decouvrent-accident-piste-proteger-fruits-139471/"
+      },
+      "detail": [
+        "Des chercheurs de l'université Rutgers, dans le New Jersey, étudient depuis des années la drosophile à ailes tachetées, un insecte invasif qui pond dans les fruits mûrs et ravage les cultures de myrtilles. Leurs élevages ont été envahis à plusieurs reprises par des mouches du vinaigre ordinaires, venues de la cuisine voisine, qui finissaient par supplanter l'espèce étudiée.",
+        "En cherchant la cause, l'équipe a identifié une levure qui attire la mouche du vinaigre mais provoque une nette aversion chez la drosophile à ailes tachetées. Les travaux, publiés dans Applied and Environmental Microbiology, ouvrent une piste de répulsif naturel, qui reste à valider en conditions réelles dans les exploitations."
+      ]
+    }
+  ]
+}
