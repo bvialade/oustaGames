@@ -81,7 +81,9 @@
 <body>
   <header class="topbar">
     <a href="../" aria-label="Retour au menu">‹</a>
+    <span style="min-width:40px"></span>
     <h1>SUTOM</h1>
+    <button class="icon-btn" id="stats-btn" aria-label="Mes statistiques">📊</button>
     <button class="icon-btn" id="help-btn" aria-label="Règles">?</button>
   </header>
   <div class="modes">
@@ -103,6 +105,7 @@
     <div class="stats" id="stats"></div>
     <div class="dist" id="dist"></div>
     <button class="btn" id="share">Partager mon résultat</button>
+    <button class="btn secondary" id="end-stats">📊 Toutes mes statistiques</button>
     <button class="btn secondary" id="again">Nouvelle partie libre</button>
     <button class="btn secondary" id="close-end">Fermer</button>
   </dialog>
@@ -130,6 +133,7 @@
   </dialog>
 
   <script src="words.js"></script>
+  <script src="../stats.js"></script>
   <script src="mot.js"></script>
 </body>
 </html>

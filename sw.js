@@ -1,8 +1,8 @@
 // Garde les fichiers en cache pour jouer hors connexion.
 // Les fichiers sont toujours redemandés au réseau d'abord, donc les mises à jour arrivent seules.
-const VERSION = 'v24';
+const VERSION = 'v25';
 const CORE = [
-  './', 'index.html', 'style.css', 'manifest.webmanifest',
+  './', 'index.html', 'style.css', 'stats.js', 'manifest.webmanifest',
   'icons/icon-192.png', 'icons/apple-touch-icon.png',
   'mot/', 'mot/index.html', 'mot/mot.js', 'mot/words.js', 'mot/dico/5.txt',
   'geo/', 'geo/index.html', 'geo/geo.js', 'geo/countries.js', 'geo/indices.js',

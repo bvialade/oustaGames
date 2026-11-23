@@ -33,6 +33,7 @@ async function route() {
   const actu = location.hash === '#actu';
   $('back').href = actu ? '#' : '../';
   $('title').textContent = actu ? "Quiz de l'actu" : 'Quiz';
+  $('stats-btn').style.visibility = actu ? 'visible' : 'hidden';
   if (!actu) {
     const s = dates.length ? score(dates[0]) : null;
     $('actu-tag').textContent = !dates.length ? '' : s !== null ? `Aujourd'hui : ${s}/10` : 'Quiz du jour à jouer';
@@ -106,7 +107,7 @@ function answer(i) {
   $('next').onclick = () => {
     state.index++;
     if (last) {
-      saved[quiz.date] = Object.assign([...state.answers], { key: quiz.questions.map((qq) => qq.reponse) });
+      saved[quiz.date] = Object.assign([...state.answers], { key: quiz.questions.map((qq) => qq.reponse), cat: cats(quiz) });
       persist();
       finish(false);
     } else ask();
@@ -114,15 +115,15 @@ function answer(i) {
   $('after').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
-// Les tableaux perdent leurs propriétés en JSON : on stocke { a: réponses, k: bonnes réponses }.
+// Les tableaux perdent leurs propriétés en JSON : on stocke { a: réponses, k: bonnes réponses, c: rubriques }.
 function persist() {
   const out = {};
-  for (const [d, v] of Object.entries(saved)) out[d] = { a: [...v], k: v.key };
+  for (const [d, v] of Object.entries(saved)) out[d] = { a: [...v], k: v.key, ...(v.cat && { c: v.cat }) };
   try { localStorage.setItem(STORE, JSON.stringify(out)); } catch {}
 }
 function restore() {
   const out = {};
-  for (const [d, v] of Object.entries(saved)) if (v && v.a) out[d] = Object.assign([...v.a], { key: v.k });
+  for (const [d, v] of Object.entries(saved)) if (v && v.a) out[d] = Object.assign([...v.a], { key: v.k, cat: v.c });
   saved = out;
 }
 
@@ -176,6 +177,107 @@ function toast(msg) {
   toastTimer = setTimeout(() => t.classList.remove('show'), 1500);
 }
 
+// ---------- Statistiques ----------
+
+const cats = (qz) => qz.questions.map((q) => q.categorie || '');
+const scoreColor = (s, n = 10) => (s === n ? 'blue' : s >= 7 ? 'green' : s >= 4 ? 'yellow' : 'orange');
+const shortDate = (d) => new Date(d + 'T12:00:00').toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' });
+const fmt1 = (x) => x.toLocaleString('fr-FR', { maximumFractionDigits: 1 });
+
+// Les anciens quiz joués n'ont pas gardé leurs rubriques : on les relit une fois, puis on les garde.
+async function fillCategories() {
+  const missing = Object.keys(saved).filter((d) => !saved[d].cat);
+  if (!missing.length) return;
+  await Promise.all(missing.map(async (d) => {
+    try { saved[d].cat = cats(await (await fetch(`actu/${d}.json`)).json()); } catch {}
+  }));
+  persist();
+  Stats.refresh();
+}
+
+function statsHtml() {
+  const all = [...dates].sort();
+  const done = all.filter((d) => saved[d]);
+  if (!done.length) return Stats.empty('Joue ton premier quiz de l’actu pour voir tes statistiques ici. 📰');
+  const sc = (d) => score(d);
+  const n = (d) => saved[d].length;
+  const totalOk = done.reduce((t, d) => t + sc(d), 0);
+  const totalQ = done.reduce((t, d) => t + n(d), 0);
+  // Séries : quiz joués d'affilée. Le quiz du jour pas encore joué ne casse pas la série.
+  let best = 0, run = 0;
+  for (const d of all) { run = saved[d] ? run + 1 : 0; best = Math.max(best, run); }
+  let cur = 0;
+  const back = [...all].reverse();
+  if (back.length && !saved[back[0]]) back.shift();
+  for (const d of back) { if (!saved[d]) break; cur++; }
+  const perfect = done.filter((d) => sc(d) === n(d)).length;
+
+  const tiles = Stats.tiles([
+    { v: done.length, l: 'quiz joués', sub: `sur ${all.length} parus`, c: 'yellow' },
+    { v: fmt1(totalOk / done.length), l: 'sur 10 en moyenne', c: 'blue' },
+    { v: Stats.pct(totalOk, totalQ) + ' %', l: 'de bonnes réponses', c: 'green' },
+    { v: '🔥 ' + cur, l: 'quiz d’affilée', c: 'orange' },
+    { v: best, l: 'meilleure série', c: 'lilac' },
+    { v: perfect, l: perfect > 1 ? 'sans-fautes' : 'sans-faute', c: 'pink' },
+  ]);
+
+  const last = all.slice(-14);
+  const trend = Stats.card('Tes derniers quiz', Stats.cols(last.map((d) => ({
+    label: new Date(d + 'T12:00:00').getDate(),
+    value: saved[d] ? sc(d) : 0, empty: !saved[d], c: saved[d] ? scoreColor(sc(d), n(d)) : 'soft',
+    hi: d === all[all.length - 1], act: 'quiz:' + d,
+  })), 10), 'Touche une colonne pour rouvrir ce quiz. Les colonnes hachurées sont les quiz pas encore joués.');
+
+  // Moyenne par rubrique.
+  const per = {};
+  for (const d of done) (saved[d].cat || []).forEach((c, i) => {
+    if (!RUBRIQUES[c]) return;
+    const t = (per[c] = per[c] || [0, 0]);
+    t[1]++;
+    if (saved[d][i] === saved[d].key[i]) t[0]++;
+  });
+  const rubs = Object.keys(RUBRIQUES).filter((c) => per[c]);
+  const rubCard = rubs.length
+    ? Stats.card('Par rubrique', Stats.bars(rubs.map((c) => {
+      const p = Stats.pct(per[c][0], per[c][1]);
+      return { label: RUBRIQUES[c], value: p, max: 100, text: p + ' %', c: p >= 70 ? 'green' : p >= 50 ? 'yellow' : 'orange' };
+    }), 100), 'Part de bonnes réponses dans chaque rubrique, sur tous tes quiz.')
+    : Stats.card('Par rubrique', Stats.empty('Chargement…'));
+
+  const dist = Array(11).fill(0);
+  for (const d of done) dist[Math.min(10, sc(d))]++;
+  const distCard = Stats.card('Répartition de tes scores', Stats.cols(dist.map((v, s) => ({
+    label: s, value: v, text: v || '', c: scoreColor(s),
+  }))), 'Nombre de quiz terminés avec 0, 1, 2… jusqu’à 10 bonnes réponses.');
+
+  const days = {};
+  for (const d of all) days[d] = saved[d]
+    ? { c: scoreColor(sc(d), n(d)), text: sc(d), act: 'quiz:' + d }
+    : { c: 'soft', text: new Date(d + 'T12:00:00').getDate(), act: 'quiz:' + d };
+  const calCard = Stats.card('Calendrier', Stats.cal(days, all[0], all[all.length - 1])
+    + Stats.legend([['blue', '10/10'], ['green', '7 à 9'], ['yellow', '4 à 6'], ['orange', '0 à 3'], ['soft', 'pas joué']]),
+  'Chaque case montre ton score du jour. Touche un jour pour jouer ou revoir ce quiz.');
+
+  return tiles + trend + rubCard + distCard + calCard;
+}
+
+function openStats() {
+  Stats.open({
+    title: '📊 Quiz de l’actu',
+    render: statsHtml,
+    onAction(a) {
+      if (!a.startsWith('quiz:')) return;
+      Stats.close();
+      if (location.hash !== '#actu') location.hash = '#actu';
+      openQuiz(a.slice(5));
+    },
+  });
+  fillCategories();
+}
+
+$('stats-btn').onclick = openStats;
+$('intro-stats').onclick = openStats;
+$('result-stats').onclick = openStats;
 $('start').onclick = start;
 $('share').onclick = share;
 $('home').onclick = () => openQuiz(quiz.date);
