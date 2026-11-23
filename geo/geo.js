@@ -515,6 +515,7 @@ function finish() {
     record = previous === undefined || quiz.score > previous;
     if (record) { prefs.points[quiz.key] = quiz.score; save(); }
   }
+  logGame(total);
   show('result');
 
   $('result-text').textContent = avg >= 4.5 ? 'Champion du cash !' : pct === 100 ? 'Sans faute !' : pct >= 70 ? 'Très bien !' : pct >= 40 ? 'Pas mal !' : 'On s’entraîne encore ?';
@@ -610,6 +611,63 @@ function tick() {
 
 // --- Commandes ---
 
+// ---------- Statistiques ----------
+
+function logGame(total) {
+  const h = (prefs.hist = prefs.hist || []);
+  h.push({ m: quiz.mode, r: prefs.region, l: quiz.key ? prefs.length : -1, s: quiz.score, g: quiz.good, n: total, c: quiz.cash, b: quiz.bestStreak, t: Date.now() });
+  if (h.length > 500) h.splice(0, h.length - 500);
+  const miss = ((prefs.rates = prefs.rates || {})[quiz.mode] = prefs.rates[quiz.mode] || {});
+  for (const c of quiz.misses) miss[c.id] = (miss[c.id] || 0) + 1;
+  save();
+}
+
+const geoColor = (p) => (p === 100 ? 'blue' : p >= 70 ? 'green' : p >= 40 ? 'yellow' : 'orange');
+
+function statsHtml(m) {
+  const hist = (prefs.hist || []).filter((x) => x.m === m);
+  const recs = Object.entries(prefs.points || {}).filter(([k]) => k.startsWith(m + '-'));
+  if (!hist.length && !recs.length) return Stats.empty('Joue une partie de ce jeu pour voir tes statistiques ici. 🌍');
+  const g = hist.reduce((t, x) => t + x.g, 0), n = hist.reduce((t, x) => t + x.n, 0);
+  const miss = (prefs.rates || {})[m] || {};
+  const tiles = Stats.tiles([
+    { v: hist.length, l: hist.length > 1 ? 'parties jouées' : 'partie jouée', c: 'green' },
+    { v: n ? Stats.pct(g, n) + ' %' : '–', l: 'de bonnes réponses', c: 'blue' },
+    { v: '✍️ ' + hist.reduce((t, x) => t + x.c, 0), l: 'réponses en cash', c: 'yellow' },
+    { v: '🔥 ' + (hist.length ? Math.max(...hist.map((x) => x.b)) : 0), l: 'meilleure série', c: 'orange' },
+    { v: recs.length, l: recs.length > 1 ? 'records établis' : 'record établi', c: 'lilac' },
+    { v: g, l: g > 1 ? 'pays trouvés' : 'pays trouvé', c: 'pink' },
+  ]);
+  const last = hist.slice(-14);
+  const trend = last.length ? Stats.card('Tes dernières parties', Stats.cols(last.map((x, i) => {
+    const p = Stats.pct(x.g, x.n);
+    return { label: hist.length - last.length + i + 1, value: p, text: p, c: geoColor(p), hi: i === last.length - 1 };
+  }), 100), 'Pourcentage de bonnes réponses à chaque partie.') : '';
+  const lenName = (r, l) => (+l ? `${l} questions` : `tous les pays (${pool(r).length})`);
+  const records = recs.length ? Stats.card('Tes records', Stats.list(recs.map(([k, v]) => {
+    const [, r, l] = k.split('-');
+    const max = (+l || pool(r).length) * KINDS.cash.pts;
+    return { left: REGIONS[r] || r, sub: lenName(r, l), right: ptsLabel(v), c: geoColor(Stats.pct(v, max)), v: v / max };
+  }).sort((a, b) => b.v - a.v))) : '';
+  const tough = Object.entries(miss).sort((a, b) => b[1] - a[1]).slice(0, 8);
+  const byId = Object.fromEntries(COUNTRIES.map((c) => [c.id, c]));
+  const flagImg = (id) => `<img src="${flagSrc(id)}" alt="" style="height:.95em;vertical-align:-2px;margin-right:7px;border-radius:2px">`;
+  const toughCard = tough.length ? Stats.card('Les pays qui te résistent', Stats.list(tough.filter(([id]) => byId[id]).map(([id, k]) => ({
+    left: flagImg(id) + byId[id].n, sub: m === 'flag' ? '' : 'Capitale : ' + byId[id].c, right: `${k} raté${k > 1 ? 's' : ''}`, c: k >= 3 ? 'orange' : 'yellow',
+  }))), 'Tu peux les retravailler avec « Rejouer mes erreurs » en fin de partie.') : '';
+  const note = !hist.length ? '<p class="st-note" style="text-align:center">Le détail des parties se remplit à partir du 23 novembre 2026.</p>' : '';
+  return tiles + trend + records + toughCard + note;
+}
+
+function openStats() {
+  Stats.open({
+    title: '📊 Géographie',
+    tabs: Object.entries(MODES).map(([id, x]) => ({ id, label: `${x.icon} ${id === 'country' ? 'Pays' : x.label}` })),
+    tab: prefs.mode, render: statsHtml,
+  });
+}
+$('stats-btn').onclick = openStats;
+$('result-stats').onclick = openStats;
 $('start').onclick = () => start();
 $('replay').onclick = () => start();
 $('retry-misses').onclick = () => start(quiz.misses);

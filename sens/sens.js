@@ -265,7 +265,7 @@ function submit(e) {
   $('guess').value = '';
   if (game.guesses.includes(word)) return toast(`« ${word} » déjà essayé`);
   game.guesses.push(word);
-  if (word === secret.word) { game.done = true; game.won = true; }
+  if (word === secret.word) { game.done = true; game.won = true; recordEnd(); }
   persist();
   render(true);
   if (game.won) {
@@ -295,6 +295,7 @@ function giveUp() {
   if (!confirm('Abandonner et afficher le mot secret ?')) return;
   game.done = true;
   game.gaveUp = true;
+  recordEnd();
   persist();
   render();
   showEnd();
@@ -321,6 +322,81 @@ function showEnd() {
   $('again').textContent = mode === 'free' ? 'Rejouer' : 'Faire une partie libre';
   $('end').showModal();
 }
+
+// ---------- Statistiques ----------
+
+const isoDate = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+
+function recordEnd() {
+  const all = (data.stats = data.stats || {});
+  const st = (all[mode] = all[mode] || { played: 0, wins: 0, streak: 0, best: 0 });
+  st.played++;
+  if (game.won) {
+    st.wins++;
+    st.streak = mode === 'daily' && st.lastDay !== undefined && st.lastDay !== game.day - 1 ? 1 : st.streak + 1;
+  } else st.streak = 0;
+  st.best = Math.max(st.best, st.streak);
+  if (mode === 'daily') st.lastDay = game.day;
+  const h = (data.hist = data.hist || []);
+  h.push({ m: mode, d: isoDate(new Date()), w: secret.word, n: game.guesses.length, won: !!game.won, h: game.hints || 0, l: game.letters || 0 });
+  if (h.length > 500) h.splice(0, h.length - 500);
+}
+
+const TRY_BUCKETS = [[1, 10], [11, 25], [26, 50], [51, 100], [101, Infinity]];
+const sensColor = (x) => (!x.won ? 'orange' : x.n <= 25 ? 'green' : x.n <= 100 ? 'blue' : 'yellow');
+const fmt1 = (x) => x.toLocaleString('fr-FR', { maximumFractionDigits: 1 });
+
+function statsHtml(m) {
+  const st = (data.stats || {})[m];
+  const hist = (data.hist || []).filter((x) => x.m === m);
+  if (!st || !st.played) return Stats.empty(m === 'daily' ? 'Termine un mot du jour pour voir tes statistiques ici. 🔥' : 'Termine une partie libre pour voir tes statistiques ici. 🔥');
+  const won = hist.filter((x) => x.won);
+  const avg = won.length ? won.reduce((t, x) => t + x.n, 0) / won.length : 0;
+  const clean = won.filter((x) => !x.h && !x.l).length;
+  const tiles = Stats.tiles([
+    { v: st.played, l: st.played > 1 ? 'parties jouées' : 'partie jouée', c: 'orange' },
+    { v: Stats.pct(st.wins, st.played) + ' %', l: 'de mots trouvés', c: 'green' },
+    { v: won.length ? Math.round(avg) : '–', l: 'essais en moyenne', c: 'yellow' },
+    { v: '🔥 ' + st.streak, l: m === 'daily' ? 'jours d’affilée' : 'victoires d’affilée', c: 'blue' },
+    { v: st.best, l: 'meilleure série', c: 'lilac' },
+    { v: clean, l: 'trouvés sans aide', c: 'pink' },
+  ]);
+  const rows = TRY_BUCKETS.map(([a, b]) => {
+    const v = won.filter((x) => x.n >= a && x.n <= b).length;
+    return { label: b === Infinity ? `${a}+` : `${a}–${b}`, value: v, text: `${v} <small>· ${Stats.pct(v, hist.length)} %</small>`, c: 'blue' };
+  });
+  const lost = hist.length - won.length;
+  rows.push({ label: 'Abandon', value: lost, text: `${lost} <small>· ${Stats.pct(lost, hist.length)} %</small>`, c: 'orange' });
+  const dist = Stats.card('En combien d’essais', Stats.bars(rows));
+  let cal = '';
+  if (m === 'daily' && hist.length) {
+    const days = {};
+    for (const x of hist) days[x.d] = { c: sensColor(x), text: x.won ? (x.n > 99 ? '99+' : x.n) : '✗' };
+    const today = new Date();
+    const first = hist.map((x) => x.d).sort()[0];
+    const monthStart = isoDate(new Date(today.getFullYear(), today.getMonth(), 1));
+    cal = Stats.card('Calendrier du mot du jour', Stats.cal(days, first < monthStart ? first : monthStart, isoDate(today))
+      + Stats.legend([['green', '25 essais ou moins'], ['blue', '26 à 100'], ['yellow', 'plus de 100'], ['orange', 'abandon']]),
+    'Chaque case indique en combien d’essais tu as trouvé le mot ce jour-là.');
+  }
+  const recent = hist.slice(-10).reverse();
+  const aides = (x) => [x.h && `${x.h} énigme${x.h > 1 ? 's' : ''}`, x.l && `${x.l} lettre${x.l > 1 ? 's' : ''}`].filter(Boolean).join(' · ') || 'sans aide';
+  const list = recent.length ? Stats.card('Dernières parties', Stats.list(recent.map((x) => ({
+    left: x.w, sub: new Date(x.d + 'T12:00:00').toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }) + ' · ' + aides(x),
+    right: x.won ? `${x.n} essai${x.n > 1 ? 's' : ''}` : 'Abandon', c: sensColor(x),
+  })))) : '';
+  return tiles + dist + cal + list;
+}
+
+function openStats() {
+  Stats.open({
+    title: '📊 Mot chaud, mot froid',
+    tabs: [{ id: 'daily', label: 'Mot du jour' }, { id: 'free', label: 'Parties libres' }],
+    tab: mode, render: statsHtml,
+  });
+}
+$('stats-btn').onclick = openStats;
+$('end-stats').onclick = () => { $('end').close(); openStats(); };
 
 async function share() {
   const n = game.guesses.length;

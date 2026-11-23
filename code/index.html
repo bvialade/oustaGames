@@ -110,7 +110,7 @@
   <header class="topbar">
     <a href="../quiz/" aria-label="Retour">‹</a>
     <h1>Code de la route</h1>
-    <span style="min-width:40px"></span>
+    <button class="icon-btn" id="stats-btn" aria-label="Mes statistiques">📊</button>
   </header>
 
   <main class="page">
@@ -140,6 +140,7 @@
       <div class="sub" id="result-sub"></div>
       <button class="btn" id="again">Rejouer</button>
       <button class="btn secondary" id="share">Partager mon score</button>
+      <button class="btn secondary" id="result-stats">📊 Mes statistiques</button>
       <button class="btn secondary" id="home">Changer de mode ou de thèmes</button>
       <div class="bilan" id="bilan"></div>
       <div class="recap" id="recap"></div>
@@ -169,6 +170,7 @@
   <script src="s/mecanique.js"></script>
   <script src="s/equipements.js"></script>
   <script src="s/environnement.js"></script>
+  <script src="../stats.js"></script>
   <script src="code.js"></script>
 </body>
 </html>

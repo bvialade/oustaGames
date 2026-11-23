@@ -126,7 +126,9 @@
 <body>
   <header class="topbar">
     <a href="../" aria-label="Retour au menu">‹</a>
+    <span style="min-width:40px"></span>
     <h1>Mot chaud, mot froid</h1>
+    <button class="icon-btn" id="stats-btn" aria-label="Mes statistiques">📊</button>
     <button class="icon-btn" id="help-btn" aria-label="Règles">?</button>
   </header>
   <main class="page">
@@ -176,6 +178,7 @@
     <div class="big" id="end-word"></div>
     <p id="end-text"></p>
     <button class="btn" id="share">Partager mon résultat</button>
+    <button class="btn secondary" id="end-stats">📊 Mes statistiques</button>
     <button class="btn secondary" id="again">Nouvelle partie libre</button>
     <button class="btn secondary" id="close-end">Fermer</button>
   </dialog>
@@ -190,6 +193,7 @@
   </dialog>
 
   <script src="secrets.js"></script>
+  <script src="../stats.js"></script>
   <script src="sens.js"></script>
 </body>
 </html>

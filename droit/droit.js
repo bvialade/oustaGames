@@ -104,6 +104,10 @@ function answer(i) {
   navigator.vibrate?.(right ? 30 : [60, 40, 60]);
   partie.ok.push(right);
   prefs.vues[q.cle] = 1;
+  const parNiv = ((prefs.reussite = prefs.reussite || {})[prefs.niveau] = prefs.reussite[prefs.niveau] || {});
+  const rt = (parNiv[q.theme] = parNiv[q.theme] || [0, 0]);
+  rt[1]++;
+  if (right) rt[0]++;
   save();
   const last = partie.index === partie.questions.length - 1;
   $('after').innerHTML = `
@@ -125,6 +129,7 @@ function finish() {
   const k = cleRecord();
   const record = prefs.records[k] === undefined || s > prefs.records[k];
   if (record) prefs.records[k] = s;
+  prefs.parties = [...(prefs.parties || []), { niv: prefs.niveau, s, n, t: Date.now() }].slice(-200);
   save();
   const lvl = niveau();
   $('result-text').textContent = s === n ? (lvl.n === 3 ? 'Sans faute. Un vrai GOAT 🐐' : 'Sans faute, la Cour est impressionnée !')
@@ -174,6 +179,55 @@ function toast(msg) {
   toastTimer = setTimeout(() => t.classList.remove('show'), 1500);
 }
 
+// ---------- Statistiques ----------
+
+const noteColor = (s, n = PAR_PARTIE) => (s === n ? 'blue' : s >= 7 ? 'green' : s >= 4 ? 'yellow' : 'orange');
+
+function statsHtml(tab) {
+  const niv = +tab;
+  const parties = (prefs.parties || []).filter((p) => p.niv === niv);
+  const rt = (prefs.reussite || {})[niv] || {};
+  const recs = Object.entries(prefs.records).filter(([k]) => k.startsWith(niv + ':'));
+  if (!parties.length && !recs.length) return Stats.empty('Joue une partie à ce niveau pour voir tes statistiques ici. ⚖️');
+  const okAll = Object.values(rt).reduce((t, [a]) => t + a, 0);
+  const nAll = Object.values(rt).reduce((t, [, b]) => t + b, 0);
+  const avg = parties.length ? parties.reduce((t, p) => t + p.s, 0) / parties.length : 0;
+  const tout = prefs.records[niv + ':tout'];
+  const tiles = Stats.tiles([
+    { v: parties.length, l: parties.length > 1 ? 'parties jouées' : 'partie jouée', c: 'blue' },
+    { v: parties.length ? avg.toLocaleString('fr-FR', { maximumFractionDigits: 1 }) : '–', l: 'sur 10 en moyenne', c: 'yellow' },
+    { v: nAll ? Stats.pct(okAll, nAll) + ' %' : '–', l: 'de bonnes réponses', c: 'green' },
+    { v: tout !== undefined ? `${tout}/10` : '–', l: 'record, toutes matières', c: 'orange' },
+    { v: parties.filter((p) => p.s === p.n).length, l: 'sans-fautes', c: 'lilac' },
+    { v: recs.length, l: recs.length > 1 ? 'records établis' : 'record établi', c: 'pink' },
+  ]);
+  const last = parties.slice(-14);
+  const trend = last.length ? Stats.card('Tes dernières parties', Stats.cols(last.map((p, i) => ({
+    label: parties.length - last.length + i + 1, value: p.s, c: noteColor(p.s, p.n), hi: i === last.length - 1,
+  })), 10)) : '';
+  const themes = THEMES.filter((t) => rt[t.id]);
+  const forces = themes.length ? Stats.card('Réussite par matière', Stats.bars(themes.map((t) => {
+    const [a, b] = rt[t.id];
+    const p = Stats.pct(a, b);
+    return { label: `${t.emoji} ${t.nom}`, value: p, max: 100, text: `${p} %`, c: p >= 75 ? 'green' : p >= 50 ? 'yellow' : 'orange' };
+  }), 100), 'Part de bonnes réponses dans chaque matière, à ce niveau.') : '';
+  const nom = (k) => { const ids = k.split(':')[1]; return ids === 'tout' ? 'Toutes les matières' : ids.split(',').map((id) => { const t = THEMES.find((x) => x.id === id); return t ? `${t.emoji} ${t.nom}` : id; }).join(', '); };
+  const records = recs.length ? Stats.card('Tes records', Stats.list(recs.sort((a, b) => b[1] - a[1]).map(([k, v]) => ({
+    left: nom(k), right: `${v}/10`, c: noteColor(v),
+  })))) : '';
+  const note = !parties.length ? '<p class="st-note" style="text-align:center">Le détail des parties se remplit à partir du 23 novembre 2026.</p>' : '';
+  return tiles + trend + forces + records + note;
+}
+
+function openStats() {
+  Stats.open({
+    title: '📊 Quiz du droit',
+    tabs: NIVEAUX.map((n) => ({ id: String(n.n), label: `${n.emoji} ${n.nom}` })),
+    tab: String(prefs.niveau), render: statsHtml,
+  });
+}
+$('stats-btn').onclick = openStats;
+$('result-stats').onclick = openStats;
 $('start').onclick = start;
 $('again').onclick = start;
 $('share').onclick = share;
