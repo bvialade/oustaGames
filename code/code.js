@@ -202,6 +202,9 @@ function answer(choisis) {
   partie.ok.push(right);
   partie.reponses.push(choisis);
   prefs.vues[q.cle] = 1;
+  const rt = ((prefs.reussite = prefs.reussite || {})[q.theme] = prefs.reussite[q.theme] || [0, 0]);
+  rt[1]++;
+  if (right) rt[0]++;
   if (right) delete prefs.erreurs[q.cle];
   else prefs.erreurs[q.cle] = 1;
   save();
@@ -235,6 +238,7 @@ function finish() {
   const n = partie.questions.length;
   const s = partie.ok.filter(Boolean).length;
   const exam = partie.mode === 'examen';
+  prefs.parties = [...(prefs.parties || []), { m: partie.mode, s, n, t: Date.now() }].slice(-200);
   let sub = '';
   if (exam) {
     prefs.examens = [...prefs.examens, s].slice(-50);
@@ -326,3 +330,54 @@ $('share').onclick = share;
 $('home').onclick = () => { renderIntro(); show('intro'); };
 $('quit').onclick = () => { if (confirm('Arrêter cette partie ?')) { renderIntro(); show('intro'); } };
 renderIntro();
+
+// ---------- Statistiques ----------
+
+const examColor = (s) => (s >= REUSSITE ? 'green' : s >= 30 ? 'yellow' : 'orange');
+
+function statsHtml() {
+  const vues = Object.keys(prefs.vues).filter(parCle).length;
+  const ex = prefs.examens;
+  const reussis = ex.filter((s) => s >= REUSSITE).length;
+  const parties = prefs.parties || [];
+  const tr = parties.filter((p) => p.m === 'entrainement');
+  const rt = prefs.reussite || {};
+  const okAll = Object.values(rt).reduce((t, [a]) => t + a, 0);
+  const nAll = Object.values(rt).reduce((t, [, b]) => t + b, 0);
+  if (!vues && !ex.length) return Stats.empty('Fais une première série de questions pour voir tes statistiques ici. 🚦');
+  const tiles = Stats.tiles([
+    { v: Stats.pct(Math.min(vues, total()), total()) + ' %', l: 'des questions déjà vues', sub: `${Math.min(vues, total())} sur ${total()}`, c: 'yellow' },
+    { v: ex.length, l: ex.length > 1 ? 'examens blancs' : 'examen blanc', sub: `${reussis} réussi${reussis > 1 ? 's' : ''}`, c: 'blue' },
+    { v: ex.length ? Math.max(...ex) : '–', l: `meilleur examen (/${EXAMEN})`, c: 'green' },
+    { v: nbErreurs(), l: 'erreurs à revoir', c: 'orange', act: nbErreurs() ? 'erreurs' : '' },
+    { v: tr.length, l: tr.length > 1 ? 'entraînements' : 'entraînement', c: 'lilac' },
+    { v: nAll ? Stats.pct(okAll, nAll) + ' %' : '–', l: 'de bonnes réponses', c: 'pink' },
+  ]);
+  const last = ex.slice(-12);
+  const exams = ex.length ? Stats.card('Tes examens blancs', Stats.cols(last.map((s, i) => ({
+    label: ex.length - last.length + i + 1, value: s, c: examColor(s), hi: i === last.length - 1,
+  })), EXAMEN) + Stats.legend([['green', `réussi (${REUSSITE} et plus)`], ['yellow', '30 à 34'], ['orange', 'moins de 30']]),
+  `Note sur ${EXAMEN}, dans l’ordre où tu les as passés. Il faut ${REUSSITE} bonnes réponses pour réussir.`) : '';
+  const themes = THEMES.filter((t) => rt[t.id]);
+  const forces = themes.length ? Stats.card('Réussite par thème', Stats.bars(themes.map((t) => {
+    const [a, b] = rt[t.id];
+    const p = Stats.pct(a, b);
+    return { label: `${t.emoji} ${t.nom}`, value: p, max: 100, text: `${p} %`, c: p >= 85 ? 'green' : p >= 65 ? 'yellow' : 'orange' };
+  }), 100), 'Part de bonnes réponses dans chaque thème. Les thèmes en orange sont ceux à travailler.') : '';
+  const couverture = Stats.card('Questions vues par thème', Stats.bars(THEMES.map((t) => {
+    const liste = avecCles(t.id);
+    const v = liste.filter((q) => prefs.vues[q.cle]).length;
+    const err = liste.filter((q) => prefs.erreurs[q.cle]).length;
+    return { label: `${t.emoji} ${t.nom}`, value: v, max: liste.length || 1, text: `${v}/${liste.length}${err ? ` <small>· ${err} ❌</small>` : ''}`, c: 'yellow' };
+  }), 1), 'Le ❌ compte les questions ratées à revoir dans ce thème.');
+  return tiles + exams + forces + couverture;
+}
+
+function openStats() {
+  Stats.open({
+    title: '📊 Code de la route', render: statsHtml,
+    onAction(a) { if (a === 'erreurs') { Stats.close(); prefs.mode = 'erreurs'; save(); renderIntro(); show('intro'); } },
+  });
+}
+$('stats-btn').onclick = openStats;
+$('result-stats').onclick = openStats;

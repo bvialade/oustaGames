@@ -540,6 +540,72 @@ function finish() {
     st.lastDay = game.day;
     st.best = Math.max(st.best, st.streak);
   }
+  const h = (data.hist = data.hist || []);
+  h.push({ r: game.region, m: mode, day: game.day, num: game.num, a: C[game.a].n, b: C[game.b].n,
+    n: game.guesses.length, s: shortest(), h: game.hints.length, won: !!game.won });
+  if (h.length > 500) h.splice(0, h.length - 500);
+}
+
+// ---------- Statistiques ----------
+
+const dayDate = (day) => new Date(START.getFullYear(), START.getMonth(), START.getDate() + day, 12);
+const isoDay = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+const extra = (x) => x.n - x.s; // essais au-delà du plus court chemin
+const pfColor = (x) => (!x.won ? 'orange' : extra(x) === 0 && !x.h ? 'green' : extra(x) <= 1 ? 'blue' : 'yellow');
+
+function statsHtml(region) {
+  const st = data.stats[region];
+  if (!st || !st.played) return Stats.empty('Termine un trajet dans cette zone pour voir tes statistiques ici. 🧭');
+  const hist = (data.hist || []).filter((x) => x.r === region);
+  const tiles = Stats.tiles([
+    { v: st.played, l: st.played > 1 ? 'trajets joués' : 'trajet joué', c: 'lilac' },
+    { v: Stats.pct(st.won, st.played) + ' %', l: 'de trajets reliés', c: 'green' },
+    { v: st.perfect || 0, l: 'parcours parfaits', c: 'blue' },
+    { v: '🔥 ' + (st.streak || 0), l: 'défis du jour d’affilée', c: 'orange' },
+    { v: st.best || 0, l: 'meilleure série', c: 'yellow' },
+    { v: hist.reduce((t, x) => t + x.h, 0), l: 'indices utilisés', c: 'pink' },
+  ]);
+  let detail = '';
+  if (hist.length) {
+    const won = hist.filter((x) => x.won);
+    const rows = [0, 1, 2, 3].map((k) => {
+      const v = won.filter((x) => (k === 3 ? extra(x) >= 3 : extra(x) === k)).length;
+      return { label: k === 0 ? 'Au plus court' : k === 3 ? '+3 ou plus' : `+${k} essai${k > 1 ? 's' : ''}`, value: v,
+        text: `${v} <small>· ${Stats.pct(v, hist.length)} %</small>`, c: k === 0 ? 'green' : 'blue' };
+    });
+    const lost = hist.length - won.length;
+    rows.push({ label: 'Perdu', value: lost, text: `${lost} <small>· ${Stats.pct(lost, hist.length)} %</small>`, c: 'orange' });
+    detail += Stats.card('Tes trajets', Stats.bars(rows), 'Nombre d’essais en plus du chemin le plus court.');
+    const daily = hist.filter((x) => x.m === 'daily' && x.day !== undefined);
+    if (daily.length) {
+      const days = {};
+      for (const x of daily) days[isoDay(dayDate(x.day))] = { c: pfColor(x), text: x.won ? x.n : '✗' };
+      const today = new Date();
+      const first = dayDate(Math.min(...daily.map((x) => x.day)));
+      const from = new Date(Math.min(first, new Date(today.getFullYear(), today.getMonth(), 1, 12)));
+      detail += Stats.card('Calendrier des défis du jour', Stats.cal(days, isoDay(from), isoDay(today))
+        + Stats.legend([['green', 'parfait'], ['blue', '+1 essai au plus'], ['yellow', 'plus long'], ['orange', 'perdu']]),
+      'Chaque case indique en combien d’essais tu as relié les deux pays.');
+    }
+    detail += Stats.card('Derniers trajets', Stats.list(hist.slice(-10).reverse().map((x) => ({
+      left: `${x.a} → ${x.b}`,
+      sub: (x.m === 'daily' ? 'Défi du ' + dayDate(x.day).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' }) : 'Partie libre') + ` · n°${x.num}` + (x.h ? ` · 💡${x.h}` : ''),
+      right: x.won ? `${x.n} (min ${x.s})` : 'Perdu', c: pfColor(x),
+    }))));
+  } else {
+    detail = '<p class="st-note" style="text-align:center">Le détail des trajets se remplit à partir du 23 novembre 2026.</p>';
+  }
+  return tiles + detail;
+}
+
+function openStats() {
+  const tabs = Object.entries(REGIONS).filter(([k]) => data.stats[k] && data.stats[k].played).map(([id, label]) => ({ id, label }));
+  Stats.open({
+    title: '📊 Passe-frontières',
+    tabs: tabs.length ? tabs : [{ id: game.region, label: REGIONS[game.region] }],
+    tab: tabs.some((t) => t.id === game.region) ? game.region : tabs[0] && tabs[0].id,
+    render: statsHtml,
+  });
 }
 
 // La route : la chaîne trouvée (si gagné) ou un plus court chemin (si perdu), tracée en courbe.
@@ -664,6 +730,8 @@ $('help-btn').onclick = () => $('help').showModal();
 $('fit-btn').onclick = () => flyTo(focusBox());
 $('share').onclick = share;
 $('close-end').onclick = () => $('end').close();
+$('stats-btn').onclick = openStats;
+$('end-stats').onclick = () => { $('end').close(); openStats(); };
 $('again').onclick = () => { $('end').close(); data.games['free-' + game.region] = null; newGame('free', game.region); };
 
 $('settings-btn').onclick = () => {

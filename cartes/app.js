@@ -233,6 +233,45 @@ document.addEventListener('visibilitychange', () => {
 setInterval(() => { if (T && T.since && !document.hidden) UI.update(); }, 1000);
 
 miniFan($('heroFan'), [[0, 1], [1, 13], [2, 12], [3, 11], [1, 10]], 12, 62);
+// ---------- Statistiques ----------
+function statsHtml(id) {
+  const all = Store.get().stats;
+  if (id === 'tout') {
+    const played = Object.values(GAMES).filter((g) => all[g.id] && all[g.id].played);
+    if (!played.length) return Stats.empty('Termine une partie pour voir tes statistiques ici. 🃏');
+    const tot = played.reduce((t, g) => t + all[g.id].played, 0), won = played.reduce((t, g) => t + all[g.id].won, 0);
+    return Stats.tiles([
+      { v: tot, l: tot > 1 ? 'parties jouées' : 'partie jouée', c: 'ink' },
+      { v: won, l: won > 1 ? 'victoires' : 'victoire', c: 'green' },
+      { v: Stats.pct(won, tot) + ' %', l: 'de réussite', c: 'yellow' },
+    ]) + Stats.card('Par jeu', Stats.bars(Object.values(GAMES).map((g) => {
+      const x = all[g.id] || { played: 0, won: 0 };
+      return { label: g.name, value: x.played ? Stats.pct(x.won, x.played) : 0, max: 100, act: g.id,
+        text: x.played ? `${x.won}/${x.played}` : '–', c: ['green', 'blue', 'orange', 'pink'][Object.keys(GAMES).indexOf(g.id)] };
+    }), 100), 'Victoires sur parties jouées, pour chaque jeu.');
+  }
+  const x = all[id];
+  if (!x || !x.played) return Stats.empty(`Termine une partie de ${GAMES[id].name} pour voir tes statistiques ici. 🃏`);
+  const best = x.best == null ? '–' : id === 'dame' ? x.best + ' pts' : fmt(x.best);
+  return Stats.tiles([
+    { v: x.played, l: x.played > 1 ? 'parties jouées' : 'partie jouée', c: 'ink' },
+    { v: Stats.pct(x.won, x.played) + ' %', l: 'de victoires', sub: plural(x.won, 'victoire'), c: 'green' },
+    { v: best, l: id === 'dame' ? 'meilleur score' : 'meilleur temps', c: 'yellow' },
+    { v: '🔥 ' + x.streak, l: 'victoires d’affilée', c: 'orange' },
+    { v: x.bestStreak, l: 'meilleure série', c: 'lilac' },
+    { v: x.played - x.won, l: x.played - x.won > 1 ? 'parties perdues' : 'partie perdue', c: 'pink' },
+  ]);
+}
+// Touche une barre de « Tous les jeux » pour ouvrir l'onglet de ce jeu.
+function openStats(tab) {
+  Stats.open({
+    title: '📊 OustaCards',
+    tabs: [{ id: 'tout', label: 'Tous' }, ...Object.values(GAMES).map((g) => ({ id: g.id, label: g.name }))],
+    tab, render: statsHtml, onAction: (id) => openStats(id),
+  });
+}
+$('stats-btn').onclick = () => openStats('tout');
+
 renderPrefs();
 route();
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('../sw.js');

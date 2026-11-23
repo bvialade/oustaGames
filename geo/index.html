@@ -254,7 +254,7 @@
   <header class="topbar">
     <a href="../" id="back" aria-label="Retour">‹</a>
     <h1><span>Géographie</span></h1>
-    <span style="min-width:40px"></span>
+    <button class="icon-btn" id="stats-btn" aria-label="Mes statistiques">📊</button>
   </header>
 
   <main class="page screen" id="setup">
@@ -316,6 +316,7 @@
     <div class="facts" id="facts"></div>
     <button class="btn go" id="replay">Rejouer</button>
     <button class="btn secondary" id="retry-misses">Rejouer mes erreurs</button>
+    <button class="btn secondary" id="result-stats">📊 Mes statistiques</button>
     <button class="btn secondary" id="to-setup">Changer de jeu</button>
     <div class="recap" id="recap"></div>
   </main>
@@ -325,6 +326,7 @@
   <script src="countries.js"></script>
   <script src="indices.js"></script>
   <script src="../frontieres/data.js"></script>
+  <script src="../stats.js"></script>
   <script src="geo.js"></script>
 </body>
 </html>

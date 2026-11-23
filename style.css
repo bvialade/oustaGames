@@ -148,9 +148,9 @@ dialog h2 { margin-top: 0; }
 .st-note { margin: 10px 0 0; font-size: .78rem; color: var(--st-muted); line-height: 1.35; }
 .st-empty { text-align: center; color: var(--st-muted); padding: 30px 10px; margin: 0; line-height: 1.4; }
 
-.st-bars { display: grid; gap: 7px; }
-.st-bar { display: grid; grid-template-columns: minmax(28px, auto) 1fr auto; align-items: center; gap: 10px; font-size: .88rem; }
-.st-bl { font-weight: 700; white-space: nowrap; }
+.st-bars { display: grid; grid-template-columns: minmax(24px, max-content) 1fr auto; align-items: center; gap: 7px 10px; font-size: .88rem; }
+.st-bar { display: contents; }
+.st-bl { font-weight: 700; max-width: 9.5em; line-height: 1.2; }
 .st-bt { height: 22px; border-radius: 8px; background: var(--st-track); overflow: hidden; }
 .st-bt i { display: block; height: 100%; border-radius: 8px; background: var(--bgc); transform-origin: left; animation: stGrow .6s cubic-bezier(.2,.9,.3,1) both; }
 .st-bv { font-weight: 800; font-variant-numeric: tabular-nums; min-width: 2.2em; text-align: right; }
