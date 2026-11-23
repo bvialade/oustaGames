@@ -88,7 +88,7 @@
   <header class="topbar">
     <a href="../" id="back" aria-label="Retour">‹</a>
     <h1 id="title">Quiz</h1>
-    <span style="min-width:40px"></span>
+    <button class="icon-btn" id="stats-btn" aria-label="Mes statistiques" style="visibility:hidden">📊</button>
   </header>
 
   <main class="page">
@@ -115,6 +115,7 @@
       <p>Après chaque réponse, un lien vers l'article pour en savoir plus.</p>
       <div class="done" id="intro-done" hidden></div>
       <button class="btn" id="start">C'est parti</button>
+      <button class="btn secondary" id="intro-stats">📊 Mes statistiques</button>
       <a class="revue-link" href="../revue/">📰 Lire d'abord la revue de presse du jour ›</a>
     </section>
     <section class="archive" id="archive" hidden>
@@ -131,6 +132,7 @@
       <div id="result-text"></div>
       <div class="big" id="result-score"></div>
       <button class="btn" id="share">Partager mon score</button>
+      <button class="btn secondary" id="result-stats">📊 Mes statistiques</button>
       <button class="btn secondary" id="home">Retour au quiz</button>
       <div class="recap" id="recap"></div>
     </section>
@@ -138,6 +140,7 @@
     <p class="empty" id="empty" hidden>Pas encore de quiz aujourd'hui, reviens un peu plus tard !</p>
   </main>
   <div class="toast" id="toast"></div>
+  <script src="../stats.js"></script>
   <script src="quiz.js"></script>
 </body>
 </html>

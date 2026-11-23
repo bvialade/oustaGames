@@ -196,6 +196,20 @@ function recordStats(won) {
   }
   st.best = Math.max(st.best, st.streak);
   if (mode === 'daily') st.lastDay = game.day;
+  logGame(game, mode);
+}
+
+// Historique détaillé des parties, pour l'écran de statistiques (les 500 dernières).
+function logGame(g, m) {
+  const h = (data.hist = data.hist || []);
+  h.push({ m, day: g.day, num: g.num, w: (words && words.get(g.answer)) || g.answer, n: g.guesses.length, won: !!g.won, t: Date.now() });
+  if (h.length > 500) h.splice(0, h.length - 500);
+}
+// Première fois : on reprend les dernières parties terminées qui sont encore en mémoire.
+if (!data.hist) {
+  data.hist = [];
+  for (const m of ['daily', 'free']) if (data[m] && data[m].done) logGame(data[m], m);
+  save();
 }
 
 // Petite phrase souvenir qui reprend les mots essayés et le mot trouvé.
@@ -279,6 +293,92 @@ function showEnd() {
   $('again').textContent = mode === 'free' ? 'Rejouer' : 'Faire une partie libre';
   $('end').showModal();
 }
+
+// ---------- Écran de statistiques ----------
+
+const dayDate = (day) => new Date(START.getFullYear(), START.getMonth(), START.getDate() + day, 12);
+const isoDay = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+const triesColor = (h) => (!h.won ? 'orange' : h.n <= 2 ? 'green' : h.n <= 4 ? 'blue' : 'yellow');
+const fmt1 = (x) => x.toLocaleString('fr-FR', { maximumFractionDigits: 1 });
+const nice = (w) => w.toUpperCase();
+
+function statsHtml(m) {
+  const st = (data.stats || {})[m];
+  if (!st || !st.played) {
+    return Stats.empty(m === 'daily' ? 'Termine un mot du jour pour voir tes statistiques ici.' : 'Termine une partie libre pour voir tes statistiques ici.');
+  }
+  const hist = (data.hist || []).filter((h) => h.m === m);
+  const wins = st.dist.reduce((a, b) => a + b, 0);
+  const avg = wins ? st.dist.reduce((t, v, i) => t + v * (i + 1), 0) / wins : 0;
+  const losses = st.played - st.wins;
+  const now = game && game.done && mode === m ? game : null;
+
+  const tiles = Stats.tiles([
+    { v: st.played, l: st.played > 1 ? 'parties jouées' : 'partie jouée', c: 'blue' },
+    { v: Stats.pct(st.wins, st.played) + ' %', l: 'de victoires', c: 'green' },
+    { v: wins ? fmt1(avg) : '–', l: 'essais en moyenne', c: 'yellow' },
+    { v: '🔥 ' + st.streak, l: m === 'daily' ? 'jours d’affilée' : 'victoires d’affilée', c: 'orange' },
+    { v: st.best, l: 'meilleure série', c: 'lilac' },
+    { v: st.wins, l: st.wins > 1 ? 'mots trouvés' : 'mot trouvé', c: 'pink' },
+  ]);
+
+  const rows = st.dist.map((v, i) => ({
+    label: i + 1, value: v, text: `${v} <small>· ${Stats.pct(v, st.played)} %</small>`,
+    c: now && now.won && now.guesses.length === i + 1 ? 'red' : 'blue', hi: now && now.won && now.guesses.length === i + 1,
+  }));
+  rows.push({ label: '✗', value: losses, text: `${losses} <small>· ${Stats.pct(losses, st.played)} %</small>`, c: 'orange', hi: now && !now.won });
+  const dist = Stats.card('En combien d’essais', Stats.bars(rows), now ? 'Le cadre montre la partie que tu viens de finir.' : '');
+
+  let cal = '';
+  if (m === 'daily' && hist.length) {
+    const days = {};
+    for (const h of hist) if (h.day !== undefined) days[isoDay(dayDate(h.day))] = { c: triesColor(h), text: h.won ? h.n : '✗' };
+    const today = new Date();
+    const first = dayDate(Math.min(...hist.map((h) => h.day)));
+    const from = new Date(Math.min(first, new Date(today.getFullYear(), today.getMonth(), 1, 12)));
+    cal = Stats.card('Calendrier du mot du jour', Stats.cal(days, isoDay(from), isoDay(today))
+      + Stats.legend([['green', '1 ou 2 essais'], ['blue', '3 ou 4'], ['yellow', '5 ou 6'], ['orange', 'perdu']]),
+    'Chaque case indique en combien d’essais tu as trouvé le mot ce jour-là.');
+  }
+
+  let byLen = '';
+  const lens = {};
+  for (const h of hist) {
+    const L = (lens[h.w.length] = lens[h.w.length] || { p: 0, w: 0, n: 0 });
+    L.p++;
+    if (h.won) { L.w++; L.n += h.n; }
+  }
+  const keys = Object.keys(lens).map(Number).sort((a, b) => a - b);
+  if (keys.length) {
+    byLen = Stats.card('Selon la longueur du mot', Stats.bars(keys.map((k) => {
+      const L = lens[k];
+      const p = Stats.pct(L.w, L.p);
+      return { label: `${k} l.`, value: p, max: 100, text: `${p} % <small>· ${L.w ? fmt1(L.n / L.w) + ' ess.' : '–'}</small>`, c: p >= 80 ? 'green' : p >= 50 ? 'yellow' : 'orange' };
+    }), 100), 'Part de mots trouvés et nombre moyen d’essais, selon le nombre de lettres.');
+  }
+
+  const recent = hist.slice(-10).reverse();
+  const list = recent.length ? Stats.card('Dernières parties', Stats.list(recent.map((h) => ({
+    left: nice(h.w),
+    sub: (h.day !== undefined ? dayDate(h.day).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }) + ' · ' : '') + `n°${h.num}`,
+    right: h.won ? `${h.n}/6` : 'Perdu', c: triesColor(h),
+  })))) : '';
+
+  const note = hist.length < st.played
+    ? `<p class="st-note" style="text-align:center">Le calendrier et l’historique détaillé se remplissent à partir du 23 novembre 2026. Les chiffres du haut comptent toutes tes parties.</p>` : '';
+  return tiles + dist + cal + byLen + list + note;
+}
+
+function openStats() {
+  Stats.open({
+    title: '📊 SUTOM',
+    tabs: [{ id: 'daily', label: 'Mot du jour' }, { id: 'free', label: 'Parties libres' }],
+    tab: mode,
+    render: statsHtml,
+  });
+}
+$('stats-btn').onclick = openStats;
+$('end-stats').onclick = () => { $('end').close(); openStats(); };
 
 async function share() {
   const lines = game.guesses.map((g) =>
