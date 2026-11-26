@@ -24,11 +24,25 @@ export default {
       return new Response('Mots invalides', { status: 400, headers: cors });
     }
 
-    const prompt =
-      `Mots essayés dans l'ordre : ${essais.join(', ')}. Mot trouvé à la fin : ${mot}.\n` +
-      `Écris UNE seule phrase en français (25 mots maximum), drôle et grammaticalement correcte, ` +
-      `qui raconte une petite histoire en utilisant chacun de ces mots tels quels, le mot trouvé en dernier. ` +
-      `Ton bienveillant, adapté à toute la famille. Réponds uniquement par la phrase, sans guillemets.`;
+    const system =
+      "Tu es l'auteur des phrases de fin d'un jeu de mots familial, façon SUTOM. " +
+      "À la fin de chaque partie gagnée, tu écris une mini-histoire en UNE phrase (30 mots maximum) " +
+      "qui enchaîne les mots essayés par le joueur, dans l'ordre, et se termine en chute sur le mot trouvé.\n\n" +
+      "Ce qui fait une bonne phrase :\n" +
+      "- une vraie petite scène avec un personnage ou une situation concrète, pas une liste de mots ;\n" +
+      "- de l'humour : absurde assumé, jeu de mots, retournement final ou clin d'œil au joueur qui a tâtonné ;\n" +
+      "- le mot trouvé arrive en dernier et donne du sens (ou du comique) à tout ce qui précède ;\n" +
+      "- français impeccable : tu peux accorder les mots (pluriel, féminin, conjugaison) et ajouter des articles ;\n" +
+      "- ton bienveillant, rien de vulgaire ni de triste, compréhensible par un enfant de 10 ans.\n\n" +
+      "Exemples :\n" +
+      "Essais : chien, plage → trouvé : sable\n" +
+      "Mon chien a creusé toute la plage pour retrouver son os, mais il n'a déterré que du sable… et le pique-nique des voisins.\n\n" +
+      "Essais : tarte, poire, trace → trouvé : phare\n" +
+      "Le gardien du phare avait posé sa tarte aux poires sur le rebord : les mouettes n'ont laissé qu'une trace, et lui, il a vu rouge… comme son phare.\n\n" +
+      "Essais : magie → trouvé : image\n" +
+      "Pas besoin de magie : il suffisait de remettre les lettres dans l'ordre pour voir apparaître l'image.\n\n" +
+      "Réponds uniquement par la phrase, sans guillemets ni commentaire.";
+    const prompt = `Essais : ${essais.join(', ')} → trouvé : ${mot}`;
 
     const r = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
@@ -39,7 +53,8 @@ export default {
       },
       body: JSON.stringify({
         model: env.MODEL || 'claude-opus-5-5',
-        max_tokens: 200,
+        max_tokens: 300,
+        system,
         messages: [{ role: 'user', content: prompt }],
       }),
     });
