@@ -43,7 +43,11 @@ export default {
         messages: [{ role: 'user', content: prompt }],
       }),
     });
-    if (!r.ok) return new Response('Erreur du modèle', { status: 502, headers: cors });
+    if (!r.ok) {
+      const detail = (await r.text()).slice(0, 300);
+      console.log('Erreur Anthropic', r.status, detail); // visible dans les Journaux du Worker
+      return new Response(`Erreur du modèle (${r.status}) : ${detail}`, { status: 502, headers: cors });
+    }
     const data = await r.json();
     const text = (data.content || []).filter((b) => b.type === 'text').map((b) => b.text).join('').trim();
     if (!text) return new Response('Réponse vide', { status: 502, headers: cors });

@@ -255,20 +255,22 @@ async function aiPhrase() {
   const pretty = (w) => words.get(w) || w.toLowerCase();
   try {
     const ctl = new AbortController();
-    setTimeout(() => ctl.abort(), 8000);
+    setTimeout(() => ctl.abort(), 15000);
     const r = await fetch(PHRASE_API, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ essais: game.guesses.slice(0, -1).map(pretty), mot: pretty(game.answer) }),
       signal: ctl.signal,
     });
+    if (!r.ok) throw new Error('Relais ' + r.status + ' : ' + (await r.text()));
     const { phrase: t } = await r.json();
-    if (!t) throw new Error();
+    if (!t) throw new Error('Réponse vide');
     cache[key] = t;
     save();
     shown(t);
-  } catch {
-    el.hidden = true;
+  } catch (e) {
+    console.warn('Phrase IA indisponible', e);
+    el.innerHTML = phrase(); // repli sur les phrases modèles
   }
 }
 
