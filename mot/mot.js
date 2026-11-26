@@ -3,7 +3,7 @@ let COLS = 5; // longueur du mot en cours, de 5 à 10
 const START = new Date(2026, 0, 1);
 const STORE = 'ousta.mot';
 // Adresse du relais qui écrit la phrase de fin (voir outils/phrase-worker). Vide = phrases modèles.
-const PHRASE_API = '';
+const PHRASE_API = 'https://oustagame.bastien-vialade.workers.dev/phrase';
 
 const $ = (id) => document.getElementById(id);
 const board = $('board');
